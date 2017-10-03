@@ -1,0 +1,54 @@
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "0TC-Fg-vaX"; */
+"0TC-Fg-vaX.normalTitle" = "Sign Up";
+
+/* Class = "UIButton"; normalTitle = "SIGN IN"; ObjectID = "4wZ-Yb-mCf"; */
+"4wZ-Yb-mCf.normalTitle" = "SIGN IN";
+
+/* Class = "UITextField"; placeholder = "Email / User name"; ObjectID = "9qg-LE-PPL"; */
+"9qg-LE-PPL.placeholder" = "Email / User name";
+
+/* Class = "UIButton"; normalTitle = "Sign in"; ObjectID = "CZY-84-9l9"; */
+"CZY-84-9l9.normalTitle" = "Sign in";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "GrZ-iS-M3i"; */
+"GrZ-iS-M3i.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "KPV-AK-HsC"; */
+"KPV-AK-HsC.text" = "Don't have an account?";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "SWE-mo-oQZ"; */
+"SWE-mo-oQZ.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "now"; ObjectID = "V8S-NJ-Osh"; */
+"V8S-NJ-Osh.text" = "now";
+
+/* Class = "UIButton"; normalTitle = "SIGN IN"; ObjectID = "XdO-zY-Par"; */
+"XdO-zY-Par.normalTitle" = "SIGN IN";
+
+/* Class = "UILabel"; text = "now"; ObjectID = "bAK-5V-D8R"; */
+"bAK-5V-D8R.text" = "now";
+
+/* Class = "UILabel"; text = "Already have an account?"; ObjectID = "ezC-1v-i6P"; */
+"ezC-1v-i6P.text" = "Already have an account?";
+
+/* Class = "UITextField"; placeholder = "Email address"; ObjectID = "fFS-3y-dIe"; */
+"fFS-3y-dIe.placeholder" = "Email address";
+
+/* Class = "UILabel"; text = "LOGIN"; ObjectID = "fx3-8s-CbN"; */
+"fx3-8s-CbN.text" = "LOGIN";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password?"; ObjectID = "hi7-9Z-fJd"; */
+"hi7-9Z-fJd.normalTitle" = "Forgot Password?";
+
+/* Class = "UITextField"; placeholder = "Phone Number"; ObjectID = "ine-vK-mda"; */
+"ine-vK-mda.placeholder" = "Phone Number";
+
+/* Class = "UITextField"; placeholder = "Your name"; ObjectID = "rSd-IV-KpG"; */
+"rSd-IV-KpG.placeholder" = "Your name";
+
+/* Class = "UILabel"; text = "LOGIN"; ObjectID = "sxt-De-zvS"; */
+"sxt-De-zvS.text" = "LOGIN";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password?"; ObjectID = "uBp-uS-KZX"; */
+"uBp-uS-KZX.normalTitle" = "Forgot Password?";

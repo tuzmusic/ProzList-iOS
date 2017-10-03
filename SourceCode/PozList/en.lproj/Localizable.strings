@@ -1,0 +1,25 @@
+/* 
+  Localizable.strings
+  PozList
+
+  Created by Devubha Manek on 29/09/17.
+  Copyright © 2017 Devubha Manek. All rights reserved.
+*/
+
+"LOGIN" = "LOGIN";
+"Email/User name" = "Email/User name";
+"Password" = "Password";
+"Forgot Password?" = "Forgot Password?";
+"SIGN IN" = "SIGN IN";
+"Sign in" = "Sign in";
+"Sign Up" = "Sign Up";
+"SIGN UP" = "SIGN UP";
+"Don't have an account?" = "Don't have an account?";
+"now" = "now";
+"REGISTRATION" = "REGISTRATION";
+"Your name" = "Your name";
+"Email address" = "Email address";
+"Phone Number" = "Phone Number";
+"Already have an account?" = "Already have an account?";
+"Email is required." = "Email is required.";
+"Create Request" = "Create Request";
