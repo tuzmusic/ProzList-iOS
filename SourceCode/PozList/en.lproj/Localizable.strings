@@ -5,13 +5,15 @@
   Created by Devubha Manek on 29/09/17.
   Copyright © 2017 Devubha Manek. All rights reserved.
 */
-
+//Mark: - Login
 "LOGIN" = "LOGIN";
 "Email/User name" = "Email/User name";
 "Password" = "Password";
 "Forgot Password?" = "Forgot Password?";
 "SIGN IN" = "SIGN IN";
 "Sign in" = "Sign in";
+
+//Mark: - Registration
 "Sign Up" = "Sign Up";
 "SIGN UP" = "SIGN UP";
 "Don't have an account?" = "Don't have an account?";
@@ -21,5 +23,29 @@
 "Email address" = "Email address";
 "Phone Number" = "Phone Number";
 "Already have an account?" = "Already have an account?";
+"Your name is required." = "Your name is required.";
 "Email is required." = "Email is required.";
+"Please Enter Valid Email"=  "Please Enter Valid Email";
+"Phone number is required."= "Phone number is required.";
+"Password is required." = "Password is required.";
+"Password atleast 8 character" = "Password atleast 8 character";
+
+//Mark: - Create Request
 "Create Request" = "Create Request";
+"Service Request" = "Service Request";
+"Add Images of service type" = "Add Images of service type";
+"SUMBIT" = "SUMBIT";
+"SAVE" = "SAVE";
+"Enter Your name here." = "Enter Your name here.";
+
+//Mark: - Job History
+"Profile" = "Profile";
+"Job History" = "Job History";
+
+//Mark: - Job Detail
+"Job Detail" = "Job Detail";
+
+//Mark: - Job Detail
+"Request Detail" = "Request Detail";
+"Request Status" = "Request Status";
+

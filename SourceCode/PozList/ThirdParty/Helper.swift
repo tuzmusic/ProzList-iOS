@@ -16,8 +16,6 @@ import QuartzCore
 public let build_type = "dev"
 public let apiversion = 1.0
 
-
-let ONE_TIME = "com.postJob.Onetime"
 var isAllUpdated : Int = 0
 //MARK: - Web Services Constant
 struct WebURL {
@@ -123,6 +121,18 @@ extension UIColor{
     }
     class func textInput() -> UIColor{
         return UIColor(red: 36.0 / 255.0, green: 41.0 / 255.0, blue: 38.0 / 255.0, alpha: 1.0)
+    }
+    class func appGreen() -> UIColor{
+        return UIColor(red: 9.0 / 255.0, green: 129.0 / 255.0, blue: 59.0 / 255.0, alpha: 1.0)
+    }
+    class func appBackGroundColor() -> UIColor{
+        return UIColor(red: 165.0 / 255.0, green: 177.0 / 255.0, blue: 13.0 / 255.0, alpha: 1.0)
+    }
+    class func appNotcome() -> UIColor{
+        return UIColor(red: 210.0 / 255.0, green: 51.0 / 255.0, blue: 4.0 / 255.0, alpha: 1.0)
+    }
+    class func appLighteGreen() -> UIColor{
+       return UIColor(red: 36.0 / 255.0, green: 41.0 / 255.0, blue: 38.0 / 255.0, alpha: 1.0)
     }
    
 }
@@ -336,6 +346,24 @@ func creatDictnory(value: AnyObject) -> NSMutableDictionary
     
     return tempDict
 }
+func UTCToLocal(date:String) -> String {
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+    
+    let dt = dateFormatter.date(from: date)
+    dateFormatter.timeZone = TimeZone.current
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    var str = ""
+    if dt != nil
+    {
+        str = dateFormatter.string(from: dt!)
+    }
+    return str
+}
+
+
 //MARK: - Scaling
 struct DeviceScale {
     static let SCALE_X = ScreenSize.WIDTH / 375.0
@@ -470,7 +498,16 @@ extension UIView {
             }
         }
     }
-    
+    @IBInspectable var overAllShadow : Bool {
+        get {
+            return layer.shadowOpacity > 0.0
+        }
+        set {
+            if newValue == true {
+                self.overAllShadow()
+            }
+        }
+    }
     @IBInspectable var cornerRadius: CGFloat {
         get {
             return self.layer.cornerRadius
@@ -496,6 +533,17 @@ extension UIView {
         layer.shadowOpacity = shadowOpacity
         layer.shadowRadius = shadowRadius
     }
+    func overAllShadow(shadowColor: CGColor = UIColor.gray.cgColor,
+                       shadowOffset: CGSize = CGSize(width: 0.0, height: 0.0),
+                       shadowOpacity: Float = 0.4,
+                       shadowRadius: CGFloat = 4.0) {
+        
+        layer.shadowColor = shadowColor
+        layer.shadowOffset = shadowOffset
+        layer.shadowOpacity = shadowOpacity
+        layer.shadowRadius = shadowRadius
+    }
+    
     func add_shadow(demoView : UIView,height : CGFloat){
         
         let radius: CGFloat = demoView.frame.width //change it to .height if you need spread for height
@@ -543,7 +591,15 @@ extension UIView {
             return self.layer.cornerRadius == self.frame.size.height / 2.0
         }
     }
-   
+    //Set Border Color
+    @IBInspectable var borderColor:UIColor {
+        set {
+            self.layer.borderColor = newValue.cgColor
+        }
+        get {
+            return UIColor(cgColor: self.layer.borderColor!)
+        }
+    }
     //Set Border Width
     @IBInspectable var borderWidth:CGFloat {
         set {

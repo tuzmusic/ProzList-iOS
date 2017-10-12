@@ -159,7 +159,6 @@ extension UIView {
     func insertSubviewWithFullSizeConstraints(view : UIView, atIndex: Int) {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.insertSubview(view, at: atIndex)
-        
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["view": view]))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["view": view]))
     }

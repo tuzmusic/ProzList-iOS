@@ -1,15 +1,36 @@
 PODS:
+  - DKImagePickerController (3.8.0):
+    - DKImagePickerController/Camera (= 3.8.0)
+    - DKImagePickerController/ImageManager (= 3.8.0)
+  - DKImagePickerController/Camera (3.8.0)
+  - DKImagePickerController/ImageManager (3.8.0)
+  - GoogleMaps (2.4.0):
+    - GoogleMaps/Maps (= 2.4.0)
+  - GoogleMaps/Base (2.4.0)
+  - GoogleMaps/Maps (2.4.0):
+    - GoogleMaps/Base
+  - GooglePlaces (2.4.0):
+    - GoogleMaps/Base (= 2.4.0)
   - InteractiveSideMenu (2.0)
   - IQKeyboardManagerSwift (5.0.0)
+  - SkyFloatingLabelTextField (3.2.0)
 
 DEPENDENCIES:
+  - DKImagePickerController
+  - GoogleMaps
+  - GooglePlaces
   - InteractiveSideMenu
   - IQKeyboardManagerSwift (= 5.0.0)
+  - SkyFloatingLabelTextField (~> 3.0)
 
 SPEC CHECKSUMS:
+  DKImagePickerController: 6eea9f1ba2e2ca0ba0317b81d68152d07d9e877f
+  GoogleMaps: 8436ab5d1c25e36915b2f7416d0c8e3fa2e76c61
+  GooglePlaces: aafe5990fa7951e98e078761bbdaaf236d7e0c65
   InteractiveSideMenu: 337f6d95a3f6543c517a888893531430e18553b3
   IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
+  SkyFloatingLabelTextField: 4e2d2f7160af660ed1da6bb9d0027b5c474b4b79
 
-PODFILE CHECKSUM: 6e2b83cdfbd16d794f1458c59dc183480ae71f5a
+PODFILE CHECKSUM: f911b3a95993da448ea6ef47019424f63f596cb7
 
 COCOAPODS: 1.4.0.beta.1

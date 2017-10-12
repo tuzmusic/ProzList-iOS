@@ -8,5 +8,8 @@ target 'PozList' do
   # Pods for PozList
 pod 'InteractiveSideMenu'
 pod 'IQKeyboardManagerSwift', '5.0.0'
-
+pod 'DKImagePickerController'
+pod 'GoogleMaps'
+pod 'GooglePlaces'
+pod 'SkyFloatingLabelTextField', '~> 3.0'
 end

@@ -6,17 +6,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/InteractiveSideMenu/Sources/MenuAnimator.swift"
-            timestampString = "528646273.67318"
+            filePath = "PozList/MainViewController/MainVc/RequestStatus/TrackServiceVC.swift"
+            timestampString = "529239545.098791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "contentScale"
-            landmarkType = "24">
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "getPolylineRoute(from:to:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

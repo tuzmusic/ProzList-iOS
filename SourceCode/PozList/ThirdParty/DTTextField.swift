@@ -60,9 +60,7 @@ public class DTTextField: UITextField {
         didSet{ invalidateIntrinsicContentSize() }
     }
     
-    public var borderColor:UIColor = UIColor(red: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0, alpha: 1.0){
-        didSet{ dtLayer.borderColor = borderColor.cgColor }
-    }
+   
     
     public var canShowBorder:Bool = true{
         didSet{ dtLayer.isHidden = !canShowBorder }
@@ -117,14 +115,11 @@ public class DTTextField: UITextField {
     
     fileprivate var showErrorLabel:Bool = false{
         didSet{
-            
             guard showErrorLabel != oldValue else { return }
-            
             guard showErrorLabel else {
                 hideErrorMessage()
                 return
             }
-            
             guard !errorMessage.isEmptyStr else { return }
             showErrorMessage()
         }

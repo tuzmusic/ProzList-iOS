@@ -86,7 +86,6 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
         guard let menuContainerViewController = self.menuContainerViewController else {
             return
         }
-        
         menuContainerViewController.selectContentViewController(menuContainerViewController.contentViewControllers[indexPath.row])
         menuContainerViewController.hideSideMenu()
     }

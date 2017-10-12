@@ -83,5 +83,14 @@
 		<key>NSTemporaryExceptionMinimumTLSVersion</key>
 		<string>TLSv1.1</string>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App Need to Access Your Location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App Need to Access Your Location</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>googlechromes</string>
+		<string>comgooglemaps</string>
+	</array>
 </dict>
 </plist>

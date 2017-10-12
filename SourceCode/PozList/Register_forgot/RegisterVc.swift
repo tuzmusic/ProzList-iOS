@@ -7,37 +7,59 @@
 //
 
 import UIKit
+import SkyFloatingLabelTextField
 
 class RegisterVc: UIViewController,CustomToolBarDelegate	 {
 
      var toolBar : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: true)
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var txt_name: DTTextField!
-    @IBOutlet weak var txt_email: DTTextField!
-    @IBOutlet weak var txt_phone: DTTextField!
-    @IBOutlet weak var txt_password: DTTextField!
     
-    let nameMessage = "Email is required."
-    let emailMessage = "Email is required."
-    let phoneMessage = "Password is required."
-    let passwordMessage = "Password is required."
+    @IBOutlet weak var txt_name: SkyFloatingLabelTextField!
+    @IBOutlet weak var txt_email: SkyFloatingLabelTextField!
+    @IBOutlet weak var txt_phone: SkyFloatingLabelTextField!
+    @IBOutlet weak var txt_password: SkyFloatingLabelTextField!
+    
+    let nameMessage = "Your name is required.".localized
+    let emailMessage = "Email is required.".localized
+    let emailMessage1 =  "Please Enter Valid Email".localized
+    let phoneMessage = "Phone number is required.".localized
+    let passwordMessage = "Password is required.".localized
+    let passwordMessage1 = "Password atleast 8 character".localized
     
     var txt_y:CGFloat = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
-        txt_name.canShowBorder = false
-        txt_email.canShowBorder = false
-        txt_phone.canShowBorder = false
-        txt_password.canShowBorder = false
+        self.setupAllTextFiels()
+    }
+    func setupAllTextFiels(){
         
         self.txt_name.text = ""
         self.txt_email.text = ""
         self.txt_phone.text = ""
         self.txt_password.text = ""
         
+        
+        self.txt_name.titleLabel.font =  UIFont.init(name: FontName.RobotoRegular, size: 12)
+        self.txt_name.placeholderFont = UIFont.init(name: FontName.RobotoLight, size: 16)
+        self.txt_name.font =  UIFont.init(name: FontName.RobotoLight, size: 16)
+        
+        
+        self.txt_email.titleLabel.font =  UIFont.init(name: FontName.RobotoRegular, size: 12)
+        self.txt_email.placeholderFont =  UIFont.init(name: FontName.RobotoLight, size: 16)
+        self.txt_email.font =  UIFont.init(name: FontName.RobotoLight, size: 16)
+        
+        
+        self.txt_phone.titleLabel.font =  UIFont.init(name: FontName.RobotoRegular, size: 12)
+        self.txt_phone.placeholderFont =  UIFont.init(name: FontName.RobotoLight, size: 16)
+        self.txt_phone.font =  UIFont.init(name: FontName.RobotoLight, size: 16)
+        
+        self.txt_password.titleLabel.font =  UIFont.init(name: FontName.RobotoRegular, size: 12)
+        self.txt_password.placeholderFont =  UIFont.init(name: FontName.RobotoLight, size: 16)
+        self.txt_password.font =  UIFont.init(name: FontName.RobotoLight, size: 16)
+        
+        
     }
-   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -86,24 +108,42 @@ extension RegisterVc : UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
     {
-        
+        if let floatingLabelTextField = textField as? SkyFloatingLabelTextField
+        {
+            floatingLabelTextField.errorMessage = ""
+        }
         textField.inputAccessoryView = toolbarInit(textField: textField);
         return true
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if let floatingLabelTextField = textField as? SkyFloatingLabelTextField
+        {
+            floatingLabelTextField.errorMessage = ""
+        }
+        
+        return true
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
+        if let floatingLabelTextField = textField as? SkyFloatingLabelTextField
+        {
+            floatingLabelTextField.errorMessage = ""
+        }
         print("TextField should return method called")
         textField.resignFirstResponder();
         return true;
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         //scrollView.contentOffset = CGPoint.init(x: 0, y: 0)
     }
     // MARK: - Keyboard
     
     func toolbarInit(textField: UITextField) -> UIToolbar
     {
+        
         toolBar.delegate1 = self
         toolBar.txtField = textField
         return toolBar;
@@ -147,22 +187,68 @@ extension RegisterVc : UITextFieldDelegate {
 extension RegisterVc{
     func validateData() -> Bool {
        
-        guard !self.txt_name.text!.isEmptyStr else {
-            self.txt_name.showError(message: nameMessage)
+        txt_name.resignFirstResponder()
+        txt_email.resignFirstResponder()
+        txt_phone.resignFirstResponder()
+        txt_password.resignFirstResponder()
+        
+
+        guard (txt_name.text?.characters.count)! > 0 else
+        {
+            if let floatingLabelTextField = txt_name
+            {
+                floatingLabelTextField.errorMessage = nameMessage
+            }
             return false
         }
-        guard !self.txt_email.text!.isEmptyStr else {
-            self.txt_email.showError(message: emailMessage)
+        
+        guard (txt_email.text?.characters.count)! > 0 else
+        {
+            if let floatingLabelTextField = txt_email
+            {
+                floatingLabelTextField.errorMessage = emailMessage
+            }
             return false
         }
-        guard !self.txt_phone.text!.isEmptyStr else {
-            self.txt_phone.showError(message: phoneMessage)
+       
+        guard self.validateEmail( txt_email.text!) else
+        {
+            if let floatingLabelTextField = txt_email
+            {
+                floatingLabelTextField.errorMessage = emailMessage1
+            }
             return false
         }
-        guard !self.txt_password.text!.isEmptyStr else {
-            self.txt_password.showError(message: passwordMessage)
+       
+        guard (txt_phone.text?.characters.count)! > 0  && (txt_phone.text?.characters.count)! == 10 else
+        {
+            if let floatingLabelTextField = txt_phone
+            {
+                floatingLabelTextField.errorMessage = phoneMessage
+            }
+            return false
+        }
+        guard (txt_password.text?.characters.count)! > 0 else
+        {
+            if let floatingLabelTextField = txt_password
+            {
+                floatingLabelTextField.errorMessage = passwordMessage
+            }
+            return false
+        }
+        guard (txt_password.text?.characters.count)! == 8 else
+        {
+            if let floatingLabelTextField = txt_password
+            {
+                floatingLabelTextField.errorMessage = passwordMessage1
+            }
             return false
         }
         return true
+    }
+    
+    func validateEmail(_ candidate: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: candidate)
     }
 }
