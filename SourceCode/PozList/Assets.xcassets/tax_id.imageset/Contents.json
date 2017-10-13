@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "tax_id-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "licence_type.png",
+      "filename" : "tax_id.png",
       "scale" : "2x"
     },
     {

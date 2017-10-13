@@ -12,4 +12,5 @@ pod 'DKImagePickerController'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'SkyFloatingLabelTextField', '~> 3.0'
+pod 'TGPControls'
 end

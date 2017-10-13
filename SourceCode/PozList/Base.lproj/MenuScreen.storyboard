@@ -1311,7 +1311,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="Review"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQd-Ka-6df" customClass="CosmosView" customModule="PozList" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQd-Ka-6df" customClass="CosmosView" customModule="PozList" customModuleProvider="target">
                                                         <rect key="frame" x="70" y="168" width="180" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="b3a-8S-nAs"/>
@@ -2077,7 +2077,7 @@
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x3M-rh-9mU" customClass="CosmosView" customModule="PozList" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x3M-rh-9mU" customClass="CosmosView" customModule="PozList" customModuleProvider="target">
                                                 <rect key="frame" x="30" y="92" width="180" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="w5e-ir-ldw"/>
@@ -2502,7 +2502,7 @@
                                         <rect key="frame" x="20" y="50" width="280" height="386"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Receipt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2Z-HT-oA9">
-                                                <rect key="frame" x="75" y="25" width="130.5" height="20"/>
+                                                <rect key="frame" x="75.5" y="25" width="130.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -2957,7 +2957,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CaN-Ba-7Al" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2516.25" y="2550"/>
+            <point key="canvasLocation" x="2113" y="2551"/>
         </scene>
         <!--Profile DeatilVC-->
         <scene sceneID="Rtk-Eb-0qW">

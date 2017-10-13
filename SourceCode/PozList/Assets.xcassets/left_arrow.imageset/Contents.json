@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "left_arrow-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "licence_type.png",
+      "filename" : "left_arrow.png",
       "scale" : "2x"
     },
     {

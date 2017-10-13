@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "plush-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "licence_type.png",
+      "filename" : "plush.png",
       "scale" : "2x"
     },
     {

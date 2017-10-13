@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "security_number.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "licence_type.png",
+      "filename" : "security.png",
       "scale" : "2x"
     },
     {

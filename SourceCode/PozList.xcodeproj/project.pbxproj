@@ -80,6 +80,11 @@
 		1781A8431F7D25FF000D4779 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		178A276B1F8B94AE00836AD3 /* SurveyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyVC.swift; sourceTree = "<group>"; };
 		179B26301F8782C2006AEEBA /* PaymentRecipetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRecipetVC.swift; sourceTree = "<group>"; };
+		179C59BF1F8F3CF70094AD17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		179C59C01F8F3CF70094AD17 /* TGPCamelLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGPCamelLabels.swift; sourceTree = "<group>"; };
+		179C59C11F8F3CF70094AD17 /* TGPControls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TGPControls.h; sourceTree = "<group>"; };
+		179C59C21F8F3CF70094AD17 /* TGPControlsTicksProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGPControlsTicksProtocol.swift; sourceTree = "<group>"; };
+		179C59C31F8F3CF70094AD17 /* TGPDiscreteSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGPDiscreteSlider.swift; sourceTree = "<group>"; };
 		17A04BBA1F85FECC007A84F3 /* CosmosDistrib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 		17A04BBC1F8614CD007A84F3 /* CreateReqVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReqVC.swift; sourceTree = "<group>"; };
 		17A04BBE1F864400007A84F3 /* TrackServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackServiceVC.swift; sourceTree = "<group>"; };
@@ -215,6 +220,7 @@
 		1781A8401F7D25FF000D4779 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				179C59BE1F8F3CF70094AD17 /* TGPControls */,
 				17A04BB91F85FECC007A84F3 /* Distrib */,
 				17B215A11F84F073004FB9B4 /* DKStickyHeaderView */,
 				1733EA511F7E519B00B3DF1A /* Font */,
@@ -226,6 +232,18 @@
 				1781A8431F7D25FF000D4779 /* Helper.swift */,
 			);
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		179C59BE1F8F3CF70094AD17 /* TGPControls */ = {
+			isa = PBXGroup;
+			children = (
+				179C59BF1F8F3CF70094AD17 /* Info.plist */,
+				179C59C01F8F3CF70094AD17 /* TGPCamelLabels.swift */,
+				179C59C11F8F3CF70094AD17 /* TGPControls.h */,
+				179C59C21F8F3CF70094AD17 /* TGPControlsTicksProtocol.swift */,
+				179C59C31F8F3CF70094AD17 /* TGPDiscreteSlider.swift */,
+			);
+			path = TGPControls;
 			sourceTree = "<group>";
 		};
 		17A04BB91F85FECC007A84F3 /* Distrib */ = {
@@ -419,6 +437,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/InteractiveSideMenu/InteractiveSideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/TGPControls/TGPControls.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -426,6 +445,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InteractiveSideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TGPControls.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -663,6 +683,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.PozList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -680,6 +701,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.PozList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

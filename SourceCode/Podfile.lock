@@ -14,6 +14,7 @@ PODS:
   - InteractiveSideMenu (2.0)
   - IQKeyboardManagerSwift (5.0.0)
   - SkyFloatingLabelTextField (3.2.0)
+  - TGPControls (4.0.0)
 
 DEPENDENCIES:
   - DKImagePickerController
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - InteractiveSideMenu
   - IQKeyboardManagerSwift (= 5.0.0)
   - SkyFloatingLabelTextField (~> 3.0)
+  - TGPControls
 
 SPEC CHECKSUMS:
   DKImagePickerController: 6eea9f1ba2e2ca0ba0317b81d68152d07d9e877f
@@ -30,7 +32,8 @@ SPEC CHECKSUMS:
   InteractiveSideMenu: 337f6d95a3f6543c517a888893531430e18553b3
   IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
   SkyFloatingLabelTextField: 4e2d2f7160af660ed1da6bb9d0027b5c474b4b79
+  TGPControls: d7ab5a338746c100b2ae57f6b6cedee7151f116a
 
-PODFILE CHECKSUM: f911b3a95993da448ea6ef47019424f63f596cb7
+PODFILE CHECKSUM: 85d5e96c481fd2b25a0a60bbf5295cdeca3af8d5
 
 COCOAPODS: 1.4.0.beta.1

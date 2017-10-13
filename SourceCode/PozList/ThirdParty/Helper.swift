@@ -190,7 +190,20 @@ struct FontName {
     static let RobotoLight = "Roboto-Light"
     
 }
-
+class Slider: UISlider {
+    
+    @IBInspectable var thumbImage: UIImage?
+    
+    // MARK: Lifecycle
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        if let thumbImage = thumbImage {
+            self.setThumbImage(thumbImage, for: .normal)
+        }
+    }
+}
 func showAlert(title: NSString, message: String) {
     let obj = UIAlertView(title: title as String, message: message, delegate: nil, cancelButtonTitle:"OK")
     obj.show()
