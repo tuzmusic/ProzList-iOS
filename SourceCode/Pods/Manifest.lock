@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.5.1)
   - DKImagePickerController (3.8.0):
     - DKImagePickerController/Camera (= 3.8.0)
     - DKImagePickerController/ImageManager (= 3.8.0)
@@ -11,29 +12,37 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (2.4.0):
     - GoogleMaps/Base (= 2.4.0)
+  - GTProgressBar (0.2.0)
   - InteractiveSideMenu (2.0)
   - IQKeyboardManagerSwift (5.0.0)
   - SkyFloatingLabelTextField (3.2.0)
+  - SVProgressHUD (2.2.1)
   - TGPControls (4.0.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.0)
   - DKImagePickerController
   - GoogleMaps
   - GooglePlaces
+  - GTProgressBar
   - InteractiveSideMenu
   - IQKeyboardManagerSwift (= 5.0.0)
   - SkyFloatingLabelTextField (~> 3.0)
+  - SVProgressHUD
   - TGPControls
 
 SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   DKImagePickerController: 6eea9f1ba2e2ca0ba0317b81d68152d07d9e877f
   GoogleMaps: 8436ab5d1c25e36915b2f7416d0c8e3fa2e76c61
   GooglePlaces: aafe5990fa7951e98e078761bbdaaf236d7e0c65
+  GTProgressBar: 5db7054f6069100d871cde5a3149eb708fc348c5
   InteractiveSideMenu: 337f6d95a3f6543c517a888893531430e18553b3
   IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
   SkyFloatingLabelTextField: 4e2d2f7160af660ed1da6bb9d0027b5c474b4b79
+  SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
   TGPControls: d7ab5a338746c100b2ae57f6b6cedee7151f116a
 
-PODFILE CHECKSUM: 85d5e96c481fd2b25a0a60bbf5295cdeca3af8d5
+PODFILE CHECKSUM: 331808851a1286d7ea0b5f9130d635d442ca7caa
 
 COCOAPODS: 1.4.0.beta.1

@@ -217,6 +217,10 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2zU-kO-bGl">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rOJ-78-wfk">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.48238296812749004" colorSpace="calibratedRGB"/>
+                                                </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oeT-Ru-kw8">
                                                     <rect key="frame" x="18" y="35" width="30" height="30"/>
                                                     <constraints>
@@ -240,15 +244,19 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Kr0-XY-S61" firstAttribute="centerY" secondItem="LrS-gT-Hle" secondAttribute="centerY" id="3Vw-7t-SbC"/>
+                                                <constraint firstAttribute="trailing" secondItem="rOJ-78-wfk" secondAttribute="trailing" id="6Ff-XI-76Q"/>
                                                 <constraint firstItem="oeT-Ru-kw8" firstAttribute="leading" secondItem="LrS-gT-Hle" secondAttribute="leadingMargin" constant="10" id="75g-5S-4d6"/>
                                                 <constraint firstItem="Kr0-XY-S61" firstAttribute="leading" secondItem="YnE-PE-DNg" secondAttribute="trailing" constant="10" id="Cd9-6e-Qo9"/>
+                                                <constraint firstItem="rOJ-78-wfk" firstAttribute="leading" secondItem="LrS-gT-Hle" secondAttribute="leading" id="ITH-Bb-P40"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="YnE-PE-DNg" secondAttribute="bottom" id="Lhc-ih-BnS"/>
                                                 <constraint firstAttribute="bottom" secondItem="2zU-kO-bGl" secondAttribute="bottom" id="MTj-zG-fp8"/>
                                                 <constraint firstItem="2zU-kO-bGl" firstAttribute="leading" secondItem="LrS-gT-Hle" secondAttribute="leading" id="Nyz-Rj-Bl2"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Kr0-XY-S61" secondAttribute="trailing" constant="5" id="T1k-cO-LvZ"/>
                                                 <constraint firstItem="2zU-kO-bGl" firstAttribute="top" secondItem="LrS-gT-Hle" secondAttribute="top" id="XDF-c5-n49"/>
+                                                <constraint firstItem="rOJ-78-wfk" firstAttribute="top" secondItem="LrS-gT-Hle" secondAttribute="top" id="XhB-91-toQ"/>
                                                 <constraint firstItem="YnE-PE-DNg" firstAttribute="top" secondItem="LrS-gT-Hle" secondAttribute="topMargin" id="gP4-ZR-TcI"/>
                                                 <constraint firstAttribute="trailing" secondItem="2zU-kO-bGl" secondAttribute="trailing" id="gsV-hu-QI5"/>
+                                                <constraint firstAttribute="bottom" secondItem="rOJ-78-wfk" secondAttribute="bottom" id="iqn-oj-Wze"/>
                                                 <constraint firstItem="YnE-PE-DNg" firstAttribute="leading" secondItem="oeT-Ru-kw8" secondAttribute="trailing" constant="10" id="k1x-u0-wju"/>
                                                 <constraint firstItem="oeT-Ru-kw8" firstAttribute="centerY" secondItem="2zU-kO-bGl" secondAttribute="centerY" id="vGj-cW-EMa"/>
                                             </constraints>
@@ -284,6 +292,9 @@
                         <viewLayoutGuide key="safeArea" id="LUQ-if-0oN"/>
                     </view>
                     <navigationItem key="navigationItem" id="MXs-qO-dRF"/>
+                    <connections>
+                        <outlet property="tblServiceList" destination="e9r-v3-gLI" id="Ybj-vB-Pei"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Let-yL-E7n" sceneMemberID="firstResponder"/>
             </objects>
@@ -351,9 +362,6 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="Enter Your name here."/>
-                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="Agt-3p-I8X" id="YED-e5-iTw"/>
                                                 </connections>
@@ -2241,6 +2249,7 @@
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="Alert_view" destination="qxh-JS-OT8" id="KuZ-sB-KRx"/>
+                        <outlet property="Contro_not_come" destination="PF3-JI-RW1" id="BrA-Dc-WR8"/>
                         <outlet property="img_completed" destination="ace-cs-rqB" id="i6g-uW-rJP"/>
                         <outlet property="img_notCome" destination="19b-7b-k8h" id="dOQ-RB-53J"/>
                         <outlet property="lbl_alert_rating" destination="2Pk-mv-jef" id="NPn-wH-7Za"/>
@@ -3585,7 +3594,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z98-XO-eiL" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3788" y="-375"/>
+            <point key="canvasLocation" x="4009" y="-362"/>
         </scene>
     </scenes>
     <resources>

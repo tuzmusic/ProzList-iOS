@@ -68,6 +68,7 @@ class HostViewController: MenuContainerViewController {
     }
 
     private func contentControllers() -> [UIViewController] {
+        
         let controllersIdentifiers = ["EditProfileVC","SelectServiceVC","CreateReqVC","JobHistoryVC","SurveyVC"]
         
         var contentList = [UIViewController]()

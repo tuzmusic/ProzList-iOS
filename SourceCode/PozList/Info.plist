@@ -55,33 +55,6 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>amazonaws.com</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-				<key>NSThirdPartyExceptionMinimumTLSVersion</key>
-				<string>TLSv1.0</string>
-				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-				<false/>
-			</dict>
-			<key>amazonaws.com.cn</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-				<key>NSThirdPartyExceptionMinimumTLSVersion</key>
-				<string>TLSv1.0</string>
-				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-				<false/>
-			</dict>
-		</dict>
-		<key>NSIncludesSubdomains</key>
-		<true/>
-		<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-		<true/>
-		<key>NSTemporaryExceptionMinimumTLSVersion</key>
-		<string>TLSv1.1</string>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App Need to Access Your Location</string>

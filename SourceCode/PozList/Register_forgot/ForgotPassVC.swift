@@ -7,16 +7,26 @@
 //
 
 import UIKit
+import SkyFloatingLabelTextField
 
 class ForgotPassVC: UIViewController,CustomToolBarDelegate {
 
-    @IBOutlet weak var txt_email: DTTextField!
-     var toolBar : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: false)
+   // @IBOutlet weak var txt_email: DTTextField!
+    
+    @IBOutlet var txt_email: SkyFloatingLabelTextField!
+    var toolBar : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: false)
+    
+    let emailMessage = "Email is required.".localized
+    let emailMessage1 =  "Please Enter Valid Email".localized
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.txt_email.canShowBorder = false
+        
         self.txt_email.text = ""
+        
+        self.txt_email.titleLabel.font =  UIFont.init(name: FontName.RobotoRegular, size: 12)
+        self.txt_email.placeholderFont = UIFont.init(name: FontName.RobotoLight, size: 16)
+        self.txt_email.font =  UIFont.init(name: FontName.RobotoLight, size: 16)
         // Do any additional setup after loading the view.
     }
 
@@ -25,10 +35,27 @@ class ForgotPassVC: UIViewController,CustomToolBarDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func SendClick(_ sender: Any) {
-        let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
-        self.navigationController?.pushViewController(selected_service, animated: true)
+    @IBAction func clickSignIn(_ sender: UIButton) {
+        
+        for viewContro in (self.navigationController?.viewControllers)!{
+            if viewContro is ViewController{
+                
+                self.navigationController?.popViewController(animated: true)
+                break
+            }
+        }
     }
+    
+    @IBAction func SendClick(_ sender: Any) {
+        
+        guard validateData() else { return }
+//        let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"LoginVC") as! HostViewController
+//        self.navigationController?.pushViewController(selected_service, animated: true)
+    }
+    
+   
+    
+    
 }
 extension ForgotPassVC : UITextFieldDelegate {
     
@@ -38,17 +65,32 @@ extension ForgotPassVC : UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
     {
-        
-        
+        if let floatingLabelTextField = textField as? SkyFloatingLabelTextField
+        {
+            floatingLabelTextField.errorMessage = ""
+        }
         textField.inputAccessoryView = toolbarInit(textField: textField);
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
-        print("TextField should return method called")
+        if let floatingLabelTextField = textField as? SkyFloatingLabelTextField
+        {
+            floatingLabelTextField.errorMessage = ""
+        }
         textField.resignFirstResponder();
         return true;
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if let floatingLabelTextField = textField as? SkyFloatingLabelTextField
+        {
+            floatingLabelTextField.errorMessage = ""
+        }
+        
+        return true
     }
     
     // MARK: - Keyboard
@@ -61,11 +103,88 @@ extension ForgotPassVC : UITextFieldDelegate {
     func resignKeyboard()
     {
         self.txt_email.resignFirstResponder()
-        
-        
     }
     
     func closeKeyBoard() {
         resignKeyboard()
     }
+}
+
+// MARK: User Define Methods
+extension ForgotPassVC{
+    
+    func validateData() -> Bool {
+        
+        
+        guard (txt_email.text?.characters.count)! > 0 else
+        {
+            if let floatingLabelTextField = txt_email
+            {
+                floatingLabelTextField.errorMessage = emailMessage
+            }
+            return false
+        }
+        guard self.validateEmail(txt_email.text!) else
+        {
+            if let floatingLabelTextField = txt_email
+            {
+                floatingLabelTextField.errorMessage = emailMessage1
+            }
+            return false
+        }
+        self.forgotPassApiCall()
+        return true
+        
+    }
+    
+    func validateEmail(_ candidate: String) -> Bool {
+        
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: candidate)
+    }
+    
+    func forgotPassApiCall() {
+        var dict = [String:Any]()
+        dict["email"] = txt_email.text
+        appDelegate.showLoadingIndicator()
+        MTWebCall.call.forgotPassword(dictParam: dict) { (respons, status) in
+            appDelegate.hideLoadingIndicator()
+            jprint(items: status)
+            if (status == 200 && respons != nil) {
+                //Response
+                let dictResponse = respons as! NSDictionary
+                
+                let Response = getStringFromDictionary(dictionary: dictResponse, key: "response")
+                if Response == "true"
+                {
+                    //Message
+                    let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                    print(message)
+                    
+                    let alert = UIAlertController(title: "ProzList".localized, message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (cancel) in
+                        DispatchQueue.main.async {
+                            for viewContro in (self.navigationController?.viewControllers)!{
+                                if viewContro is ViewController{
+                                    self.navigationController?.popViewController(animated: true)
+                                    break
+                                }
+                            }
+                        }
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }else
+                {
+                    //Popup
+                    let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                    appDelegate.Popup(Message: "\(message)")
+                }
+            } else {
+                //Popup
+                let Title = NSLocalizedString("Somthing went wrong \n Try after sometime", comment: "")
+                appDelegate.Popup(Message: Title)
+            }
+        }
+    }
+    
 }

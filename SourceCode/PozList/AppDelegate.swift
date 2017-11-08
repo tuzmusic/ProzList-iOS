@@ -18,11 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
 
     var window: UIWindow?
     var locationManager = CLLocationManager()
-   
-  
-    
-    
-    
+    var loadingIndicator:MTLoadingIndicator!
+    var isLoadingIndicatorOpen:Bool = false
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -43,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         IQKeyboardManager.sharedManager().previousNextDisplayMode = .alwaysHide
         
-       
+        //let value:Bool = UserDefaults.Main.bool(forKey: .isLogin)
         
         return true
     }
@@ -71,10 +68,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     }
     
     
-   
+    //MARK: - Show/Hide Loading Indicator
+    func showLoadingIndicator() {
+        
+        if (isLoadingIndicatorOpen == false) {
+            
+            DispatchQueue.global(qos: .background).async {
+                
+                DispatchQueue.main.async {
+                    
+                    self.loadingIndicator = MTLoadingIndicator.init(frame: UIScreen.main.bounds).show(isAnimated: true)
+                    self.isLoadingIndicatorOpen = true
+                }
+            }
+        }
+    }
+    func hideLoadingIndicator() {
+        
+        if self.loadingIndicator != nil && isLoadingIndicatorOpen == true {
+            self.loadingIndicator.hide(isAnimated: true)
+            isLoadingIndicatorOpen = false
+        }
+    }
+    
+    //MARK: - Alert View
+    
+    func Popup(Message:String){
+        var alert = UIAlertController()
+        if Message.characters.count > 0
+        {
+            alert = UIAlertController(title: "Alert!", message: Message, preferredStyle: UIAlertControllerStyle.alert)
+        }else{
+            alert = UIAlertController(title: "Alert!", message: "Check your internet connection.", preferredStyle: UIAlertControllerStyle.alert)
+        }
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { ACTION in
+        }))
+        UIApplication.topViewController()?.present(alert, animated: false, completion: {
+        })
+    }
     
     
-    // Location Manager
+    //MARK: - Location Manager
     
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
@@ -213,5 +247,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
    
     
 
+}
+// Add your userdefault key here :
+extension UserDefaults
+{
+    struct Main : UserDefaultable {
+        private init() { }
+        
+        enum BoolDefaultKey : String {
+            case isLogin
+            case isSignUp
+        }
+        
+        enum FloatDefaultKey:String {
+            case floatKey
+        }
+        enum DoubleDefaultKey: String {
+            case doubleKey
+        }
+        enum IntegerDefaultKey: String {
+            case IntKey
+        }
+        enum StringDefaultKey: String {
+            case UserID
+            case token
+            case Appuser
+        }
+        enum URLDefaultKey: String {
+            case urlKey
+        }
+        enum ObjectDefaultKey: String {
+            case Profile
+            
+        }
+    }
 }
 

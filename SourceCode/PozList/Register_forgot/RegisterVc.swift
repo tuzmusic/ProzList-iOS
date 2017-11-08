@@ -28,6 +28,9 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
     let passwordMessage1 = "Password atleast 8 character".localized
     
     var txt_y:CGFloat = 0.0
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupAllTextFiels()
@@ -64,27 +67,12 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     //MARK: - all Clicks
     
     @IBAction func BtnSubmitClicked(_ sender: Any) {
         
         guard validateData() else { return }
-        
-        let alert = UIAlertController(title: "Congratulations", message: "Your registration is successful!!!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (cancel) in
-            DispatchQueue.main.async {
-                self.txt_name.text = ""
-                self.txt_email.text = ""
-                self.txt_phone.text = ""
-                self.txt_password.text = ""
-                
-                let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
-                self.navigationController?.pushViewController(selected_service, animated: true)
-            }
-        }))
-        
-        present(alert, animated: true, completion: nil)
-        
     }
 
     @IBAction func Click_login(_ sender: Any) {
@@ -98,6 +86,83 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
         }
     }
     
+    //MARK: - Register Api Call
+    
+    func registerApiCall() {
+        
+        var peraDic = [String:Any]()
+        peraDic["name"] = self.txt_name.text!
+        peraDic["password"] = self.txt_password.text!
+        peraDic["role"] = UserType.General
+        peraDic["phone"] = self.txt_phone.text!
+        peraDic["email"] = self.txt_email.text!
+        
+        appDelegate.showLoadingIndicator()
+        MTWebCall.call.registerUser(dictParam: peraDic) { (respons, status) in
+            appDelegate.hideLoadingIndicator()
+            jprint(items: status)
+            if (status == 200 && respons != nil) {
+                //Response
+                let dictResponse = respons as! NSDictionary
+                
+                let Response = getStringFromDictionary(dictionary: dictResponse, key: "response")
+                if Response == "true"
+                {
+                    //Message
+                    let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                    print(message)
+                    let dictData = getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
+                    let id = createString(value:dictData.value(forKey: "id") as AnyObject)
+                    let username = createString(value: dictData.value(forKey: "name") as AnyObject)
+                    let email = createString(value: dictData.value(forKey: "email") as AnyObject)
+                    let mobile = createString(value: dictData.value(forKey: "mobile") as AnyObject)
+                    let type = createString(value: dictData.value(forKey: "role") as AnyObject)
+                    let status = createString(value: dictData.value(forKey: "status") as AnyObject)
+                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: "")
+                    
+                    //UserDefaults.standard.set(userdate, forKey: "Userdata")
+                    // UserDefaults.standard.set(UserType.General, forKey: "LoginType")
+                    
+                    UserDefaults.Main.set(true, forKey: .isSignUp)
+                    //UserDefaults.Main.set(userdate, forKey: .Profile)
+                    UserDefaults.Main.set(id, forKey: .UserID)
+                    
+                    let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                    self.navigationController?.pushViewController(selected_service, animated: true)
+                    
+                }else
+                {
+                    //Popup
+                    let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                    appDelegate.Popup(Message: "\(message)")
+                }
+            } else {
+                //Popup
+                let Title = NSLocalizedString("Somthing went wrong \n Try after sometime", comment: "")
+                appDelegate.Popup(Message: Title)
+            }
+        }
+        
+        /*
+         let alert = UIAlertController(title: "ProzList".localized, message: "Your registration is successful!!!", preferredStyle: .alert)
+         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (cancel) in
+         DispatchQueue.main.async {
+         self.txt_name.text = ""
+         self.txt_email.text = ""
+         self.txt_phone.text = ""
+         self.txt_password.text = ""
+         
+         let usertypr = UserType.User
+         UserDefaults.Main.set(usertypr.rawValue, forKey: .Appuser)
+         
+         let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+         self.navigationController?.pushViewController(selected_service, animated: true)
+         }
+         }))
+         
+         present(alert, animated: true, completion: nil)
+         */
+    }
     
 }
 extension RegisterVc : UITextFieldDelegate {
@@ -184,7 +249,7 @@ extension RegisterVc : UITextFieldDelegate {
     }
 }
 // MARK: User Define Methods
-extension RegisterVc{
+extension RegisterVc {
     func validateData() -> Bool {
        
         txt_name.resignFirstResponder()
@@ -244,6 +309,9 @@ extension RegisterVc{
             }
             return false
         }
+        
+        self.registerApiCall()
+        
         return true
     }
     

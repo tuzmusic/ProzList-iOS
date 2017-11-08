@@ -16,100 +16,30 @@ import QuartzCore
 public let build_type = "dev"
 public let apiversion = 1.0
 
+
+
+enum UserType: String{
+    case General = "General"
+    case Customer = "Customer"
+    case ServiceProvider = "Service"
+    
+}
+
 var isAllUpdated : Int = 0
 //MARK: - Web Services Constant
 struct WebURL {
     
-   // static let baseURL:String = "http://139.99.144.27/bozzii/api/v1/"
-      //static let baseURL:String = "http://project-demo-server.net/bozzii/api/v1/"
-    static let baseURL:String = "http://admin.bozzii.com.au/api/v1/"
-
-    
-    static let appkey:String = "UYN657894nfrhYYB!@DUDJ423358snr4hdn"
-  
-    // static let ImageBaseUrl = "http://project-demo-server.net/bozzii/";
-     static let ImageBaseUrl = "https://s3-ap-southeast-2.amazonaws.com/bozzii/"
-    
-    
-    static let login:String = WebURL.baseURL + "user/login"
-    static let sign:String = WebURL.baseURL + "user"
-    static let ForgotPass:String = WebURL.baseURL + "user/forgot-password"
-    static let UploadProfilePicture:String = WebURL.baseURL + "user/profile-pictures"
-    static let App_detail:String = WebURL.baseURL + "user/app-details"
-    
-    
-    static let Get_single_user_info:String = WebURL.baseURL + "user/"
-    static let Delete_pic:String = WebURL.baseURL + "user/delete-image"
-    static let UpdateProfile:String = WebURL.baseURL + "user/"
-    static let getMySavePost :String = WebURL.baseURL + "user/get-saved-list/"
-    static let getcompanyInfo:String = WebURL.baseURL + "user/company"
-    static let getMyPost:String = WebURL.baseURL + "user/mypost"
-    static let GetNewsFeed :String = WebURL.baseURL + "user/feed/"
-    
-    static let suspend_delete_user :String = WebURL.baseURL + "user/"
-   
-    
-    static let FindPeople:String = WebURL.baseURL + "friendship/findpeople"
-    static let MakeFriend:String = WebURL.baseURL + "friendship/make"
-    static let Mymate:String = WebURL.baseURL + "friendship/allmates"
-    static let PendingRequst:String = WebURL.baseURL + "friendship/pending/"
-    static let AcceptRequst:String = WebURL.baseURL + "friendship/accept"
-    static let CancelRequst:String = WebURL.baseURL + "friendship/cancel-request"
-    static let block_unblock:String = WebURL.baseURL + "friendship/block-unblock"
-    static let getblocked:String = WebURL.baseURL + "friendship/getblocked"
-    
-    
-    static let getallListing:String = WebURL.baseURL + "listing/getall"
-    static let getallLocation:String = WebURL.baseURL + "location/getall"
-    static let getalCategory:String = WebURL.baseURL + "listing/category/getall"
-    static let getallClassification:String = WebURL.baseURL + "classification/getall"
-    static let addremoveuser:String = WebURL.baseURL + "listing/addremoveuser"
-    static let mute_unMute_alerts:String = WebURL.baseURL + "listing/mute-unmute"
-    static let Single_Listing:String = WebURL.baseURL + "listing/"
-    
-    static let Add_post:String = WebURL.baseURL + "post"
-    static let Update_post:String = WebURL.baseURL + "post/"
-    static let Delete_post:String = WebURL.baseURL + "post/"
-    static let Single_post:String = WebURL.baseURL + "post/"
-    static let getallPost :String = WebURL.baseURL + "post/getall"
-    static let setLikePost :String = WebURL.baseURL + "post/like-unlike"
-    static let getLikedUsers :String = WebURL.baseURL + "post/who-liked"
-    static let SaveAndremovePost :String = WebURL.baseURL + "post/save-remove-post"
-    static let reportPost :String = WebURL.baseURL + "post/report"
-    static let delete_media :String = WebURL.baseURL + "post/delete-media/"
-    static let getReportedComments :String = WebURL.baseURL + "post/get-report/"
-    
-    static let Add_comment :String = WebURL.baseURL + "post/comment"
-    static let Get_all_comment :String = WebURL.baseURL + "post/get-comments"
-    static let delete_comment :String = WebURL.baseURL + "post/delete-comment"
-    static let Update_comment :String = WebURL.baseURL + "post/update-comment"
-    static let getJobAdvertPost :String = WebURL.baseURL + "job-advert/getall"
-    static let AddJobAdvertPost :String = WebURL.baseURL + "job-advert"
-    static let RepostJobAdvertPost :String = WebURL.baseURL + "job-advert/repost"
-    static let LikeCommnent :String = WebURL.baseURL + "post/like-unlike"
-
-    static let getAllServiceDirectory :String = WebURL.baseURL + "service_directory/getall"
-    //Admin report post-
-    static let GetReportedList :String = WebURL.baseURL + "post/get-report/"
-    static let not_violating :String = WebURL.baseURL + "post/not-violating/"
-   
-    
-    static let sendMessage :String = WebURL.baseURL + "send-message"
-    static let getMsgUserList :String = WebURL.baseURL + "get-chat"
-    static let getAllPreMessage :String = WebURL.baseURL + "get-single-conversation"
-    static let clearMessages :String = WebURL.baseURL + "delete-messages"
-    static let deleteMessages :String = WebURL.baseURL + "delete-conversation"
-    static let muteNotification :String = WebURL.baseURL + "message-notification"
-    
-    static let createGroup :String = WebURL.baseURL + "make-group"
-    static let getGroupInfo :String = WebURL.baseURL + "get-group-info"
-    static let updateGroupInfo :String = WebURL.baseURL + "update-group"
-    static let addRemoveInGroup :String = WebURL.baseURL + "add-people"
-    static let deleteEntireGroup :String = WebURL.baseURL + "delete-group/"
-    
-    static let allAlerts :String = WebURL.baseURL + "alerts/getall"
-
-
+    static let baseURL:String = "http://project-demo-server.info/prozlist/api/v1/"
+    static let appkey:String = "da85d87b84495e41e24a55ea05bc7247"
+    static let tokenKey:String = "Authorization"
+    static let ImageBaseUrl = "http://project-demo-server.info/prozlist/public/upload/"
+    static let login:String = WebURL.baseURL + "login"
+    static let Register:String = WebURL.baseURL + "registration"
+    static let ForgotPassword:String = WebURL.baseURL + "forgot-password"
+    static let ServiceCatagory:String = WebURL.baseURL + "getsercat"
+    static let UserProfile:String = WebURL.baseURL + "getprofile/"
+    static let UpdateUserProfile:String = WebURL.baseURL + "update_profile/"
+    static let CreateRequest:String = WebURL.baseURL + "create_request"
 }
 
 extension UIColor{
@@ -126,7 +56,7 @@ extension UIColor{
         return UIColor(red: 9.0 / 255.0, green: 129.0 / 255.0, blue: 59.0 / 255.0, alpha: 1.0)
     }
     class func appBackGroundColor() -> UIColor{
-        return UIColor(red: 165.0 / 255.0, green: 177.0 / 255.0, blue: 13.0 / 255.0, alpha: 1.0)
+        return UIColor(red: 176.0 / 255.0, green: 186.0 / 255.0, blue: 48.0 / 245.0, alpha: 1.0)
     }
     class func appNotcome() -> UIColor{
         return UIColor(red: 210.0 / 255.0, green: 51.0 / 255.0, blue: 4.0 / 255.0, alpha: 1.0)
@@ -134,9 +64,7 @@ extension UIColor{
     class func appLighteGreen() -> UIColor{
        return UIColor(red: 36.0 / 255.0, green: 41.0 / 255.0, blue: 38.0 / 255.0, alpha: 1.0)
     }
-   
 }
-
 
 //MARK: - Device Type
 enum UIUserInterfaceIdiom : Int {
@@ -376,7 +304,46 @@ func UTCToLocal(date:String) -> String {
     return str
 }
 
+//MARK: - Get String From Dictionary
+func getStringFromDictionary(dictionary:NSDictionary, key:String) -> String {
+    
+    if let value = dictionary[key] {
+        
+        let string = NSString.init(format: "%@", value as! CVarArg) as String
+        if (string == "null" || string == "NULL" || string == "nil") {
+            return ""
+        }
+        return string.removeWhiteSpace()
+    }
+    return ""
+}
 
+//MARK: - Get Dictionary From Dictionary
+func getDictionaryFromDictionary(dictionary:NSDictionary, key:String) -> NSDictionary {
+    
+    if let value = dictionary[key] as? NSDictionary {
+        
+        let string = NSString.init(format: "%@", value as CVarArg) as String
+        if (string == "null" || string == "NULL" || string == "nil") {
+            return NSDictionary()
+        }
+        return value
+    }
+    return NSDictionary()
+}
+//MARK: - Get Array From Dictionary
+func getArrayFromDictionary(dictionary:NSDictionary, key:String) -> NSArray {
+    
+    if let value = dictionary[key] as? NSArray {
+        
+        let string = NSString.init(format: "%@", value as CVarArg) as String
+        if (string == "null" || string == "NULL" || string == "nil") {
+            return NSArray()
+        }
+        return value
+    }
+    return NSArray()
+}
 //MARK: - Scaling
 struct DeviceScale {
     static let SCALE_X = ScreenSize.WIDTH / 375.0
@@ -411,6 +378,10 @@ extension String {
     
     func isStringWithoutSpace() -> Bool{
         return !self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty
+    }
+    
+    func removeWhiteSpace() -> String {
+        return self.trimmingCharacters(in: .whitespaces)
     }
 }
 //MARK: - UILabel Extension
