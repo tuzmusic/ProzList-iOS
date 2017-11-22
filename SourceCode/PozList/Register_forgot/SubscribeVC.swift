@@ -29,12 +29,40 @@ class SubscribeVC: UIViewController {
     }
     
     @IBAction func click_subscribe(_ sender: UIControl) {
-        let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
-        self.navigationController?.pushViewController(selected_service, animated: true)
         
+        var peraDic = [String:Any]()
+        
+        peraDic["transaction_id"] = "10001"
+        peraDic["user_id"] = UserDefaults.Main.string(forKey: .UserID)
+        peraDic["total_amount"] = "10"
+        
+        appDelegate.showLoadingIndicator()
+        MTWebCall.call.subcriptionSave(dictParam: peraDic) { (respons, status) in
+            appDelegate.hideLoadingIndicator()
+            jprint(items: status)
+            if (status == 200 && respons != nil) {
+                //Response
+                let dictResponse = respons as! NSDictionary
+                
+                let Response = getStringFromDictionary(dictionary: dictResponse, key: "response")
+                if Response == "true"
+                {
+                    UserDefaults.Main.set(true, forKey: .isSubscribed)
+                    let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                    self.navigationController?.pushViewController(selected_service, animated: true)
+                    
+                } else {
+                    //Popup
+                    let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                    appDelegate.Popup(Message: "\(message)")
+                }
+            } else {
+                //Popup
+                let Title = NSLocalizedString("Somthing went wrong \n Try after sometime", comment: "")
+                appDelegate.Popup(Message: Title)
+            }
+        }
         
     }
     
-    
-
 }

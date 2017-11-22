@@ -8,12 +8,16 @@
 
 import UIKit
 import GTProgressBar
+import Alamofire
 
 class cell_dotted :UITableViewCell {
     @IBOutlet weak var img_Certi: UIImageView!
     @IBOutlet weak var lbl_certi_name: UILabel!
     @IBOutlet weak var progressBar: GTProgressBar!
+    var uploadImagetag : Int!
+    var uploadStatus : Bool!
     
+    @IBOutlet var btnDelete: UIButton!
 }
 
 
@@ -26,7 +30,7 @@ class UploadCertificateVC: UIViewController,UIImagePickerControllerDelegate,UINa
     @IBOutlet weak var dotted_view: UIControl!
 
    
-    var imag_arry = [#imageLiteral(resourceName: "user")]
+    var imag_arry = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +40,7 @@ class UploadCertificateVC: UIViewController,UIImagePickerControllerDelegate,UINa
         view_shadow.layer.shadowRadius = 5.0
         view_shadow.layer.shadowColor = UIColor.black.cgColor
     
-        
-
-        
     }
-
-   
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -114,28 +111,96 @@ class UploadCertificateVC: UIViewController,UIImagePickerControllerDelegate,UINa
     }
     
     @IBAction func Click_upload(_ sender: UIControl) {
-        let vc = storyBoards.Main.instantiateViewController(withIdentifier: "SubscribeVC") as! SubscribeVC
-        self.navigationController?.pushViewController(vc, animated: true)
+        if (imag_arry.count > 0) {
+            var dict = [String:String]()
+            dict["user_id"] = UserDefaults.Main.string(forKey: .UserID)
+            self.uplaodImages(imag: imag_arry[0] , parameters: dict, indexPath: 0)
+        }
     }
-
+    @IBAction func clickDeleteCertificate(_ sender: UIButton) {
+        imag_arry.remove(at: sender.tag)
+        tbl_view.reloadData()
+    }
 }
 
+extension UploadCertificateVC  {
+    
+    func uplaodImages(imag:UIImage,parameters:[String:String],indexPath:Int) {
+        let headers: HTTPHeaders = [
+            //"Content-Type": "application/x-www-form-urlencoded",
+            "apikey":WebURL.appkey
+        ]
+        
+        
+        Alamofire.upload(multipartFormData: { (formData) in
+            formData.append(UIImageJPEGRepresentation(imag, 1.0)!, withName: "images[]", fileName: "cartificate.jpeg", mimeType: "image/jpeg")
+            for (key, value) in parameters {
+                formData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+        }, to: WebURL.uploadCertificate, method: HTTPMethod.post, headers: headers, encodingCompletion: { encoding in
+            switch encoding{
+            case .success(let req, _, _):
+                req.uploadProgress(closure: { (prog) in
+                    let section = 0
+                    let row = indexPath
+                    let indexPath = IndexPath(row: row, section: section)
+                    let cell: cell_dotted = self.tbl_view.cellForRow(at: indexPath) as! cell_dotted
+                    cell.progressBar.progress = CGFloat(prog.fractionCompleted)
+                    print("Upload Progress: \(prog.fractionCompleted)")
+                }).responseJSON { (resObj) in
+                    switch resObj.result{
+                    case .success:
+                        if let resData = resObj.data{
+                            do {
+                                let res = try JSONSerialization.jsonObject(with: resData, options: []) as AnyObject
+                                let dictResponse = res as! NSDictionary
+                                let Response = getStringFromDictionary(dictionary: dictResponse, key: "response")
+                                if Response == "true" {
+                                    self.imag_arry.remove(at: 0)
+                                    let next = indexPath + 1
+                                    if (self.imag_arry.count > 0 ) {
+                                        self.uplaodImages(imag: self.imag_arry[0], parameters: parameters, indexPath: next)
+                                    }
+                                    else{
+                                        UserDefaults.Main.set(true, forKey: .isCertificated)
+                                        let vc = storyBoards.Main.instantiateViewController(withIdentifier: "SubscribeVC") as! SubscribeVC
+                                        self.navigationController?.pushViewController(vc, animated: true)
+                                    }
+                                } else {
+                                }
+                            } catch let errParse{
+                                jprint(items: errParse)
+                            }
+                        }
+                        break
+                    case .failure(let err):
+                        jprint(items: err)
+                        break
+                    }
+                }
+                break
+            case .failure(let err):
+                jprint(items: err)
+                break
+            }
+        })
+        
+    }
+}
 
 extension UploadCertificateVC : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imag_arry.count
-        //return 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_dotted") as! cell_dotted
             cell.img_Certi.image = imag_arry[indexPath.row]
-            cell.progressBar.progress = 0.5
-
-        
-        
+            cell.progressBar.progress = 0.0
+            cell.uploadImagetag = indexPath.row
+            cell.uploadStatus = false
+            cell.btnDelete.tag = indexPath.row
             return cell
-        
     }
 }

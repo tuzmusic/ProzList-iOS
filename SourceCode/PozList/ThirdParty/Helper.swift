@@ -40,6 +40,10 @@ struct WebURL {
     static let UserProfile:String = WebURL.baseURL + "getprofile/"
     static let UpdateUserProfile:String = WebURL.baseURL + "update_profile/"
     static let CreateRequest:String = WebURL.baseURL + "create_request"
+    static let getRequest:String = WebURL.baseURL + "get_service_request/"
+    static let getNearbyJob:String = WebURL.baseURL + "get_nearbyjob/"
+    static let uploadCertificate:String = WebURL.baseURL + "upload_certificate"
+    static let subcribeSave:String = WebURL.baseURL + "subscription_save"
 }
 
 extension UIColor{
@@ -461,6 +465,14 @@ extension NSDate {
         dateFormatter.dateFormat = "dd/MM/yy hh:mma"
         return dateFormatter.string(from: self as Date)
     }
+    
+//    func getAppFormetedDate(date:String) -> String {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        let date = dateFormatter.date(from: date)
+//        dateFormatter.dateFormat = "dd MMMM yyyy"
+//        return  dateFormatter.string(from: date!)
+//    }
     
 }
 extension UIView {

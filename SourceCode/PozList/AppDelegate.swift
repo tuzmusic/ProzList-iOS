@@ -24,8 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
       
-        GMSServices.provideAPIKey("AIzaSyD5dRdfmT4dpHjAo7Rdy-WOK4YMixclnuo")
-        GMSPlacesClient.provideAPIKey("AIzaSyD5dRdfmT4dpHjAo7Rdy-WOK4YMixclnuo")
+        GMSServices.provideAPIKey("AIzaSyA9Tfqqo1J0wbVqTRDUzOH68vU-yK5JspI")
+        GMSPlacesClient.provideAPIKey("AIzaSyA9Tfqqo1J0wbVqTRDUzOH68vU-yK5JspI")
         locationManager = CLLocationManager()
         if (CLLocationManager.locationServicesEnabled())
         {
@@ -40,7 +40,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         IQKeyboardManager.sharedManager().previousNextDisplayMode = .alwaysHide
         
-        //let value:Bool = UserDefaults.Main.bool(forKey: .isLogin)
+        if UserDefaults.Main.bool(forKey: .isLogin) {
+            
+            if UserType.Customer.rawValue == "Service" {
+                if !UserDefaults.Main.bool(forKey: .isCertificated) {
+                    let vc = storyBoards.Main.instantiateViewController(withIdentifier: "UploadCertificateVC") as! UploadCertificateVC
+                    self.window?.rootViewController = UINavigationController.init(rootViewController: vc)
+                    self.window?.makeKeyAndVisible()
+                }else if !UserDefaults.Main.bool(forKey: .isSubscribed) {
+                    let vc = storyBoards.Main.instantiateViewController(withIdentifier: "SubscribeVC") as! SubscribeVC
+                    self.window?.rootViewController = UINavigationController.init(rootViewController: vc)
+                    self.window?.makeKeyAndVisible()
+                }else {
+                    let ContainerVC = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                    self.window?.rootViewController = UINavigationController.init(rootViewController: ContainerVC)
+                    self.window?.makeKeyAndVisible()
+                }
+            }else {
+                let ContainerVC = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                self.window?.rootViewController = UINavigationController.init(rootViewController: ContainerVC)
+                self.window?.makeKeyAndVisible()
+            }
+        }
+        else {
+            
+            let ContainerVC = storyBoards.Main.instantiateViewController(withIdentifier: "LoginVC") as! UINavigationController
+            self.window?.rootViewController = ContainerVC
+            self.window?.makeKeyAndVisible()
+        }
         
         return true
     }
@@ -257,6 +284,8 @@ extension UserDefaults
         enum BoolDefaultKey : String {
             case isLogin
             case isSignUp
+            case isCertificated
+            case isSubscribed
         }
         
         enum FloatDefaultKey:String {

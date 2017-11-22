@@ -23,7 +23,7 @@ import InteractiveSideMenu
 class EditProfileVC: UIViewController, SideMenuItemContent,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CustomToolBarDelegate {
 
     var toolBarDone : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: false)
-  var toolBar : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: true)
+    var toolBar : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: true)
     @IBOutlet weak var txt_name_edit: UITextField!
     @IBOutlet weak var Img_profile: UIImageView!
     @IBOutlet weak var lbl_under_name: UILabel!
@@ -32,10 +32,8 @@ class EditProfileVC: UIViewController, SideMenuItemContent,UIImagePickerControll
     @IBOutlet weak var Control_edit_profile: UIControl!
     
     @IBOutlet weak var Cons_width_edit: NSLayoutConstraint!
-   
     
     @IBOutlet weak var btn_save_edit: UIButton!
-    
     
     var isEditing_profile = false
     var text_head = UITextField()
@@ -87,24 +85,20 @@ class EditProfileVC: UIViewController, SideMenuItemContent,UIImagePickerControll
                     self.arr_edit = [["main":"Email","image":#imageLiteral(resourceName: "email-1"),"Edit_image":#imageLiteral(resourceName: "email"),"sub":email,"Place":"Enter Your Email"],
                                      ["main":"City","image":#imageLiteral(resourceName: "locaton"),"Edit_image":#imageLiteral(resourceName: "locaton"),"sub":city,"Place":"Enter your city name"],
                                      ["main":"Phone Number","image":#imageLiteral(resourceName: "phone_no"),"Edit_image":#imageLiteral(resourceName: "phone"),"sub":mobile,"Place":"Enter Your Phone Number"]]
-                    var str1 =  WebURL.ImageBaseUrl + imgProfile
+                    
+                    let str1 =  WebURL.ImageBaseUrl + imgProfile
                     let escapedOwnreImage = str1.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
                     let urlOwnreImage = URL.init(string: escapedOwnreImage!)
-                    SDImageCache.shared().removeImage(forKey: String(describing: urlOwnreImage), fromDisk: true)
+                    //SDImageCache.shared().removeImage(forKey: String(describing: urlOwnreImage), fromDisk: true)
+                    
                     self.Img_profile.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "camera_icon"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
                         //Hide Loading indicator
-                        //self.activityIndicatorImgView.isHidden = true
-                        //self.activityIndicatorImgView.stopAnimating()
-                        
+                        //self.Img_profile.setShowActivityIndicator(false)
                         if (image != nil) {
                             self.Img_profile.contentMode = .scaleAspectFit
-                            self.Img_profile.image = image
-                            
-                            //Show userprofile image
-                            //self.imageViewUserProfile.isHidden = false
+                           // self.Img_profile.image = image
                         }
                     })
-                    
                     
                     //str1 = str1.replacingOccurrences(of: " ", with: "%20")
                     //self.Img_profile.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "camera_icon"), options: .refreshCached)
@@ -229,21 +223,18 @@ class EditProfileVC: UIViewController, SideMenuItemContent,UIImagePickerControll
                                          ["main":"City","image":#imageLiteral(resourceName: "locaton"),"Edit_image":#imageLiteral(resourceName: "locaton"),"sub":city,"Place":"Enter your city name"],
                                          ["main":"Phone Number","image":#imageLiteral(resourceName: "phone_no"),"Edit_image":#imageLiteral(resourceName: "phone"),"sub":mobile,"Place":"Enter Your Phone Number"]]
                         
-                        var str1 =  WebURL.ImageBaseUrl + imgProfile
+                        let str1 =  WebURL.ImageBaseUrl + imgProfile
                         let escapedOwnreImage = str1.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
                         let urlOwnreImage = URL.init(string: escapedOwnreImage!)
                         SDImageCache.shared().removeImage(forKey: String(describing: urlOwnreImage), fromDisk: true)
                         self.Img_profile.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "camera_icon"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
                             //Hide Loading indicator
-                            //self.activityIndicatorImgView.isHidden = true
-                            //self.activityIndicatorImgView.stopAnimating()
+                           
                             
                             if (image != nil) {
                                 self.Img_profile.contentMode = .scaleAspectFit
                                 self.Img_profile.image = image
-                                
-                                //Show userprofile image
-                                //self.imageViewUserProfile.isHidden = false
+                              
                             }
                         })
                         //str1 = str1.replacingOccurrences(of: " ", with: "%20")
@@ -352,6 +343,11 @@ extension EditProfileVC : UITableViewDelegate,UITableViewDataSource{
             cell.txt_edit.text = dict["sub"] as? String
             cell.txt_edit.tag = indexPath.row + 1
             cell.txt_edit.placeholder = dict["Place"] as? String
+            
+            if (dict["main"] as! String == "Email") {
+                cell.txt_edit.isUserInteractionEnabled = false
+            }
+            
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleCell") as! SimpleCell

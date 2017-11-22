@@ -452,6 +452,24 @@ extension MTWebCall{
         let relPath = WebURL.CreateRequest
         let _ = uploadMultiImage(relPath: relPath, img: images, imgKey: "image", param: dictParam as? [String : String], block: block, progress: nil)
     }
+    //MARK: - Create Request API calling
+    func getRequest(userId: String, type: String,dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.getRequest + userId + "/" + type
+        let _ = getRequest(relPath: relPath, param: dictParam, block: block)
+    }
+    //MARK: - Create Request API calling
+    func getNearByJob(userId: String, type: String,dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.getNearbyJob + userId
+        let _ = getRequest(relPath: relPath, param: dictParam, block: block)
+    }
+    //MARK: - Subcription API calling
+    func subcriptionSave(dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.subcribeSave
+        let _ = postRequest(relPath: relPath, param: dictParam, block: block)
+    }
 }
 /*extension MTWebCall{
     

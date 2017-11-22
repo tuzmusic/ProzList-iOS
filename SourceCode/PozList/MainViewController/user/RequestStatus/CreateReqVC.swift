@@ -23,7 +23,6 @@ class CreateReqVC: UIViewController , SideMenuItemContent {
     @IBOutlet weak var view_alert_star: CosmosView!
     @IBOutlet weak var txt_view_alert: UITextView!
     
-    
     @IBOutlet weak var img_completed: UIImageView!
     
     @IBOutlet weak var img_notCome: UIImageView!
@@ -31,37 +30,42 @@ class CreateReqVC: UIViewController , SideMenuItemContent {
     var seconds = 0
     var timer = Timer()
     var IsComplete = false
-    
+    var isUserAvil:Bool!
     @IBOutlet weak var Contro_not_come: UIControl!
+    @IBOutlet var userDetaileView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let now1 = Date()
-        let now =  dateFrm(date: "2017-10-27 10:0:00")
-        let endDate = now1
-        
-        let calendar = Calendar.current
-        let unitFlags = Set<Calendar.Component>([ .second])
-        let datecomponenets = calendar.dateComponents(unitFlags, from: now, to: endDate)
-        let seconds1 = datecomponenets.second
-        print(seconds1 ?? 0)
-        seconds = seconds1!
-        runTimer()
-          self.Alert_view.frame = CGRect(x: 0, y: self.view.frame.size.height, width: self.Alert_view.frame.size.width , height: self.Alert_view.frame.size.height)
+        if isUserAvil {
+            let now1 = Date()
+            let now =  dateFrm(date: "2017-10-27 10:0:00")
+            let endDate = now1
+            
+            let calendar = Calendar.current
+            let unitFlags = Set<Calendar.Component>([ .second])
+            let datecomponenets = calendar.dateComponents(unitFlags, from: now, to: endDate)
+            let seconds1 = datecomponenets.second
+            print(seconds1 ?? 0)
+            seconds = seconds1!
+            runTimer()
+            self.Alert_view.frame = CGRect(x: 0, y: self.view.frame.size.height, width: self.Alert_view.frame.size.width , height: self.Alert_view.frame.size.height)
+        }
+        else {
+            userDetaileView.isUserInteractionEnabled = false
+            userDetaileView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     //Mark:- Click events
     
     @IBAction func Click_bak(_ sender: Any) {
-        showSideMenu()
-        
-//         self.navigationController?.popViewController(animated: true)
+       self.navigationController?.popViewController(animated: true)
     }
     @IBAction func Click_profile_pic(_ sender: UIControl) {
         
@@ -79,8 +83,6 @@ class CreateReqVC: UIViewController , SideMenuItemContent {
             }) { (Closer) in
             }
         }
-  
-        
     }
     @IBAction func Click_Track_service(_ sender: UIControl) {
      
@@ -107,7 +109,7 @@ class CreateReqVC: UIViewController , SideMenuItemContent {
             sender.backgroundColor = UIColor.appBackGroundColor()
             img_completed.image = #imageLiteral(resourceName: "Group_name")
         }
-  }
+    }
     
     
     @IBAction func Click_Not_come_state(_ sender: UIControl) {

@@ -29,8 +29,6 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
     
     var txt_y:CGFloat = 0.0
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupAllTextFiels()
@@ -41,7 +39,7 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
         self.txt_email.text = ""
         self.txt_phone.text = ""
         self.txt_password.text = ""
-        
+        self.txt_password.isSecureTextEntry = true
         
         self.txt_name.titleLabel.font =  UIFont.init(name: FontName.RobotoRegular, size: 12)
         self.txt_name.placeholderFont = UIFont.init(name: FontName.RobotoLight, size: 16)
@@ -93,7 +91,7 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
         var peraDic = [String:Any]()
         peraDic["name"] = self.txt_name.text!
         peraDic["password"] = self.txt_password.text!
-        peraDic["role"] = UserType.General
+        peraDic["role"] = UserType.Customer.rawValue
         peraDic["phone"] = self.txt_phone.text!
         peraDic["email"] = self.txt_email.text!
         
@@ -123,7 +121,7 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
                     //UserDefaults.standard.set(userdate, forKey: "Userdata")
                     // UserDefaults.standard.set(UserType.General, forKey: "LoginType")
                     
-                    UserDefaults.Main.set(true, forKey: .isSignUp)
+                    UserDefaults.Main.set(true, forKey: .isLogin)
                     //UserDefaults.Main.set(userdate, forKey: .Profile)
                     UserDefaults.Main.set(id, forKey: .UserID)
                     

@@ -35,6 +35,7 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
     func setupAllTextFiels(){
         self.txtfld_email.text = ""
         self.txtfld_password.text = ""
+        self.txtfld_password.isSecureTextEntry = true
         
         self.txtfld_email.titleLabel.font =  UIFont.init(name: FontName.RobotoRegular, size: 12)
         self.txtfld_email.placeholderFont = UIFont.init(name: FontName.RobotoLight, size: 16)
@@ -95,7 +96,7 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
         actionSheetController.addAction(takePictureAction)
         
         // Create and add a second option action
-        let choosePictureAction = UIAlertAction(title: "For User", style: .default) { action -> Void in
+        let choosePictureAction = UIAlertAction(title: "For Customer", style: .default) { action -> Void in
             
            
             let vc = storyBoards.Main.instantiateViewController(withIdentifier: "RegisterVc") as! RegisterVc
@@ -128,22 +129,58 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
                     //Message
                     let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
                     print(message)
+                    
                     let dictData = getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
-                    let id = createString(value:dictData.value(forKey: "id") as AnyObject)
-                    let username = createString(value: dictData.value(forKey: "name") as AnyObject)
-                    let email = createString(value: dictData.value(forKey: "email") as AnyObject)
-                    let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
                     let type = createString(value: dictData.value(forKey: "role") as AnyObject)
                     let status = createString(value: dictData.value(forKey: "status") as AnyObject)
-                    let city = createString(value: dictData.value(forKey: "status") as AnyObject)
-                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city)
                     
-                    UserDefaults.Main.set(true, forKey: .isSignUp)
-                    //UserDefaults.Main.set(userdate, forKey: .Profile)
-                    UserDefaults.Main.set(id, forKey: .UserID)
-                    
-                    let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
-                    self.navigationController?.pushViewController(selected_service, animated: true)
+                    if type == UserType.Customer.rawValue {
+                        
+                        UserDefaults.Main.set(UserType.Customer.rawValue, forKey: .Appuser)
+                        let id = createString(value:dictData.value(forKey: "id") as AnyObject)
+                        let username = createString(value: dictData.value(forKey: "name") as AnyObject)
+                        let email = createString(value: dictData.value(forKey: "email") as AnyObject)
+                        let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
+                        
+                        let city = createString(value: dictData.value(forKey: "status") as AnyObject)
+                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city)
+                        
+                        UserDefaults.Main.set(true, forKey: .isLogin)
+                        UserDefaults.Main.set(id, forKey: .UserID)
+                        
+                        
+                        //let userDate1 = NSKeyedArchiver.archivedData(withRootObject: userdate)
+                        //UserDefaults.Main.set(userDate1, forKey: .Profile)
+                        let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                        self.navigationController?.pushViewController(selected_service, animated: true)
+                    }
+                    else {
+                        
+                        let id = createString(value:dictData.value(forKey: "id") as AnyObject)
+                        UserDefaults.Main.set(id, forKey: .UserID)
+                        
+                        let certified = createString(value: dictData.value(forKey: "certified") as AnyObject)
+                        let subcrib = createString(value: dictData.value(forKey: "subscribed") as AnyObject)
+                        
+                        if certified == "false"
+                        {
+                            let vc = storyBoards.Main.instantiateViewController(withIdentifier: "UploadCertificateVC") as! UploadCertificateVC
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        } else if subcrib == "false" {
+                            let vc = storyBoards.Main.instantiateViewController(withIdentifier: "SubscribeVC") as! SubscribeVC
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        } else if status == "Active"{
+                            UserDefaults.Main.set(true, forKey: .isLogin)
+                            UserDefaults.Main.set(true, forKey: .isCertificated)
+                            UserDefaults.Main.set(true, forKey: .isSubscribed)
+                            let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                            self.navigationController?.pushViewController(selected_service, animated: true)
+                        }
+                        else {
+                            let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                            appDelegate.Popup(Message: "\(message)")
+                        }
+                    }
                     
                 }else
                 {

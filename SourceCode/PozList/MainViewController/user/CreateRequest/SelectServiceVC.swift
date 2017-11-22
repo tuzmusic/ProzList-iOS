@@ -28,6 +28,24 @@ class SelectServiceVC: UIViewController, SideMenuItemContent {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        // Do any additional setup after loading the view.
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    @IBAction func ClickMenu(_ sender: UIButton) {
+          showSideMenu()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.arr_service_list.removeAll()
+        self.getServiceList()
+    }
+    
+    func getServiceList() {
+        
         let dic = [String:Any]()
         appDelegate.showLoadingIndicator()
         MTWebCall.call.getServiceCat(dictParam: dic) { (respons, status) in
@@ -68,14 +86,6 @@ class SelectServiceVC: UIViewController, SideMenuItemContent {
                 appDelegate.Popup(Message: Title)
             }
         }
-        // Do any additional setup after loading the view.
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    @IBAction func ClickMenu(_ sender: UIButton) {
-          showSideMenu()
     }
 }
 extension SelectServiceVC:UITableViewDelegate,UITableViewDataSource{

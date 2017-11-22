@@ -35,6 +35,7 @@ class HostViewController: MenuContainerViewController {
         return false
     }
 
+    var appuser = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,11 +45,23 @@ class HostViewController: MenuContainerViewController {
         // Instantiate menu view controller by identifier
         self.menuViewController = storyBoards.Menu.instantiateViewController(withIdentifier: "NavigationMenu") as! MenuViewController
 
-        // Gather content items controllers
-        self.contentViewControllers = contentControllers()
+        
 
         // Select initial content controller. It's needed even if the first view controller should be selected.
-        self.selectContentViewController(contentViewControllers[1])
+        let usertpr =  UserDefaults.Main.string(forKey: .Appuser)
+        appuser = usertpr
+        
+        if  appuser == UserType.ServiceProvider.rawValue{
+            // Gather content items controllers
+            self.contentViewControllers = contentControllers()
+            self.selectContentViewController(contentViewControllers[1])
+        }else{  // User
+            // Gather content items controllers
+            self.contentViewControllers = contentControllers()
+            self.selectContentViewController(contentViewControllers[1])
+        }
+        
+        self.navigationController?.isNavigationBarHidden = true
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -69,7 +82,7 @@ class HostViewController: MenuContainerViewController {
 
     private func contentControllers() -> [UIViewController] {
         
-        let controllersIdentifiers = ["EditProfileVC","SelectServiceVC","CreateReqVC","JobHistoryVC","SurveyVC"]
+        let controllersIdentifiers = ["ServiceProviderProfileVC","SelectServiceVC","NearJobVC","JobHistoryVC","SurveyVC"]
         
         var contentList = [UIViewController]()
 

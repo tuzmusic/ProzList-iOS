@@ -10,6 +10,9 @@ PODS:
   - GoogleMaps/Base (2.4.0)
   - GoogleMaps/Maps (2.4.0):
     - GoogleMaps/Base
+  - GooglePlacePicker (2.4.0):
+    - GoogleMaps (= 2.4.0)
+    - GooglePlaces (= 2.4.0)
   - GooglePlaces (2.4.0):
     - GoogleMaps/Base (= 2.4.0)
   - GTProgressBar (0.2.0)
@@ -23,6 +26,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.0)
   - DKImagePickerController
   - GoogleMaps
+  - GooglePlacePicker
   - GooglePlaces
   - GTProgressBar
   - InteractiveSideMenu
@@ -35,6 +39,7 @@ SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   DKImagePickerController: 6eea9f1ba2e2ca0ba0317b81d68152d07d9e877f
   GoogleMaps: 8436ab5d1c25e36915b2f7416d0c8e3fa2e76c61
+  GooglePlacePicker: 755f10343d71280c7b016823e73fbae9625dfa8a
   GooglePlaces: aafe5990fa7951e98e078761bbdaaf236d7e0c65
   GTProgressBar: 5db7054f6069100d871cde5a3149eb708fc348c5
   InteractiveSideMenu: 337f6d95a3f6543c517a888893531430e18553b3
@@ -43,6 +48,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
   TGPControls: d7ab5a338746c100b2ae57f6b6cedee7151f116a
 
-PODFILE CHECKSUM: 331808851a1286d7ea0b5f9130d635d442ca7caa
+PODFILE CHECKSUM: c1e1c23639f9345b5fb7bab25453ba278e8fadee
 
-COCOAPODS: 1.4.0.beta.1
+COCOAPODS: 1.3.1

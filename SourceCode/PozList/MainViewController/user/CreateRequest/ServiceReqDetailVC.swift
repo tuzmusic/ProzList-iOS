@@ -23,7 +23,7 @@ class cellColl: UICollectionViewCell {
 import UIKit
 import Photos
 import DKImagePickerController
-
+import GooglePlacePicker
 
 class ServiceReqDetailVC: UIViewController,CustomToolBarDelegate {
     
@@ -36,7 +36,8 @@ class ServiceReqDetailVC: UIViewController,CustomToolBarDelegate {
     
     @IBOutlet weak var text_view: UITextView!
     
-    
+    @IBOutlet var lblSelectedAddress: UILabel!
+    var selectedPlace : CLLocationCoordinate2D!
     var placeholderLabel1 : UILabel!
     var isExpande = false
     var assets: [DKAsset]?
@@ -119,6 +120,10 @@ class ServiceReqDetailVC: UIViewController,CustomToolBarDelegate {
         var dict = [String:Any]()
         dict["user_id"] = UserDefaults.Main.string(forKey: .UserID)
         dict["request_desc"] = text_view.text
+        dict["address"] = lblSelectedAddress.text
+        dict["lat"] = String(selectedPlace.latitude)
+        dict["lng"] = String(selectedPlace.longitude)
+        
         for i in 0...arr_service_list.count - 1 {
             let Sdict = arr_service_list[i] as Service
             if  Sdict.IsSelected {
@@ -173,6 +178,13 @@ class ServiceReqDetailVC: UIViewController,CustomToolBarDelegate {
             self.arr_image.removeObject(at:sender.tag )
             self.Coll_view.reloadData()
         }
+    }
+    
+    @IBAction func clickSelectePlace(_ sender: Any) {
+        let config = GMSPlacePickerConfig(viewport: nil)
+        let placePicker = GMSPlacePickerViewController(config: config)
+        placePicker.delegate = self
+        present(placePicker, animated: true, completion: nil)
     }
     
     func get_MultipleImage()  {
@@ -317,5 +329,29 @@ extension ServiceReqDetailVC :UITextViewDelegate {
        
     }
   
+}
+
+extension ServiceReqDetailVC:GMSPlacePickerViewControllerDelegate {
+
+    
+    
+    func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
+        // Dismiss the place picker, as it cannot dismiss itself.
+        viewController.dismiss(animated: true, completion: nil)
+        
+        print("Place name \(place.name)")
+        print("Place address \(String(describing: place.formattedAddress))")
+        print("Place attributions \(String(describing: place.attributions))")
+        print("Place attributions \(String(describing: place.coordinate))")
+        lblSelectedAddress.text = place.formattedAddress
+        selectedPlace = place.coordinate
+    }
+    
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        // Dismiss the place picker, as it cannot dismiss itself.
+        viewController.dismiss(animated: true, completion: nil)
+        
+        print("No place selected")
+    }
 }
 

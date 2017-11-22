@@ -33,9 +33,6 @@ class NavigationMenuViewController: MenuViewController {
     let menu_user_text = ["Profile", "Create Request","Request Status","Job History","Survey","LOG OUT"]
     
     var appuser = ""
-    
-    
-    
     let menu_service_pro = [#imageLiteral(resourceName: "profile"),#imageLiteral(resourceName: "service_location"),#imageLiteral(resourceName: "request_status"),#imageLiteral(resourceName: "job_history"),#imageLiteral(resourceName: "request_status"),#imageLiteral(resourceName: "servey"),#imageLiteral(resourceName: "img"),#imageLiteral(resourceName: "log_out")]
     let menu_service_pro_text = ["Profile", "Nearby Job Request","Current Request","Request List","Award Given","Strikes and Review","on Duty / Off Duty","LOG OUT"]
     @IBOutlet weak var tableView: UITableView!
@@ -116,6 +113,9 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
         let steText = cell.lbl.text
         
         if steText == "LOG OUT" {
+            UserDefaults.Main.removeObj(forKey: .isLogin)
+            UserDefaults.Main.removeObj(forKey: .Appuser)
+            UserDefaults.Main.removeObj(forKey: .UserID)
             menuContainerViewController.hideSideMenu()
             let loginVc = storyBoards.Main.instantiateViewController(withIdentifier: "LoginVC") as! UINavigationController
             menuContainerViewController.selectContentViewController(loginVc)
