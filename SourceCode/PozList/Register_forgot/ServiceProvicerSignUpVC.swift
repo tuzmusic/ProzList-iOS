@@ -314,13 +314,13 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
     
     @IBAction func Click_Register(_ sender: UIControl) {
         
-       // guard validateData2() else { return }
+        guard validateData2() else { return }
         
         //let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
         //self.navigationController?.pushViewController(selected_service, animated: true)
         
-        let vc = storyBoards.Main.instantiateViewController(withIdentifier: "UploadCertificateVC") as! UploadCertificateVC
-        self.navigationController?.pushViewController(vc, animated: true)
+      //  let vc = storyBoards.Main.instantiateViewController(withIdentifier: "UploadCertificateVC") as! UploadCertificateVC
+      //  self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK:- =======================================================

@@ -122,7 +122,7 @@ extension SelectServiceVC:UITableViewDelegate,UITableViewDataSource{
         }
         let service = arr_service_list[indexPath.row] as Service
         service.IsSelected = true
-        let vc = storyBoards.Menu.instantiateViewController(withIdentifier: "ServiceReqDetailVC") as! ServiceReqDetailVC
+        let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "ServiceReqDetailVC") as! ServiceReqDetailVC
         vc.arr_service_list = arr_service_list
         self.navigationController?.pushViewController(vc, animated: true)
     }

@@ -84,7 +84,7 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate ,SideMenuItemContent{
     }
     
     @objc func click_profile_service() {
-        let vc = storyBoards.Menu.instantiateViewController(withIdentifier: "ProfileDeatilVC") as! ProfileDeatilVC
+        let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "ProfileDeatilVC") as! ProfileDeatilVC
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

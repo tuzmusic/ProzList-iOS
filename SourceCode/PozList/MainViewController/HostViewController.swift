@@ -43,7 +43,7 @@ class HostViewController: MenuContainerViewController {
         self.transitionOptions = TransitionOptions(duration: 0.4, visibleContentWidth: screenSize.width / 6)
 
         // Instantiate menu view controller by identifier
-        self.menuViewController = storyBoards.Menu.instantiateViewController(withIdentifier: "NavigationMenu") as! MenuViewController
+        self.menuViewController = storyBoards.Customer.instantiateViewController(withIdentifier: "NavigationMenu") as! MenuViewController
 
         
 
@@ -81,20 +81,27 @@ class HostViewController: MenuContainerViewController {
     }
 
     private func contentControllers() -> [UIViewController] {
-        
-        let controllersIdentifiers = ["ServiceProviderProfileVC","SelectServiceVC","NearJobVC","JobHistoryVC","SurveyVC"]
-        
+        var controllersIdentifiers = [String]()
         var contentList = [UIViewController]()
-
-        /*
-         Instantiate items controllers from storyboard.
-         */
-        for identifier in controllersIdentifiers {
-            if let viewController = storyBoards.Menu.instantiateViewController(withIdentifier: identifier) as? UIViewController {
-                contentList.append(viewController)
+        if  appuser == UserType.ServiceProvider.rawValue{
+            controllersIdentifiers = ["ServiceProviderProfileVC","NearJobVC","CurrentRequestVC"]
+            
+            for identifier in controllersIdentifiers {
+                if let viewController = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: identifier) as? UIViewController {
+                    contentList.append(viewController)
+                }
+            }
+            
+        }else{  // User
+            controllersIdentifiers = ["EditProfileVC","SelectServiceVC","RequestStatusListVC","JobHistoryVC","SurveyVC"]
+            
+            for identifier in controllersIdentifiers {
+                if let viewController = storyBoards.Customer.instantiateViewController(withIdentifier: identifier) as? UIViewController {
+                    contentList.append(viewController)
+                }
             }
         }
-
+        
         return contentList
     }
 }

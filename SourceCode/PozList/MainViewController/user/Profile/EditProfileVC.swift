@@ -54,8 +54,9 @@ class EditProfileVC: UIViewController, SideMenuItemContent,UIImagePickerControll
         table_view.rowHeight = UITableViewAutomaticDimension
         let dict = [String : Any]()
         let userId = UserDefaults.Main.string(forKey: .UserID)
+        appDelegate.showLoadingIndicator()
         MTWebCall.call.getUserProfile(userId: userId, dictParam: dict) { (respons, status) in
-            
+        appDelegate.hideLoadingIndicator()
             jprint(items: status)
             if (status == 200 && respons != nil) {
                 //Response
@@ -76,7 +77,7 @@ class EditProfileVC: UIViewController, SideMenuItemContent,UIImagePickerControll
                     let status = createString(value: dictData.value(forKey: "status") as AnyObject)
                     let city = createString(value: dictData.value(forKey: "city") as AnyObject)
                     let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
-                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city)
+                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city,profileImg: imgProfile)
                     
                     UserDefaults.Main.set(true, forKey: .isSignUp)
                     //UserDefaults.Main.set(userdate, forKey: .Profile)
@@ -213,7 +214,7 @@ class EditProfileVC: UIViewController, SideMenuItemContent,UIImagePickerControll
                         let status = createString(value: dictData.value(forKey: "status") as AnyObject)
                         let city = createString(value: dictData.value(forKey: "city") as AnyObject)
                         let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
-                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city)
+                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: imgProfile)
                         
                         UserDefaults.Main.set(true, forKey: .isSignUp)
                         //UserDefaults.Main.set(userdate, forKey: .Profile)

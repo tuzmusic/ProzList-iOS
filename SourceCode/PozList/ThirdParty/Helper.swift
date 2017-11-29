@@ -41,9 +41,11 @@ struct WebURL {
     static let UpdateUserProfile:String = WebURL.baseURL + "update_profile/"
     static let CreateRequest:String = WebURL.baseURL + "create_request"
     static let getRequest:String = WebURL.baseURL + "get_service_request/"
-    static let getNearbyJob:String = WebURL.baseURL + "get_nearbyjob/"
+    static let getNearbyJob:String = WebURL.baseURL + "get_nearbyjob"
     static let uploadCertificate:String = WebURL.baseURL + "upload_certificate"
     static let subcribeSave:String = WebURL.baseURL + "subscription_save"
+    static let accetpAndDeclineReq:String = WebURL.baseURL + "save_request_status"
+    static let getCurrentServiceReq:String = WebURL.baseURL + "get_current_request/"
 }
 
 extension UIColor{
@@ -98,7 +100,8 @@ struct ScreenSize {
 struct storyBoards {
     
     static let Main = UIStoryboard(name: "Main", bundle: Bundle.main)
-    static let Menu = UIStoryboard(name: "MenuScreen", bundle: Bundle.main)
+    static let Customer = UIStoryboard(name: "Customer", bundle: Bundle.main)
+    static let ServiceProvider = UIStoryboard(name: "ServiceProvider", bundle: Bundle.main)
 
 }
 
@@ -317,7 +320,7 @@ func getStringFromDictionary(dictionary:NSDictionary, key:String) -> String {
         if (string == "null" || string == "NULL" || string == "nil") {
             return ""
         }
-        return string.removeWhiteSpace()
+        return string.removeWhiteSpace() as String
     }
     return ""
 }
@@ -372,22 +375,7 @@ class Helper {
         return ((number > 9) ? (String.init(format: "%d", number)) : (String.init(format: "0%d", number)))
     }
 }
-extension String {
-    
-    func isEmail() -> Bool {
-        let regex = try? NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}", options: .caseInsensitive)
-        
-        return regex?.firstMatch(in: self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
-    }
-    
-    func isStringWithoutSpace() -> Bool{
-        return !self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty
-    }
-    
-    func removeWhiteSpace() -> String {
-        return self.trimmingCharacters(in: .whitespaces)
-    }
-}
+
 //MARK: - UILabel Extension
 extension UILabel {
    
@@ -411,9 +399,6 @@ extension UILabel {
         label.sizeToFit()
         return label.frame.width
     }
-    
-    
-   
 }
 
 
@@ -439,12 +424,23 @@ extension UIApplication {
 }
 
 //MARK: - NSString Extension
-extension NSString {
+
+extension String {
+    
+    func isEmail() -> Bool {
+        let regex = try? NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}", options: .caseInsensitive)
+        
+        return regex?.firstMatch(in: self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
+    }
+    
+    func isStringWithoutSpace() -> Bool{
+        return !self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty
+    }
+    
     //Remove white space in string
     func removeWhiteSpace() -> NSString {
         return self.trimmingCharacters(in: NSCharacterSet.whitespaces) as NSString
     }
-    
 }
 
 

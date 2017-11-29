@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         {
             
             locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
             //locationManager.allowsBackgroundLocationUpdates = true
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
@@ -52,12 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                     self.window?.rootViewController = UINavigationController.init(rootViewController: vc)
                     self.window?.makeKeyAndVisible()
                 }else {
-                    let ContainerVC = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                    let ContainerVC = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
                     self.window?.rootViewController = UINavigationController.init(rootViewController: ContainerVC)
                     self.window?.makeKeyAndVisible()
                 }
             }else {
-                let ContainerVC = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                let ContainerVC = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
                 self.window?.rootViewController = UINavigationController.init(rootViewController: ContainerVC)
                 self.window?.makeKeyAndVisible()
             }
@@ -144,10 +144,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-        locationManager.stopUpdatingLocation()
+        
         if locations.count > 0
         {
             self.checkLocation(location: locations)
+            locationManager.stopUpdatingLocation()
         }
         
     }
@@ -156,8 +157,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     {
         var currentLocation = CLLocation()
         
-        if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
-            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+            //CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways
+        if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse){
            
             currentLocation = location[0]
             
@@ -171,12 +172,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             
             
             
-            let lat = NSNumber(value: location.coordinate.latitude)
-            let lon = NSNumber(value: location.coordinate.longitude)
+            let lat = String(location.coordinate.latitude)
+            let lon = String(location.coordinate.longitude)
+            
             let DriverLocation: NSDictionary = ["lat": lat, "long": lon]
             
-//            UserDefaults.Main.set(DriverLocation, forKey: .driverLocation)
-//            UserDefaults.standard.synchronize()
+            UserDefaults.Main.set(lat, forKey: .userLatitude)
+            UserDefaults.Main.set(lon, forKey: .userLongitude)
+            //UserDefaults.Main.set(DriverLocation, forKey: .driverLocation)
+            //UserDefaults.standard.synchronize()
             
             
             
@@ -301,6 +305,8 @@ extension UserDefaults
             case UserID
             case token
             case Appuser
+            case userLatitude
+            case userLongitude
         }
         enum URLDefaultKey: String {
             case urlKey

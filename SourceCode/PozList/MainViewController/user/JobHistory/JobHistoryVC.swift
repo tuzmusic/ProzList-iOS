@@ -28,7 +28,7 @@ class JobHistoryVC: UIViewController, SideMenuItemContent {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.getJobHistory()
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,11 +40,17 @@ class JobHistoryVC: UIViewController, SideMenuItemContent {
         showSideMenu()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        arrJobHistory.removeAll()
+        self.getJobHistory()
+    }
+    
     func getJobHistory() {
         let dict = [String:Any]()
         let userid = UserDefaults.Main.string(forKey: .UserID)
         appDelegate.showLoadingIndicator()
-        MTWebCall.call.getRequest(userId: "36", type: "2", dictParam: dict) { (responas, status) in
+        MTWebCall.call.getRequest(userId: userid, type: "2", dictParam: dict) { (responas, status) in
             appDelegate.hideLoadingIndicator()
             jprint(items: status)
             if (status == 200 && responas != nil) {
@@ -60,42 +66,49 @@ class JobHistoryVC: UIViewController, SideMenuItemContent {
                     
                     let arrService = getArrayFromDictionary(dictionary: dictResponse, key: "data")
                     
-                    for i in 0...arrService.count - 1 {
-                        let catValue = arrService[i] as! NSDictionary
+                    if arrService.count > 0 {
                         
-                        let id = createString(value:catValue.value(forKey: "id") as AnyObject)
-                        let cId = createString(value:catValue.value(forKey: "cat_id") as AnyObject)
-                        
-                        let status = createString(value:catValue.value(forKey: "status") as AnyObject)
-                        let reqDesc = createString(value:catValue.value(forKey: "request_desc") as AnyObject)
-                        let reqDate = createString(value:catValue.value(forKey: "created_at") as AnyObject)
-                        
-                        var serImges = [String]()
-                        let arrImages = getArrayFromDictionary(dictionary: catValue, key: "service_request_image")
-                        
-                        if arrImages.count > 0 {
-                            for i in 0...arrImages.count - 1 {
-                                let imgDict = arrImages[i] as! NSDictionary
-                                let imgPath = createString(value:imgDict.value(forKey: "image") as AnyObject)
-                                serImges.append(imgPath)
+                        for i in 0...arrService.count - 1 {
+                            let catValue = arrService[i] as! NSDictionary
+                            
+                            let id = createString(value:catValue.value(forKey: "id") as AnyObject)
+                            let cId = createString(value:catValue.value(forKey: "cat_id") as AnyObject)
+                            
+                            let status = createString(value:catValue.value(forKey: "status") as AnyObject)
+                            let reqDesc = createString(value:catValue.value(forKey: "request_desc") as AnyObject)
+                            let reqDate = createString(value:catValue.value(forKey: "created_at") as AnyObject)
+                            let lat = createString(value:catValue.value(forKey: "lat") as AnyObject)
+                            let lng = createString(value:catValue.value(forKey: "lng") as AnyObject)
+                            let distance = createFloatToString(value:catValue.value(forKey: "distance") as AnyObject)
+                            let address = createString(value:catValue.value(forKey: "lng") as AnyObject)
+                            
+                            var serImges = [String]()
+                            let arrImages = getArrayFromDictionary(dictionary: catValue, key: "service_request_image")
+                            
+                            if arrImages.count > 0 {
+                                for i in 0...arrImages.count - 1 {
+                                    let imgDict = arrImages[i] as! NSDictionary
+                                    let imgPath = createString(value:imgDict.value(forKey: "image") as AnyObject)
+                                    serImges.append(imgPath)
+                                }
                             }
+                            
+                            let serDetail = getDictionaryFromDictionary(dictionary: catValue, key: "service_category_name")
+                            
+                            var serviceReq:ServiceRequest!
+                            
+                            let cName = createString(value:serDetail.value(forKey: "name") as AnyObject)
+                            if cName != "" {
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng , distance : distance , address : address ,customerProfile : Profile())
+                            }
+                            else {
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng , distance : distance ,address : address , customerProfile : Profile())
+                            }
+                            self.arrJobHistory.append(serviceReq)
+                            print("data service \(catValue)")
                         }
-                        
-                        let serDetail = getDictionaryFromDictionary(dictionary: catValue, key: "service_category_name")
-                        
-                        var serviceReq:ServiceRequest!
-                        
-                        let cName = createString(value:serDetail.value(forKey: "name") as AnyObject)
-                        if cName != "" {
-                            serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,customerProfile : Profile())
-                        }
-                        else {
-                            serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,customerProfile : Profile())
-                        }
-                        self.arrJobHistory.append(serviceReq)
-                        print("data service \(catValue)")
+                        self.tblJobHistoryList.reloadData()
                     }
-                    self.tblJobHistoryList.reloadData()
                 }else
                 {
                     //Popup
@@ -145,7 +158,7 @@ extension JobHistoryVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyBoards.Menu.instantiateViewController(withIdentifier: "JobProfileVC") as! JobProfileVC
+        let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "JobProfileVC") as! JobProfileVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

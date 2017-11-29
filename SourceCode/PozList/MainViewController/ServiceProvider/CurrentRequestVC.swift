@@ -1,53 +1,53 @@
 //
-//  RequestStatusListViewController.swift
+//  CurrentRequestVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 11/14/17.
+//  Created by Devubha Manek on 11/29/17.
 //  Copyright © 2017 Devubha Manek. All rights reserved.
 //
 
 import UIKit
 import InteractiveSideMenu
 
-class ReqStatusCell : UITableViewCell{
+class CurrentReqCell : UITableViewCell{
     
     @IBOutlet weak var lbl_title: UILabel!
     @IBOutlet weak var lbl_date: UILabel!
+    @IBOutlet weak var lbl_radius: UILabel!
     
 }
 
-class RequestStatusListVC: UIViewController , SideMenuItemContent {
+class CurrentRequestVC: UIViewController, SideMenuItemContent {
 
     @IBOutlet var tblRequestList: UITableView!
     var arrReqList = [ServiceRequest]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func Click_menu(_ sender: Any) {
-        showSideMenu()
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        arrReqList.removeAll()
-        self.getRequestStatus()
+        
+        self.getRequestList()
+    }
+    
+    @IBAction func ClickMenu(_ sender: UIButton) {
+        showSideMenu()
     }
     
     // MARK: - web service call
     
-    func getRequestStatus() {
+    func getRequestList() {
         let dict = [String:Any]()
         let userid = UserDefaults.Main.string(forKey: .UserID)
         appDelegate.showLoadingIndicator()
-        MTWebCall.call.getRequest(userId: userid, type: "2", dictParam: dict) { (responas, status) in
+        MTWebCall.call.getCurrentServiceReq(userId: userid, dictParam: dict) { (responas, status) in
             appDelegate.hideLoadingIndicator()
             jprint(items: status)
             if (status == 200 && responas != nil) {
@@ -77,28 +77,41 @@ class RequestStatusListVC: UIViewController , SideMenuItemContent {
                             let lat = createString(value:catValue.value(forKey: "lat") as AnyObject)
                             let lng = createString(value:catValue.value(forKey: "lng") as AnyObject)
                             let distance = createFloatToString(value:catValue.value(forKey: "distance") as AnyObject)
-                            let address = createString(value:catValue.value(forKey: "lng") as AnyObject)
+                            let address = createString(value:catValue.value(forKey: "address") as AnyObject)
                             
                             var serImges = [String]()
                             let arrImages = getArrayFromDictionary(dictionary: catValue, key: "service_request_image")
-                            for i in 0...arrImages.count - 1 {
-                                let imgDict = arrImages[i] as! NSDictionary
-                                let imgPath = createString(value:imgDict.value(forKey: "image") as AnyObject)
-                                serImges.append(imgPath)
+                            if arrImages.count > 0 {
+                                for i in 0...arrImages.count - 1 {
+                                    let imgDict = arrImages[i] as! NSDictionary
+                                    let imgPath = createString(value:imgDict.value(forKey: "image") as AnyObject)
+                                    serImges.append(imgPath)
+                                }
                             }
-                            let serDetail = getDictionaryFromDictionary(dictionary: catValue, key: "service_category_name")
                             
+                            let serDetail = getDictionaryFromDictionary(dictionary: catValue, key: "service_category_name")
                             var serviceReq:ServiceRequest!
                             
-                            let cName = createString(value:serDetail.value(forKey: "name") as AnyObject)
+                            let dictData = getDictionaryFromDictionary(dictionary: catValue, key: "service_customer_detail")
+                            let cid = createString(value:dictData.value(forKey: "id") as AnyObject)
+                            let username = createString(value: dictData.value(forKey: "name") as AnyObject)
+                            let email = createString(value: dictData.value(forKey: "email") as AnyObject)
+                            let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
+                            let type = createString(value: dictData.value(forKey: "role") as AnyObject)
+                            let cstatus = createString(value: dictData.value(forKey: "status") as AnyObject)
+                            let city = createString(value: dictData.value(forKey: "status") as AnyObject)
+                            let profileImg = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
+                            let cutomerdata = Profile.init(id: cid, username: username, email: email, mobile: mobile, type: type, status: cstatus, city: city,profileImg: profileImg)
+                            
+                            let cName = createString(value: serDetail.value(forKey: "name") as AnyObject)
                             if cName != "" {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng , distance : distance ,address : address ,customerProfile : Profile())
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,latitude:lat,longitude:lng ,distance : distance ,address : address ,customerProfile : cutomerdata)
                             }
                             else {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng ,distance : distance, address : address ,customerProfile : Profile())
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,latitude:lat,longitude:lng , distance : distance,address : address ,customerProfile : cutomerdata)
                             }
+                            
                             self.arrReqList.append(serviceReq)
-                            print("data service \(catValue)")
                         }
                         self.tblRequestList.reloadData()
                     }
@@ -115,16 +128,17 @@ class RequestStatusListVC: UIViewController , SideMenuItemContent {
             }
         }
     }
-}
 
-extension RequestStatusListVC:UITableViewDelegate,UITableViewDataSource{
+}
+// MARK: - Table view deleget
+extension CurrentRequestVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrReqList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReqStatusCell") as!  ReqStatusCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CurrentReqCell") as!  CurrentReqCell
         
         let service = arrReqList[indexPath.row] as ServiceRequest
         cell.lbl_title.text = service.serviceCatName
@@ -133,13 +147,15 @@ extension RequestStatusListVC:UITableViewDelegate,UITableViewDataSource{
         let date = dateFormatter.date(from: service.serviceReqDate)
         dateFormatter.dateFormat = "dd MMMM yyyy"
         cell.lbl_date.text =  dateFormatter.string(from: date!)
-        
+        cell.lbl_radius.text = service.distance
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "CreateReqVC") as! CreateReqVC
-        vc.isUserAvil = false
+        let service = arrReqList[indexPath.row]
+        let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "CurrentReqDetailVC") as! CurrentReqDetailVC
+        vc.isFromCurrentReq = true
+        vc.requestData = service
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -270,7 +270,8 @@ extension MTWebCall{
     func uploadImage(relPath: String,img: UIImage,imgKey: String,param: [String: String]?, block: @escaping WSBlock, progress: WSProgress?){
         do{
             manager.upload(multipartFormData: { (formData) in
-                formData.append(UIImageJPEGRepresentation(img, 1.0)!, withName: imgKey, fileName: "image.jpeg", mimeType: "image/jpeg")
+                let currentTimeStamp = String(Int(NSDate().timeIntervalSince1970))
+                formData.append(UIImageJPEGRepresentation(img, 1.0)!, withName: imgKey, fileName: currentTimeStamp + "image" + ".jpeg", mimeType: "image/jpeg")
                 if let _ = param{
                     for (key, value) in param!{
                         formData.append(value.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: key)
@@ -459,16 +460,28 @@ extension MTWebCall{
         let _ = getRequest(relPath: relPath, param: dictParam, block: block)
     }
     //MARK: - Create Request API calling
-    func getNearByJob(userId: String, type: String,dictParam:[String : Any],block: @escaping WSBlock) {
+    func getNearByJob(userId: String,dictParam:[String : Any],block: @escaping WSBlock) {
         
-        let relPath = WebURL.getNearbyJob + userId
-        let _ = getRequest(relPath: relPath, param: dictParam, block: block)
+        let relPath = WebURL.getNearbyJob  //+ userId
+        let _ = postRequest(relPath: relPath, param: dictParam, block: block)
     }
     //MARK: - Subcription API calling
     func subcriptionSave(dictParam:[String : Any],block: @escaping WSBlock) {
         
         let relPath = WebURL.subcribeSave
         let _ = postRequest(relPath: relPath, param: dictParam, block: block)
+    }
+    //MARK: - Subcription API calling
+    func requestAcceptAndDecline(dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.accetpAndDeclineReq
+        let _ = postRequest(relPath: relPath, param: dictParam, block: block)
+    }
+    //MARK: - get User Profile API calling
+    func getCurrentServiceReq(userId: String,dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.getCurrentServiceReq + userId
+        let _ = getRequest(relPath: relPath, param: dictParam, block: block)
     }
 }
 /*extension MTWebCall{

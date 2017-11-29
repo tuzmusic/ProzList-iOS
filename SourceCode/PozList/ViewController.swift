@@ -141,23 +141,27 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
                         let username = createString(value: dictData.value(forKey: "name") as AnyObject)
                         let email = createString(value: dictData.value(forKey: "email") as AnyObject)
                         let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
-                        
+                        let profilePic = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
                         let city = createString(value: dictData.value(forKey: "status") as AnyObject)
-                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city)
+                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: profilePic)
                         
                         UserDefaults.Main.set(true, forKey: .isLogin)
                         UserDefaults.Main.set(id, forKey: .UserID)
                         
-                        
+                        let usertype = UserType.Customer
+                        UserDefaults.Main.set(usertype.rawValue, forKey: .Appuser)
                         //let userDate1 = NSKeyedArchiver.archivedData(withRootObject: userdate)
                         //UserDefaults.Main.set(userDate1, forKey: .Profile)
-                        let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                        let selected_service = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
                         self.navigationController?.pushViewController(selected_service, animated: true)
                     }
                     else {
                         
                         let id = createString(value:dictData.value(forKey: "id") as AnyObject)
                         UserDefaults.Main.set(id, forKey: .UserID)
+                        
+                        let usertype = UserType.ServiceProvider
+                        UserDefaults.Main.set(usertype.rawValue, forKey: .Appuser)
                         
                         let certified = createString(value: dictData.value(forKey: "certified") as AnyObject)
                         let subcrib = createString(value: dictData.value(forKey: "subscribed") as AnyObject)
@@ -173,7 +177,8 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
                             UserDefaults.Main.set(true, forKey: .isLogin)
                             UserDefaults.Main.set(true, forKey: .isCertificated)
                             UserDefaults.Main.set(true, forKey: .isSubscribed)
-                            let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                            
+                            let selected_service = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
                             self.navigationController?.pushViewController(selected_service, animated: true)
                         }
                         else {

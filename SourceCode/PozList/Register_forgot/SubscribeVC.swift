@@ -48,7 +48,7 @@ class SubscribeVC: UIViewController {
                 if Response == "true"
                 {
                     UserDefaults.Main.set(true, forKey: .isSubscribed)
-                    let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                    let selected_service = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
                     self.navigationController?.pushViewController(selected_service, animated: true)
                     
                 } else {

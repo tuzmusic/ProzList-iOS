@@ -58,8 +58,6 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App Need to Access Your Location</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>App Need to Access Your Location</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>

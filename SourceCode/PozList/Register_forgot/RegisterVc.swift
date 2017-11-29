@@ -116,7 +116,7 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
                     let mobile = createString(value: dictData.value(forKey: "mobile") as AnyObject)
                     let type = createString(value: dictData.value(forKey: "role") as AnyObject)
                     let status = createString(value: dictData.value(forKey: "status") as AnyObject)
-                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: "")
+                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: "",profileImg: "")
                     
                     //UserDefaults.standard.set(userdate, forKey: "Userdata")
                     // UserDefaults.standard.set(UserType.General, forKey: "LoginType")
@@ -125,7 +125,7 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
                     //UserDefaults.Main.set(userdate, forKey: .Profile)
                     UserDefaults.Main.set(id, forKey: .UserID)
                     
-                    let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+                    let selected_service = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
                     self.navigationController?.pushViewController(selected_service, animated: true)
                     
                 }else
