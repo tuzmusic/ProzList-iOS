@@ -34,6 +34,8 @@ class CreateReqVC: UIViewController , SideMenuItemContent {
     @IBOutlet weak var Contro_not_come: UIControl!
     @IBOutlet var userDetaileView: UIView!
     
+    var requestData:ServiceRequest!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +54,7 @@ class CreateReqVC: UIViewController , SideMenuItemContent {
             self.Alert_view.frame = CGRect(x: 0, y: self.view.frame.size.height, width: self.Alert_view.frame.size.width , height: self.Alert_view.frame.size.height)
         }
         else {
-            userDetaileView.isUserInteractionEnabled = false
+            userDetaileView.isUserInteractionEnabled = true
             userDetaileView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
         }
     }

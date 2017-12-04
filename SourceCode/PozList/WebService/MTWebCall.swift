@@ -316,8 +316,11 @@ extension MTWebCall{
     func uploadMultiImage(relPath: String,img: [UIImage],imgKey: String,param: [String: String]?, block: @escaping WSBlock, progress: WSProgress?){
         do{
             manager.upload(multipartFormData: { (formData) in
+                var i = 0
                 for imageData in img {
-                   formData.append(UIImageJPEGRepresentation(imageData, 1.0)!, withName: "\(imgKey)[]", fileName: "image.jpeg", mimeType: "image/jpeg")
+                    let currentTimeStamp = String(Int(NSDate().timeIntervalSince1970))
+                   formData.append(UIImageJPEGRepresentation(imageData, 1.0)!, withName: "\(imgKey)[]", fileName: currentTimeStamp + "\(i)" + "image.jpeg", mimeType: "image/jpeg")
+                    i += 1
                 }
                 
                 if let _ = param{
@@ -451,7 +454,7 @@ extension MTWebCall{
     func createRequest(images:[UIImage],dictParam:[String : Any],block: @escaping WSBlock) {
         
         let relPath = WebURL.CreateRequest
-        let _ = uploadMultiImage(relPath: relPath, img: images, imgKey: "image", param: dictParam as? [String : String], block: block, progress: nil)
+        let _ = uploadMultiImage(relPath: relPath, img: images, imgKey: "images", param: dictParam as? [String : String], block: block, progress: nil)
     }
     //MARK: - Create Request API calling
     func getRequest(userId: String, type: String,dictParam:[String : Any],block: @escaping WSBlock) {
@@ -471,16 +474,34 @@ extension MTWebCall{
         let relPath = WebURL.subcribeSave
         let _ = postRequest(relPath: relPath, param: dictParam, block: block)
     }
-    //MARK: - Subcription API calling
+    //MARK: - Accept and Decline API calling
     func requestAcceptAndDecline(dictParam:[String : Any],block: @escaping WSBlock) {
         
         let relPath = WebURL.accetpAndDeclineReq
         let _ = postRequest(relPath: relPath, param: dictParam, block: block)
     }
-    //MARK: - get User Profile API calling
-    func getCurrentServiceReq(userId: String,dictParam:[String : Any],block: @escaping WSBlock) {
+    //MARK: - get User Current Requestt API calling
+    func getCurrentServiceReq(userId: String, type: String,dictParam:[String : Any],block: @escaping WSBlock) {
         
-        let relPath = WebURL.getCurrentServiceReq + userId
+        let relPath = WebURL.getCurrentServiceReq + userId + "/" + type
+        let _ = getRequest(relPath: relPath, param: dictParam, block: block)
+    }
+    //MARK: - Complete service API calling
+    func serviceCompleted(dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.completeServiceReq
+        let _ = postRequest(relPath: relPath, param: dictParam, block: block)
+    }
+    //MARK: - get User Review API calling
+    func getCutomerReview(userId: String, type: String,dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.getCutomerReview + userId + "/" + type
+        let _ = getRequest(relPath: relPath, param: dictParam, block: block)
+    }
+    //MARK: - get User Strickes API calling
+    func getStricks(userId: String, dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.getCutomerStricks + userId
         let _ = getRequest(relPath: relPath, param: dictParam, block: block)
     }
 }

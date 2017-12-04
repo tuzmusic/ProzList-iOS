@@ -46,6 +46,9 @@ struct WebURL {
     static let subcribeSave:String = WebURL.baseURL + "subscription_save"
     static let accetpAndDeclineReq:String = WebURL.baseURL + "save_request_status"
     static let getCurrentServiceReq:String = WebURL.baseURL + "get_current_request/"
+    static let completeServiceReq:String = WebURL.baseURL + "give_rating"
+    static let getCutomerReview:String = WebURL.baseURL + "/get_my_review/"
+    static let getCutomerStricks:String = WebURL.baseURL + "get_strike/"
 }
 
 extension UIColor{
@@ -438,8 +441,8 @@ extension String {
     }
     
     //Remove white space in string
-    func removeWhiteSpace() -> NSString {
-        return self.trimmingCharacters(in: NSCharacterSet.whitespaces) as NSString
+    func removeWhiteSpace() -> String {
+        return self.trimmingCharacters(in: NSCharacterSet.whitespaces)
     }
 }
 

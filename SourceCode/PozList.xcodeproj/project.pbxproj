@@ -18,6 +18,10 @@
 		173BCEE21FCEC11F0025FA77 /* RatingAndReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173BCEE11FCEC11F0025FA77 /* RatingAndReviewVC.swift */; };
 		17443C001F8DFC930037B5DF /* ProfileDeatilVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17443BFF1F8DFC930037B5DF /* ProfileDeatilVC.swift */; };
 		17443C021F8E291C0037B5DF /* ServiceProvicerSignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17443C011F8E291C0037B5DF /* ServiceProvicerSignUpVC.swift */; };
+		174564F11FD1589E00B16E8B /* AwardGivanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174564F01FD1589E00B16E8B /* AwardGivanVC.swift */; };
+		174564F31FD158C900B16E8B /* StricksAndReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174564F21FD158C900B16E8B /* StricksAndReviewVC.swift */; };
+		174564F51FD16A6600B16E8B /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174564F41FD16A6600B16E8B /* Review.swift */; };
+		174564F71FD16CA000B16E8B /* Stricks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174564F61FD16CA000B16E8B /* Stricks.swift */; };
 		174BDEC51FC81A9D006FA763 /* RequestDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BDEC41FC81A9D006FA763 /* RequestDetailVC.swift */; };
 		1751185B1F7D238900D8CBFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751185A1F7D238900D8CBFC /* AppDelegate.swift */; };
 		1751185D1F7D238900D8CBFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751185C1F7D238900D8CBFC /* ViewController.swift */; };
@@ -28,6 +32,8 @@
 		176894491FAC892B00EDE359 /* MTWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176894481FAC86E100EDE359 /* MTWebCall.swift */; };
 		1768944B1FAC8E9000EDE359 /* MTLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1768944A1FAC8E9000EDE359 /* MTLoadingIndicator.swift */; };
 		1768944F1FAC8F3E00EDE359 /* LKAYoutubeLikeLoadingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1768944E1FAC8F3E00EDE359 /* LKAYoutubeLikeLoadingIndicatorView.m */; };
+		17704C8E1FCFC98500A923F7 /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17704C8C1FCFC98000A923F7 /* HCSStarRatingView.m */; };
+		17704C901FD019DD00A923F7 /* RequsetListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17704C8F1FD019DD00A923F7 /* RequsetListVC.swift */; };
 		17758AE01F94E6200009DD0D /* MTUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17758ADF1F94E61F0009DD0D /* MTUserDefault.swift */; };
 		1781A84E1F7D26EC000D4779 /* CustomToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1781A8411F7D25FF000D4779 /* CustomToolBar.swift */; };
 		1781A84F1F7D26EC000D4779 /* DTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1781A8421F7D25FF000D4779 /* DTTextField.swift */; };
@@ -114,6 +120,10 @@
 		173BCEE11FCEC11F0025FA77 /* RatingAndReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingAndReviewVC.swift; sourceTree = "<group>"; };
 		17443BFF1F8DFC930037B5DF /* ProfileDeatilVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeatilVC.swift; sourceTree = "<group>"; };
 		17443C011F8E291C0037B5DF /* ServiceProvicerSignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvicerSignUpVC.swift; sourceTree = "<group>"; };
+		174564F01FD1589E00B16E8B /* AwardGivanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardGivanVC.swift; sourceTree = "<group>"; };
+		174564F21FD158C900B16E8B /* StricksAndReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StricksAndReviewVC.swift; sourceTree = "<group>"; };
+		174564F41FD16A6600B16E8B /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		174564F61FD16CA000B16E8B /* Stricks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stricks.swift; sourceTree = "<group>"; };
 		174BDEC41FC81A9D006FA763 /* RequestDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailVC.swift; sourceTree = "<group>"; };
 		175118571F7D238900D8CBFC /* PozList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PozList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1751185A1F7D238900D8CBFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +138,9 @@
 		1768944C1FAC8F3C00EDE359 /* PozList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PozList-Bridging-Header.h"; sourceTree = "<group>"; };
 		1768944D1FAC8F3E00EDE359 /* LKAYoutubeLikeLoadingIndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKAYoutubeLikeLoadingIndicatorView.h; sourceTree = "<group>"; };
 		1768944E1FAC8F3E00EDE359 /* LKAYoutubeLikeLoadingIndicatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKAYoutubeLikeLoadingIndicatorView.m; sourceTree = "<group>"; };
+		17704C8B1FCFC98000A923F7 /* HCSStarRatingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCSStarRatingView.h; sourceTree = "<group>"; };
+		17704C8C1FCFC98000A923F7 /* HCSStarRatingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCSStarRatingView.m; sourceTree = "<group>"; };
+		17704C8F1FD019DD00A923F7 /* RequsetListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequsetListVC.swift; sourceTree = "<group>"; };
 		17758ADF1F94E61F0009DD0D /* MTUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefault.swift; sourceTree = "<group>"; };
 		1781A83C1F7D25FF000D4779 /* HostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewController.swift; sourceTree = "<group>"; };
 		1781A83F1F7D25FF000D4779 /* NavigationMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMenuViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +322,8 @@
 				176894451FAC824200EDE359 /* Profile.swift */,
 				17A3510E1FB0271000B44E1A /* Service.swift */,
 				17A0A4DF1FBC1A0F00295040 /* ServiceProvider.swift */,
+				174564F41FD16A6600B16E8B /* Review.swift */,
+				174564F61FD16CA000B16E8B /* Stricks.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -319,6 +334,15 @@
 				176894481FAC86E100EDE359 /* MTWebCall.swift */,
 			);
 			path = WebService;
+			sourceTree = "<group>";
+		};
+		17704C8A1FCFC98000A923F7 /* HCSStarRatingView */ = {
+			isa = PBXGroup;
+			children = (
+				17704C8B1FCFC98000A923F7 /* HCSStarRatingView.h */,
+				17704C8C1FCFC98000A923F7 /* HCSStarRatingView.m */,
+			);
+			path = HCSStarRatingView;
 			sourceTree = "<group>";
 		};
 		1781A83B1F7D25FF000D4779 /* MainViewController */ = {
@@ -348,6 +372,7 @@
 		1781A8401F7D25FF000D4779 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				17704C8A1FCFC98000A923F7 /* HCSStarRatingView */,
 				178EEA7A1FB997B1001DDFF5 /* SDWebImage */,
 				17BBB88A1F9099BD00DF700A /* DropDown */,
 				17A04BB91F85FECC007A84F3 /* Distrib */,
@@ -378,6 +403,9 @@
 				173BCEDB1FCE6EE70025FA77 /* CurrentRequestVC.swift */,
 				173BCEDF1FCE8E140025FA77 /* CurrentReqDetailVC.swift */,
 				173BCEE11FCEC11F0025FA77 /* RatingAndReviewVC.swift */,
+				17704C8F1FD019DD00A923F7 /* RequsetListVC.swift */,
+				174564F01FD1589E00B16E8B /* AwardGivanVC.swift */,
+				174564F21FD158C900B16E8B /* StricksAndReviewVC.swift */,
 			);
 			path = ServiceProvider;
 			sourceTree = "<group>";
@@ -663,6 +691,8 @@
 				"${BUILT_PRODUCTS_DIR}/GTProgressBar/GTProgressBar.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/InteractiveSideMenu/InteractiveSideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/RSKGrowingTextView/RSKGrowingTextView.framework",
+				"${BUILT_PRODUCTS_DIR}/RSKPlaceholderTextView/RSKPlaceholderTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/TGPControls/TGPControls.framework",
@@ -674,6 +704,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTProgressBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InteractiveSideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKGrowingTextView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKPlaceholderTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TGPControls.framework",
@@ -733,8 +765,12 @@
 				178EEAA71FB9990E001DDFF5 /* UIButton+WebCache.m in Sources */,
 				1781A84E1F7D26EC000D4779 /* CustomToolBar.swift in Sources */,
 				1768944B1FAC8E9000EDE359 /* MTLoadingIndicator.swift in Sources */,
+				174564F71FD16CA000B16E8B /* Stricks.swift in Sources */,
+				17704C901FD019DD00A923F7 /* RequsetListVC.swift in Sources */,
+				174564F11FD1589E00B16E8B /* AwardGivanVC.swift in Sources */,
 				174BDEC51FC81A9D006FA763 /* RequestDetailVC.swift in Sources */,
 				1733EA501F7E2B7800B3DF1A /* ForgotPassVC.swift in Sources */,
+				174564F31FD158C900B16E8B /* StricksAndReviewVC.swift in Sources */,
 				1751185D1F7D238900D8CBFC /* ViewController.swift in Sources */,
 				173BCEE01FCE8E140025FA77 /* CurrentReqDetailVC.swift in Sources */,
 				17BBB89C1F909D1800DF700A /* DropDown+Appearance.swift in Sources */,
@@ -742,6 +778,7 @@
 				178EEAA01FB998F3001DDFF5 /* SDImageCache.m in Sources */,
 				1733EA4B1F7E20E400B3DF1A /* Localizable.swift in Sources */,
 				178EEA9F1FB998F0001DDFF5 /* NSData+ImageContentType.m in Sources */,
+				17704C8E1FCFC98500A923F7 /* HCSStarRatingView.m in Sources */,
 				17BE81071F835F740040CB32 /* ServiceReqDetailVC.swift in Sources */,
 				17B2159D1F84DA2F004FB9B4 /* JobProfileVC.swift in Sources */,
 				17A019911FBEA8630048D2EA /* AvailablejobVC.swift in Sources */,
@@ -789,6 +826,7 @@
 				17B215A71F851AB1004FB9B4 /* FloatRatingView.swift in Sources */,
 				17BBB8971F909CFB00DF700A /* DPDConstants.swift in Sources */,
 				17A0A4E41FBC371000295040 /* NearJobVC.swift in Sources */,
+				174564F51FD16A6600B16E8B /* Review.swift in Sources */,
 				176894491FAC892B00EDE359 /* MTWebCall.swift in Sources */,
 				17B215A31F84F0A5004FB9B4 /* DKStickyHeaderView.swift in Sources */,
 				17903BAC1FBAC24E00C7E7F6 /* RequestStatusListVC.swift in Sources */,

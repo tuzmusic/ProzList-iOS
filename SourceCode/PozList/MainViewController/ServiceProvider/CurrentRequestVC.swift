@@ -33,7 +33,7 @@ class CurrentRequestVC: UIViewController, SideMenuItemContent {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        arrReqList.removeAll()
         self.getRequestList()
     }
     
@@ -47,7 +47,7 @@ class CurrentRequestVC: UIViewController, SideMenuItemContent {
         let dict = [String:Any]()
         let userid = UserDefaults.Main.string(forKey: .UserID)
         appDelegate.showLoadingIndicator()
-        MTWebCall.call.getCurrentServiceReq(userId: userid, dictParam: dict) { (responas, status) in
+        MTWebCall.call.getCurrentServiceReq(userId: userid,type: "1", dictParam: dict) { (responas, status) in
             appDelegate.hideLoadingIndicator()
             jprint(items: status)
             if (status == 200 && responas != nil) {
@@ -105,16 +105,16 @@ class CurrentRequestVC: UIViewController, SideMenuItemContent {
                             
                             let cName = createString(value: serDetail.value(forKey: "name") as AnyObject)
                             if cName != "" {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,latitude:lat,longitude:lng ,distance : distance ,address : address ,customerProfile : cutomerdata)
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,latitude:lat,longitude:lng ,distance : distance ,address : address ,customerProfile : cutomerdata, serviceProvider : ServiceProvider())
                             }
                             else {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,latitude:lat,longitude:lng , distance : distance,address : address ,customerProfile : cutomerdata)
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,latitude:lat,longitude:lng , distance : distance,address : address ,customerProfile : cutomerdata, serviceProvider : ServiceProvider())
                             }
                             
                             self.arrReqList.append(serviceReq)
                         }
-                        self.tblRequestList.reloadData()
                     }
+                    self.tblRequestList.reloadData()
                 }else
                 {
                     //Popup

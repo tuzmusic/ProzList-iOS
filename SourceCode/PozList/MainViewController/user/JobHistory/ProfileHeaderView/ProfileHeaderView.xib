@@ -42,7 +42,7 @@
                             <rect key="frame" x="20" y="71.5" width="335" height="158.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Roger dexon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67L-g1-Bfg">
-                                    <rect key="frame" x="110.5" y="70" width="115.5" height="35"/>
+                                    <rect key="frame" x="110" y="70" width="115.5" height="35"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="35" id="8kL-Sf-B08"/>
                                     </constraints>

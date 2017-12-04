@@ -26,12 +26,13 @@ class ServiceProvider: NSObject {
     var texId : String = ""
     var latitude : String = ""
     var longitude : String = ""
+    var workingArea : String = ""
     var userServices = [userService]()
     override init() {
         
     }
     
-    init(id: String, username: String,email: String, mobile: String, type: String, status: String ,address : String ,city:String, country : String ,state : String, licenceNo : String ,licenceType : String ,socialNo : String ,texId : String, latitude : String, longitude : String, userServices:[userService])
+    init(id: String, username: String,email: String, mobile: String, type: String, status: String ,address : String ,city:String, country : String ,state : String, licenceNo : String ,licenceType : String ,socialNo : String ,texId : String, latitude : String, longitude : String, workingArea: String, userServices:[userService])
     {
             self.id = id
             self.username = username
@@ -50,6 +51,7 @@ class ServiceProvider: NSObject {
             self.userServices = userServices
             self.latitude = latitude
             self.longitude = longitude
+            self.workingArea = workingArea
     }
 }
 

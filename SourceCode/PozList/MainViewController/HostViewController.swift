@@ -84,7 +84,7 @@ class HostViewController: MenuContainerViewController {
         var controllersIdentifiers = [String]()
         var contentList = [UIViewController]()
         if  appuser == UserType.ServiceProvider.rawValue{
-            controllersIdentifiers = ["ServiceProviderProfileVC","NearJobVC","CurrentRequestVC"]
+            controllersIdentifiers = ["ServiceProviderProfileVC","NearJobVC","CurrentRequestVC","RequsetListVC","AwardGivanVC","StricksAndReviewVC"]
             
             for identifier in controllersIdentifiers {
                 if let viewController = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: identifier) as? UIViewController {

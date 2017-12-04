@@ -44,12 +44,13 @@ class ServiceRequest: NSObject {
     var distance : String = ""
     var address : String = ""
     var customerProfile : Profile!
+    var serviceProviderProfile : ServiceProvider!
     
     override init() {
         
     }
     
-    init(id: String, serviceCatId: String, serviceCatName: String, status: String, imagepath: [String], serviceReqDesc : String, serviceReqDate : String, latitude : String, longitude : String,distance : String,address : String, customerProfile : Profile)
+    init(id: String, serviceCatId: String, serviceCatName: String, status: String, imagepath: [String], serviceReqDesc : String, serviceReqDate : String, latitude : String, longitude : String,distance : String,address : String, customerProfile : Profile, serviceProvider : ServiceProvider)
     {
         self.id = id
         self.serviceCatId = serviceCatId
@@ -63,6 +64,7 @@ class ServiceRequest: NSObject {
         self.distance = distance
         self.address = address
         self.customerProfile = customerProfile
+        self.serviceProviderProfile = serviceProvider
     }
     
 }

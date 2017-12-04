@@ -45,7 +45,6 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
             let lat = 23.033863
             let lon = 72.585022
         
-        
             let position = CLLocationCoordinate2D(latitude:CLLocationDegrees(lat) , longitude: CLLocationDegrees(lon))
             let camera_google :GMSCameraPosition  = GMSCameraPosition.camera(withTarget: position, zoom: 12.0)
             self.GmapView.animate(to: camera_google)
@@ -74,9 +73,9 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
         
         
         GmapView.delegate = self
-        //let position1 = CLLocationCoordinate2D(latitude:CLLocationDegrees(lat) , longitude: CLLocationDegrees(lon))
-        //let position2 = CLLocationCoordinate2D(latitude:CLLocationDegrees(23.0265) , longitude: CLLocationDegrees(72.5609))
-       // getPolylineRoute(from: position1, to:position2 )
+        let position1 = CLLocationCoordinate2D(latitude:CLLocationDegrees(lat) , longitude: CLLocationDegrees(lon))
+        let position2 = CLLocationCoordinate2D(latitude:CLLocationDegrees(23.0265) , longitude: CLLocationDegrees(72.5609))
+        getPolylineRoute(from: position1, to:position2 )
     }
 
     override func didReceiveMemoryWarning() {
@@ -117,7 +116,7 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
                             let polyline = GMSPolyline.init(path: path)
                             polyline.strokeWidth = 2.0
                             polyline.geodesic = true
-                            polyline.strokeColor = .black
+                            polyline.strokeColor = .orange
                             polyline.map = self.GmapView
                             
                         }

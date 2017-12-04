@@ -263,7 +263,7 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
     
     @IBAction func Next(_ sender: UIControl) {
         
-     //   guard validateData1() else { return }
+        guard validateData1() else { return }
         
         self.ViewSecond.transform = CGAffineTransform.identity
         self.ViewSecond.frame.origin.y =  Y_sec
@@ -392,6 +392,7 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
                     let sltexId = createString(value: dictData.value(forKey: "tax_id") as AnyObject)
                     let slatitude = createString(value: dictData.value(forKey: "latitude") as AnyObject)
                     let slongitude = createString(value: dictData.value(forKey: "longitude") as AnyObject)
+                    let sWorkingArea = createString(value: dictData.value(forKey: "working_area_radius") as AnyObject)
                     
                     var arrUserService = [userService]()
                     
@@ -413,7 +414,7 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
                             arrUserService.append(userServic)
                         }
                     }
-                    let userdate = ServiceProvider.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, address: sAddress, city: "", country: sCountry, state: sState, licenceNo: slicenceNo, licenceType: slicenceType, socialNo: ssocialNo, texId: sltexId, latitude: slatitude,longitude: slongitude, userServices:arrUserService)
+                    let userdate = ServiceProvider.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, address: sAddress, city: "", country: sCountry, state: sState, licenceNo: slicenceNo, licenceType: slicenceType, socialNo: ssocialNo, texId: sltexId, latitude: slatitude,longitude: slongitude, workingArea: sWorkingArea, userServices:arrUserService)
                     
                     UserDefaults.Main.set(true, forKey: .isLogin)
                     UserDefaults.Main.set(id, forKey: .UserID)

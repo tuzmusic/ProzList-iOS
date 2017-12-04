@@ -28,8 +28,7 @@ class JobHistoryVC: UIViewController, SideMenuItemContent {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-       
-    }
+   }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -99,10 +98,10 @@ class JobHistoryVC: UIViewController, SideMenuItemContent {
                             
                             let cName = createString(value:serDetail.value(forKey: "name") as AnyObject)
                             if cName != "" {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng , distance : distance , address : address ,customerProfile : Profile())
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng , distance : distance , address : address ,customerProfile : Profile() ,serviceProvider : ServiceProvider())
                             }
                             else {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng , distance : distance ,address : address , customerProfile : Profile())
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng , distance : distance ,address : address , customerProfile : Profile() ,serviceProvider : ServiceProvider())
                             }
                             self.arrJobHistory.append(serviceReq)
                             print("data service \(catValue)")

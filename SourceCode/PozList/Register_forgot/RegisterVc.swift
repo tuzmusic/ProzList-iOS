@@ -125,6 +125,9 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
                     //UserDefaults.Main.set(userdate, forKey: .Profile)
                     UserDefaults.Main.set(id, forKey: .UserID)
                     
+                    let usertype = UserType.Customer
+                    UserDefaults.Main.set(usertype.rawValue, forKey: .Appuser)
+                    
                     let selected_service = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
                     self.navigationController?.pushViewController(selected_service, animated: true)
                     

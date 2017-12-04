@@ -8,7 +8,9 @@
 
 import UIKit
 
-class CurrentReqDetailVC: UIViewController {
+class CurrentReqDetailVC: UIViewController ,reviewDelegate {
+    
+    
 
     @IBOutlet weak var btnComplete: UIButton!
     @IBOutlet weak var lblNoImgs: UILabel!
@@ -26,10 +28,14 @@ class CurrentReqDetailVC: UIViewController {
     @IBOutlet weak var reviewView: UIView!
     var requestData:ServiceRequest!
     
+    @IBOutlet weak var ratingView: HCSStarRatingView!
     @IBOutlet weak var reviweViewHeight: NSLayoutConstraint!
+    
+    var serviceRating:CGFloat!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        serviceRating = 0.0
         ImagesView.setNeedsLayout()
         ImagesView.layoutIfNeeded()
         
@@ -48,12 +54,28 @@ class CurrentReqDetailVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func click_bak(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func changeRatingAndReview(review: String, rating: CGFloat) {
+        
+        if review != "" || rating != 0.0 {
+            lblRequestReviewTitle.text = "Review"
+            lblRequestReview.text = review
+            ratingView.value = rating
+            serviceRating = rating
+            reviweViewHeight.constant = 84
+            reviewView.clipsToBounds = false
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
     // MARK: - Navigation
     @IBAction func btnCompleteClick(_ sender: Any) {
-        let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "RatingAndReviewVC") as! RatingAndReviewVC
-        vc.modalPresentationStyle = .overCurrentContext
-        self.present(vc, animated: false, completion: nil)
+       self.requestAcceptAndDecline(status: "Completed")
     }
     
     func setUpUI() {
@@ -79,7 +101,7 @@ class CurrentReqDetailVC: UIViewController {
             var y = 0
             
             let view = UIImageView()
-            view.backgroundColor = UIColor.red
+            //view.backgroundColor = UIColor.red
             view.cornerRadius = 8
             view.frame = CGRect(x: x, y: y, width: width - 2, height: height)
             x += width
@@ -97,7 +119,7 @@ class CurrentReqDetailVC: UIViewController {
                 for _ in 1...2 {
                     
                     let view = UIImageView()
-                    view.backgroundColor = UIColor.red
+                    //view.backgroundColor = UIColor.red
                     view.cornerRadius = 8
                     view.frame = CGRect(x: innerX, y: y, width: width - 2, height: height - 1)
                     var str1 =  WebURL.ImageBaseUrl + arrImg[k]
@@ -129,7 +151,7 @@ class CurrentReqDetailVC: UIViewController {
             var y = 0
             
             let view = UIImageView()
-            view.backgroundColor = UIColor.red
+            //view.backgroundColor = UIColor.red
             view.cornerRadius = 8
             view.frame = CGRect(x: x, y: y, width: width - 2, height: height)
             x += width
@@ -147,7 +169,7 @@ class CurrentReqDetailVC: UIViewController {
                 for _ in 1...2 {
                     
                     let view = UIImageView()
-                    view.backgroundColor = UIColor.red
+                    //view.backgroundColor = UIColor.red
                     view.cornerRadius = 8
                     view.frame = CGRect(x: innerX, y: y, width: width - 2, height: height - 1)
                     innerX += width
@@ -167,7 +189,7 @@ class CurrentReqDetailVC: UIViewController {
             var y = 0
             
             let view = UIImageView()
-            view.backgroundColor = UIColor.red
+            //view.backgroundColor = UIColor.red
             view.cornerRadius = 8
             view.frame = CGRect(x: x, y: y, width: width - 2, height: height)
             x += width
@@ -185,7 +207,7 @@ class CurrentReqDetailVC: UIViewController {
                 for _ in (1...i).reversed(){
                     
                     let view = UIImageView()
-                    view.backgroundColor = UIColor.red
+                    //view.backgroundColor = UIColor.red
                     view.cornerRadius = 8
                     view.frame = CGRect(x: innerX, y: y, width: width - 2, height: height - 1)
                     innerX += width
@@ -205,7 +227,7 @@ class CurrentReqDetailVC: UIViewController {
             let y = 0
             
             let view = UIImageView()
-            view.backgroundColor = UIColor.red
+            //view.backgroundColor = UIColor.red
             view.cornerRadius = 8
             view.frame = CGRect(x: x, y: y, width: width - 2, height: height)
             x += width
@@ -221,7 +243,7 @@ class CurrentReqDetailVC: UIViewController {
             for i in 1...2 {
                 
                 let view = UIImageView()
-                view.backgroundColor = UIColor.red
+                //view.backgroundColor = UIColor.red
                 view.cornerRadius = 8
                 view.frame = CGRect(x: innerX, y: y, width: width - 2, height: height - 1)
                 var str1 =  WebURL.ImageBaseUrl + arrImg[i]
@@ -241,7 +263,7 @@ class CurrentReqDetailVC: UIViewController {
             for i in 0...1 {
                 
                 let view = UIImageView()
-                view.backgroundColor = UIColor.red
+                //view.backgroundColor = UIColor.red
                 view.cornerRadius = 8
                 view.frame = CGRect(x: x, y: y, width: width - 2, height: height - 1)
                 x += width
@@ -254,7 +276,7 @@ class CurrentReqDetailVC: UIViewController {
         } else if count > 0 {
             
             let view = UIImageView()
-            view.backgroundColor = UIColor.red
+            //view.backgroundColor = UIColor.red
             view.cornerRadius = 8
             view.frame = CGRect(x: 0, y: 0, width: ImagesView.frame.size.width, height: ImagesView.frame.size.height)
             var str1 =  WebURL.ImageBaseUrl + arrImg[0]
@@ -264,7 +286,64 @@ class CurrentReqDetailVC: UIViewController {
             
         } else {
             ImagesView.isHidden = true
-            lblNoImgs.isHidden = false
+            //lblNoImgs.isHidden = false
         }
     }
 }
+
+// MARK: - Webservice call
+
+extension CurrentReqDetailVC {
+    
+    func requestAcceptAndDecline(status:String) {
+        
+        var dic = [String:Any]()
+        let userid = UserDefaults.Main.string(forKey: .UserID)
+        dic["user_id"] = userid
+        dic["status"] = status
+        dic["request_id"] = requestData.id
+        
+        appDelegate.showLoadingIndicator()
+        MTWebCall.call.requestAcceptAndDecline(dictParam: dic) { (respons, status) in
+            appDelegate.hideLoadingIndicator()
+            jprint(items: status)
+            if (status == 200 && respons != nil) {
+                //Response
+                let dictResponse = respons as! NSDictionary
+                
+                let Response = getStringFromDictionary(dictionary: dictResponse, key: "response")
+                if Response == "true"
+                {
+                    //Message
+                    let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                    print(message)
+                    
+                    let dictData = getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
+                    print(dictData)
+                    //appDelegate.Popup(Message: "\(message)")
+                    
+                    self.btnComplete.backgroundColor = UIColor.darkGray
+                    self.btnComplete.isUserInteractionEnabled = false
+                    
+                    let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "RatingAndReviewVC") as! RatingAndReviewVC
+                    vc.delegate = self
+                    vc.requestData = self.requestData
+                    vc.modalPresentationStyle = .overCurrentContext
+                    self.present(vc, animated: false, completion: nil)
+                    
+                }else
+                {
+                    //Popup
+                    let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                    appDelegate.Popup(Message: "\(message)")
+                }
+            } else {
+                //Popup
+                let Title = NSLocalizedString("Somthing went wrong \n Try after sometime", comment: "")
+                appDelegate.Popup(Message: Title)
+            }
+        }
+    }
+}
+
+

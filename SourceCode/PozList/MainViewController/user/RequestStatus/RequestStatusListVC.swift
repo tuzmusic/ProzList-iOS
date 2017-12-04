@@ -47,7 +47,7 @@ class RequestStatusListVC: UIViewController , SideMenuItemContent {
         let dict = [String:Any]()
         let userid = UserDefaults.Main.string(forKey: .UserID)
         appDelegate.showLoadingIndicator()
-        MTWebCall.call.getRequest(userId: userid, type: "2", dictParam: dict) { (responas, status) in
+        MTWebCall.call.getRequest(userId: userid, type: "1", dictParam: dict) { (responas, status) in
             appDelegate.hideLoadingIndicator()
             jprint(items: status)
             if (status == 200 && responas != nil) {
@@ -81,22 +81,66 @@ class RequestStatusListVC: UIViewController , SideMenuItemContent {
                             
                             var serImges = [String]()
                             let arrImages = getArrayFromDictionary(dictionary: catValue, key: "service_request_image")
-                            for i in 0...arrImages.count - 1 {
-                                let imgDict = arrImages[i] as! NSDictionary
-                                let imgPath = createString(value:imgDict.value(forKey: "image") as AnyObject)
-                                serImges.append(imgPath)
+                            if arrImages.count > 0 {
+                                for i in 0...arrImages.count - 1 {
+                                    let imgDict = arrImages[i] as! NSDictionary
+                                    let imgPath = createString(value:imgDict.value(forKey: "image") as AnyObject)
+                                    serImges.append(imgPath)
+                                }
                             }
                             let serDetail = getDictionaryFromDictionary(dictionary: catValue, key: "service_category_name")
                             
                             var serviceReq:ServiceRequest!
                             
+                            let dictData = getDictionaryFromDictionary(dictionary: catValue, key: "service_provider_detail")
+                            
+                            let spid = createString(value:dictData.value(forKey: "id") as AnyObject)
+                            let spUsername = createString(value: dictData.value(forKey: "name") as AnyObject)
+                            let spEmail = createString(value: dictData.value(forKey: "email") as AnyObject)
+                            let spMobile = createString(value: dictData.value(forKey: "mobile") as AnyObject)
+                            let spType = createString(value: dictData.value(forKey: "role") as AnyObject)
+                            let spStatus = createString(value: dictData.value(forKey: "status") as AnyObject)
+                            let spAddress = createString(value: dictData.value(forKey: "address") as AnyObject)
+                            let spCountry = createString(value: dictData.value(forKey: "country") as AnyObject)
+                            let spState = createString(value: dictData.value(forKey: "state") as AnyObject)
+                            let splicenceNo = createString(value: dictData.value(forKey: "licence_number") as AnyObject)
+                            let splicenceType = createString(value: dictData.value(forKey: "licence_type") as AnyObject)
+                            let spsocialNo = createString(value: dictData.value(forKey: "social_security_number") as AnyObject)
+                            let spltexId = createString(value: dictData.value(forKey: "tax_id") as AnyObject)
+                            let splatitude = createString(value: dictData.value(forKey: "latitude") as AnyObject)
+                            let splongitude = createString(value: dictData.value(forKey: "longitude") as AnyObject)
+                            let sWorkingArea = createString(value: dictData.value(forKey: "working_area_radius") as AnyObject)
+                            var arrUserService = [userService]()
+                            
+                            let arrService = getArrayFromDictionary(dictionary: dictData, key: "service_json")
+                            if arrService.count > 0 {
+                                
+                                for i in 0...arrService.count - 1 {
+                                    
+                                    let catValue = arrService[i] as! NSDictionary
+                                    
+                                    let serviceId = createString(value:catValue.value(forKey: "service_id") as AnyObject)
+                                    let prize = createString(value: catValue.value(forKey: "price") as AnyObject)
+                                    let discount = createString(value: catValue.value(forKey: "discount") as AnyObject)
+                                    let serviceName = createString(value: catValue.value(forKey: "name") as AnyObject)
+                                    let status = "" //createString(value: catValue.value(forKey: "status") as AnyObject)
+                                    
+                                    let userServic = userService.init(serviceId: serviceId, prize: prize, discount: discount, serviceName: serviceName, status: status)
+                                    
+                                    arrUserService.append(userServic)
+                                }
+                            }
+                            
+                            let userdate = ServiceProvider.init(id: spid, username: spUsername, email: spEmail, mobile: spMobile, type: spType, status: spStatus, address: spAddress, city: "", country: spCountry, state: spState, licenceNo: splicenceNo, licenceType: splicenceType, socialNo: spsocialNo, texId: spltexId, latitude: splatitude,longitude: splongitude, workingArea:sWorkingArea, userServices:arrUserService)
+                            
                             let cName = createString(value:serDetail.value(forKey: "name") as AnyObject)
                             if cName != "" {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng , distance : distance ,address : address ,customerProfile : Profile())
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng , distance : distance ,address : address ,customerProfile : Profile() ,serviceProvider : userdate)
                             }
                             else {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng ,distance : distance, address : address ,customerProfile : Profile())
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, latitude:lat, longitude:lng ,distance : distance, address : address ,customerProfile : Profile() ,serviceProvider : userdate)
                             }
+                            
                             self.arrReqList.append(serviceReq)
                             print("data service \(catValue)")
                         }
@@ -138,8 +182,10 @@ extension RequestStatusListVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let service = arrReqList[indexPath.row]
         let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "CreateReqVC") as! CreateReqVC
         vc.isUserAvil = false
+        vc.requestData = service
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

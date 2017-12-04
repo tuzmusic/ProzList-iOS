@@ -55,6 +55,7 @@ class NearJobVC: UIViewController,SideMenuItemContent {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        profileViewHeight.constant = 0
         self.arrReqList.removeAll()
         self.getServiceList()
     }
@@ -269,7 +270,7 @@ extension NearJobVC : GMSMapViewDelegate {
 extension NearJobVC {
     
     func getServiceList() {
-        
+        googleMapView.clear()
         var dic = [String:Any]()
         let userid = UserDefaults.Main.string(forKey: .UserID)
         dic["user_id"] = userid
@@ -335,10 +336,10 @@ extension NearJobVC {
                             
                             let cName = createString(value:catValue.value(forKey: "name") as AnyObject)
                             if cName != "" {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,latitude:lat,longitude:lng ,distance : distance ,address : address ,customerProfile : cutomerdata)
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,latitude:lat,longitude:lng ,distance : distance ,address : address ,customerProfile : cutomerdata ,serviceProvider : ServiceProvider())
                             }
                             else {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,latitude:lat,longitude:lng , distance : distance,address : address ,customerProfile : cutomerdata)
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate,latitude:lat,longitude:lng , distance : distance,address : address ,customerProfile : cutomerdata ,serviceProvider : ServiceProvider())
                             }
                             
                             self.addAllMarkerPoint(serviceRequest: serviceReq)
@@ -388,6 +389,8 @@ extension NearJobVC:UITableViewDelegate,UITableViewDataSource{
         //vc.items = Int(txtCount.text!)
         vc.requestData = service
         self.navigationController?.pushViewController(vc, animated: true)
+        profileViewHeight.constant = 0
+        profileView.clipsToBounds = true
     }
 }
 
