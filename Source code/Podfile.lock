@@ -1,0 +1,59 @@
+PODS:
+  - AKSideMenu (1.4.1)
+  - Alamofire (4.5.1)
+  - DKImagePickerController (3.8.0):
+    - DKImagePickerController/Camera (= 3.8.0)
+    - DKImagePickerController/ImageManager (= 3.8.0)
+  - DKImagePickerController/Camera (3.8.0)
+  - DKImagePickerController/ImageManager (3.8.0)
+  - GoogleMaps (2.5.0):
+    - GoogleMaps/Maps (= 2.5.0)
+  - GoogleMaps/Base (2.5.0)
+  - GoogleMaps/Maps (2.5.0):
+    - GoogleMaps/Base
+  - GooglePlacePicker (2.5.0):
+    - GoogleMaps (= 2.5.0)
+    - GooglePlaces (= 2.5.0)
+  - GooglePlaces (2.5.0):
+    - GoogleMaps/Base (= 2.5.0)
+  - GTProgressBar (0.2.0)
+  - IQKeyboardManagerSwift (5.0.0)
+  - RSKGrowingTextView (3.0.0):
+    - RSKPlaceholderTextView (= 3.0.0)
+  - RSKPlaceholderTextView (3.0.0)
+  - SkyFloatingLabelTextField (3.2.0)
+  - SVProgressHUD (2.2.1)
+  - TGPControls (4.0.0)
+
+DEPENDENCIES:
+  - AKSideMenu
+  - Alamofire (~> 4.0)
+  - DKImagePickerController
+  - GoogleMaps
+  - GooglePlacePicker
+  - GooglePlaces
+  - GTProgressBar
+  - IQKeyboardManagerSwift (= 5.0.0)
+  - RSKGrowingTextView
+  - SkyFloatingLabelTextField (~> 3.0)
+  - SVProgressHUD
+  - TGPControls
+
+SPEC CHECKSUMS:
+  AKSideMenu: 5f253516c339960e474f81c3da53540368520be5
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  DKImagePickerController: 6eea9f1ba2e2ca0ba0317b81d68152d07d9e877f
+  GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
+  GooglePlacePicker: 1573e644ab54564d95c2643edc0f29091609e966
+  GooglePlaces: dd70d9d71ea1c7944846afe67de3712c99b30a77
+  GTProgressBar: 5db7054f6069100d871cde5a3149eb708fc348c5
+  IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
+  RSKGrowingTextView: 6bcc9d4565ce4a66de4b7c42875439bde99dab21
+  RSKPlaceholderTextView: 0ce73a19998e236323b3f1f16bf4a4e4a76c2c28
+  SkyFloatingLabelTextField: 4e2d2f7160af660ed1da6bb9d0027b5c474b4b79
+  SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
+  TGPControls: d7ab5a338746c100b2ae57f6b6cedee7151f116a
+
+PODFILE CHECKSUM: 4f8b94fb4f72b34c87b648972205d88365694098
+
+COCOAPODS: 1.4.0
