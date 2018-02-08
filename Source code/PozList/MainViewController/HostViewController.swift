@@ -30,11 +30,11 @@ class HostViewController: AKSideMenu,AKSideMenuDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.menuPreferredStatusBarStyle = .lightContent
-        self.contentViewShadowColor = .black
-        self.contentViewShadowOffset = CGSize(width: 0, height: 0)
+        self.contentViewShadowColor = .blue
+        self.contentViewShadowOffset = CGSize(width: 10, height: 10)
         self.contentViewShadowOpacity = 0.6
-        //self.contentViewShadowRadius =
-        //self.contentViewShadowEnabled = true
+        self.contentViewShadowRadius = 0.0
+        self.contentViewShadowEnabled = true
         
         let userType = UserDefaults.Main.string(forKey: .Appuser)
         if userType == "Service"{

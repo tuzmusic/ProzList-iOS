@@ -15,6 +15,7 @@ class ReviewCell : UITableViewCell {
     @IBOutlet weak var lblRates: UILabel!
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var cosmosView: CosmosView!
+    @IBOutlet weak var btnViewmore: UIButton!
     
 }
 
@@ -52,7 +53,9 @@ class StricksAndReviewVC: UIViewController {
     }
     
     @IBAction func btnViewMoreClick(_ sender: UIButton) {
-    
+        let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "ReviewDetailVC") as! ReviewDetailVC
+        vc.reviewDetail = arrReview[sender.tag]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func btnStricksClick(_ sender: Any) {
@@ -110,7 +113,8 @@ extension StricksAndReviewVC {
                             
                             let id = createString(value:catValue.value(forKey: "id") as AnyObject)
                             let rate = createString(value:catValue.value(forKey: "rating") as AnyObject)
-                            let strReview = createString(value:catValue.value(forKey: "status") as AnyObject)
+                            let strReview = createString(value:catValue.value(forKey: "review") as AnyObject)
+                            let reviewDate = createString(value:catValue.value(forKey: "updated_at") as AnyObject)
                             
                             let dictData = getDictionaryFromDictionary(dictionary: catValue, key: "customer_detail")
                             let cid = createString(value:dictData.value(forKey: "id") as AnyObject)
@@ -145,7 +149,7 @@ extension StricksAndReviewVC {
                             
                             let userdate = ServiceProvider.init(id: spid, username: spUsername, email: spEmail, mobile: spMobile, type: spType, status: spStatus, address: spAddress, city: "", country: spCountry, state: spState, licenceNo: splicenceNo, licenceType: splicenceType, socialNo: spsocialNo, texId: spltexId, latitude: splatitude,longitude: splongitude, workingArea:sWorkingArea, avgRating:"", profilePic: "", userServices:arrUserService)
                             
-                            let review = Review.init(id: id, rate: rate, review: strReview, customerProfile: cutomerdata, serviceProvider: userdate)
+                            let review = Review.init(id: id, rate: rate, review: strReview, reviewDate: reviewDate, customerProfile: cutomerdata, serviceProvider: userdate)
                             self.arrReview.append(review)
                         }
                         self.tblStricksAndReview.reloadData()
@@ -228,7 +232,7 @@ extension StricksAndReviewVC:UITableViewDelegate,UITableViewDataSource{
             let Review = arrReview[indexPath.row] as Review
             cell.lblDescription.text = Review.review
             
-//            cell.cosmosView.ra
+            cell.cosmosView.rating = Double(Review.rate)!
             cell.lblRates.text = Review.rate + " Stars"
             
             cell.lblUserName.text = Review.cutomerProfile.username
@@ -237,6 +241,7 @@ extension StricksAndReviewVC:UITableViewDelegate,UITableViewDataSource{
             str1 = str1.replacingOccurrences(of: " ", with: "%20")
             cell.profileImg.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
            
+            cell.btnViewmore.tag = indexPath.row
             return cell
             
         } else {
@@ -258,10 +263,12 @@ extension StricksAndReviewVC:UITableViewDelegate,UITableViewDataSource{
     }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let service = arrReqList[indexPath.row]
-//        let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "CurrentReqDetailVC") as! CurrentReqDetailVC
-//        vc.isFromCurrentReq = true
-//        vc.requestData = service
-//        self.navigationController?.pushViewController(vc, animated: true)
+//        if isReview {
+//            let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "ReviewDetailVC") as! ReviewDetailVC
+//            vc.reviewDetail = arrReview[indexPath.row]
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        } else {
+//
+//        }
 //    }
 }

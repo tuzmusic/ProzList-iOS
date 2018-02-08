@@ -26,11 +26,15 @@ class CreateReqVC: UIViewController {
     
     @IBOutlet weak var img_notCome: UIImageView!
     
+    @IBOutlet weak var img_Panding: UIImageView!
+    
     var seconds = 0
     var timer = Timer()
     var IsComplete = false
     var isUserAvil:Bool!
     @IBOutlet weak var Contro_not_come: UIControl!
+    @IBOutlet weak var Control_panding: UIControl!
+    @IBOutlet weak var Control_completed: UIControl!
     @IBOutlet var userDetaileView: UIView!
     
     var requestData:ServiceRequest!
@@ -113,43 +117,43 @@ class CreateReqVC: UIViewController {
     }
     
     
-    @IBAction func Click_Pending_state(_ sender: Any) {
+    @IBAction func Click_Pending_state(_ sender: UIControl) {
         
+        img_Panding.image = #imageLiteral(resourceName: "Group_name")
+        Control_panding.backgroundColor = UIColor.appPanding()
+        
+        Control_completed.backgroundColor = UIColor.lightGray
+        img_completed.image =  #imageLiteral(resourceName: "round")
+        
+        Contro_not_come.backgroundColor = UIColor.lightGray
+        img_notCome.image = #imageLiteral(resourceName: "Rounded_red")
         
     }
     
     @IBAction func Click_completed_state(_ sender: UIControl) {
-        if  img_completed.image == #imageLiteral(resourceName: "Group_name"){
-            sender.backgroundColor = UIColor.lightGray
-            img_completed.image =  #imageLiteral(resourceName: "round")
-        }else{
-            
-            if img_notCome.image == #imageLiteral(resourceName: "Group_name"){
-               self.Click_Not_come_state(Contro_not_come)
-            }
-            
-            sender.backgroundColor = UIColor.appBackGroundColor()
-            img_completed.image = #imageLiteral(resourceName: "Group_name")
-        }
+        
+        img_completed.image = #imageLiteral(resourceName: "Group_name")
+        Control_completed.backgroundColor = UIColor.appBackGroundColor()
+        
+        Contro_not_come.backgroundColor = UIColor.lightGray
+        img_notCome.image = #imageLiteral(resourceName: "Rounded_red")
+        
+        Control_panding.backgroundColor = UIColor.lightGray
+        img_Panding.image = #imageLiteral(resourceName: "Rounded_yellow")
+        
     }
     
     
     @IBAction func Click_Not_come_state(_ sender: UIControl) {
-  
-        if  img_notCome.image == #imageLiteral(resourceName: "Group_name") {
-            sender.backgroundColor = UIColor.lightGray
-            img_notCome.image = #imageLiteral(resourceName: "Rounded_red")
-        } else {
         
-            if img_completed.image == #imageLiteral(resourceName: "Group_name"){
-                sender.backgroundColor = UIColor.lightGray
-                img_notCome.image =  #imageLiteral(resourceName: "Rounded_red")
-            }
-            
-            sender.backgroundColor = UIColor.appNotcome()
-            img_notCome.image = #imageLiteral(resourceName: "Group_name")
+        img_notCome.image = #imageLiteral(resourceName: "Group_name")
+        Contro_not_come.backgroundColor = UIColor.appNotcome()
         
-        }
+        Control_completed.backgroundColor = UIColor.lightGray
+        img_completed.image =  #imageLiteral(resourceName: "round")
+        
+        Control_panding.backgroundColor = UIColor.lightGray
+        img_Panding.image = #imageLiteral(resourceName: "Rounded_yellow")
     }
     
     //MARK: - Alert Click

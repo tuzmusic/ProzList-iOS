@@ -72,6 +72,9 @@ extension UIColor{
     class func appNotcome() -> UIColor{
         return UIColor(red: 210.0 / 255.0, green: 51.0 / 255.0, blue: 4.0 / 255.0, alpha: 1.0)
     }
+    class func appPanding() -> UIColor{
+        return UIColor(red: 229.0 / 255.0, green: 153.0 / 255.0, blue: 45.0 / 255.0, alpha: 1.0)
+    }
     class func appLighteGreen() -> UIColor{
        return UIColor(red: 36.0 / 255.0, green: 41.0 / 255.0, blue: 38.0 / 255.0, alpha: 1.0)
     }
