@@ -156,6 +156,7 @@ class ServiceReqDetailVC: UIViewController,CustomToolBarDelegate {
                 break;
             }
         }
+        
         appDelegate.showLoadingIndicator()
         MTWebCall.call.createRequest(images: self.arrImages, dictParam: dict) { (respons, status) in
             appDelegate.hideLoadingIndicator()

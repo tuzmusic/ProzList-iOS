@@ -96,6 +96,16 @@ class CreateReqVC: UIViewController {
         
     }
     @IBAction func Click_payment(_ sender: Any) {
+        
+        if img_Panding.image == #imageLiteral(resourceName: "Group_name") {
+            self.requestComplete(status: "panding")
+        } else if img_completed.image == #imageLiteral(resourceName: "Group_name") {
+            self.requestComplete(status: "Completed")
+        } else if img_notCome.image == #imageLiteral(resourceName: "Group_name") {
+            self.requestComplete(status: "Not come")
+        }
+        
+        /*
         if  img_completed.image != #imageLiteral(resourceName: "Group_name") {
             let alert = UIAlertController(title: "Congratulations".localized, message: "Your registration is successful!!!".localized, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (cancel) in
@@ -107,13 +117,13 @@ class CreateReqVC: UIViewController {
                 self.Alert_view.frame = CGRect(x: 0, y: 0, width: self.Alert_view.frame.size.width , height: self.Alert_view.frame.size.height)
             }) { (Closer) in
             }
-        }
+        } */
     }
     @IBAction func Click_Track_service(_ sender: UIControl) {
      
-//        let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "TrackServiceVC") as! TrackServiceVC
-//        vc.providerRequestData = requestData
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "TrackServiceVC") as! TrackServiceVC
+        vc.providerRequestData = requestData
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -208,4 +218,48 @@ class CreateReqVC: UIViewController {
         return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
     }
     
+}
+
+extension CreateReqVC {
+    
+    func requestComplete(status:String) {
+        
+        var dic = [String:Any]()
+        let userid = UserDefaults.Main.string(forKey: .UserID)
+        dic["user_id"] = userid
+        dic["status"] = status
+        dic["request_id"] = requestData.id
+        
+        appDelegate.showLoadingIndicator()
+        MTWebCall.call.requestAcceptAndDecline(dictParam: dic) { (respons, status) in
+            appDelegate.hideLoadingIndicator()
+            jprint(items: status)
+            if (status == 200 && respons != nil) {
+                //Response
+                let dictResponse = respons as! NSDictionary
+                
+                let Response = getStringFromDictionary(dictionary: dictResponse, key: "response")
+                if Response == "true"
+                {
+                    //Message
+                    let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                    print(message)
+                    
+                    let dictData = getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
+                    print(dictData)
+                    //appDelegate.Popup(Message: "\(message)")
+                    
+                }else
+                {
+                    //Popup
+                    let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                    appDelegate.Popup(Message: "\(message)")
+                }
+            } else {
+                //Popup
+                let Title = NSLocalizedString("Somthing went wrong \n Try after sometime", comment: "")
+                appDelegate.Popup(Message: Title)
+            }
+        }
+    }
 }

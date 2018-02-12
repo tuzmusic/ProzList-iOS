@@ -102,7 +102,6 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
     }
 }
 
-
 extension JobProfileVC :UIScrollViewDelegate{
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

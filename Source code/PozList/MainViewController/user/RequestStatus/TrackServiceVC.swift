@@ -35,12 +35,29 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
     
     var providerRequestData:ServiceRequest!
     
+    var seconds = 0
+    var timer = Timer()
+    var IsComplete = false
+    var isUserAvil:Bool!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.MapView.layoutIfNeeded()
 
+        let now1 = Date()
+        let now =  dateFrm(date: providerRequestData.serviceReqUpdateDate)
+        let endDate = now1
+        
+        let calendar = Calendar.current
+        let unitFlags = Set<Calendar.Component>([ .second])
+        let datecomponenets = calendar.dateComponents(unitFlags, from: now, to: endDate)
+        let seconds1 = datecomponenets.second
+        
+        seconds = seconds1!
+        runTimer()
+        
     
         // Create a GMSCameraPosition that tells the map to display the
         let camera = GMSCameraPosition.camera(withLatitude: 23, longitude: 72, zoom: 11.0)
@@ -149,8 +166,49 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
         })
         task.resume()
     }
-
+    
+    func dateFrm(date:String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        //  dateFormatter.dateFormat = "dd-mm-yyyy" //Your date format
+        //  dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00") //Current time zone
+        let date = dateFormatter.date(from: date) //according to date format your date string
+        print(date ?? "") //Convert String to Date
+        return date!
+    }
+    
+    func secondsIn(_ str: String)->Int{
+        var strArr = str.characters.split{$0 == ":"}.map(String.init)
+        let sec = Int(strArr[0])! * 3600
+        let sec1 = Int(strArr[1])! * 36
+        print("sec")
+        print(sec+sec1)
+        return sec+sec1
+    }
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(CreateReqVC.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTimer() {
+        seconds += 1
+        
+        self.lblRemainTime.text = timeString(time: TimeInterval(seconds))
+        //print(timeString(time: TimeInterval(seconds)))
+    }
+    func stop(){
+        seconds = 0
+        timer.invalidate()
+    }
+    
+    func timeString(time:TimeInterval) -> String {
+        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    }
 }
+
 //extension TrackServiceVC{
 //    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
 //

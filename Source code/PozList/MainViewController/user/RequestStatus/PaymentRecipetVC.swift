@@ -34,7 +34,6 @@ class PaymentRecipetVC: UIViewController {
                 }
             }
         }
-        
     }
     
     override func didReceiveMemoryWarning() {

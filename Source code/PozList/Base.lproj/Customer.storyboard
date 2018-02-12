@@ -2185,7 +2185,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="PAYMENT"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <segue destination="cD4-jh-jDc" kind="show" id="cIj-Bf-OAo"/>
+                                                            <action selector="Click_payment:" destination="ESU-5C-Ehe" eventType="touchUpInside" id="PQN-J0-SQG"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -2667,13 +2667,13 @@
                                             <action selector="ClickBack:" destination="cD4-jh-jDc" eventType="touchUpInside" id="q08-6h-DUg"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMJ-PR-bg0">
-                                        <rect key="frame" x="95" y="10" width="131" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMJ-PR-bg0">
+                                        <rect key="frame" x="121.5" y="10" width="78.5" height="24"/>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="Track Location"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="Payment"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
