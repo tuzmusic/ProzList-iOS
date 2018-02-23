@@ -93,9 +93,10 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
     }
     
     @objc func click_profile_service() {
-//        let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "ProfileDeatilVC") as! ProfileDeatilVC
-//        self.navigationController?.pushViewController(vc, animated: true)
-        
+        let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "ServiceProviderProfileVC") as! ServiceProviderProfileVC
+        vc.isOnlyShowProfile = true
+        vc.serviceProviderId = requestData.serviceProviderProfile.id
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func back_Click(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -120,6 +121,7 @@ extension JobProfileVC :UIScrollViewDelegate{
         }
     }
 }
+
 extension JobProfileVC :UITextViewDelegate {
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
@@ -133,8 +135,8 @@ extension JobProfileVC :UITextViewDelegate {
         return true;
     }
     func textViewDidChange(_ textView: UITextView) {
-        self.placeholderLabel1.isHidden = !textView.text.isEmpty
         
+        self.placeholderLabel1.isHidden = !textView.text.isEmpty
         print(self.text_view.contentSize.height)
         self.cons_heighte_txtView.constant = self.text_view.contentSize.height + 20
         
@@ -153,7 +155,6 @@ extension JobProfileVC :UITextViewDelegate {
     func resignKeyboard()
     {
         self.text_view.resignFirstResponder()
-        
     }
     
 }

@@ -12,8 +12,8 @@ class ReqCell : UITableViewCell{
     
     @IBOutlet weak var lbl_title: UILabel!
     @IBOutlet weak var lbl_date: UILabel!
-    @IBOutlet weak var lbl_radius: UILabel!
-    
+    @IBOutlet weak var lblStatus: UILabel!
+    @IBOutlet weak var lblAddress: UILabel!
 }
 
 class RequsetListVC: UIViewController {
@@ -149,7 +149,8 @@ extension RequsetListVC:UITableViewDelegate,UITableViewDataSource {
         let date = dateFormatter.date(from: service.serviceReqDate)
         dateFormatter.dateFormat = "dd MMMM yyyy"
         cell.lbl_date.text =  dateFormatter.string(from: date!)
-        cell.lbl_radius.text = service.status
+        cell.lblStatus.text = service.status
+        cell.lblAddress.text = service.address
         return cell
     }
     

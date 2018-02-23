@@ -13,6 +13,7 @@ class CurrentReqCell : UITableViewCell{
     @IBOutlet weak var lbl_title: UILabel!
     @IBOutlet weak var lbl_date: UILabel!
     @IBOutlet weak var lbl_radius: UILabel!
+    @IBOutlet weak var lblAddress: UILabel!
     
 }
 
@@ -149,7 +150,7 @@ extension CurrentRequestVC:UITableViewDelegate,UITableViewDataSource{
         let date = dateFormatter.date(from: service.serviceReqDate)
         dateFormatter.dateFormat = "dd MMMM yyyy"
         cell.lbl_date.text =  dateFormatter.string(from: date!)
-        
+        cell.lblAddress.text = service.address
         if service.distance == "" {
             cell.lbl_radius.text = "0.00m"
         } else {

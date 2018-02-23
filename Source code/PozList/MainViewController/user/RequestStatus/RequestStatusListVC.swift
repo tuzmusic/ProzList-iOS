@@ -12,7 +12,7 @@ class ReqStatusCell : UITableViewCell{
     
     @IBOutlet weak var lbl_title: UILabel!
     @IBOutlet weak var lbl_date: UILabel!
-    
+    @IBOutlet weak var lblAddress: UILabel!
 }
 
 class RequestStatusListVC: UIViewController {
@@ -66,6 +66,8 @@ class RequestStatusListVC: UIViewController {
                         for i in 0...arrService.count - 1 {
                             let catValue = arrService[i] as! NSDictionary
                             
+                            var serviceReq:ServiceRequest!
+                            
                             let id = createString(value:catValue.value(forKey: "id") as AnyObject)
                             let cId = createString(value:catValue.value(forKey: "cat_id") as AnyObject)
                             
@@ -76,7 +78,7 @@ class RequestStatusListVC: UIViewController {
                             let lat = createString(value:catValue.value(forKey: "lat") as AnyObject)
                             let lng = createString(value:catValue.value(forKey: "lng") as AnyObject)
                             let distance = createFloatToString(value:catValue.value(forKey: "distance") as AnyObject)
-                            let address = createString(value:catValue.value(forKey: "lng") as AnyObject)
+                            let address = createString(value:catValue.value(forKey: "address") as AnyObject)
                             
                             var serImges = [String]()
                             let arrImages = getArrayFromDictionary(dictionary: catValue, key: "service_request_image")
@@ -89,7 +91,7 @@ class RequestStatusListVC: UIViewController {
                             }
                             let serDetail = getDictionaryFromDictionary(dictionary: catValue, key: "service_category_name")
                             
-                            var serviceReq:ServiceRequest!
+                            
                             
                             let dictData = getDictionaryFromDictionary(dictionary: catValue, key: "service_provider_detail")
                             
@@ -179,7 +181,7 @@ extension RequestStatusListVC:UITableViewDelegate,UITableViewDataSource{
         let date = dateFormatter.date(from: service.serviceReqDate)
         dateFormatter.dateFormat = "dd MMMM yyyy"
         cell.lbl_date.text =  dateFormatter.string(from: date!)
-        
+        cell.lblAddress.text = service.address
         return cell
     }
     

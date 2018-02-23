@@ -13,7 +13,7 @@ class JobHistoryCell : UITableViewCell{
     @IBOutlet weak var img_stauts: UIImageView!
     @IBOutlet weak var view_compl: UIView!
     @IBOutlet weak var lbl_title: UILabel!
-    
+    @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var lbl_complete: UILabel!
     @IBOutlet weak var lbl_sub_title: UILabel!
     
@@ -27,8 +27,6 @@ class JobHistoryVC: UIViewController {
     @IBOutlet var tblJobHistoryList: UITableView!
     
     var arrJobHistory = [ServiceRequest]()
-    
-    var serviceReq:ServiceRequest!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +74,8 @@ class JobHistoryVC: UIViewController {
                         for i in 0...arrService.count - 1 {
                             let catValue = arrService[i] as! NSDictionary
                             
+                            var serviceReq:ServiceRequest!
+                            
                             let id = createString(value:catValue.value(forKey: "id") as AnyObject)
                             let cId = createString(value:catValue.value(forKey: "cat_id") as AnyObject)
                             
@@ -86,7 +86,7 @@ class JobHistoryVC: UIViewController {
                             let lat = createString(value:catValue.value(forKey: "lat") as AnyObject)
                             let lng = createString(value:catValue.value(forKey: "lng") as AnyObject)
                             let distance = createFloatToString(value:catValue.value(forKey: "distance") as AnyObject)
-                            let address = createString(value:catValue.value(forKey: "lng") as AnyObject)
+                            let address = createString(value:catValue.value(forKey: "address") as AnyObject)
                             
                             var serImges = [String]()
                             let arrImages = getArrayFromDictionary(dictionary: catValue, key: "service_request_image")
@@ -100,8 +100,6 @@ class JobHistoryVC: UIViewController {
                             }
                             
                             let serDetail = getDictionaryFromDictionary(dictionary: catValue, key: "service_category_name")
-                            
-                            var serviceReq:ServiceRequest!
                             
                             let dictData = getDictionaryFromDictionary(dictionary: catValue, key: "service_provider_detail")
                             
@@ -148,12 +146,13 @@ class JobHistoryVC: UIViewController {
                             
                             let cName = createString(value:serDetail.value(forKey: "name") as AnyObject)
                             if cName != "" {
-                                self.serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate, latitude:lat, longitude:lng , distance : distance , address : address ,customerProfile : Profile() ,serviceProvider : userdate)
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate, latitude:lat, longitude:lng , distance : distance , address : address ,customerProfile : Profile() ,serviceProvider : userdate)
                             }
                             else {
-                                self.serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate, latitude:lat, longitude:lng , distance : distance ,address : address , customerProfile : Profile() ,serviceProvider : userdate)
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate, latitude:lat, longitude:lng , distance : distance ,address : address , customerProfile : Profile() ,serviceProvider : userdate)
                             }
-                            self.arrJobHistory.append(self.serviceReq)
+                            
+                            self.arrJobHistory.append(serviceReq)
                             print("data service \(catValue)")
                         }
                         self.tblJobHistoryList.reloadData()
@@ -202,7 +201,7 @@ extension JobHistoryVC:UITableViewDelegate,UITableViewDataSource{
         let date = dateFormatter.date(from: service.serviceReqDate)
         dateFormatter.dateFormat = "dd MMMM yyyy"
         cell.lbl_sub_title.text =  dateFormatter.string(from: date!)
-        
+        cell.lblAddress.text = service.address
         return cell
     }
     

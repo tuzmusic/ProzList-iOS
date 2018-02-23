@@ -196,9 +196,17 @@ class ServiceProviderProfileVC: UIViewController {
     let socialNo =  "Your social security number is required.".localized
     let texId =  "Your Tex id is required.".localized
     
+    var isOnlyShowProfile:Bool = false
+    var serviceProviderId:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
+        
+        if isOnlyShowProfile {
+            self.btnSaveAndEdit.isHidden = true
+        }
+        
         self.getUserProfile()
     }
 
@@ -220,7 +228,11 @@ class ServiceProviderProfileVC: UIViewController {
     }
     
     @IBAction func BackClick(_ sender: Any) {
-        self.sideMenuViewController?.presentLeftMenuViewController()
+        if isOnlyShowProfile {
+            self.navigationController?.popViewController(animated: true)
+        } else{
+            self.sideMenuViewController?.presentLeftMenuViewController()
+        }
     }
     
     @IBAction func ClickEditProfile(_ sender: Any) {
@@ -340,10 +352,15 @@ extension ServiceProviderProfileVC {
     
     func getUserProfile() {
         
-        var dict = [String : Any]()
+        let dict = [String : Any]()
+        var userId = ""
+        if isOnlyShowProfile {
+            userId = serviceProviderId
+            self.btnSaveAndEdit.isHidden = true
+        } else {
+            userId = UserDefaults.Main.string(forKey: .UserID)
+        }
         
-        
-        let userId = UserDefaults.Main.string(forKey: .UserID)
         appDelegate.showLoadingIndicator()
         MTWebCall.call.getUserProfile(userId: userId, dictParam: dict) { (respons, status) in
         appDelegate.hideLoadingIndicator()
@@ -372,8 +389,8 @@ extension ServiceProviderProfileVC {
                     let slicenceType = createString(value: dictData.value(forKey: "licence_type") as AnyObject)
                     let ssocialNo = createString(value: dictData.value(forKey: "social_security_number") as AnyObject)
                     let sltexId = createString(value: dictData.value(forKey: "tax_id") as AnyObject)
-                    let slatitude = createString(value: dictData.value(forKey: "latitude") as AnyObject)
-                    let slongitude = createString(value: dictData.value(forKey: "longitude") as AnyObject)
+                    let slatitude = createFloatToString(value: dictData.value(forKey: "latitude") as AnyObject)
+                    let slongitude = createFloatToString(value: dictData.value(forKey: "longitude") as AnyObject)
                     let radius = createString(value: dictData.value(forKey: "working_area_radius") as AnyObject)
 //                    let spAvgRating = createString(value: dictData.value(forKey: "avg_rating") as AnyObject)
                     let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
@@ -414,9 +431,11 @@ extension ServiceProviderProfileVC {
                                     ["main":"Services","name":strMainService,"services":arrUserService],
                                     ["main":"Radius","Edit_image":#imageLiteral(resourceName: "licence_type"),"sub":radius],
                                     ]
-                    let lat = CLLocationDegrees(slatitude)
-                    let long = CLLocationDegrees(slongitude)
-                    self.selectedPlace = CLLocationCoordinate2D.init(latitude: lat!, longitude: long!)
+                    if slatitude != "" {
+                        let lat = CLLocationDegrees(slatitude)
+                        let long = CLLocationDegrees(slongitude)
+                        self.selectedPlace = CLLocationCoordinate2D.init(latitude: lat!, longitude: long!)
+                    }
                     self.lblUserName.text = username
                     self.lblDesignation.text = strMainService
                     if status == "Active" {

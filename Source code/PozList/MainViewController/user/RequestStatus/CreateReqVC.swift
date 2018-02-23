@@ -22,6 +22,8 @@ class CreateReqVC: UIViewController {
     @IBOutlet weak var view_alert_star: CosmosView!
     @IBOutlet weak var txt_view_alert: UITextView!
     
+    @IBOutlet weak var lblReqAddress: UILabel!
+    @IBOutlet weak var lblReqDetail: UILabel!
     @IBOutlet weak var img_completed: UIImageView!
     
     @IBOutlet weak var img_notCome: UIImageView!
@@ -80,6 +82,9 @@ class CreateReqVC: UIViewController {
             userDetaileView.isUserInteractionEnabled = false
             userDetaileView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
         }
+        
+        self.lblReqAddress.text = requestData.address
+        self.lblReqDetail.text = requestData.serviceReqDesc
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,8 +98,12 @@ class CreateReqVC: UIViewController {
        self.navigationController?.popViewController(animated: true)
     }
     @IBAction func Click_profile_pic(_ sender: UIControl) {
-        
+        let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "ServiceProviderProfileVC") as! ServiceProviderProfileVC
+        vc.isOnlyShowProfile = true
+        vc.serviceProviderId = requestData.serviceProviderProfile.id
+        self.navigationController?.pushViewController(vc, animated: true)
     }
+    
     @IBAction func Click_payment(_ sender: Any) {
         
         if img_Panding.image == #imageLiteral(resourceName: "Group_name") {

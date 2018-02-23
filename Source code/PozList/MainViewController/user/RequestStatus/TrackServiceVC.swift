@@ -123,6 +123,15 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func btnProfileViewClick(_ sender: Any) {
+        
+        let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "ServiceProviderProfileVC") as! ServiceProviderProfileVC
+        vc.isOnlyShowProfile = true
+        vc.serviceProviderId = providerRequestData.serviceProviderProfile.id
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
         
         let config = URLSessionConfiguration.default

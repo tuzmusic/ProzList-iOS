@@ -14,6 +14,7 @@ class nearJobCell: UITableViewCell{
     @IBOutlet weak var lbl_title: UILabel!
     @IBOutlet weak var lbl_date: UILabel!
     @IBOutlet weak var lbl_areaMilles: UILabel!
+    @IBOutlet weak var lblAddress: UILabel!
 }
 
 class NearJobVC: UIViewController {
@@ -299,6 +300,8 @@ extension NearJobVC {
                         for i in 0...arrService.count - 1 {
                             let catValue = arrService[i] as! NSDictionary
                             
+                            var serviceReq:ServiceRequest!
+                            
                             let id = createString(value:catValue.value(forKey: "id") as AnyObject)
                             let cId = createString(value:catValue.value(forKey: "cat_id") as AnyObject)
                             
@@ -320,8 +323,6 @@ extension NearJobVC {
                                     serImges.append(imgPath)
                                 }
                             }
-                            //let serDetail = getDictionaryFromDictionary(dictionary: catValue, key: "service_category_name")
-                            var serviceReq:ServiceRequest!
                             
                             let dictData = getDictionaryFromDictionary(dictionary: catValue, key: "service_customer_detail")
                             let cid = createString(value:dictData.value(forKey: "id") as AnyObject)
@@ -380,6 +381,7 @@ extension NearJobVC:UITableViewDelegate,UITableViewDataSource{
         let date = dateFormatter.date(from: service.serviceReqDate)
         dateFormatter.dateFormat = "dd MMMM yyyy"
         cell.lbl_date.text =  dateFormatter.string(from: date!)
+        cell.lblAddress.text = service.address
         if service.distance == "" {
             cell.lbl_areaMilles.text = "0.00m"
         } else {
