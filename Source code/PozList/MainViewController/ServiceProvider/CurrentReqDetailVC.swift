@@ -291,6 +291,13 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
             //lblNoImgs.isHidden = false
         }
     }
+    //Redirect to Map screen
+    @IBAction func btnTrackLocationTapped(_ sender: Any) {
+        
+        let requestMapVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestDetailMapVC") as! RequestDetailMapVC
+        requestMapVC.requestData = requestData
+        self.navigationController?.pushViewController(requestMapVC, animated: true)
+    }
 }
 
 // MARK: - Webservice call

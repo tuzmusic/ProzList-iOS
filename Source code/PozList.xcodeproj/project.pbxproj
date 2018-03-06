@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171BD023204EA06100E776F5 /* LocationCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BD022204EA06100E776F5 /* LocationCoordinate.swift */; };
 		1733EA3E1F7E166300B3DF1A /* Customer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1733EA401F7E166300B3DF1A /* Customer.storyboard */; };
 		1733EA461F7E174E00B3DF1A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1733EA481F7E174E00B3DF1A /* Localizable.strings */; };
 		1733EA4B1F7E20E400B3DF1A /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1733EA4A1F7E20E400B3DF1A /* Localizable.swift */; };
@@ -64,6 +65,7 @@
 		179843C31F9498750021E7E2 /* UploadCertificateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179843C21F9498750021E7E2 /* UploadCertificateVC.swift */; };
 		179843CB1F94D8300021E7E2 /* SubscribeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179843CA1F94D8300021E7E2 /* SubscribeVC.swift */; };
 		179B26311F8782C2006AEEBA /* PaymentRecipetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179B26301F8782C2006AEEBA /* PaymentRecipetVC.swift */; };
+		179C2858204D65AC006C4462 /* RequestDetailMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C2857204D65AC006C4462 /* RequestDetailMapVC.swift */; };
 		17A019911FBEA8630048D2EA /* AvailablejobVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A019901FBEA8630048D2EA /* AvailablejobVC.swift */; };
 		17A04BBB1F85FECF007A84F3 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A04BBA1F85FECC007A84F3 /* CosmosDistrib.swift */; };
 		17A04BBD1F8614CD007A84F3 /* CreateReqVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A04BBC1F8614CD007A84F3 /* CreateReqVC.swift */; };
@@ -104,6 +106,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		171BD022204EA06100E776F5 /* LocationCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCoordinate.swift; sourceTree = "<group>"; };
 		1733EA411F7E169000B3DF1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Customer.storyboard; sourceTree = "<group>"; };
 		1733EA471F7E174E00B3DF1A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1733EA4A1F7E20E400B3DF1A /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
@@ -190,6 +193,7 @@
 		179843C21F9498750021E7E2 /* UploadCertificateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadCertificateVC.swift; sourceTree = "<group>"; };
 		179843CA1F94D8300021E7E2 /* SubscribeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeVC.swift; sourceTree = "<group>"; };
 		179B26301F8782C2006AEEBA /* PaymentRecipetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRecipetVC.swift; sourceTree = "<group>"; };
+		179C2857204D65AC006C4462 /* RequestDetailMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailMapVC.swift; sourceTree = "<group>"; };
 		17A019901FBEA8630048D2EA /* AvailablejobVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailablejobVC.swift; sourceTree = "<group>"; };
 		17A04BBA1F85FECC007A84F3 /* CosmosDistrib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 		17A04BBC1F8614CD007A84F3 /* CreateReqVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReqVC.swift; sourceTree = "<group>"; };
@@ -398,6 +402,7 @@
 		1785107D1FA2F9AE00D8EE29 /* ServiceProvider */ = {
 			isa = PBXGroup;
 			children = (
+				179C2856204D6598006C4462 /* RequestMapVC */,
 				179843C21F9498750021E7E2 /* UploadCertificateVC.swift */,
 				17A0A4E31FBC371000295040 /* NearJobVC.swift */,
 				17A019901FBEA8630048D2EA /* AvailablejobVC.swift */,
@@ -453,6 +458,15 @@
 				178EEA9D1FB997B1001DDFF5 /* UIView+WebCacheOperation.m */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		179C2856204D6598006C4462 /* RequestMapVC */ = {
+			isa = PBXGroup;
+			children = (
+				179C2857204D65AC006C4462 /* RequestDetailMapVC.swift */,
+				171BD022204EA06100E776F5 /* LocationCoordinate.swift */,
+			);
+			path = RequestMapVC;
 			sourceTree = "<group>";
 		};
 		17A04BB91F85FECC007A84F3 /* Distrib */ = {
@@ -768,6 +782,7 @@
 				178A276C1F8B94AE00836AD3 /* SurveyVC.swift in Sources */,
 				178EEAAA1FB99919001DDFF5 /* UIImage+WebP.m in Sources */,
 				178EEAA71FB9990E001DDFF5 /* UIButton+WebCache.m in Sources */,
+				179C2858204D65AC006C4462 /* RequestDetailMapVC.swift in Sources */,
 				1781A84E1F7D26EC000D4779 /* CustomToolBar.swift in Sources */,
 				1768944B1FAC8E9000EDE359 /* MTLoadingIndicator.swift in Sources */,
 				174564F71FD16CA000B16E8B /* Stricks.swift in Sources */,
@@ -788,6 +803,7 @@
 				17B2159D1F84DA2F004FB9B4 /* JobProfileVC.swift in Sources */,
 				17A019911FBEA8630048D2EA /* AvailablejobVC.swift in Sources */,
 				17A04BBD1F8614CD007A84F3 /* CreateReqVC.swift in Sources */,
+				171BD023204EA06100E776F5 /* LocationCoordinate.swift in Sources */,
 				178EEA9E1FB998EC001DDFF5 /* MKAnnotationView+WebCache.m in Sources */,
 				17BBB8991F909CFB00DF700A /* DPDUIView+Extension.swift in Sources */,
 				17443C001F8DFC930037B5DF /* ProfileDeatilVC.swift in Sources */,

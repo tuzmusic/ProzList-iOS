@@ -50,7 +50,9 @@ struct WebURL {
     static let getCutomerReview:String = WebURL.baseURL + "get_my_review/"
     static let getCutomerStricks:String = WebURL.baseURL + "get_strike/"
     static let getAwards:String = WebURL.baseURL + "get_award/"
+    static let updateLocation:String = WebURL.baseURL + "update_location"
     
+
 }
 
 extension UIColor{

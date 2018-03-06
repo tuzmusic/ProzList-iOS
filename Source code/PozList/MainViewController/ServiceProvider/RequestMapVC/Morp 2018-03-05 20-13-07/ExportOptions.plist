@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>method</key>
+	<string>app-store</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.app.morp</key>
+		<string>MorpAppStore</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>9647FD58C32B7FDBD7E9ED58AD552C3664926201</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>teamID</key>
+	<string>ZL4WU5ZLT3</string>
+	<key>uploadSymbols</key>
+	<true/>
+</dict>
+</plist>

@@ -23,6 +23,10 @@ class RequestDetailVC: UIViewController {
     var items:Int!
     var requestData:ServiceRequest!
     
+   
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ImagesView.setNeedsLayout()
@@ -265,6 +269,8 @@ class RequestDetailVC: UIViewController {
             lblNoImgs.isHidden = false
         }
     }
+    
+   
 }
 
 // MARK: - Webservice call
@@ -278,6 +284,9 @@ extension RequestDetailVC {
         dic["user_id"] = userid
         dic["status"] = status
         dic["request_id"] = requestData.id
+        //Gautam - Pass Distance and Duration in API
+        
+        
         
 //        if status == "" {
 //            dic["distance"] = requestData.id

@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     var locationManager = CLLocationManager()
     var loadingIndicator:MTLoadingIndicator!
     var isLoadingIndicatorOpen:Bool = false
+    var updatedLocation:LocationCoordinate!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -69,6 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             self.window?.makeKeyAndVisible()
         }
         
+        //Set observer location
+        updatedLocation = LocationCoordinate.init(strLatitude: UserDefaults.Main.string(forKey: .userLatitude), strLongitude: UserDefaults.Main.string(forKey: .userLongitude))
         return true
     }
 
@@ -156,7 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         if locations.count > 0
         {
             self.checkLocation(location: locations)
-            locationManager.stopUpdatingLocation()
+            //locationManager.stopUpdatingLocation()
         }
         
     }
@@ -187,6 +190,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             
             UserDefaults.Main.set(lat, forKey: .userLatitude)
             UserDefaults.Main.set(lon, forKey: .userLongitude)
+            
+            updatedLocation.strLatitude = lat
+            updatedLocation.strLongitude = lon
+            
             //UserDefaults.Main.set(DriverLocation, forKey: .driverLocation)
             //UserDefaults.standard.synchronize()
             

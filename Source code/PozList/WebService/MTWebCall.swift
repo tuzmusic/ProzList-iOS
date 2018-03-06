@@ -510,6 +510,13 @@ extension MTWebCall{
         let relPath = WebURL.getAwards + userId
         let _ = getRequest(relPath: relPath, param: dictParam, block: block)
     }
+    
+    //MARK: - Accept and Decline API calling
+    func updateLocationAPI(dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.updateLocation
+        let _ = postRequest(relPath: relPath, param: dictParam, block: block)
+    }
 }
 /*extension MTWebCall{
     

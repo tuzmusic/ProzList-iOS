@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Morp.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>9647FD58C32B7FDBD7E9ED58AD552C3664926201</string>
+				<key>dateExpires</key>
+				<string>1/8/19</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>ZL4WU5ZLT3.com.app.morp</string>
+				<key>beta-reports-active</key>
+				<true/>
+				<key>com.apple.developer.team-identifier</key>
+				<string>ZL4WU5ZLT3</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>Morp.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>be9fff12-d57b-4623-9678-06e8c5767bdf</string>
+				<key>name</key>
+				<string>MorpAppStore</string>
+			</dict>
+			<key>symbols</key>
+			<true/>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>ZL4WU5ZLT3</string>
+				<key>name</key>
+				<string>Visual Net Design, LC</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

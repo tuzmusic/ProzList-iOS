@@ -78,7 +78,7 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
     @IBAction func signIn(_ sender: UIButton) {
    
         // Create the AlertController
-        let actionSheetController = UIAlertController(title: "SignIn", message: "", preferredStyle: .actionSheet)
+        let actionSheetController = UIAlertController(title: "Sign Up", message: "", preferredStyle: .actionSheet)
         
         // Create and add the Cancel action
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
