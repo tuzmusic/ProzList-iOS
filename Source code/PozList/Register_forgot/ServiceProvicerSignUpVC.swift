@@ -400,6 +400,10 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
                     let slongitude = createString(value: dictData.value(forKey: "longitude") as AnyObject)
                     let sWorkingArea = createString(value: dictData.value(forKey: "working_area_radius") as AnyObject)
                     
+                    //Default Duty is on
+                    UserDefaults.Main.set(true, forKey: .isDutyOnOff)
+                    UserDefaults.standard.synchronize()
+                    
                     var arrUserService = [userService]()
                     
                     let arrService = getArrayFromDictionary(dictionary: dictData, key: "service_json")

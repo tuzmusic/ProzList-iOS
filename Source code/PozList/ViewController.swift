@@ -166,6 +166,11 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
                         
                         let certified = createString(value: dictData.value(forKey: "certified") as AnyObject)
                         let subcrib = createString(value: dictData.value(forKey: "subscribed") as AnyObject)
+                        if (dictData.value(forKey: "duty_status") as! String) == "on"{
+                            UserDefaults.Main.set(true, forKey: .isDutyOnOff)
+                        }else{
+                            UserDefaults.Main.set(false, forKey: .isDutyOnOff)
+                        }
                         
                         if certified == "false"
                         {
@@ -186,6 +191,7 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
                             let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
                             appDelegate.Popup(Message: "\(message)")
                         }
+                        UserDefaults.standard.synchronize()
                     }
                     
                 }else

@@ -517,6 +517,14 @@ extension MTWebCall{
         let relPath = WebURL.updateLocation
         let _ = postRequest(relPath: relPath, param: dictParam, block: block)
     }
+    
+    //MARK: - Set Duty On Off
+    func setDutyOnOffAPI(dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.serviceProviderDuty
+        let _ = postRequest(relPath: relPath, param: dictParam, block: block)
+    }
+    
 }
 /*extension MTWebCall{
     

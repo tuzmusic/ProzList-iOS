@@ -178,10 +178,16 @@ extension RequestStatusListVC:UITableViewDelegate,UITableViewDataSource{
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: NSLocale.current.identifier)
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = dateFormatter.date(from: service.serviceReqDate)
-        dateFormatter.dateFormat = "dd MMMM yyyy"
-        cell.lbl_date.text =  dateFormatter.string(from: date!)
+        if let date = dateFormatter.date(from: service.serviceReqDate){
+            dateFormatter.dateFormat = "dd MMMM yyyy"
+            cell.lbl_date.text =  dateFormatter.string(from: date)
+        }else{
+            cell.lbl_date.text =  ""
+        }
+       // let date = dateFormatter.date(from: service.serviceReqDate)
         cell.lblAddress.text = service.address
+        
+        
         return cell
     }
     

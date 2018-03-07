@@ -404,7 +404,7 @@ extension RequestDetailMapVC {
         let userid = UserDefaults.Main.string(forKey: .UserID)
         dic["user_id"] = userid
         dic["latitude"] = UserDefaults.Main.string(forKey: .userLatitude)
-        dic["longitude"] = UserDefaults.Main.string(forKey: .userLongitude)
+        dic["longtitude"] = UserDefaults.Main.string(forKey: .userLongitude)
         
 //        request_id (pass if we want to get user updated location)
         

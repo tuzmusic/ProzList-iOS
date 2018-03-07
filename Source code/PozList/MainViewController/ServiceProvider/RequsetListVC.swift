@@ -155,10 +155,31 @@ extension RequsetListVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let service = arrReqList[indexPath.row]
-        let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "CurrentReqDetailVC") as! CurrentReqDetailVC
-        vc.isFromCurrentReq = true
+        
+       // let service = arrReqList[indexPath.row]
+        let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "JobProfileVC") as! JobProfileVC
+        let service = arrReqList[indexPath.row] as ServiceRequest
         vc.requestData = service
         self.navigationController?.pushViewController(vc, animated: true)
+        
+        
+//        let service = arrReqList[indexPath.row]
+//
+//        let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "CreateReqVC") as! CreateReqVC
+//
+//        if service.serviceProviderProfile.id == "" {
+//            vc.isUserAvil = false
+//        } else {
+//            vc.isUserAvil = true
+//        }
+//
+//        vc.requestData = service
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+//        let service = arrReqList[indexPath.row]
+//        let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "CurrentReqDetailVC") as! CurrentReqDetailVC
+//        vc.isFromCurrentReq = true
+//        vc.requestData = service
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

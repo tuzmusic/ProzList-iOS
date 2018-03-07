@@ -146,10 +146,36 @@ class JobHistoryVC: UIViewController {
                             
                             let cName = createString(value:serDetail.value(forKey: "name") as AnyObject)
                             if cName != "" {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate, latitude:lat, longitude:lng , distance : distance , address : address ,customerProfile : Profile() ,serviceProvider : userdate)
+                                serviceReq = ServiceRequest.init(id: id,
+                                                                 serviceCatId: cId,
+                                                                 serviceCatName:cName,
+                                                                 status: status,
+                                                                 imagepath: serImges,
+                                                                 serviceReqDesc: reqDesc,
+                                                                 serviceReqDate: reqDate,
+                                                                 serviceReqUpdateDate: reqUpdateDate,
+                                                                 latitude:lat,
+                                                                 longitude:lng ,
+                                                                 distance : distance ,
+                                                                 address : address,
+                                                                 customerProfile : Profile(),
+                                                                 serviceProvider : userdate)
                             }
                             else {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate, latitude:lat, longitude:lng , distance : distance ,address : address , customerProfile : Profile() ,serviceProvider : userdate)
+                                serviceReq = ServiceRequest.init(id: id,
+                                                                 serviceCatId: cId,
+                                                                 serviceCatName:cName,
+                                                                 status: status,
+                                                                 imagepath: serImges,
+                                                                 serviceReqDesc: reqDesc,
+                                                                 serviceReqDate: reqDate,
+                                                                 serviceReqUpdateDate: reqUpdateDate,
+                                                                 latitude:lat,
+                                                                 longitude:lng,
+                                                                 distance : distance,
+                                                                 address : address,
+                                                                 customerProfile : Profile(),
+                                                                 serviceProvider : userdate)
                             }
                             
                             self.arrJobHistory.append(serviceReq)

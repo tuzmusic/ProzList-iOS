@@ -120,7 +120,7 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
                     
                     //UserDefaults.standard.set(userdate, forKey: "Userdata")
                     // UserDefaults.standard.set(UserType.General, forKey: "LoginType")
-                    
+                                        
                     UserDefaults.Main.set(true, forKey: .isLogin)
                     //UserDefaults.Main.set(userdate, forKey: .Profile)
                     UserDefaults.Main.set(id, forKey: .UserID)

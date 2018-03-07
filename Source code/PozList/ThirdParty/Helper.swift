@@ -29,10 +29,13 @@ var isAllUpdated : Int = 0
 //MARK: - Web Services Constant
 struct WebURL {
     
-    static let baseURL:String = "http://project-demo-server.info/prozlist/api/v1/"
+    //static let baseURL:String = "http://project-demo-server.info/prozlist/api/v1/"
+    static let baseURL:String = "http://project-demo-server.net/prozlist/api/v1/"
+    
     static let appkey:String = "da85d87b84495e41e24a55ea05bc7247"
     static let tokenKey:String = "Authorization"
-    static let ImageBaseUrl = "http://project-demo-server.info/prozlist/public/upload/"
+//    static let ImageBaseUrl = "http://project-demo-server.info/prozlist/public/upload/"
+    static let ImageBaseUrl = "http://project-demo-server.net/prozlist/public/upload/"
     static let login:String = WebURL.baseURL + "login"
     static let Register:String = WebURL.baseURL + "registration"
     static let ForgotPassword:String = WebURL.baseURL + "forgot-password"
@@ -51,6 +54,7 @@ struct WebURL {
     static let getCutomerStricks:String = WebURL.baseURL + "get_strike/"
     static let getAwards:String = WebURL.baseURL + "get_award/"
     static let updateLocation:String = WebURL.baseURL + "update_location"
+    static let serviceProviderDuty:String = WebURL.baseURL + "service_provider_duty"
     
 
 }

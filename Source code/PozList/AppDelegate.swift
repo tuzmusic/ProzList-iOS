@@ -303,6 +303,7 @@ extension UserDefaults
             case isSignUp
             case isCertificated
             case isSubscribed
+            case isDutyOnOff
         }
         
         enum FloatDefaultKey:String {
