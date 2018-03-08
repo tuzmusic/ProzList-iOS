@@ -55,8 +55,6 @@ struct WebURL {
     static let getAwards:String = WebURL.baseURL + "get_award/"
     static let updateLocation:String = WebURL.baseURL + "update_location"
     static let serviceProviderDuty:String = WebURL.baseURL + "service_provider_duty"
-    
-
 }
 
 extension UIColor{
@@ -884,10 +882,10 @@ extension UITextField {
    
     
     //Set placeholder font
-    func setPlaceholderFont(font: UIFont) {
-        let lblPlaceHolder:UILabel = self.value(forKey: "_placeholderLabel") as! UILabel
-        lblPlaceHolder.font = font
-    }
+//    func setPlaceholderFont(font: UIFont) {
+//        let lblPlaceHolder:UILabel = self.value(forKey: "_placeholderLabel") as! UILabel
+//        lblPlaceHolder.font = font
+//    }
     
 }
 //MARK: - Protocol Oriented Programming Language
@@ -920,7 +918,6 @@ extension NSMutableArray {
 }
 
 // Dictionary Contains Value
-
 extension Dictionary where Value: Equatable {
     func containsValue(value : Value) -> Bool {
         return self.contains { $0.1 == value }

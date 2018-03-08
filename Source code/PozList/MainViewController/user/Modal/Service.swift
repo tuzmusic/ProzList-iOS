@@ -46,12 +46,12 @@ class ServiceRequest: NSObject {
     var address : String = ""
     var customerProfile : Profile!
     var serviceProviderProfile : ServiceProvider!
-    
+    var ratingNReviewObj:RatingNReview!
     override init() {
         
     }
     
-    init(id: String, serviceCatId: String, serviceCatName: String, status: String, imagepath: [String], serviceReqDesc : String, serviceReqDate : String, serviceReqUpdateDate: String, latitude : String, longitude : String,distance : String,address : String, customerProfile : Profile, serviceProvider : ServiceProvider)
+    init(id: String, serviceCatId: String, serviceCatName: String, status: String, imagepath: [String], serviceReqDesc : String, serviceReqDate : String, serviceReqUpdateDate: String, latitude : String, longitude : String,distance : String,address : String, customerProfile : Profile, serviceProvider : ServiceProvider, ratingNReviewObj:RatingNReview)
     {
         self.id = id
         self.serviceCatId = serviceCatId
@@ -67,6 +67,35 @@ class ServiceRequest: NSObject {
         self.address = address
         self.customerProfile = customerProfile
         self.serviceProviderProfile = serviceProvider
+        self.ratingNReviewObj = ratingNReviewObj
     }
-    
 }
+
+class RatingNReview:NSObject{
+    
+    var id : String
+    var serviceRequestId : String
+    var customerId : String
+    var serviceProviderId : String
+    var rating : String
+    var review : String
+    var reviewFrom : String
+    var createdAt : String
+    var updated_at : String
+    
+    init(id : String, serviceRequestId : String, customerId : String, serviceProviderId : String, rating : String, review : String, reviewFrom : String, createdAt : String, updated_at : String) {
+        self.id = id
+        self.serviceRequestId = serviceRequestId
+        self.customerId = customerId
+        self.serviceProviderId = serviceProviderId
+        self.rating = rating
+        self.review = review
+        self.reviewFrom = reviewFrom
+        self.createdAt = createdAt
+        self.updated_at = updated_at
+    }
+}
+
+
+
+

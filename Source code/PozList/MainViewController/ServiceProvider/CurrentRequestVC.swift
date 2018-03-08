@@ -105,12 +105,42 @@ class CurrentRequestVC: UIViewController {
                             let profileImg = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
                             let cutomerdata = Profile.init(id: cid, username: username, email: email, mobile: mobile, type: type, status: cstatus, city: city,profileImg: profileImg)
                             
+                            //Review & Rating
+                            let reviewRatingObj = RatingNReview.init(id: "",
+                                                                     serviceRequestId: "",
+                                                                     customerId: "",
+                                                                     serviceProviderId: "",
+                                                                     rating: "",
+                                                                     review: "",
+                                                                     reviewFrom: "",
+                                                                     createdAt: "",
+                                                                     updated_at: "")
+                            
+                            //                            let arrayOfRating = getArrayFromDictionary(dictionary: catValue, key: "rating")
+                            let arrayOfRating = catValue.getArray(key: "rating")
+                            
+                            for counter in 0..<arrayOfRating.count{
+                                let dictRating = arrayOfRating[counter] as! NSDictionary
+                                if let reviewFrom = dictRating["review_from"], reviewFrom as! String == "Customer"{
+                                    reviewRatingObj.id = dictRating.getString(key: "id")
+                                    reviewRatingObj.serviceRequestId = dictRating.getString(key: "service_request_id")
+                                    reviewRatingObj.customerId = dictRating.getString(key: "customer_id")
+                                    reviewRatingObj.serviceProviderId = dictRating.getString(key: "service_provider_id")
+                                    reviewRatingObj.rating = dictRating.getString(key: "rating")
+                                    reviewRatingObj.review = dictRating.getString(key: "review")
+                                    reviewRatingObj.reviewFrom = dictRating.getString(key: "review_from")
+                                    reviewRatingObj.createdAt = dictRating.getString(key: "created_at")
+                                    reviewRatingObj.updated_at = dictRating.getString(key: "updated_at")
+                                    break
+                                }
+                            }
+                            
                             let cName = createString(value: serDetail.value(forKey: "name") as AnyObject)
                             if cName != "" {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate,latitude:lat,longitude:lng ,distance : distance ,address : address ,customerProfile : cutomerdata, serviceProvider : ServiceProvider())
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate,latitude:lat,longitude:lng ,distance : distance ,address : address ,customerProfile : cutomerdata, serviceProvider : ServiceProvider(), ratingNReviewObj:reviewRatingObj)
                             }
                             else {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate,latitude:lat,longitude:lng , distance : distance,address : address ,customerProfile : cutomerdata, serviceProvider : ServiceProvider())
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate,latitude:lat,longitude:lng , distance : distance,address : address ,customerProfile : cutomerdata, serviceProvider : ServiceProvider(), ratingNReviewObj:reviewRatingObj)
                             }
                             
                             self.arrReqList.append(serviceReq)

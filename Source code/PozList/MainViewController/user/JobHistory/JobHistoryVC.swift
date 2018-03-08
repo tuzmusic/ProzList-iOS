@@ -144,6 +144,36 @@ class JobHistoryVC: UIViewController {
                             
                             let userdate = ServiceProvider.init(id: spid, username: spUsername, email: spEmail, mobile: spMobile, type: spType, status: spStatus, address: spAddress, city: "", country: spCountry, state: spState, licenceNo: splicenceNo, licenceType: splicenceType, socialNo: spsocialNo, texId: spltexId, latitude: splatitude,longitude: splongitude, workingArea:sWorkingArea, avgRating:spAvgRating, profilePic: spProfilePic, userServices:arrUserService)
                             
+                            //Review & Rating
+                            let reviewRatingObj = RatingNReview.init(id: "",
+                                                                     serviceRequestId: "",
+                                                                     customerId: "",
+                                                                     serviceProviderId: "",
+                                                                     rating: "",
+                                                                     review: "",
+                                                                     reviewFrom: "",
+                                                                     createdAt: "",
+                                                                     updated_at: "")
+                            
+                            //                            let arrayOfRating = getArrayFromDictionary(dictionary: catValue, key: "rating")
+                            let arrayOfRating = catValue.getArray(key: "rating")
+                            
+                            for counter in 0..<arrayOfRating.count{
+                                let dictRating = arrayOfRating[counter] as! NSDictionary
+                                if let reviewFrom = dictRating["review_from"], reviewFrom as! String == "Service"{
+                                    reviewRatingObj.id = dictRating.getString(key: "id")
+                                    reviewRatingObj.serviceRequestId = dictRating.getString(key: "service_request_id")
+                                    reviewRatingObj.customerId = dictRating.getString(key: "customer_id")
+                                    reviewRatingObj.serviceProviderId = dictRating.getString(key: "service_provider_id")
+                                    reviewRatingObj.rating = dictRating.getString(key: "rating")
+                                    reviewRatingObj.review = dictRating.getString(key: "review")
+                                    reviewRatingObj.reviewFrom = dictRating.getString(key: "review_from")
+                                    reviewRatingObj.createdAt = dictRating.getString(key: "created_at")
+                                    reviewRatingObj.updated_at = dictRating.getString(key: "updated_at")
+                                    break
+                                }
+                            }
+                            
                             let cName = createString(value:serDetail.value(forKey: "name") as AnyObject)
                             if cName != "" {
                                 serviceReq = ServiceRequest.init(id: id,
@@ -159,7 +189,8 @@ class JobHistoryVC: UIViewController {
                                                                  distance : distance ,
                                                                  address : address,
                                                                  customerProfile : Profile(),
-                                                                 serviceProvider : userdate)
+                                                                 serviceProvider : userdate,
+                                                                 ratingNReviewObj:reviewRatingObj)
                             }
                             else {
                                 serviceReq = ServiceRequest.init(id: id,
@@ -175,7 +206,8 @@ class JobHistoryVC: UIViewController {
                                                                  distance : distance,
                                                                  address : address,
                                                                  customerProfile : Profile(),
-                                                                 serviceProvider : userdate)
+                                                                 serviceProvider : userdate,
+                                                                 ratingNReviewObj:reviewRatingObj)
                             }
                             
                             self.arrJobHistory.append(serviceReq)

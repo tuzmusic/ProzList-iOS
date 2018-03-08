@@ -9,14 +9,18 @@
 import UIKit
 
 class JobProfileVC: UIViewController,CustomToolBarDelegate {
+   
+    
 
     @IBOutlet weak var NavigationView: UIView!
-    
     @IBOutlet weak var scroll_view: UIScrollView!
-
-    @IBOutlet weak var cons_heighte_txtView: NSLayoutConstraint!
-    @IBOutlet weak var text_view: UITextView!
+    //@IBOutlet weak var cons_heighte_txtView: NSLayoutConstraint!
+   // @IBOutlet weak var text_view: UITextView!
     @IBOutlet weak var lbl_naviga: UILabel!
+    
+    @IBOutlet weak var lblDescription: UILabel!
+    @IBOutlet weak var lblAddress: UILabel!
+    @IBOutlet weak var lblReview: UILabel!
     
     var profileHeaderView:ProfileHeaderView!
     var flexibleHeaderView:DKStickyHeaderView!
@@ -28,6 +32,7 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
     
     var requestData:ServiceRequest!
     
+    //MARK: - Initialization view
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,15 +65,30 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
         profileHeaderView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         profileHeaderView.control_profile_click.addTarget(self, action:#selector(JobProfileVC.click_profile_service), for: .touchUpInside)
         
-        profileHeaderView.lblUserName.text = "dfsgdfg"
+       // profileHeaderView.lblUserName.text = "dfsgdfg"
         
         var str1 =  WebURL.ImageBaseUrl + requestData.serviceProviderProfile.profilePic
         str1 = str1.replacingOccurrences(of: " ", with: "%20")
         profileHeaderView.profileImgView.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
         
-        profileHeaderView.lbl_star.text = requestData.serviceProviderProfile.avgRating
-        profileHeaderView.lblUserName.text = requestData.serviceProviderProfile.username.capitalized
-        profileHeaderView.lblUserDetail.text = requestData.serviceCatName
+        let userType = UserDefaults.Main.string(forKey: .Appuser)
+        if userType == "Service"{
+            //Login using Service Provider
+            profileHeaderView.lbl_star.text = requestData.serviceProviderProfile.avgRating
+            profileHeaderView.lblUserName.text = requestData.customerProfile.username
+           profileHeaderView.lblUserDetail.text = "-"
+            str1 =  WebURL.ImageBaseUrl + requestData.customerProfile.profileImg
+            profileHeaderView.profileImgView.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+            
+            
+        }else{
+            //Login using Customer
+            profileHeaderView.lbl_star.text = requestData.serviceProviderProfile.avgRating
+            profileHeaderView.lblUserName.text = requestData.serviceProviderProfile.username.capitalized
+            profileHeaderView.lblUserDetail.text = requestData.serviceCatName
+        }
+        
+        
 
         self.scroll_view.delegate = self
         self.scroll_view.addSubview(flexibleHeaderView)
@@ -76,15 +96,35 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
 
         placeholderLabel1 = UILabel()
         placeholderLabel1.text = "Add your review here"
-        placeholderLabel1.font = text_view.font
+        placeholderLabel1.font = UIFont.init(name: FontName.RobotoLight, size: 17.0)
         placeholderLabel1.sizeToFit()
-        text_view.addSubview(placeholderLabel1)
-        placeholderLabel1.frame.origin = CGPoint(x: 4, y: (text_view.font?.pointSize)! / 2)
+        //text_view.addSubview(placeholderLabel1)
+        placeholderLabel1.frame.origin = CGPoint(x: 4, y: placeholderLabel1.font.pointSize / 2)
         placeholderLabel1.textColor = UIColor.lightGray
-        placeholderLabel1.isHidden = !text_view.text.isEmpty
-        print(self.text_view.contentSize.height)
-        self.cons_heighte_txtView.constant = self.text_view.contentSize.height
+        //placeholderLabel1.isHidden = !text_view.text.isEmpty
+       // print(self.text_view.contentSize.height)
+       // self.cons_heighte_txtView.constant = self.text_view.contentSize.height
         // Do any additional setup after loading the view.
+        
+        //Set Service Description
+        lblDescription.text = requestData.serviceReqDesc
+        
+        //Set Service Address
+        lblAddress.text = requestData.address
+        
+        //Set review
+        if requestData.ratingNReviewObj.review == ""{
+            lblReview.text = "No enough review"
+        }else{
+            lblReview.text = requestData.ratingNReviewObj.review
+        }
+        
+        //Set Ratings
+        if requestData.ratingNReviewObj.rating == ""{
+            cosmosView.rating = 0.0
+        }else{
+            cosmosView.rating = Double(requestData.ratingNReviewObj.rating)!
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -100,6 +140,10 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
     }
     @IBAction func back_Click(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func closeKeyBoard() {
+        resignFirstResponder()
     }
 }
 
@@ -122,12 +166,16 @@ extension JobProfileVC :UIScrollViewDelegate{
     }
 }
 
-extension JobProfileVC :UITextViewDelegate {
+/*extension JobProfileVC :UITextViewDelegate {
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         textView.autocorrectionType = .no
         textView.inputAccessoryView = toolbarInit(textField: UITextField())
         return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -157,7 +205,7 @@ extension JobProfileVC :UITextViewDelegate {
         self.text_view.resignFirstResponder()
     }
     
-}
+}*/
 //extension JobProfileVC:FloatRatingViewDelegate {
 //
 //    // MARK: FloatRatingViewDelegate
