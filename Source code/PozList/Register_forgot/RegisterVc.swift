@@ -116,7 +116,7 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
                     let mobile = createString(value: dictData.value(forKey: "mobile") as AnyObject)
                     let type = createString(value: dictData.value(forKey: "role") as AnyObject)
                     let status = createString(value: dictData.value(forKey: "status") as AnyObject)
-                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: "",profileImg: "")
+                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: "",profileImg: "", avgRating: "")
                     
                     //UserDefaults.standard.set(userdate, forKey: "Userdata")
                     // UserDefaults.standard.set(UserType.General, forKey: "LoginType")

@@ -23,10 +23,11 @@ class RequestDetailVC: UIViewController {
     var items:Int!
     var requestData:ServiceRequest!
     
-   
+    @IBOutlet weak var ratingView: CosmosView!
+    @IBOutlet weak var lblRatingPoint: UILabel!
     
     
-    
+    //MARK:- View initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         ImagesView.setNeedsLayout()
@@ -65,6 +66,14 @@ class RequestDetailVC: UIViewController {
             lblDistance.text = "0.00m"
         } else {
             lblDistance.text = requestData.distance + "m"
+        }
+        
+        //Set rating
+        if requestData.customerProfile.avgRating.length > 0{
+            ratingView.rating = Double(requestData.customerProfile.avgRating)!
+            lblRatingPoint.text = requestData.customerProfile.avgRating + " Stars"
+        }else{
+            lblRatingPoint.text = "0 Star"
         }
         
         lblRequestDesc.text = requestData.serviceReqDesc

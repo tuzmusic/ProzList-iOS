@@ -688,6 +688,7 @@
 				175118551F7D238900D8CBFC /* Resources */,
 				990152DBD366DF2E0E558FEA /* [CP] Embed Pods Frameworks */,
 				0DDA0C5231CB091368212E18 /* [CP] Copy Pods Resources */,
+				17395EB72052A4C1006CE534 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -785,14 +786,25 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PozList/Pods-PozList-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		17395EB72052A4C1006CE534 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" c4254b33da8a4622df4df9467e57f7c2e7a54cb5 e162bd54a47b6d26a26720e2a08e441dcbd8f01354fee295628936fea5841275";
 		};
 		990152DBD366DF2E0E558FEA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

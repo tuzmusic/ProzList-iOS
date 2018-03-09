@@ -20,10 +20,12 @@ class AwardGivanVC: UIViewController {
     
     // Outlets
     @IBOutlet var tblAwardList: UITableView!
+    @IBOutlet weak var lblNoAwardFound: UILabel!
     
     // Variables
     var arrAwardList = [Award]()
 
+    //MARK: - View initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -95,6 +97,12 @@ class AwardGivanVC: UIViewController {
                     }
                     
                     self.tblAwardList.reloadData()
+                    
+                    if self.arrAwardList.count == 0{
+                        self.lblNoAwardFound.isHidden = false
+                    }else{
+                        self.lblNoAwardFound.isHidden = true
+                    }
                     
                 } else {
                     //Popup

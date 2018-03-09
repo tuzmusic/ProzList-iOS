@@ -77,7 +77,8 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                     let status = createString(value: dictData.value(forKey: "status") as AnyObject)
                     let city = createString(value: dictData.value(forKey: "city") as AnyObject)
                     let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
-                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city,profileImg: imgProfile)
+                    
+                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city,profileImg: imgProfile, avgRating: "")
                     
                     UserDefaults.Main.set(true, forKey: .isSignUp)
                     //UserDefaults.Main.set(userdate, forKey: .Profile)
@@ -214,7 +215,7 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                         let status = createString(value: dictData.value(forKey: "status") as AnyObject)
                         let city = createString(value: dictData.value(forKey: "city") as AnyObject)
                         let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
-                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: imgProfile)
+                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: imgProfile, avgRating: "")
                         
                         UserDefaults.Main.set(true, forKey: .isSignUp)
                         //UserDefaults.Main.set(userdate, forKey: .Profile)

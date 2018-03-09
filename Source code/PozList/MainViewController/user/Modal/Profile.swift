@@ -18,12 +18,13 @@ class Profile: NSObject {
     var status : String = ""
     var city : String = ""
     var profileImg : String = ""
+    var avgRating : String = ""
     
     override init() {
         
     }
     
-    init(id: String, username: String,email: String, mobile: String, type: String, status: String ,city:String,profileImg:String)
+    init(id: String, username: String,email: String, mobile: String, type: String, status: String, city:String, profileImg:String, avgRating:String)
     {
         self.id = id
         self.username = username
@@ -33,5 +34,6 @@ class Profile: NSObject {
         self.status = status
         self.city = city
         self.profileImg = profileImg
+        self.avgRating = avgRating
     }
 }

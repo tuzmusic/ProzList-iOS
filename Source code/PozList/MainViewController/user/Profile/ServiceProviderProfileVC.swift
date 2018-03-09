@@ -392,7 +392,7 @@ extension ServiceProviderProfileVC {
                     let slatitude = createFloatToString(value: dictData.value(forKey: "latitude") as AnyObject)
                     let slongitude = createFloatToString(value: dictData.value(forKey: "longitude") as AnyObject)
                     let radius = createString(value: dictData.value(forKey: "working_area_radius") as AnyObject)
-//                    let spAvgRating = createString(value: dictData.value(forKey: "avg_rating") as AnyObject)
+//                    let avgRating = dictData.getString(key: "avg_rating")
                     let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
                     
                     var arrUserService = [userService]()

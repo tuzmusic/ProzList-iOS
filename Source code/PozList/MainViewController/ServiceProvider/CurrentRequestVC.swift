@@ -21,6 +21,7 @@ class CurrentRequestVC: UIViewController {
 
     @IBOutlet var tblRequestList: UITableView!
     var arrReqList = [ServiceRequest]()
+    @IBOutlet weak var lblNoRequestFound: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,7 +104,9 @@ class CurrentRequestVC: UIViewController {
                             let cstatus = createString(value: dictData.value(forKey: "status") as AnyObject)
                             let city = createString(value: dictData.value(forKey: "status") as AnyObject)
                             let profileImg = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
-                            let cutomerdata = Profile.init(id: cid, username: username, email: email, mobile: mobile, type: type, status: cstatus, city: city,profileImg: profileImg)
+                            let avgRating = dictData.getString(key: "avg_rating")
+                            
+                            let cutomerdata = Profile.init(id: cid, username: username, email: email, mobile: mobile, type: type, status: cstatus, city: city,profileImg: profileImg, avgRating: avgRating)
                             
                             //Review & Rating
                             let reviewRatingObj = RatingNReview.init(id: "",
@@ -116,7 +119,7 @@ class CurrentRequestVC: UIViewController {
                                                                      createdAt: "",
                                                                      updated_at: "")
                             
-                            //                            let arrayOfRating = getArrayFromDictionary(dictionary: catValue, key: "rating")
+                            // let arrayOfRating = getArrayFromDictionary(dictionary: catValue, key: "rating")
                             let arrayOfRating = catValue.getArray(key: "rating")
                             
                             for counter in 0..<arrayOfRating.count{
@@ -147,6 +150,15 @@ class CurrentRequestVC: UIViewController {
                         }
                     }
                     self.tblRequestList.reloadData()
+                    
+                    //Set no request found label
+                    if self.arrReqList.count == 0{
+                        self.lblNoRequestFound.text = "No new Jobs found!"
+                        self.lblNoRequestFound.isHidden = false
+                    }else{
+                        self.lblNoRequestFound.isHidden = true
+                    }
+                    
                 }else
                 {
                     //Popup

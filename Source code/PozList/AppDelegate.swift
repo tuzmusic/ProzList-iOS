@@ -10,6 +10,8 @@ import UIKit
 import IQKeyboardManagerSwift
 import GoogleMaps
 import GooglePlaces
+import Fabric
+import Crashlytics
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -72,6 +74,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         
         //Set observer location
         updatedLocation = LocationCoordinate.init(strLatitude: UserDefaults.Main.string(forKey: .userLatitude), strLongitude: UserDefaults.Main.string(forKey: .userLongitude))
+        
+        Fabric.with([Crashlytics.self])
+        
+        
         return true
     }
 

@@ -28,22 +28,32 @@ class SurveyVC: UIViewController {
     
     @IBOutlet weak var btn_next_submit: UIButton!
     
-    var  arr_answewr = [["text":"a","status" : "0" ],["text":"b","status" : "0" ],["text":"c","status" : "0" ],["text":"d","status" : "0" ]]
+    var  arr_answewr = [["text":"Plumbing","status" : "0" ],["text":"Electrical","status" : "0" ],["text":"HVAC","status" : "0" ],["text":"Handyman","status" : "0" ]]
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-        self.table_view.reloadData()
-        DispatchQueue.main.async {
-              self.table_view.reloadData()
-            DispatchQueue.main.async {
-                self.cons_height_table_view.constant =  self.table_view.contentSize.height
-            }
-        }
+        
         // Do any additional setup after loading the view.
+        
+        reloadTableData()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        reloadTableData()
+    }
+    
+    func reloadTableData(){
+        DispatchQueue.main.async {
+            self.table_view.reloadData()
+            DispatchQueue.main.async {
+                self.cons_height_table_view.constant =  self.table_view.contentSize.height
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -92,10 +102,6 @@ extension SurveyVC:UITableViewDelegate,UITableViewDataSource{
         var dict = arr_answewr[indexPath.row]
          dict["status"] = "1"
          arr_answewr[indexPath.row] = dict
-        self.table_view.reloadData()
-        DispatchQueue.main.async {
-            self.cons_height_table_view.constant =  self.table_view.contentSize.height
-        }
+        self.reloadTableData()
     }
-    
 }

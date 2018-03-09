@@ -24,6 +24,7 @@ class NearJobVC: UIViewController {
     @IBOutlet var btnLeftImg: UIImageView!
     @IBOutlet var lblTitle: UILabel!
     
+    @IBOutlet weak var lblNoNewJobFound: UILabel!
     var isMapView:Bool!
     @IBOutlet weak var txtCount: UITextField!
     
@@ -46,17 +47,18 @@ class NearJobVC: UIViewController {
     
     var selectedReq:ServiceRequest!
     //var gmapView:GMSMapView!
+    
+    //MARK: - View initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         isMapView = false
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         profileViewHeight.constant = 0
-        self.arrReqList.removeAll()
+        //self.arrReqList.removeAll()
         self.getServiceList()
     }
     override func didReceiveMemoryWarning() {
@@ -278,6 +280,7 @@ extension NearJobVC {
         let userLong = UserDefaults.Main.string(forKey: .userLongitude)
         dic["latitude"] = userLat
         dic["longitude"] = userLong
+        
         appDelegate.showLoadingIndicator()
         MTWebCall.call.getNearByJob(userId: userid, dictParam: dic) { (responas, status) in
             appDelegate.hideLoadingIndicator()
@@ -294,6 +297,7 @@ extension NearJobVC {
                     print(message)
                     
                     let arrService = getArrayFromDictionary(dictionary: dictResponse, key: "data")
+                    self.arrReqList.removeAll()
                     
                     if arrService.count > 0 {
                         
@@ -333,7 +337,10 @@ extension NearJobVC {
                             let cstatus = createString(value: dictData.value(forKey: "status") as AnyObject)
                             let city = createString(value: dictData.value(forKey: "status") as AnyObject)
                             let profileImg = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
-                            let cutomerdata = Profile.init(id: cid, username: username, email: email, mobile: mobile, type: type, status: cstatus, city: city,profileImg: profileImg)
+                            let avgRating = dictData.getString(key: "avg_rating")
+                            
+                            
+                            let cutomerdata = Profile.init(id: cid, username: username, email: email, mobile: mobile, type: type, status: cstatus, city: city,profileImg: profileImg, avgRating: avgRating)
                             
                             //Review & Rating
                             let reviewRatingObj = RatingNReview.init(id: "",
@@ -378,6 +385,13 @@ extension NearJobVC {
                             self.arrReqList.append(serviceReq)
                         }
                         self.tblJobList.reloadData()
+                        
+                        //Set no new job found
+                        if self.arrReqList.count == 0{
+                            self.lblNoNewJobFound.isHidden = false
+                        }else{
+                            self.lblNoNewJobFound.isHidden = true
+                        }
                     }
                 }else
                 {

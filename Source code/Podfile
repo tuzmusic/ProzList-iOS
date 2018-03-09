@@ -18,5 +18,7 @@ pod 'Alamofire', '~> 4.0’
 pod 'SVProgressHUD'
 pod 'RSKGrowingTextView'
 pod 'AKSideMenu'
+pod 'Fabric'
+pod 'Crashlytics'
 
 end

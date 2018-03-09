@@ -63,7 +63,7 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
         flexibleHeaderView.addSubview(profileHeaderView)
         profileHeaderView.frame = flexibleHeaderView.bounds
         profileHeaderView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        profileHeaderView.control_profile_click.addTarget(self, action:#selector(JobProfileVC.click_profile_service), for: .touchUpInside)
+       
         
        // profileHeaderView.lblUserName.text = "dfsgdfg"
         
@@ -74,7 +74,7 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
         let userType = UserDefaults.Main.string(forKey: .Appuser)
         if userType == "Service"{
             //Login using Service Provider
-            profileHeaderView.lbl_star.text = requestData.serviceProviderProfile.avgRating
+            profileHeaderView.lbl_star.text = requestData.customerProfile.avgRating
             profileHeaderView.lblUserName.text = requestData.customerProfile.username
            profileHeaderView.lblUserDetail.text = "-"
             str1 =  WebURL.ImageBaseUrl + requestData.customerProfile.profileImg
@@ -86,10 +86,9 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
             profileHeaderView.lbl_star.text = requestData.serviceProviderProfile.avgRating
             profileHeaderView.lblUserName.text = requestData.serviceProviderProfile.username.capitalized
             profileHeaderView.lblUserDetail.text = requestData.serviceCatName
+            profileHeaderView.control_profile_click.addTarget(self, action:#selector(JobProfileVC.click_profile_service), for: .touchUpInside)
         }
         
-        
-
         self.scroll_view.delegate = self
         self.scroll_view.addSubview(flexibleHeaderView)
         self.scroll_view.bringSubview(toFront: NavigationView)

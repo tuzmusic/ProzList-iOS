@@ -81,6 +81,8 @@ class CreateReqVC: UIViewController {
             userDetaileView.alpha = 0.5
             userDetaileView.isUserInteractionEnabled = false
             userDetaileView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
+            self.lbl_user_name.text = "-"
+            self.lbl_user_service_type.text = "-"
         }
         
         self.lblReqAddress.text = requestData.address

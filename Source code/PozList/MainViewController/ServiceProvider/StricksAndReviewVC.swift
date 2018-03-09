@@ -30,12 +30,15 @@ class StricksAndReviewVC: UIViewController {
 
     @IBOutlet weak var viewReview: UIView!
     @IBOutlet weak var viewStricks: UIView!
+    @IBOutlet weak var lblNoStrikeReviewFound: UILabel!
     
     var isReview:Bool!
     var arrReview = [Review]()
     var arrStrcks = [Stricks]()
     
     @IBOutlet weak var tblStricksAndReview: UITableView!
+    
+    //MARK: - Initialization view
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -61,11 +64,13 @@ class StricksAndReviewVC: UIViewController {
     @IBAction func btnStricksClick(_ sender: Any) {
         isReview = false
         self.setUpUi()
+        tblStricksAndReview.reloadData()
     }
     
     @IBAction func btnReviewClick(_ sender: Any) {
         isReview = true
         self.setUpUi()
+        tblStricksAndReview.reloadData()
     }
     
     func setUpUi() {
@@ -77,6 +82,27 @@ class StricksAndReviewVC: UIViewController {
             viewStricks.isHidden = false
             viewReview.isHidden = true
             self.getStricks()
+        }
+    }
+    
+    //Set Stricks and Review text
+    func setStrickReview() {
+        if isReview{
+            //Set no found
+            if arrReview.count == 0{
+                lblNoStrikeReviewFound.isHidden = false
+                lblNoStrikeReviewFound.text = "No Review found"
+            }else{
+                lblNoStrikeReviewFound.isHidden = true
+            }
+        }else{
+            //Set no found
+            if arrStrcks.count == 0{
+                lblNoStrikeReviewFound.isHidden = false
+                lblNoStrikeReviewFound.text = "No Strikes found"
+            }else{
+                lblNoStrikeReviewFound.isHidden = true
+            }
         }
     }
 }
@@ -125,7 +151,9 @@ extension StricksAndReviewVC {
                             let cstatus = createString(value: dictData.value(forKey: "status") as AnyObject)
                             let city = createString(value: dictData.value(forKey: "status") as AnyObject)
                             let profileImg = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
-                            let cutomerdata = Profile.init(id: cid, username: username, email: email, mobile: mobile, type: type, status: cstatus, city: city,profileImg: profileImg)
+                            let avgRating = dictData.getString(key: "avg_rating")
+                            
+                            let cutomerdata = Profile.init(id: cid, username: username, email: email, mobile: mobile, type: type, status: cstatus, city: city,profileImg: profileImg, avgRating: avgRating)
                             
                             let dictSPData = getDictionaryFromDictionary(dictionary: catValue, key: "service_provider_detail")
                             
@@ -154,6 +182,7 @@ extension StricksAndReviewVC {
                         }
                         self.tblStricksAndReview.reloadData()
                     }
+                    self.setStrickReview()
                 }else
                 {
                     //Popup
@@ -173,7 +202,7 @@ extension StricksAndReviewVC {
         let dic = [String:Any]()
         let userid = UserDefaults.Main.string(forKey: .UserID)
         appDelegate.showLoadingIndicator()
-        MTWebCall.call.getStricks(userId: userid, dictParam: dic) { (respons, status) in
+        MTWebCall.call.getStricks(userId: "60", dictParam: dic) { (respons, status) in
             appDelegate.hideLoadingIndicator()
             if (status == 200 && respons != nil) {
                 //Response
@@ -199,6 +228,7 @@ extension StricksAndReviewVC {
                         }
                     }
                     self.tblStricksAndReview.reloadData()
+                    self.setStrickReview()
                 }else {
                     //Popup
                     let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")

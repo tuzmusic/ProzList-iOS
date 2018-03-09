@@ -40,6 +40,11 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
         self.txtfld_email.titleLabel.font =  UIFont.init(name: FontName.RobotoRegular, size: 12)
         self.txtfld_email.placeholderFont = UIFont.init(name: FontName.RobotoLight, size: 16)
         self.txtfld_email.font =  UIFont.init(name: FontName.RobotoLight, size: 16)
+        if #available(iOS 10.0, *) {
+            self.txtfld_email.textContentType = UITextContentType.emailAddress
+        } else {
+            // Fallback on earlier versions
+        }
         
         self.txtfld_password.titleLabel.font =  UIFont.init(name: FontName.RobotoRegular, size: 12)
         self.txtfld_password.placeholderFont =  UIFont.init(name: FontName.RobotoLight, size: 16)
@@ -143,7 +148,7 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
                         let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
                         let profilePic = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
                         let city = createString(value: dictData.value(forKey: "status") as AnyObject)
-                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: profilePic)
+                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: profilePic, avgRating: "")
                         
                         UserDefaults.Main.set(true, forKey: .isLogin)
                         UserDefaults.Main.set(id, forKey: .UserID)

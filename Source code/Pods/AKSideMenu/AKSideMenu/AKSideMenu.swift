@@ -50,7 +50,7 @@ import UIKit
     @IBInspectable public var contentViewShadowRadius: CGFloat = 0.0
     @IBInspectable public var contentViewCornerRadius: CGFloat = 0.0
     @IBInspectable public var contentViewFadeOutAlpha: CGFloat = 1.0
-    @IBInspectable public var contentViewScaleValue: CGFloat = 0.7
+    @IBInspectable public var contentViewScaleValue: CGFloat = 0.6
     @IBInspectable public var contentViewInLandscapeOffsetCenterX: CGFloat = 30.0
     @IBInspectable public var contentViewInPortraitOffsetCenterX: CGFloat = 30.0
     @IBInspectable public var parallaxMenuMinimumRelativeValue: CGFloat = -15
@@ -205,7 +205,7 @@ import UIKit
         self.contentViewFadeOutAlpha = 1.0
         self.contentViewInLandscapeOffsetCenterX = 30.0
         self.contentViewInPortraitOffsetCenterX  = 30.0
-        self.contentViewScaleValue = 0.7
+        self.contentViewScaleValue = 0.6
     }
 
     // MARK: - Public

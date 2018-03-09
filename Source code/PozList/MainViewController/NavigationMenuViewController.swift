@@ -23,7 +23,7 @@ class MenuCell:UITableViewCell{
     
     @IBOutlet weak var btnSwitchOnOff: UIControl!
     @IBOutlet weak var Img: UIImageView!
-    @IBOutlet weak var lbl: UILabel!
+    @IBOutlet weak var lbl: MTLabel!
     @IBOutlet weak var imgSwitchToggle: UIImageView!
 }
 
@@ -249,9 +249,9 @@ extension NavigationMenuViewController {
         dic["status"] = status   //status=on,off"
      
         
-        appDelegate.showLoadingIndicator()
+        //appDelegate.showLoadingIndicator()
         MTWebCall.call.setDutyOnOffAPI(dictParam: dic) { (respons, status) in
-            appDelegate.hideLoadingIndicator()
+           // appDelegate.hideLoadingIndicator()
             jprint(items: status)
             if (status == 200 && respons != nil) {
                 //Response
