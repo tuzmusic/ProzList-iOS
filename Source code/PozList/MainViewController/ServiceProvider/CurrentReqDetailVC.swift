@@ -46,6 +46,11 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
         
         self.setUpUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        userProfileImg.layer.cornerRadius = userProfileImg.frame.size.height / 2.0
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

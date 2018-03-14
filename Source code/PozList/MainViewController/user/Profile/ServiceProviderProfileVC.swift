@@ -150,7 +150,7 @@ class AllServiceCellSP : UITableViewCell,UITableViewDelegate,UITableViewDataSour
     }
 }
 
-class ServiceProviderProfileVC: UIViewController {
+class ServiceProviderProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var imgProfile: UIImageView!
     
@@ -199,6 +199,7 @@ class ServiceProviderProfileVC: UIViewController {
     var isOnlyShowProfile:Bool = false
     var serviceProviderId:String = ""
     
+    //MARK: - View initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -237,49 +238,52 @@ class ServiceProviderProfileVC: UIViewController {
     
     @IBAction func ClickEditProfile(_ sender: Any) {
         
-        let actionSheet = UIAlertController.init(title: "", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        let camera = UIAlertAction.init(title: "Camera", style: UIAlertActionStyle.default, handler: {
-            (alert: UIAlertAction) -> Void in
+        if isEditing_profile {
             
-            let imagePicker = UIImagePickerController.init()
-            imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-            imagePicker.allowsEditing = true
+            let actionSheet = UIAlertController.init(title: "", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
             
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
-            {
-                imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-                self.present(imagePicker, animated: true, completion: nil)
-            }
-            else
-            {
-                let alert = UIAlertController.init(title: "Alert", message: "Camera Not Available", preferredStyle: UIAlertControllerStyle.alert)
-                let cancel = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.destructive, handler: nil)
-                alert.addAction(cancel)
-                self.present(alert, animated: true, completion: nil)
+            let camera = UIAlertAction.init(title: "Camera", style: UIAlertActionStyle.default, handler: {
+                (alert: UIAlertAction) -> Void in
                 
-            }
-        })
-        
-        let photoLibrary = UIAlertAction.init(title: "Photo Library", style: UIAlertActionStyle.default, handler: {
+                let imagePicker = UIImagePickerController.init()
+                imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+                imagePicker.allowsEditing = true
+                
+                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
+                {
+                    imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+                    self.present(imagePicker, animated: true, completion: nil)
+                }
+                else
+                {
+                    let alert = UIAlertController.init(title: "Alert", message: "Camera Not Available", preferredStyle: UIAlertControllerStyle.alert)
+                    let cancel = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.destructive, handler: nil)
+                    alert.addAction(cancel)
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }
+            })
             
-            (action: UIAlertAction) -> Void in
+            let photoLibrary = UIAlertAction.init(title: "Photo Library", style: UIAlertActionStyle.default, handler: {
+                
+                (action: UIAlertAction) -> Void in
+                
+                let imagePicker = UIImagePickerController.init()
+                imagePicker.delegate = self
+                imagePicker.allowsEditing = true
+                imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+                self.present(imagePicker, animated: true, completion: nil)
+                
+            })
             
-            let imagePicker = UIImagePickerController.init()
-            imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-            self.present(imagePicker, animated: true, completion: nil)
+            let cancel = UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
             
-        })
-        
-        let cancel = UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
-        
-        actionSheet.addAction(camera)
-        actionSheet.addAction(photoLibrary)
-        actionSheet.addAction(cancel)
-        
-        self.present(actionSheet, animated: true, completion: nil)
+            actionSheet.addAction(camera)
+            actionSheet.addAction(photoLibrary)
+            actionSheet.addAction(cancel)
+            
+            self.present(actionSheet, animated: true, completion: nil)
+        }
     }
     
     //MARK: =======================================================
@@ -300,7 +304,7 @@ class ServiceProviderProfileVC: UIViewController {
     }
 }
 // MARK: - Google Place Picker Deleget Method
-extension ServiceProviderProfileVC:GMSPlacePickerViewControllerDelegate {
+extension ServiceProviderProfileVC:GMSPlacePickerViewControllerDelegate  {
     
     func openPlaceMap() {
         let config = GMSPlacePickerConfig(viewport: nil)
@@ -520,7 +524,7 @@ extension ServiceProviderProfileVC {
         dict["designation"] = lblDesignation.text
         dict["role"] = UserType.ServiceProvider.rawValue
         
-        let userId = "60" //UserDefaults.Main.string(forKey: .UserID)
+        let userId = UserDefaults.Main.string(forKey: .UserID)
         appDelegate.showLoadingIndicator()
         MTWebCall.call.updateUserProfile(userId: userId, image: imgProfileImage.image!, dictParam: dict) { (respons, status) in
             appDelegate.hideLoadingIndicator()

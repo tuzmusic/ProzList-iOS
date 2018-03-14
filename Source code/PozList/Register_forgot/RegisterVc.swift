@@ -78,7 +78,8 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
         for viewContro in (self.navigationController?.viewControllers)!{
             if viewContro is ViewController{
                 isInNav = true
-                self.navigationController?.popViewController(animated: true)
+//                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popToViewController(viewContro, animated: true)
                 break
             }
         }

@@ -170,11 +170,11 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
         self.txt_tax_id.placeholderFont =  UIFont.init(name: FontName.RobotoLight, size: 16)
         self.txt_tax_id.font =  UIFont.init(name: FontName.RobotoLight, size: 16)
         
-        
     }
     
     @objc func valueChanged(_ sender: TGPDiscreteSlider, event:UIEvent) {
-        lbl_show_miles_area.text = "Set working area radius(\(sender.value) miles) "
+        lbl_show_miles_area.text = "Set working area radius (Miles))"
+        lbl_slider_max.text = "\(sender.value)"
         radius = Double(sender.value)
     }
     

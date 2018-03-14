@@ -343,7 +343,6 @@ extension ServiceReqDetailVC :UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         self.placeholderLabel1.isHidden = !textView.text.isEmpty
     }
-    
     func toolbarInit(textField: UITextField) -> UIToolbar
     {
         toolBar.delegate1 = self
@@ -353,13 +352,10 @@ extension ServiceReqDetailVC :UITextViewDelegate {
     func closeKeyBoard() {
         resignKeyboard()
     }
-    
     func resignKeyboard()
     {
         self.text_view.resignFirstResponder()
-       
     }
-  
 }
 
 extension ServiceReqDetailVC:GMSPlacePickerViewControllerDelegate {
@@ -375,7 +371,13 @@ extension ServiceReqDetailVC:GMSPlacePickerViewControllerDelegate {
         print("Place attributions \(String(describing: place.attributions))")
         print("Place attributions \(String(describing: place.coordinate))")
         
-        lblSelectedAddress.text = place.formattedAddress
+        if let address = place.formattedAddress{
+            lblSelectedAddress.text = address
+        }else{
+            lblSelectedAddress.text = "Add Service address"
+        }
+        
+        lblSelectedAddress.textColor = UIColor.init(red: 104.0/255.0, green: 104.0/255.0, blue: 104.0/255.0, alpha: 1.0)
         selectedPlace = place.coordinate
     }
     

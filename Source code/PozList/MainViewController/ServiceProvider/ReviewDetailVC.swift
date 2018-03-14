@@ -30,6 +30,11 @@ class ReviewDetailVC: UIViewController {
        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        imgUserProfile.layer.cornerRadius = imgUserProfile.frame.size.height / 2.0
+    }
+    
     func setUpUi() {
         
         lblDescription.text = reviewDetail.review

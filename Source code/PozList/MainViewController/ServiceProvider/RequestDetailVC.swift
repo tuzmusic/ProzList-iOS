@@ -33,11 +33,17 @@ class RequestDetailVC: UIViewController {
         ImagesView.setNeedsLayout()
         ImagesView.layoutIfNeeded()
         
+        
         self.setUpUI()
         
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        userProfileImg.layer.cornerRadius = userProfileImg.frame.size.height / 2.0
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -293,12 +299,14 @@ extension RequestDetailVC {
         dic["user_id"] = userid
         dic["status"] = status
         dic["request_id"] = requestData.id
+        dic["distance"] = requestData.distance
+        //dic["duration"] = requestData.
         //Gautam - Pass Distance and Duration in API
         
         
         
 //        if status == "" {
-//            dic["distance"] = requestData.id
+//
 //        }
         
         appDelegate.showLoadingIndicator()

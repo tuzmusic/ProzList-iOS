@@ -41,6 +41,7 @@ class CreateReqVC: UIViewController {
     
     var requestData:ServiceRequest!
     
+    //MARK: - View initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,12 +90,17 @@ class CreateReqVC: UIViewController {
         self.lblReqDetail.text = requestData.serviceReqDesc
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        ProfileImgView.layer.cornerRadius = ProfileImgView.frame.size.height / 2.0
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    //Mark:- Click events
+    //MARK:- Click events
     
     @IBAction func Click_bak(_ sender: Any) {
        self.navigationController?.popViewController(animated: true)
@@ -105,7 +111,6 @@ class CreateReqVC: UIViewController {
         vc.serviceProviderId = requestData.serviceProviderProfile.id
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
     @IBAction func Click_payment(_ sender: Any) {
         
         if img_Panding.image == #imageLiteral(resourceName: "Group_name") {

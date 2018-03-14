@@ -19,6 +19,8 @@ class ForgotPassVC: UIViewController,CustomToolBarDelegate {
     let emailMessage = "Email is required.".localized
     let emailMessage1 =  "Please Enter Valid Email".localized
     
+    
+    //MARK: - View initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,15 +37,47 @@ class ForgotPassVC: UIViewController,CustomToolBarDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func clickSignIn(_ sender: UIButton) {
+    @IBAction func clickSignUp(_ sender: UIButton) {
         
-        for viewContro in (self.navigationController?.viewControllers)!{
+        /*for viewContro in (self.navigationController?.viewControllers)!{
             if viewContro is ViewController{
                 
                 self.navigationController?.popViewController(animated: true)
                 break
             }
+        }*/
+        
+        //By Gautam
+        // Create the AlertController
+        let actionSheetController = UIAlertController(title: "Sign Up", message: "", preferredStyle: .actionSheet)
+        
+        // Create and add the Cancel action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+            
         }
+        actionSheetController.addAction(cancelAction)
+        
+        // Create and add first option action
+        let takePictureAction = UIAlertAction(title: "For Service provider", style: .default) { action -> Void in
+            
+            
+            let vc = storyBoards.Main.instantiateViewController(withIdentifier: "ServiceProvicerSignUpVC") as! ServiceProvicerSignUpVC
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        actionSheetController.addAction(takePictureAction)
+        
+        // Create and add a second option action
+        let choosePictureAction = UIAlertAction(title: "For Customer", style: .default) { action -> Void in
+            
+            
+            let vc = storyBoards.Main.instantiateViewController(withIdentifier: "RegisterVc") as! RegisterVc
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        actionSheetController.addAction(choosePictureAction)
+        
+        // Present the AlertController
+        self.present(actionSheetController, animated: true, completion: nil)
+        
     }
     
     @IBAction func SendClick(_ sender: Any) {
@@ -53,8 +87,9 @@ class ForgotPassVC: UIViewController,CustomToolBarDelegate {
 //        self.navigationController?.pushViewController(selected_service, animated: true)
     }
     
-   
-    
+    @IBAction func btnBackTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
 }
 extension ForgotPassVC : UITextFieldDelegate {

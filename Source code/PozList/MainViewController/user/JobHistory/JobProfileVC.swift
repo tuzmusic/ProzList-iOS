@@ -79,8 +79,8 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
            profileHeaderView.lblUserDetail.text = "-"
             str1 =  WebURL.ImageBaseUrl + requestData.customerProfile.profileImg
             profileHeaderView.profileImgView.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
-            
-            
+
+
         }else{
             //Login using Customer
             profileHeaderView.lbl_star.text = requestData.serviceProviderProfile.avgRating
@@ -126,6 +126,12 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        profileHeaderView.profileImgView.layer.cornerRadius = profileHeaderView.profileImgView.frame.size.height / 2.0
+//        profileHeaderView.control_profile_click.layer.cornerRadius = profileHeaderView.control_profile_click.frame.size.height / 2.0
+        //self.view.layoutIfNeeded()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
