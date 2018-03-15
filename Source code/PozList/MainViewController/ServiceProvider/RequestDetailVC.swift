@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class RequestDetailVC: UIViewController {
 
@@ -26,6 +27,8 @@ class RequestDetailVC: UIViewController {
     @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var lblRatingPoint: UILabel!
     
+    var durationValue = "0"
+    
     
     //MARK:- View initialization
     override func viewDidLoad() {
@@ -42,6 +45,9 @@ class RequestDetailVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         userProfileImg.layer.cornerRadius = userProfileImg.frame.size.height / 2.0
+        
+        //Call matrix API
+        getDurationFromGooglePlaceAPI()
         
     }
     override func didReceiveMemoryWarning() {
@@ -284,8 +290,6 @@ class RequestDetailVC: UIViewController {
             lblNoImgs.isHidden = false
         }
     }
-    
-   
 }
 
 // MARK: - Webservice call
@@ -300,14 +304,8 @@ extension RequestDetailVC {
         dic["status"] = status
         dic["request_id"] = requestData.id
         dic["distance"] = requestData.distance
-        //dic["duration"] = requestData.
+        dic["duration"] = durationValue
         //Gautam - Pass Distance and Duration in API
-        
-        
-        
-//        if status == "" {
-//
-//        }
         
         appDelegate.showLoadingIndicator()
         MTWebCall.call.requestAcceptAndDecline(dictParam: dic) { (respons, status) in
@@ -340,5 +338,44 @@ extension RequestDetailVC {
                 appDelegate.Popup(Message: Title)
             }
         }
+    }
+    
+    func getDurationFromGooglePlaceAPI(){
+        
+        let origin = "\(CDouble(UserDefaults.Main.string(forKey: .userLatitude))!),\(CDouble(UserDefaults.Main.string(forKey: .userLongitude))!)"
+        let destination = "\(CDouble(requestData.latitude)!),\(CDouble(requestData.longitude)!)"
+        
+        let matrixAPIurl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(origin)&destinations=\(destination)"
+        
+        Alamofire.request(matrixAPIurl).responseJSON { (response) in
+            
+            switch response.result{
+                
+            case .success:
+                if let Json = response.result.value as? NSDictionary{
+                    
+                    let success = Json.value(forKey: "status") as! String
+                    if success == "OK"{
+                        if let dataArray = Json.value(forKey: "rows") as? NSArray{
+                            let dictValue = dataArray[dataArray.count-1] as! NSDictionary
+                            if let elementsArray = dictValue.value(forKey: "elements") as? NSArray{
+                                if let elementDuration = elementsArray.object(at: 0) as? NSDictionary{
+                                    print(elementDuration)
+                                    let durationDict = elementDuration.value(forKey: "duration") as! NSDictionary
+                                    self.durationValue = String(describing: durationDict.value(forKey: "value"))
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            case .failure(let error):
+                print(error)
+                
+                break
+            }
+        }
+        
     }
 }
