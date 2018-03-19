@@ -48,11 +48,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             if userType == "Service"{
                 if !UserDefaults.Main.bool(forKey: .isCertificated) {
                     let vc = storyBoards.Main.instantiateViewController(withIdentifier: "UploadCertificateVC") as! UploadCertificateVC
-                    self.window?.rootViewController = UINavigationController.init(rootViewController: vc)
+//                    self.window?.rootViewController = UINavigationController.init(rootViewController: vc)
+                    let navCtrl = UINavigationController.init(rootViewController: vc)
+                    navCtrl.navigationBar.isHidden = true
+                    self.window?.rootViewController = navCtrl
                     self.window?.makeKeyAndVisible()
                 }else if !UserDefaults.Main.bool(forKey: .isSubscribed) {
                     let vc = storyBoards.Main.instantiateViewController(withIdentifier: "SubscribeVC") as! SubscribeVC
-                    self.window?.rootViewController = UINavigationController.init(rootViewController: vc)
+                    let navCtrl = UINavigationController.init(rootViewController: vc)
+                    navCtrl.navigationBar.isHidden = true
+                    self.window?.rootViewController = navCtrl
                     self.window?.makeKeyAndVisible()
                 }else {
                     let ContainerVC = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
@@ -293,11 +298,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         }
         
     }
-    
-   
-    
-
 }
+
 // Add your userdefault key here :
 extension UserDefaults
 {

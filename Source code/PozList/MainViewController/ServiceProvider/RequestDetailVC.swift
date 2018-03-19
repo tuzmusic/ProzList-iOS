@@ -362,7 +362,7 @@ extension RequestDetailVC {
                                 if let elementDuration = elementsArray.object(at: 0) as? NSDictionary{
                                     print(elementDuration)
                                     let durationDict = elementDuration.value(forKey: "duration") as! NSDictionary
-                                    self.durationValue = String(describing: durationDict.value(forKey: "value"))
+                                    self.durationValue = String(describing: durationDict.value(forKey: "value")!)
                                     
                                 }
                             }
@@ -376,6 +376,5 @@ extension RequestDetailVC {
                 break
             }
         }
-        
     }
 }

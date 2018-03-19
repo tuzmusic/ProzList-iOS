@@ -31,6 +31,8 @@
 "Phone number is required."= "Phone number is required.";
 "Password is required." = "Password is required.";
 "Password atleast 8 character" = "Password atleast 8 character";
+"COMPLETE" = "COMPLETE";
+
 
 //Mark: - Create Request
 "Create Request" = "Create Request";

@@ -22,7 +22,11 @@ enum UserType: String{
     case General = "General"
     case Customer = "Customer"
     case ServiceProvider = "Service"
-    
+}
+enum CertificateType:String{
+    case serviceProvider = "certificate"
+    case generalContractorLicence = "licence"
+    case generalContractorInsurance = "insurance"
 }
 
 var isAllUpdated : Int = 0
@@ -801,21 +805,20 @@ class MTViewController : UIViewController
         )
     }
     
-    func alert(message: String) -> Void
-    {
-        let alert = UIAlertController.init(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.cancel, handler: { (action) in
-            
-        })
-        alert.addAction(action)
-        self.present(alert, animated: true) {
-            
-        }
-    }
+    
 }
 
-
-
+func alert(message: String) -> Void
+{
+    let alert = UIAlertController.init(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.alert)
+    let action = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.cancel, handler: { (action) in
+        
+    })
+    alert.addAction(action)
+    UIApplication.topViewController()?.present(alert, animated: true) {
+        
+    }
+}
 
 //MARK: - MTCollectionCell
 class MTCollectionCell: UICollectionViewCell

@@ -171,7 +171,8 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
                         
                         let certified = createString(value: dictData.value(forKey: "certified") as AnyObject)
                         let subcrib = createString(value: dictData.value(forKey: "subscribed") as AnyObject)
-                        if (dictData.value(forKey: "duty_status") as! String) == "on"{
+                       // if (dictData.value(forKey: "duty_status") as! String) == "on"{
+                         if dictData.getString(key: "duty_status") == "on"{
                             UserDefaults.Main.set(true, forKey: .isDutyOnOff)
                         }else{
                             UserDefaults.Main.set(false, forKey: .isDutyOnOff)

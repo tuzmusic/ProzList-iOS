@@ -91,7 +91,6 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
                 if UserDefaults.Main.bool(forKey: .isDutyOnOff){
                     cell.imgSwitchToggle.image = UIImage.init(named: "ToggleOn")
                 }else{
-                    
                     cell.imgSwitchToggle.image = UIImage.init(named: "ToggleOff")
                 }
                 

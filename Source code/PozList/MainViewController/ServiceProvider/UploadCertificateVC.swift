@@ -39,7 +39,8 @@ class UploadCertificateVC: UIViewController,UIImagePickerControllerDelegate,UINa
         view_shadow.layer.shadowOffset = CGSize(width: 3.0, height: 2.0)
         view_shadow.layer.shadowRadius = 5.0
         view_shadow.layer.shadowColor = UIColor.black.cgColor
-    
+        
+//        self.navigationController?.navigationBar.isHidden = true
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -114,6 +115,10 @@ class UploadCertificateVC: UIViewController,UIImagePickerControllerDelegate,UINa
         if (imag_arry.count > 0) {
             var dict = [String:String]()
             dict["user_id"] = UserDefaults.Main.string(forKey: .UserID)
+            let userType = UserDefaults.Main.string(forKey: .Appuser)
+            if userType == "Service"{
+                dict["type"] = CertificateType.serviceProvider.rawValue
+            }
             self.uplaodImages(imag: imag_arry[0] , parameters: dict, indexPath: 0)
         }
     }
@@ -154,6 +159,7 @@ extension UploadCertificateVC  {
                             do {
                                 let res = try JSONSerialization.jsonObject(with: resData, options: []) as AnyObject
                                 let dictResponse = res as! NSDictionary
+                                let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
                                 let Response = getStringFromDictionary(dictionary: dictResponse, key: "response")
                                 if Response == "true" {
                                     self.imag_arry.remove(at: 0)
@@ -167,6 +173,7 @@ extension UploadCertificateVC  {
                                         self.navigationController?.pushViewController(vc, animated: true)
                                     }
                                 } else {
+                                    alert(message: message)
                                 }
                             } catch let errParse{
                                 jprint(items: errParse)
@@ -184,7 +191,6 @@ extension UploadCertificateVC  {
                 break
             }
         })
-        
     }
 }
 

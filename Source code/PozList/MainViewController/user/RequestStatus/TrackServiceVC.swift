@@ -160,7 +160,7 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
                             
                             DispatchQueue.main.async {
                                 let polyline = GMSPolyline.init(path: path)
-                                polyline.strokeWidth = 2.0
+                                polyline.strokeWidth = 5.0
                                 polyline.geodesic = true
                                 polyline.strokeColor = .orange
                                 polyline.map = self.GmapView

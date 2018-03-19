@@ -39,6 +39,11 @@ class CreateReqVC: UIViewController {
     @IBOutlet weak var Control_completed: UIControl!
     @IBOutlet var userDetaileView: UIView!
     
+    @IBOutlet weak var lblPending: UILabel!
+    @IBOutlet weak var lblCompleted: UILabel!
+    @IBOutlet weak var lblNotCome: UILabel!
+    
+    
     var requestData:ServiceRequest!
     
     //MARK: - View initialization
@@ -76,6 +81,11 @@ class CreateReqVC: UIViewController {
             
             self.lbl_user_name.text = requestData.serviceProviderProfile.username.capitalized
             self.lbl_user_service_type.text = requestData.serviceCatName
+            
+            let status = requestData.status
+            if status.length > 0{
+                lblPending.text = status
+            }
             
         } else {
             
@@ -142,7 +152,6 @@ class CreateReqVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
     @IBAction func Click_Pending_state(_ sender: UIControl) {
         
         img_Panding.image = #imageLiteral(resourceName: "Group_name")
@@ -153,33 +162,34 @@ class CreateReqVC: UIViewController {
         
         Contro_not_come.backgroundColor = UIColor.lightGray
         img_notCome.image = #imageLiteral(resourceName: "Rounded_red")
-        
     }
     
     @IBAction func Click_completed_state(_ sender: UIControl) {
         
-        img_completed.image = #imageLiteral(resourceName: "Group_name")
-        Control_completed.backgroundColor = UIColor.appBackGroundColor()
-        
-        Contro_not_come.backgroundColor = UIColor.lightGray
-        img_notCome.image = #imageLiteral(resourceName: "Rounded_red")
-        
-        Control_panding.backgroundColor = UIColor.lightGray
-        img_Panding.image = #imageLiteral(resourceName: "Rounded_yellow")
-        
+        if lblPending.text?.lowercased() != "accepted"{
+            img_completed.image = #imageLiteral(resourceName: "Group_name")
+            Control_completed.backgroundColor = UIColor.appBackGroundColor()
+            
+            Contro_not_come.backgroundColor = UIColor.lightGray
+            img_notCome.image = #imageLiteral(resourceName: "Rounded_red")
+            
+            Control_panding.backgroundColor = UIColor.lightGray
+            img_Panding.image = #imageLiteral(resourceName: "Rounded_yellow")
+        }
     }
-    
     
     @IBAction func Click_Not_come_state(_ sender: UIControl) {
         
-        img_notCome.image = #imageLiteral(resourceName: "Group_name")
-        Contro_not_come.backgroundColor = UIColor.appNotcome()
-        
-        Control_completed.backgroundColor = UIColor.lightGray
-        img_completed.image =  #imageLiteral(resourceName: "round")
-        
-        Control_panding.backgroundColor = UIColor.lightGray
-        img_Panding.image = #imageLiteral(resourceName: "Rounded_yellow")
+        if lblPending.text?.lowercased() != "arrived"{
+            img_notCome.image = #imageLiteral(resourceName: "Group_name")
+            Contro_not_come.backgroundColor = UIColor.appNotcome()
+            
+            Control_completed.backgroundColor = UIColor.lightGray
+            img_completed.image =  #imageLiteral(resourceName: "round")
+            
+            Control_panding.backgroundColor = UIColor.lightGray
+            img_Panding.image = #imageLiteral(resourceName: "Rounded_yellow")
+        }
     }
     
     //MARK: - Alert Click
@@ -217,7 +227,7 @@ class CreateReqVC: UIViewController {
     }
     
     @objc func updateTimer() {
-        seconds += 1
+        seconds -= 1
 
         self.lbl_counter.text = timeString(time: TimeInterval(seconds))
         //print(timeString(time: TimeInterval(seconds)))
