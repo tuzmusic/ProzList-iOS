@@ -24,6 +24,7 @@ class AwardGivanVC: UIViewController {
     
     // Variables
     var arrAwardList = [Award]()
+    var arrayOfIndexpath = [IndexPath]()
 
     //MARK: - View initialization
     override func viewDidLoad() {
@@ -132,6 +133,12 @@ extension AwardGivanVC: UITableViewDelegate, UITableViewDataSource {
         
         let service = arrAwardList[indexPath.row] as Award
         
+        if arrayOfIndexpath.contains(indexPath){
+            cell.lblDesc.numberOfLines = 0
+        }else{
+            cell.lblDesc.numberOfLines = 2
+        }
+        
         if service.awardTag == "Gold" {
             cell.imgAwardType.image = #imageLiteral(resourceName: "gold")
         } else if service.awardTag == "Platinum" {
@@ -146,4 +153,20 @@ extension AwardGivanVC: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if arrayOfIndexpath.contains(indexPath){
+            let index = arrayOfIndexpath.index(of: indexPath)
+            arrayOfIndexpath.remove(at: index!)
+        }else{
+            arrayOfIndexpath.append(indexPath)
+        }
+        tblAwardList.reloadData()
+       
+    }
 }
+
+
+
+
+
+

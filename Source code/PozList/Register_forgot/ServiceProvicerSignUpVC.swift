@@ -343,7 +343,7 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
         peraDic["latitude"] = String(selectedPlace.latitude)
         peraDic["longitude"] = String(selectedPlace.longitude)
         
-        peraDic["working_area_radius"] = String(radius)
+        peraDic["working_area_radius"] = String(Int(radius))
         if arr_service.count >= 1 {
             var arrSec = [[String:String]]()
             for i in 0...arr_service.count - 1 {

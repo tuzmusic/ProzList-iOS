@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/user/Profile/ServiceProviderProfileVC.swift"
-            timestampString = "542640074.210784"
+            timestampString = "543403915.331118"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "716"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/user/RequestStatus/TrackServiceVC.swift"
-            timestampString = "542895997.9449199"
+            timestampString = "543420625.485653"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "105"
@@ -186,7 +186,7 @@
                   moduleName = "PozList"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Projects/BitBucketRepo/Prozlist/Source%20code/PozList/MainViewController/ServiceProvider/CurrentReqDetailVC.swift"
-                  timestampString = "542895998.4063931"
+                  timestampString = "543404275.465614"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "321"
@@ -201,7 +201,7 @@
                   moduleName = "PozList"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Projects/BitBucketRepo/Prozlist/Source%20code/PozList/MainViewController/ServiceProvider/CurrentReqDetailVC.swift"
-                  timestampString = "542895998.409575"
+                  timestampString = "543404275.468735"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "322"
@@ -389,11 +389,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/ServiceProvider/StricksAndReviewVC.swift"
-            timestampString = "542295922.520748"
+            timestampString = "543420625.486174"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -453,7 +453,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/user/Profile/ServiceProviderProfileVC.swift"
-            timestampString = "542640074.211499"
+            timestampString = "543403915.332019"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "439"
@@ -469,7 +469,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/user/RequestStatus/TrackServiceVC.swift"
-            timestampString = "542895997.945755"
+            timestampString = "543420625.4863271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "128"
@@ -485,7 +485,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/ServiceProvider/NearJobVC.swift"
-            timestampString = "542806188.2665451"
+            timestampString = "543406938.492563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "154"
@@ -501,7 +501,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/ServiceProvider/RequestMapVC/RequestDetailMapVC.swift"
-            timestampString = "542895997.946121"
+            timestampString = "543420625.486647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "189"
@@ -613,7 +613,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/ServiceProvider/NearJobVC.swift"
-            timestampString = "542806188.267483"
+            timestampString = "543406938.492901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "383"
@@ -645,7 +645,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/NavigationMenuViewController.swift"
-            timestampString = "542895997.9467371"
+            timestampString = "543420625.4870369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "227"
@@ -661,7 +661,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/NavigationMenuViewController.swift"
-            timestampString = "542895997.946806"
+            timestampString = "543420625.487294"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "91"
@@ -677,7 +677,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/NavigationMenuViewController.swift"
-            timestampString = "542895997.946849"
+            timestampString = "543420625.4875031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "255"
@@ -773,11 +773,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/ServiceProvider/StricksAndReviewVC.swift"
-            timestampString = "542295922.522566"
+            timestampString = "543420625.487826"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "getStricks()"
             landmarkType = "7">
             <Locations>
@@ -821,11 +821,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/ServiceProvider/StricksAndReviewVC.swift"
-            timestampString = "542295922.522611"
+            timestampString = "543420625.487875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "setStrickReview()"
             landmarkType = "7">
          </BreakpointContent>
@@ -837,11 +837,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PozList/MainViewController/ServiceProvider/StricksAndReviewVC.swift"
-            timestampString = "542295922.52265"
+            timestampString = "543420625.4879169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "setStrickReview()"
             landmarkType = "7">
          </BreakpointContent>
@@ -945,22 +945,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PozList/MainViewController/user/Profile/ServiceProviderProfileVC.swift"
-            timestampString = "542640074.212603"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
-            landmarkName = "Changes_UI()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -997,7 +981,7 @@
                   moduleName = "PozList"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Projects/BitBucketRepo/Prozlist/Source%20code/PozList/MainViewController/ServiceProvider/UploadCertificateVC.swift"
-                  timestampString = "542895998.511359"
+                  timestampString = "543404275.5203609"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "147"
@@ -1012,7 +996,7 @@
                   moduleName = "PozList"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Projects/BitBucketRepo/Prozlist/Source%20code/PozList/MainViewController/ServiceProvider/UploadCertificateVC.swift"
-                  timestampString = "542895998.514143"
+                  timestampString = "543404275.522969"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "147"
@@ -1044,77 +1028,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PozList/MainViewController/ServiceProvider/RequestDetailVC.swift"
-            timestampString = "542895997.947436"
+            filePath = "PozList/MainViewController/ServiceProvider/NearJobVC.swift"
+            timestampString = "543406938.493179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
-            landmarkName = "requestAcceptAndDecline(status:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PozList.RequestDetailVC.requestAcceptAndDecline(status: Swift.String) -&gt; ()"
-                  moduleName = "PozList"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Projects/BitBucketRepo/Prozlist/Source%20code/PozList/MainViewController/ServiceProvider/RequestDetailVC.swift"
-                  timestampString = "542895998.529964"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "311"
-                  endingLineNumber = "311"
-                  offsetFromSymbolStart = "1671">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Any&gt;, Swift.Int) -&gt; () in PozList.RequestDetailVC.requestAcceptAndDecline(status: Swift.String) -&gt; ()"
-                  moduleName = "PozList"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Projects/BitBucketRepo/Prozlist/Source%20code/PozList/MainViewController/ServiceProvider/RequestDetailVC.swift"
-                  timestampString = "542895998.540903"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "312"
-                  endingLineNumber = "312"
-                  offsetFromSymbolStart = "26">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PozList/MainViewController/ServiceProvider/RequestDetailVC.swift"
-            timestampString = "542895997.947816"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
-            landmarkName = "requestAcceptAndDecline(status:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PozList/MainViewController/ServiceProvider/RequestDetailVC.swift"
-            timestampString = "542896046.773344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
-            landmarkName = "requestAcceptAndDecline(status:)"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
+            landmarkName = "getServiceList()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

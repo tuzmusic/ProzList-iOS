@@ -385,19 +385,26 @@ extension NearJobVC {
                             self.arrReqList.append(serviceReq)
                         }
                         self.tblJobList.reloadData()
-                        
-                        //Set no new job found
-                        if self.arrReqList.count == 0{
-                            self.lblNoNewJobFound.isHidden = false
-                        }else{
-                            self.lblNoNewJobFound.isHidden = true
-                        }
+                    }
+                    
+                    //Set no new job found
+                    if self.arrReqList.count == 0{
+                        self.lblNoNewJobFound.isHidden = false
+                    }else{
+                        self.lblNoNewJobFound.isHidden = true
                     }
                 }else
                 {
                     //Popup
                     let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
                     appDelegate.Popup(Message: "\(message)")
+                    
+                    //Set no new job found
+                    if self.arrReqList.count == 0{
+                        self.lblNoNewJobFound.isHidden = false
+                    }else{
+                        self.lblNoNewJobFound.isHidden = true
+                    }
                 }
             } else {
                 //Popup

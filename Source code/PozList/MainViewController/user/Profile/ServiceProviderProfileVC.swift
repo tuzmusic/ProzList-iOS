@@ -68,7 +68,7 @@ class RadiusCellSP : UITableViewCell{
     }
     
     @objc func valueChanged(_ sender: TGPDiscreteSlider, event:UIEvent) {
-        lblMinValue.text = "\(sender.value)"
+        lblMinValue.text = "\(Int(sender.value))"
         radiusValue = Float(sender.value)
     }
 }

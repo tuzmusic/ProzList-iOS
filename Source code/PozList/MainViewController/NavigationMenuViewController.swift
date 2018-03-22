@@ -203,7 +203,7 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
     func showLogOutAlert() {
         
         
-        let alert = UIAlertController(title: "ProzList", message: "Are you wnat to Logout?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "ProzList", message: "Are you sure want to Logout?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancle", style: .cancel, handler: { (cancel) in
             
         }))

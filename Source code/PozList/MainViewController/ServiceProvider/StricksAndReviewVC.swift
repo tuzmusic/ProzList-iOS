@@ -65,12 +65,16 @@ class StricksAndReviewVC: UIViewController {
         isReview = false
         self.setUpUi()
         tblStricksAndReview.reloadData()
+        lblNoStrikeReviewFound.isHidden = true
+        
     }
     
     @IBAction func btnReviewClick(_ sender: Any) {
         isReview = true
         self.setUpUi()
         tblStricksAndReview.reloadData()
+        lblNoStrikeReviewFound.isHidden = true
+        
     }
     
     func setUpUi() {
