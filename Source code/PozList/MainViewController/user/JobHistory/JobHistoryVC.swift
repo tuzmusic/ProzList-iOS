@@ -21,13 +21,15 @@ class JobHistoryCell : UITableViewCell{
 
 import UIKit
 
-
 class JobHistoryVC: UIViewController {
     
     @IBOutlet var tblJobHistoryList: UITableView!
     
     var arrJobHistory = [ServiceRequest]()
     
+    @IBOutlet weak var lblNoJobHistoryFound: UILabel!
+    
+    //MARK: - View initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -47,6 +49,16 @@ class JobHistoryVC: UIViewController {
         super.viewWillAppear(animated)
         arrJobHistory.removeAll()
         self.getJobHistory()
+    }
+    
+    //Set no request found
+    func setNoJobHistoryFound() {
+        if self.arrJobHistory.count == 0{
+            lblNoJobHistoryFound.isHidden = false
+            lblNoJobHistoryFound.text = "No Job history found!"
+        }else{
+            lblNoJobHistoryFound.isHidden = true
+        }
     }
     
     func getJobHistory() {
@@ -215,12 +227,15 @@ class JobHistoryVC: UIViewController {
                         }
                         self.tblJobHistoryList.reloadData()
                     }
+                    
                 }else
                 {
                     //Popup
                     let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
                     appDelegate.Popup(Message: "\(message)")
+                    
                 }
+                self.setNoJobHistoryFound()
             } else {
                 //Popup
                 let Title = NSLocalizedString("Somthing went wrong \n Try after sometime", comment: "")

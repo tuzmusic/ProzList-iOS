@@ -810,7 +810,7 @@ class MTViewController : UIViewController
 
 func alert(message: String) -> Void
 {
-    let alert = UIAlertController.init(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.alert)
+    let alert = UIAlertController.init(title: "Alert!", message: message, preferredStyle: UIAlertControllerStyle.alert)
     let action = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.cancel, handler: { (action) in
         
     })

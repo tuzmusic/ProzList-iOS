@@ -19,6 +19,10 @@ class RequestStatusListVC: UIViewController {
 
     @IBOutlet var tblRequestList: UITableView!
     var arrReqList = [ServiceRequest]()
+    
+    @IBOutlet weak var lblNoRequestFound: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -37,6 +41,16 @@ class RequestStatusListVC: UIViewController {
         super.viewWillAppear(animated)
         arrReqList.removeAll()
         self.getRequestStatus()
+    }
+    
+    //Set no request found
+    func setNoRequestFound() {
+        if self.arrReqList.count == 0{
+            lblNoRequestFound.isHidden = false
+            lblNoRequestFound.text = "No Request found!"
+        }else{
+            lblNoRequestFound.isHidden = true
+        }
     }
     
     // MARK: - web service call
@@ -179,11 +193,13 @@ class RequestStatusListVC: UIViewController {
                         }
                         self.tblRequestList.reloadData()
                     }
+                    self.setNoRequestFound()
                 }else
                 {
                     //Popup
                     let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
                     appDelegate.Popup(Message: "\(message)")
+                    self.setNoRequestFound()
                 }
             } else {
                 //Popup

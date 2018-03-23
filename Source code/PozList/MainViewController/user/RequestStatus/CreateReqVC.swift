@@ -124,7 +124,12 @@ class CreateReqVC: UIViewController {
     @IBAction func Click_payment(_ sender: Any) {
         
         if img_Panding.image == #imageLiteral(resourceName: "Group_name") {
-            self.requestComplete(status: "panding")
+            if lblPending.text?.lowercased() == "pending"{
+               alert(message: "You can not update Pending status.")
+            }else{
+                self.requestComplete(status: "panding")
+            }
+            
         } else if img_completed.image == #imageLiteral(resourceName: "Group_name") {
             self.requestComplete(status: "Completed")
         } else if img_notCome.image == #imageLiteral(resourceName: "Group_name") {
@@ -166,7 +171,7 @@ class CreateReqVC: UIViewController {
     
     @IBAction func Click_completed_state(_ sender: UIControl) {
         
-        if lblPending.text?.lowercased() != "accepted"{
+        if lblPending.text?.lowercased() != "accepted" && lblPending.text?.lowercased() != "pending"{
             img_completed.image = #imageLiteral(resourceName: "Group_name")
             Control_completed.backgroundColor = UIColor.appBackGroundColor()
             
@@ -180,7 +185,7 @@ class CreateReqVC: UIViewController {
     
     @IBAction func Click_Not_come_state(_ sender: UIControl) {
         
-        if lblPending.text?.lowercased() != "arrived"{
+        if lblPending.text?.lowercased() != "arrived" && lblPending.text?.lowercased() != "pending"{
             img_notCome.image = #imageLiteral(resourceName: "Group_name")
             Contro_not_come.backgroundColor = UIColor.appNotcome()
             

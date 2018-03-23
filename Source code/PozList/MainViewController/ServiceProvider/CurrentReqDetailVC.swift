@@ -30,6 +30,8 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
     @IBOutlet weak var reviweViewHeight: NSLayoutConstraint!
     
     var serviceRating:CGFloat!
+    
+    //MARK: - View initialization
     override func viewDidLoad() {
         super.viewDidLoad()
 
