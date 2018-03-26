@@ -81,8 +81,11 @@ class AllServiceCellSP : UITableViewCell,UITableViewDelegate,UITableViewDataSour
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var lblMainService: UILabel!
     var isEditing_profile:Bool!
+    var serviceproviderObj:ServiceProviderProfileVC!
     @IBOutlet var tblServiceList: UITableView!
     var arr_service = [userService]() //[["Service_name":"Plumbing","price":"$200","discount":"$20","status":"0","Service_id":""]]
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arr_service.count
@@ -119,6 +122,12 @@ class AllServiceCellSP : UITableViewCell,UITableViewDelegate,UITableViewDataSour
             return cellInsu
         }
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
     
     @objc func insert_row(_ sender: UIControl){
         
@@ -137,7 +146,14 @@ class AllServiceCellSP : UITableViewCell,UITableViewDelegate,UITableViewDataSour
         tblServiceList.insertRows(at: [IndexPath(row: row , section: 0)], with: .automatic)
         tblServiceList.endUpdates()
         //self.tableReload()
+        
+        serviceproviderObj.table_view.reloadData()
         self.tblServiceList.reloadData()
+        self.subServiceTblViewHeight.constant = self.tblServiceList.contentSize.height
+        self.layoutIfNeeded()
+        
+        
+//        cell.subServiceTblViewHeight.constant = cell.tblServiceList.contentSize.height
     }
     
     @objc func delete_row(_ sender: UIControl){
@@ -198,6 +214,8 @@ class ServiceProviderProfileVC: UIViewController, UIImagePickerControllerDelegat
     
     var isOnlyShowProfile:Bool = false
     var serviceProviderId:String = ""
+    var strCertificateImg = ""
+    
     
     //MARK: - View initialization
     override func viewDidLoad() {
@@ -399,6 +417,13 @@ extension ServiceProviderProfileVC {
 //                    let avgRating = dictData.getString(key: "avg_rating")
                     let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
                     
+                    //Get Certificate Image
+                    let arraOfCertificate = dictData.getArray(key: "certificate_image")
+                    if arraOfCertificate.count > 0{
+                        let dictCertificate = arraOfCertificate[0] as! NSDictionary
+                        self.strCertificateImg = dictCertificate.getString(key: "image")
+                    }
+                    
                     var arrUserService = [userService]()
                     var strMainService = ""
                     let arrService = getArrayFromDictionary(dictionary: dictData, key: "service_json")
@@ -502,6 +527,7 @@ extension ServiceProviderProfileVC {
         let row = arr_edit.count - 2
         let indexPath = IndexPath(row: row, section: section)
         let cell: AllServiceCellSP = self.table_view.cellForRow(at: indexPath) as! AllServiceCellSP
+        cell.serviceproviderObj = self
         if cell.arr_service.count > 1 {
             var arrSec = [[String:String]]()
             for i in 0...cell.arr_service.count - 1 {
@@ -808,6 +834,7 @@ extension ServiceProviderProfileVC : UITableViewDelegate,UITableViewDataSource{
                     
                 } else if value == "Services" {
                     let cellInsu = tableView.dequeueReusableCell(withIdentifier: "AllServiceCellSP") as! AllServiceCellSP
+                    cellInsu.serviceproviderObj = self
                     cellInsu.mainServiceHeaderSpech.constant = 8
                     cellInsu.mainServiceView.isHidden = true
                     cellInsu.mainServiceViewHeight.constant = 0
@@ -822,8 +849,9 @@ extension ServiceProviderProfileVC : UITableViewDelegate,UITableViewDataSource{
                     cellInsu.lblMainService.text = serviceName
                     let imgName = serviceName
                     cellInsu.img.image = UIImage.init(named: imgName.lowercased() + "-1")
-                    cellInsu.subServiceTblViewHeight.constant = 135
                     cellInsu.tblServiceList.reloadData()
+                    cellInsu.subServiceTblViewHeight.constant = cellInsu.tblServiceList.contentSize.height + 44
+                    
                     return cellInsu
                 } else if value == "Insurance" {
                     let cellInsu  = tableView.dequeueReusableCell(withIdentifier: "blankCell") as! blankCell
@@ -864,6 +892,7 @@ extension ServiceProviderProfileVC : UITableViewDelegate,UITableViewDataSource{
                 } else if value == "Services" {
                     
                     let cellInsu = tableView.dequeueReusableCell(withIdentifier: "AllServiceCellSP") as! AllServiceCellSP
+                    cellInsu.serviceproviderObj = self
                     cellInsu.isEditing_profile = isEditing_profile
                     cellInsu.arr_service.removeAll()
                     cellInsu.arr_service = dict["services"] as! [userService]
@@ -875,14 +904,18 @@ extension ServiceProviderProfileVC : UITableViewDelegate,UITableViewDataSource{
                     cellInsu.mainServiceView.clipsToBounds = false
                     cellInsu.mainServiceHeaderSpech.constant = 43
                     cellInsu.tblServiceList.reloadData()
+                    cellInsu.subServiceTblViewHeight.constant = cellInsu.tblServiceList.contentSize.height + 44
                     return cellInsu
                     
                 } else if value == "Insurance" {
                     let cellInsu = tableView.dequeueReusableCell(withIdentifier: "InsuranceCellSP") as! InsuranceCellSP
-                    let strName = dict["name"] as!  String
+                    let strName = dict["name"] as! String
                     cellInsu.lbl_main.text = strName + " Insurance"
                     cellInsu.lbl_status.text = "Active"
+                    cellInsu.img.layer.cornerRadius = cellInsu.img.frame.size.height / 2
+                    cellInsu.img.sd_setImage(with: URL.init(string: WebURL.ImageBaseUrl + strCertificateImg), placeholderImage: UIImage.init(named: "camera_icon"), options: .retryFailed)
                     return cellInsu
+                    
                 } else if indexPath.row == 0 {
                     cell = tableView.dequeueReusableCell(withIdentifier: "SimpleCellHeader") as! SimpleCellSP
                     cell.lbl_header.text = "CONTECT DETAIL"

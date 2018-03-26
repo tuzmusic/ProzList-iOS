@@ -203,6 +203,8 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
         table_view.endUpdates()
         self.tableReload()
         self.table_view.reloadData()
+        
+        
     }
     
     @objc func delete_row(_ sender: UIControl){
