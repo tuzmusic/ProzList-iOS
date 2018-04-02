@@ -182,6 +182,7 @@
 		178200DD20515A4C00DC1446 /* UITabBarControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITabBarControllerExtension.swift; sourceTree = "<group>"; };
 		178510811FA33F9100D8EE29 /* tempAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = tempAssets.xcassets; sourceTree = "<group>"; };
 		178A276B1F8B94AE00836AD3 /* SurveyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyVC.swift; sourceTree = "<group>"; };
+		178A4A01207237FD0026AA0E /* PozList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PozList.entitlements; sourceTree = "<group>"; };
 		178EEA7B1FB997B1001DDFF5 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		178EEA7C1FB997B1001DDFF5 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		178EEA7D1FB997B1001DDFF5 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -331,6 +332,7 @@
 		175118591F7D238900D8CBFC /* PozList */ = {
 			isa = PBXGroup;
 			children = (
+				178A4A01207237FD0026AA0E /* PozList.entitlements */,
 				1751185A1F7D238900D8CBFC /* AppDelegate.swift */,
 				1751185C1F7D238900D8CBFC /* ViewController.swift */,
 				178200CB20515A1D00DC1446 /* OtherClasses */,
@@ -713,6 +715,11 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1093,6 +1100,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PozList/PozList.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Cinthya Dianderas (QQQ9885CT6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cinthya Dianderas (QQQ9885CT6)";
 				CODE_SIGN_STYLE = Manual;
@@ -1102,7 +1110,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.prozlist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bb35f872-020f-42b2-8170-f67d4b1d135a";
+				PROVISIONING_PROFILE = "a19295cd-4f44-43b5-aae4-ed7b7a81801a";
 				PROVISIONING_PROFILE_SPECIFIER = "ProzList Dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "PozList/ThirdParty/PozList-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1117,6 +1125,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PozList/PozList.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PROZLIST LLC (C9GX47XP5X)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: PROZLIST LLC (C9GX47XP5X)";
 				CODE_SIGN_STYLE = Manual;
@@ -1126,7 +1135,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.prozlist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "de07be66-0def-4f07-a312-14d40d1f05a5";
+				PROVISIONING_PROFILE = "64133bab-01c4-4e10-a8e3-9b846dc35d35";
 				PROVISIONING_PROFILE_SPECIFIER = "Prozlist Distri";
 				SWIFT_OBJC_BRIDGING_HEADER = "PozList/ThirdParty/PozList-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

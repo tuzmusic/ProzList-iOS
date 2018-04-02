@@ -175,6 +175,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         
     }
     
+    
+    
     func checkLocation(location: [CLLocation]) -> Void
     {
         var currentLocation = CLLocation()
