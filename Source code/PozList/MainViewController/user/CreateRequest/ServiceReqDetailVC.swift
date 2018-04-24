@@ -227,7 +227,9 @@ class ServiceReqDetailVC: UIViewController,CustomToolBarDelegate {
             //self.selectedCount = self.selectedCount + assets.count
             // print(assets)
             //self.assets = assets
-            self.arr_image.removeAllObjects()
+            
+            
+//            self.arr_image.removeAllObjects()
             // self.arr_image.addObjects(from: self.post_datas.media)
             if (assets != nil) || assets.count != 0 {
                 for obje in assets{
