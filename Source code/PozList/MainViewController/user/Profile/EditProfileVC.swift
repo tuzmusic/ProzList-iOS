@@ -93,7 +93,7 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                     let urlOwnreImage = URL.init(string: escapedOwnreImage!)
                     //SDImageCache.shared().removeImage(forKey: String(describing: urlOwnreImage), fromDisk: true)
                     
-                    self.Img_profile.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "camera_icon"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
+                    self.Img_profile.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "imgUserPlaceholder"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
                         //Hide Loading indicator
                         //self.Img_profile.setShowActivityIndicator(false)
                         if (image != nil) {
@@ -229,14 +229,15 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                         let escapedOwnreImage = str1.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
                         let urlOwnreImage = URL.init(string: escapedOwnreImage!)
                         SDImageCache.shared().removeImage(forKey: String(describing: urlOwnreImage), fromDisk: true)
-                        self.Img_profile.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "camera_icon"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
+                        self.Img_profile.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "imgUserPlaceholder"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
                             //Hide Loading indicator
                            
                             
                             if (image != nil) {
-                                self.Img_profile.contentMode = .scaleAspectFit
                                 self.Img_profile.image = image
-                              
+                                self.Img_profile.contentMode = UIViewContentMode.scaleAspectFill
+                                self.Img_profile.clipsToBounds = true
+    
                             }
                         })
                         //str1 = str1.replacingOccurrences(of: " ", with: "%20")

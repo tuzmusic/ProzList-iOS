@@ -65,7 +65,7 @@ class SurveyVC: UIViewController {
     }
     
     @IBAction func Click_submitAnswer(_ sender: UIButton) {
-
+            print("Done")
     }
 }
 

@@ -82,6 +82,7 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
     var arrDropList = [String]()  //["Plumbing","electronic","reparing","free services"]
     var arr_service = [["Service_name":"","price":"","discount":"","status":"0","Service_id":""]]
     var arrListOfService = [Service]()
+    var serviceName:String! = ""
     
     var radius:Double!
     override func viewDidLoad() {
@@ -184,7 +185,10 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
         let row = sender.tag
         let indexPath = IndexPath(row: row, section: section)
         let cell: serviceCell = self.table_view.cellForRow(at: indexPath) as! serviceCell
+        cell.lbl_service_name!.text = self.serviceName
         let service_name = cell.lbl_service_name.text!
+       
+       
         var service_id = ""
         for i in 0...arrListOfService.count - 1 {
             let ser = arrListOfService[i]
@@ -192,18 +196,24 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
                 service_id = ser.id
             }
         }
-        
-        if arr_service.count == 1{
-            arr_service.insert(["Service_name":service_name,"price":cell.txt_prices.text!,"discount":cell.txt_discount.text!,"status":"1","service_id":service_id], at: 0)
-        }else{
-            arr_service.insert(["Service_name":service_name,"price":cell.txt_prices.text!,"discount":cell.txt_discount.text!,"status":"1","service_id":service_id], at: arr_service.count - 1)
+        if cell.txt_prices.text! == "" {
+            
+        }else {
+            
+        }
+        if arr_service.count == 1 {
+            arr_service.insert(["Service_name":service_name,"price":"$\(cell.txt_prices.text!)","discount":"$\(cell.txt_discount.text!)","status":"1","service_id":service_id], at: 0)
+            
+            
+        }else {
+            arr_service.insert(["Service_name":service_name,"price":"$\(cell.txt_prices.text!)","discount":"$\(cell.txt_discount.text!)","status":"1","service_id":service_id], at: arr_service.count - 1)
+             dropDownList.hide()
         }
         table_view.beginUpdates()
         table_view.insertRows(at: [IndexPath(row: row , section: 0)], with: .automatic)
         table_view.endUpdates()
         self.tableReload()
         self.table_view.reloadData()
-        
         
     }
     
@@ -218,10 +228,18 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
     
     @IBAction func tapToDropDown(_ sender: UIControl) {
         
-    
-        self.setupDropDownList(control: sender, arr: arrDropList)
-        dropDownList.show()
-        dropDownList.tag = sender.tag
+        if arr_service.count == 1 {
+            
+            self.setupDropDownList(control: sender, arr: arrDropList)
+            dropDownList.show()
+            dropDownList.tag = sender.tag
+            
+        }else {
+            self.setupDropDownList(control: sender, arr: arrDropList)
+            dropDownList.hide()
+            dropDownList.tag = sender.tag
+        }
+       
         
     }
     
@@ -257,7 +275,8 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
             let row = self.dropDownList.tag
             let indexPath = IndexPath(row: row, section: section)
             let cell: serviceCell = self.table_view.cellForRow(at: indexPath) as! serviceCell
-            cell.lbl_service_name.text = item
+            self.serviceName = item
+            cell.lbl_service_name.text = self.serviceName
             
         }
     }
@@ -523,15 +542,21 @@ extension ServiceProvicerSignUpVC:UITableViewDelegate,UITableViewDataSource{
             cell.control_plus_min.addTarget(self, action: #selector(ServiceProvicerSignUpVC.delete_row(_:)), for: .touchUpInside)
         }
         
-        cell.lbl_service_name.text = dict["Service_name"]
-        cell.txt_prices.text = dict["price"]
-        cell.txt_discount.text = dict["discount"]
+//        cell.lbl_service_name.text = dict["Service_name"]
+        cell.lbl_service_name.text = self.serviceName
+        if cell.txt_prices.text! == "" && cell.txt_discount.text ==  "" {
+            cell.txt_prices.text = dict["price"]
+            cell.txt_discount.text = dict["discount"]
+        }else {
+            print("w")
+        }
+      //  cell.txt_prices.text = dict["price"]
+       // cell.txt_discount.text = dict["discount"]
         cell.control_plus_min.tag = indexPath.row
         cell.control_service.tag = indexPath.row
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         
     }
 }
@@ -722,15 +747,14 @@ extension ServiceProvicerSignUpVC {
             }
             return false
         }
-        guard (txt_password.text?.characters.count)! > 0 else
-        {
+        guard (txt_password.text?.characters.count)! > 0  else {
             if let floatingLabelTextField = txt_password
             {
                 floatingLabelTextField.errorMessage = passwordMessage
             }
             return false
         }
-        guard (txt_password.text?.characters.count)! == 8 else
+        guard (txt_password.text?.characters.count)! > 7 else
         {
             if let floatingLabelTextField = txt_password
             {

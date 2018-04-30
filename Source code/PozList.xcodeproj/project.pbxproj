@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1703CF5C209320A0006EF46A /* CustomerRatingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1703CF5B209320A0006EF46A /* CustomerRatingVC.swift */; };
 		171BD023204EA06100E776F5 /* LocationCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BD022204EA06100E776F5 /* LocationCoordinate.swift */; };
 		1733EA3E1F7E166300B3DF1A /* Customer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1733EA401F7E166300B3DF1A /* Customer.storyboard */; };
 		1733EA461F7E174E00B3DF1A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1733EA481F7E174E00B3DF1A /* Localizable.strings */; };
@@ -120,6 +121,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1703CF5B209320A0006EF46A /* CustomerRatingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerRatingVC.swift; sourceTree = "<group>"; };
 		171BD022204EA06100E776F5 /* LocationCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCoordinate.swift; sourceTree = "<group>"; };
 		1733EA411F7E169000B3DF1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Customer.storyboard; sourceTree = "<group>"; };
 		1733EA471F7E174E00B3DF1A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -287,6 +289,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1703CF5A20932057006EF46A /* CustomerRatingVC */ = {
+			isa = PBXGroup;
+			children = (
+				1703CF5B209320A0006EF46A /* CustomerRatingVC.swift */,
+			);
+			path = CustomerRatingVC;
+			sourceTree = "<group>";
+		};
 		1733EA4C1F7E2B5D00B3DF1A /* Register_forgot */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,6 +406,7 @@
 		1781A83D1F7D25FF000D4779 /* user */ = {
 			isa = PBXGroup;
 			children = (
+				1703CF5A20932057006EF46A /* CustomerRatingVC */,
 				176894441FAC820A00EDE359 /* Modal */,
 				17BE81041F835EA50040CB32 /* Profile */,
 				17BE81001F835EA50040CB32 /* CreateRequest */,
@@ -944,6 +955,7 @@
 				178200EC20515A4D00DC1446 /* UISearchBarExtension.swift in Sources */,
 				179843CB1F94D8300021E7E2 /* SubscribeVC.swift in Sources */,
 				178EEAAE1FB99926001DDFF5 /* UIView+WebCacheOperation.m in Sources */,
+				1703CF5C209320A0006EF46A /* CustomerRatingVC.swift in Sources */,
 				178EEAAC1FB99920001DDFF5 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				178200EB20515A4D00DC1446 /* DictionaryExtension.swift in Sources */,
 			);

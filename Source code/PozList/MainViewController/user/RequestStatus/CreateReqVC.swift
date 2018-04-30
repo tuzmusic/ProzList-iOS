@@ -49,6 +49,7 @@ class CreateReqVC: UIViewController {
     //MARK: - View initialization
     override func viewDidLoad() {
         super.viewDidLoad()
+     
         
         if isUserAvil {
             
@@ -71,19 +72,24 @@ class CreateReqVC: UIViewController {
             print(requestData.status)
             var str1 =  WebURL.ImageBaseUrl + requestData.serviceProviderProfile.profilePic
             str1 = str1.replacingOccurrences(of: " ", with: "%20")
-            ProfileImgView.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+            ProfileImgView.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "imgUserPlaceholder"), options: .refreshCached)
             
             if requestData.serviceProviderProfile.avgRating == "" {
-                self.lbl_rating_profile_pic.text = "0"
+                self.lbl_rating_profile_pic.text = "0.0"
+                
             } else {
-                self.lbl_rating_profile_pic.text = requestData.serviceProviderProfile.avgRating
+              
+                //self.lbl_rating_profile_pic.text = "\(String(format: "%.1f", requestData.serviceProviderProfile.avgRating))"
+                let dblRate = Double (requestData.serviceProviderProfile.avgRating )
+               // String(format: "%.2f", myDouble)
+                self.lbl_rating_profile_pic.text = "\(String(format: "%.1f", dblRate!))"
+               // self.lbl_rating_profile_pic.text = "\(String(describing: dblRate))"
             }
-            
             self.lbl_user_name.text = requestData.serviceProviderProfile.username.capitalized
             self.lbl_user_service_type.text = requestData.serviceCatName
             
             let status = requestData.status
-            if status.length > 0{
+            if status.length > 0 {
                 lblPending.text = status
             }
             
@@ -99,11 +105,24 @@ class CreateReqVC: UIViewController {
         self.lblReqAddress.text = requestData.address
         self.lblReqDetail.text = requestData.serviceReqDesc
     }
+    
+    //Show Modal
+    func showModal() {
+       
+        let customerRatingVC = self.storyboard?.instantiateViewController(withIdentifier: "CustomerRatingVC") as! CustomerRatingVC
+        customerRatingVC.modalPresentationStyle = .overCurrentContext
+        customerRatingVC.requestData = requestData
+        self.present(customerRatingVC, animated: true, completion: nil)
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         ProfileImgView.layer.cornerRadius = ProfileImgView.frame.size.height / 2.0
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        UserDefaults.standard.set("Yes", forKey: "isRating")
+        UserDefaults.standard.synchronize()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -126,30 +145,17 @@ class CreateReqVC: UIViewController {
         if img_Panding.image == #imageLiteral(resourceName: "Group_name") {
             if lblPending.text?.lowercased() == "pending"{
                alert(message: "You can not update Pending status.")
-            }else{
-                self.requestComplete(status: "panding")
+            }else {
+                 self.requestComplete(statusA: "Accepted")
             }
-            
         } else if img_completed.image == #imageLiteral(resourceName: "Group_name") {
-            self.requestComplete(status: "Completed")
+            self.requestComplete(statusA: "Completed")
+            
         } else if img_notCome.image == #imageLiteral(resourceName: "Group_name") {
-            self.requestComplete(status: "Not come")
+            self.requestComplete(statusA: "NotCome")
         }
-        
-        /*
-        if  img_completed.image != #imageLiteral(resourceName: "Group_name") {
-            let alert = UIAlertController(title: "Congratulations".localized, message: "Your registration is successful!!!".localized, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (cancel) in
-            }))
-            present(alert, animated: true, completion: nil)
-        }
-        else{
-            UIView.animate(withDuration: 0.5, animations: {
-                self.Alert_view.frame = CGRect(x: 0, y: 0, width: self.Alert_view.frame.size.width , height: self.Alert_view.frame.size.height)
-            }) { (Closer) in
-            }
-        } */
-    }
+
+}
     @IBAction func Click_Track_service(_ sender: UIControl) {
      
         let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "TrackServiceVC") as! TrackServiceVC
@@ -253,12 +259,12 @@ class CreateReqVC: UIViewController {
 
 extension CreateReqVC {
     
-    func requestComplete(status:String) {
+    func requestComplete(statusA:String) {
         
         var dic = [String:Any]()
         let userid = UserDefaults.Main.string(forKey: .UserID)
         dic["user_id"] = userid
-        dic["status"] = status
+        dic["status"] = statusA
         dic["request_id"] = requestData.id
         
         appDelegate.showLoadingIndicator()
@@ -270,6 +276,7 @@ extension CreateReqVC {
                 let dictResponse = respons as! NSDictionary
                 
                 let Response = getStringFromDictionary(dictionary: dictResponse, key: "response")
+                
                 if Response == "true"
                 {
                     //Message
@@ -279,7 +286,7 @@ extension CreateReqVC {
                     let dictData = getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
                     print(dictData)
                     //appDelegate.Popup(Message: "\(message)")
-                    
+                    self.showModal()
                 }else
                 {
                     //Popup

@@ -326,6 +326,7 @@ extension UserDefaults
             case IntKey
         }
         enum StringDefaultKey: String {
+            
             case UserID
             case token
             case Appuser

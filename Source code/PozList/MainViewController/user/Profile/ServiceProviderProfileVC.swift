@@ -476,7 +476,7 @@ extension ServiceProviderProfileVC {
                     let escapedOwnreImage = str1.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
                     let urlOwnreImage = URL.init(string: escapedOwnreImage!)
                     SDImageCache.shared().removeImage(forKey: String(describing: urlOwnreImage), fromDisk: true)
-                    self.imgProfileImage.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "camera_icon"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
+                    self.imgProfileImage.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "imgUserPlaceholder"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
                         
                         if (image != nil) {
                             self.imgProfileImage.contentMode = .scaleAspectFit
@@ -636,7 +636,7 @@ extension ServiceProviderProfileVC {
                     let escapedOwnreImage = str1.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
                     let urlOwnreImage = URL.init(string: escapedOwnreImage!)
                     SDImageCache.shared().removeImage(forKey: String(describing: urlOwnreImage), fromDisk: true)
-                    self.imgProfileImage.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "camera_icon"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
+                    self.imgProfileImage.sd_setImage(with: urlOwnreImage, placeholderImage: #imageLiteral(resourceName: "imgUserPlaceholder"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
                         
                         if (image != nil) {
                             self.imgProfileImage.contentMode = .scaleAspectFit
