@@ -21,6 +21,9 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
     @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var lblReview: UILabel!
+    @IBOutlet var viewRequestStatus: UIView!
+    @IBOutlet var imgRequestStauts: UIImageView!
+    @IBOutlet var lbl_complete: UILabel!
     
     var profileHeaderView:ProfileHeaderView!
     var flexibleHeaderView:DKStickyHeaderView!
@@ -87,6 +90,7 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
             profileHeaderView.lblUserName.text = requestData.serviceProviderProfile.username.capitalized
             profileHeaderView.lblUserDetail.text = requestData.serviceCatName
             profileHeaderView.control_profile_click.addTarget(self, action:#selector(JobProfileVC.click_profile_service), for: .touchUpInside)
+            
         }
         
         self.scroll_view.delegate = self
@@ -124,6 +128,13 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
         }else{
             cosmosView.rating = Double(requestData.ratingNReviewObj.rating)!
         }
+        
+        //Set Request Status
+        
+            viewRequestStatus.backgroundColor = UIColor.appGreen()
+            imgRequestStauts.image = #imageLiteral(resourceName: "electricle_light_green")
+            lbl_complete.text = requestData.status
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {

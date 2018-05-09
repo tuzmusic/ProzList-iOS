@@ -13,7 +13,7 @@ import GooglePlaces
 class TrackServiceVC: UIViewController,GMSMapViewDelegate {
     
     //Mapview data show
-    var GmapView: GMSMapView!
+    //var GmapView: GMSMapView!
     
     var GmapUserMark: GMSMarker!
     var GmapDiverMark: GMSMarker!
@@ -23,8 +23,8 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
     var usrPosition =  CLLocationCoordinate2D()
     var ShopPosition =  CLLocationCoordinate2D()
     var DeliverPosition =  CLLocationCoordinate2D()
-
-    @IBOutlet weak var MapView: UIView!
+    @IBOutlet var GmapView: GMSMapView!
+    //@IBOutlet weak var MapView: UIView!
     
     @IBOutlet weak var imgProfilePic: UIImageView!
     
@@ -44,8 +44,14 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.MapView.layoutIfNeeded()
+        
+        
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //self.MapView.layoutIfNeeded()
+        
         let now1 = Date()
         let now =  dateFrm(date: providerRequestData.serviceReqUpdateDate)
         let endDate = now1
@@ -58,34 +64,27 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
         seconds = seconds1!
         runTimer()
         
-    
+        let lat:Double = Double(providerRequestData.latitude) ?? 0.0
+        let lon:Double = Double(providerRequestData.longitude) ?? 0.0
+        
         // Create a GMSCameraPosition that tells the map to display the
-        let camera = GMSCameraPosition.camera(withLatitude: 23, longitude: 72, zoom: 11.0)
-        GmapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.MapView.frame.size.width , height: self.MapView.frame.size.height), camera: camera)
-        
-      //  let location = UserDefaults.Main.object(forKey: .driverLocation) as! NSDictionary
-     //   if location != nil{
-            
-            let lat = 23.033863
-            let lon = 72.585022
-        
-//        let lat = Double(providerRequestData.serviceProviderProfile.latitude)
-//        let lon = Double(providerRequestData.serviceProviderProfile.longitude)
+        let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lon, zoom: 11.0)
+        //GmapView = GMSMapView.map(withFrame: self.MapView.bounds, camera: camera)
+        GmapView.isMyLocationEnabled = true
         
         let position = CLLocationCoordinate2D(latitude:CLLocationDegrees(lat) , longitude: CLLocationDegrees(lon))
-            let camera_google :GMSCameraPosition  = GMSCameraPosition.camera(withTarget: position, zoom: 12.0)
-            self.GmapView.animate(to: camera_google)
+        let camera_google :GMSCameraPosition  = GMSCameraPosition.camera(withTarget: position, zoom: 12.0)
+        self.GmapView.animate(to: camera_google)
         
-       // }
         
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
         marker.map = GmapView
-
         
-       // 23.0265° N, 72.5609° E
         
-        self.MapView.addSubview(GmapView)
+        // 23.0265° N, 72.5609° E
+        
+        //self.MapView.addSubview(GmapView)
         
         do {
             // Set the map style by passing the URL of the local file.
@@ -100,8 +99,8 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
         
         GmapView.delegate = self
         let position1 = CLLocationCoordinate2D(latitude:CLLocationDegrees(lat) , longitude: CLLocationDegrees(lon))
-//        let position2 = CLLocationCoordinate2D(latitude:CLLocationDegrees(UserDefaults.Main.string(forKey: .userLatitude))! , longitude: CLLocationDegrees(UserDefaults.Main.string(forKey: .userLongitude))!)
-        let position2 = CLLocationCoordinate2D(latitude:CLLocationDegrees(23.0265) , longitude: CLLocationDegrees(72.5609))
+        let position2 = CLLocationCoordinate2D(latitude:CLLocationDegrees(UserDefaults.Main.string(forKey: .userLatitude))! , longitude: CLLocationDegrees(UserDefaults.Main.string(forKey: .userLongitude))!)
+        
         getPolylineRoute(from: position1, to:position2)
         
         var str1 =  WebURL.ImageBaseUrl + providerRequestData.serviceProviderProfile.profilePic
@@ -110,9 +109,7 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
         
         self.lblUserName.text = providerRequestData.serviceProviderProfile.username.capitalized
         self.lbl_ServiceType.text = providerRequestData.serviceCatName
-        
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

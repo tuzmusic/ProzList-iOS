@@ -34,8 +34,8 @@ var isAllUpdated : Int = 0
 struct WebURL {
     
     //static let baseURL:String = "http://project-demo-server.info/prozlist/api/v1/"
-    static let baseURL:String = "http://project-demo-server.net/prozlist/api/v1/"
-    
+//    static let baseURL:String = "http://project-demo-server.net/prozlist/api/v1/"
+     static let baseURL:String = "http://199.250.201.83/~mobile/prozlist/api/v1/"
     static let appkey:String = "da85d87b84495e41e24a55ea05bc7247"
     static let tokenKey:String = "Authorization"
 //    static let ImageBaseUrl = "http://project-demo-server.info/prozlist/public/upload/"

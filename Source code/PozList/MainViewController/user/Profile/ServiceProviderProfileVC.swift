@@ -437,9 +437,9 @@ extension ServiceProviderProfileVC {
                             let fPrize = Float(createString (value: catValue.value(forKey: "price") as AnyObject))
                             let fDiscount = Float(createString (value: catValue.value(forKey: "discount") as AnyObject))
                             
-                            let prize = String.init(format: "%.2f", fPrize!)
-                            let discount = String.init(format: "%.2f", fDiscount!)
-                            let serviceName = createString(value: catValue.value(forKey: "name") as AnyObject)
+                            let prize = "$" + String.init(format: "%.2f", fPrize!)
+                            let discount = "$" + String.init(format: "%.2f", fDiscount!)
+                            let serviceName =  createString(value: catValue.value(forKey: "name") as AnyObject)
                             let status = createString(value: catValue.value(forKey: "status") as AnyObject)
                             
                             let userServic = userService.init(serviceId: serviceId, prize: prize, discount: discount, serviceName: serviceName, status: status)
@@ -875,6 +875,9 @@ extension ServiceProviderProfileVC : UITableViewDelegate,UITableViewDataSource{
                 
                 if (dict["main"] as! String == "Email") {
                     cell.txt_edit.isUserInteractionEnabled = false
+                }
+                if (dict["main"] as! String == "Phone Number") {
+                    cell.txt_edit.keyboardType = .phonePad
                 }
                 
                 return cell

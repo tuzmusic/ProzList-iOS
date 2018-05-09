@@ -183,6 +183,17 @@ class JobHistoryVC: UIViewController {
                                     reviewRatingObj.createdAt = dictRating.getString(key: "created_at")
                                     reviewRatingObj.updated_at = dictRating.getString(key: "updated_at")
                                     break
+                                }else if let reviewFrom = dictRating["review_from"], reviewFrom as! String == "Customer"{
+                                    reviewRatingObj.id = dictRating.getString(key: "id")
+                                    reviewRatingObj.serviceRequestId = dictRating.getString(key: "service_request_id")
+                                    reviewRatingObj.customerId = dictRating.getString(key: "customer_id")
+                                    reviewRatingObj.serviceProviderId = dictRating.getString(key: "service_provider_id")
+                                    reviewRatingObj.rating = dictRating.getString(key: "rating")
+                                    reviewRatingObj.review = dictRating.getString(key: "review")
+                                    reviewRatingObj.reviewFrom = dictRating.getString(key: "review_from")
+                                    reviewRatingObj.createdAt = dictRating.getString(key: "created_at")
+                                    reviewRatingObj.updated_at = dictRating.getString(key: "updated_at")
+                                    break
                                 }
                             }
                             
@@ -259,12 +270,12 @@ extension JobHistoryVC:UITableViewDelegate,UITableViewDataSource{
             cell.view_compl.backgroundColor = UIColor.appGreen()
             cell.view_back_icon.backgroundColor = UIColor.appGreen()
             cell.img_stauts.image = #imageLiteral(resourceName: "completed")
-            cell.lbl_complete.text = "COMPLETED"
+            cell.lbl_complete.text = service.status
         } else {
             cell.view_compl.backgroundColor = UIColor.red
             cell.view_back_icon.backgroundColor = UIColor.red
             cell.img_stauts.image = #imageLiteral(resourceName: "completed_not")
-            cell.lbl_complete.text = "NOT COMPLETED"
+            cell.lbl_complete.text = service.status
         }
         
         cell.lbl_title.text = service.serviceCatName

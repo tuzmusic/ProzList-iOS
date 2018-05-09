@@ -23,7 +23,7 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
     let nameMessage = "Your name is required.".localized
     let emailMessage = "Email is required.".localized
     let emailMessage1 =  "Please Enter Valid Email".localized
-    let phoneMessage = "Phone number is required.".localized
+    let phoneMessage = "Please Enter Valid Phone number.".localized
     let passwordMessage = "Password is required.".localized
     let passwordMessage1 = "Password atleast 8 character".localized
     
@@ -287,7 +287,7 @@ extension RegisterVc {
             return false
         }
        
-        guard (txt_phone.text?.characters.count)! > 0  && (txt_phone.text?.characters.count)! == 10 else
+        guard (txt_phone.text?.characters.count)! >= 10  && (txt_phone.text?.characters.count)! <= 14  else
         {
             if let floatingLabelTextField = txt_phone
             {

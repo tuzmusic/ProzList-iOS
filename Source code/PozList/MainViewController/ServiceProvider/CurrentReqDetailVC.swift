@@ -80,14 +80,18 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
     
     // MARK: - Navigation
     @IBAction func btnCompleteClick(_ sender: Any) {
-       self.requestAcceptAndDecline(status: "Completed")
+        var strStatus = "Arrived"
+        if requestData.status == "Arrived" {
+            strStatus = "Completed"
+        }
+       self.requestAcceptAndDecline(status: strStatus)
     }
     
     func setUpUI() {
         
         var str1 =  WebURL.ImageBaseUrl + requestData.customerProfile.profileImg
         str1 = str1.replacingOccurrences(of: " ", with: "%20")
-        userProfileImg.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+        userProfileImg.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "imgUserPlaceholder"), options: .refreshCached)
         
         lblUserName.text = requestData.customerProfile.username
         if requestData.distance == "" {
@@ -116,7 +120,7 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
             x += width
             var str1 =  WebURL.ImageBaseUrl + arrImg[0]
             str1 = str1.replacingOccurrences(of: " ", with: "%20")
-            view.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+            view.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "placeholder")!, options: .refreshCached)
             ImagesView.addSubview(view)
             
             width = width / 2
@@ -133,7 +137,7 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
                     view.frame = CGRect(x: innerX, y: y, width: width - 2, height: height - 1)
                     var str1 =  WebURL.ImageBaseUrl + arrImg[k]
                     str1 = str1.replacingOccurrences(of: " ", with: "%20")
-                    view.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+                    view.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "placeholder")!, options: .refreshCached)
                     ImagesView.addSubview(view)
                     
                     if k == 4 {
@@ -166,7 +170,7 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
             x += width
             var str1 =  WebURL.ImageBaseUrl + arrImg[0]
             str1 = str1.replacingOccurrences(of: " ", with: "%20")
-            view.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+            view.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "placeholder")!, options: .refreshCached)
             ImagesView.addSubview(view)
             
             width = width / 2
@@ -184,7 +188,7 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
                     innerX += width
                     var str1 =  WebURL.ImageBaseUrl + arrImg[k]
                     str1 = str1.replacingOccurrences(of: " ", with: "%20")
-                    view.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+                    view.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "placeholder")!, options: .refreshCached)
                     ImagesView.addSubview(view)
                     k += 1
                 }
@@ -204,7 +208,7 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
             x += width
             var str1 =  WebURL.ImageBaseUrl + arrImg[0]
             str1 = str1.replacingOccurrences(of: " ", with: "%20")
-            view.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+            view.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "placeholder")!, options: .refreshCached)
             ImagesView.addSubview(view)
             
             width = width / 2
@@ -222,7 +226,7 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
                     innerX += width
                     var str1 =  WebURL.ImageBaseUrl + arrImg[k]
                     str1 = str1.replacingOccurrences(of: " ", with: "%20")
-                    view.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+                    view.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "placeholder")!, options: .refreshCached)
                     ImagesView.addSubview(view)
                     k += 1
                 }
@@ -242,7 +246,7 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
             x += width
             var str1 =  WebURL.ImageBaseUrl + arrImg[0]
             str1 = str1.replacingOccurrences(of: " ", with: "%20")
-            view.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+            view.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "placeholder")!, options: .refreshCached)
             ImagesView.addSubview(view)
             
             width = width / 2
@@ -257,7 +261,7 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
                 view.frame = CGRect(x: innerX, y: y, width: width - 2, height: height - 1)
                 var str1 =  WebURL.ImageBaseUrl + arrImg[i]
                 str1 = str1.replacingOccurrences(of: " ", with: "%20")
-                view.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+                view.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "placeholder")!, options: .refreshCached)
                 innerX += width
                 ImagesView.addSubview(view)
             }
@@ -278,7 +282,7 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
                 x += width
                 var str1 =  WebURL.ImageBaseUrl + arrImg[i]
                 str1 = str1.replacingOccurrences(of: " ", with: "%20")
-                view.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+                view.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "placeholder")!, options: .refreshCached)
                 ImagesView.addSubview(view)
             }
             
@@ -290,13 +294,23 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
             view.frame = CGRect(x: 0, y: 0, width: ImagesView.frame.size.width, height: ImagesView.frame.size.height)
             var str1 =  WebURL.ImageBaseUrl + arrImg[0]
             str1 = str1.replacingOccurrences(of: " ", with: "%20")
-            view.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+            view.sd_setImage(with: URL.init(string: str1)!, placeholderImage: UIImage.init(named: "placeholder")!, options: .refreshCached)
+            
             ImagesView.addSubview(view)
             
         } else {
             ImagesView.isHidden = true
             //lblNoImgs.isHidden = false
         }
+        
+        
+        //Set arrive and complete button
+        if requestData.status == "Accepted" {
+            btnComplete.setTitle("ARRIVED", for: UIControlState.normal)
+        }else if requestData.status == "Arrived" {
+            btnComplete.setTitle("COMPLETE", for: UIControlState.normal)
+        }
+        
     }
     //Redirect to Map screen
     @IBAction func btnTrackLocationTapped(_ sender: Any) {

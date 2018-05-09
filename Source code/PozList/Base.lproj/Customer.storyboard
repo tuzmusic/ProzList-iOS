@@ -1786,11 +1786,14 @@
                     <connections>
                         <outlet property="NavigationView" destination="tdF-gs-h8a" id="CET-Ew-8em"/>
                         <outlet property="cosmosView" destination="cQd-Ka-6df" id="HxV-4H-qS1"/>
+                        <outlet property="imgRequestStauts" destination="lSy-Pd-QbH" id="r9d-zo-GU3"/>
                         <outlet property="lblAddress" destination="5Qc-9C-9TE" id="x7w-zV-jUr"/>
                         <outlet property="lblDescription" destination="Frf-hc-ORH" id="ww1-0k-6o8"/>
                         <outlet property="lblReview" destination="OAV-f6-e2U" id="Cfl-4G-46d"/>
+                        <outlet property="lbl_complete" destination="fCI-tV-fSR" id="vwa-EZ-CpP"/>
                         <outlet property="lbl_naviga" destination="T2L-hM-ATi" id="Blp-TN-rQz"/>
                         <outlet property="scroll_view" destination="smG-fF-5P4" id="VIQ-ah-aJS"/>
+                        <outlet property="viewRequestStatus" destination="rBZ-0r-gcc" id="pKe-kR-b4l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLU-oe-EpS" sceneMemberID="firstResponder"/>
@@ -2775,7 +2778,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="0.853271484375" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="XVm-AI-9XC" firstAttribute="leading" secondItem="j4e-9A-Nqp" secondAttribute="leading" constant="10" id="38o-0b-VqK"/>
                                     <constraint firstItem="dxY-Yy-z0I" firstAttribute="leading" secondItem="XVm-AI-9XC" secondAttribute="trailing" constant="5" id="Dmz-gR-vSr"/>
@@ -2792,7 +2795,7 @@
                                     <constraint firstAttribute="height" constant="100" id="wAX-dC-xJ6"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ER-9C-REE">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ER-9C-REE" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="64" width="320" height="404"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -2821,12 +2824,11 @@
                     <navigationItem key="navigationItem" id="iHH-jo-Qih"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
-                        <outlet property="MapView" destination="5ER-9C-REE" id="LxL-Tx-cfJ"/>
+                        <outlet property="GmapView" destination="5ER-9C-REE" id="O4w-gs-ivL"/>
                         <outlet property="imgProfilePic" destination="6RL-zU-BEk" id="j4r-db-zim"/>
                         <outlet property="lblRemainTime" destination="Xty-SK-40W" id="kd2-LH-seF"/>
                         <outlet property="lblUserName" destination="NNL-0c-JQO" id="5tT-FC-VIX"/>
                         <outlet property="lbl_ServiceType" destination="dxY-Yy-z0I" id="vSo-OB-Mfp"/>
-                        <outlet property="mapView" destination="5ER-9C-REE" id="usd-ku-Vtt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hQZ-aP-sob" sceneMemberID="firstResponder"/>
@@ -3458,7 +3460,7 @@
                                         <state key="normal" image="review"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:0.0/5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOP-SO-ckR">
-                                        <rect key="frame" x="103.5" y="80" width="82" height="18"/>
+                                        <rect key="frame" x="103" y="80" width="83.5" height="18"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
