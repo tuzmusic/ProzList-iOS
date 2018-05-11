@@ -174,7 +174,7 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
     }
     
     @objc func valueChanged(_ sender: TGPDiscreteSlider, event:UIEvent) {
-        lbl_show_miles_area.text = "Set working area radius (Miles))"
+        lbl_show_miles_area.text = "Set working area radius (Miles)"
         lbl_slider_max.text = "\(sender.value)"
         radius = Double(sender.value)
     }
@@ -199,31 +199,35 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
         if cell.txt_prices.text! == "" {
             
         }else {
-            
+//            if arr_service.count == 1 {
+//                arr_service.insert(["Service_name":service_name,"price":"$\(cell.txt_prices.text!)","discount":"$\(cell.txt_discount.text!)","status":"1","service_id":service_id], at: 0)
+//
+//
+//            }else {
+                arr_service.insert(["Service_name":service_name,"price":"$\(cell.txt_prices.text!)","discount":"$\(cell.txt_discount.text!)","status":"1","service_id":service_id], at: arr_service.count - 1)
+                if arr_service.count > 1 {
+                    dropDownList.hide()
+                }
+//            }
+            cell.txt_prices.text = ""
+            cell.txt_discount.text = ""
+//            table_view.beginUpdates()
+//            table_view.insertRows(at: [IndexPath(row: row , section: 0)], with: .automatic)
+//            table_view.endUpdates()
+//
+            self.table_view.reloadData()
+            self.tableReload()
         }
-        if arr_service.count == 1 {
-            arr_service.insert(["Service_name":service_name,"price":"$\(cell.txt_prices.text!)","discount":"$\(cell.txt_discount.text!)","status":"1","service_id":service_id], at: 0)
-            
-            
-        }else {
-            arr_service.insert(["Service_name":service_name,"price":"$\(cell.txt_prices.text!)","discount":"$\(cell.txt_discount.text!)","status":"1","service_id":service_id], at: arr_service.count - 1)
-             dropDownList.hide()
-        }
-        table_view.beginUpdates()
-        table_view.insertRows(at: [IndexPath(row: row , section: 0)], with: .automatic)
-        table_view.endUpdates()
-        self.tableReload()
-        self.table_view.reloadData()
         
     }
     
     @objc func delete_row(_ sender: UIControl){
         arr_service.remove(at:sender.tag)
-        table_view.beginUpdates()
-        table_view.deleteRows(at: [IndexPath(row: sender.tag, section: 0)], with: .automatic)
-        table_view.endUpdates()
-        self.tableReload()
+//        table_view.beginUpdates()
+//        table_view.deleteRows(at: [IndexPath(row: sender.tag, section: 0)], with: .automatic)
+//        table_view.endUpdates()
         self.table_view.reloadData()
+        self.tableReload()
     }
     
     @IBAction func tapToDropDown(_ sender: UIControl) {
@@ -371,7 +375,7 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
                 let dict = arr_service[i]
                 var dictValue = [String:String]()
                 
-                guard dict["service_id"] != "" || dict["service_id"] != "" || dict["service_id"] != "" else {
+                guard dict["service_id"] != "" || dict["price"] != "" || dict["discount"] != "" else {
                 
                     appDelegate.Popup(Message: "Your service details is required.")
                     return
@@ -533,7 +537,6 @@ extension ServiceProvicerSignUpVC:UITableViewDelegate,UITableViewDataSource{
         let status = dict["status"]
         cell.control_plus_min.removeTarget(self, action: #selector(ServiceProvicerSignUpVC.insert_row(_:)), for: .touchUpInside)
         cell.control_plus_min.removeTarget(self, action: #selector(ServiceProvicerSignUpVC.delete_row(_:)), for: .touchUpInside)
-        
         if status == "0"{
             cell.img_pls_min.image = #imageLiteral(resourceName: "plush-1")
             cell.control_plus_min.addTarget(self, action: #selector(ServiceProvicerSignUpVC.insert_row(_:)), for: .touchUpInside)
@@ -544,12 +547,12 @@ extension ServiceProvicerSignUpVC:UITableViewDelegate,UITableViewDataSource{
         
 //        cell.lbl_service_name.text = dict["Service_name"]
         cell.lbl_service_name.text = self.serviceName
-        if cell.txt_prices.text! == "" && cell.txt_discount.text ==  "" {
+        //if cell.txt_prices.text! == "" && cell.txt_discount.text ==  "" {
             cell.txt_prices.text = dict["price"]
             cell.txt_discount.text = dict["discount"]
-        }else {
+        //}else {
             print("w")
-        }
+        //}
       //  cell.txt_prices.text = dict["price"]
        // cell.txt_discount.text = dict["discount"]
         cell.control_plus_min.tag = indexPath.row
@@ -835,7 +838,10 @@ extension ServiceProvicerSignUpVC {
             appDelegate.Popup(Message: "Your service details is required.")
             return false
         }
-        
+        guard self.radius != 0.0 else{
+            appDelegate.Popup(Message: "Please select working area radius.")
+            return false
+        }
         self.registerApiCall()
         
         return true

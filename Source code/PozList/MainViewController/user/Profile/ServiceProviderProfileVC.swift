@@ -96,8 +96,8 @@ class AllServiceCellSP : UITableViewCell,UITableViewDelegate,UITableViewDataSour
         if isEditing_profile{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCellEdit") as! ServiceCellEdit
             let status = dict.status
-            cell.control_plus_min.removeTarget(self, action: #selector(ServiceProvicerSignUpVC.insert_row(_:)), for: .touchUpInside)
-            cell.control_plus_min.removeTarget(self, action: #selector(ServiceProvicerSignUpVC.delete_row(_:)), for: .touchUpInside)
+//            cell.control_plus_min.removeTarget(self, action: #selector(ServiceProvicerSignUpVC.insert_row(_:)), for: .touchUpInside)
+//            cell.control_plus_min.removeTarget(self, action: #selector(ServiceProvicerSignUpVC.delete_row(_:)), for: .touchUpInside)
             
             if status == "Inactive"{
                 cell.img_pls_min.image = #imageLiteral(resourceName: "plush-1")
@@ -139,20 +139,24 @@ class AllServiceCellSP : UITableViewCell,UITableViewDelegate,UITableViewDataSour
         let dict = arr_service[indexPath.row]
         let service_id = dict.serviceId
         
-        let userData = userService.init(serviceId: service_id, prize: cell.txt_prices.text!, discount: cell.txt_discount.text!, serviceName: service_name, status: "Actice")
+        let userData = userService.init(serviceId: service_id, prize: "$" + cell.txt_prices.text!, discount: "$" + cell.txt_discount.text!, serviceName: service_name, status: "Actice")
 
         arr_service.insert(userData, at: arr_service.count - 1)
         tblServiceList.beginUpdates()
         tblServiceList.insertRows(at: [IndexPath(row: row , section: 0)], with: .automatic)
         tblServiceList.endUpdates()
         //self.tableReload()
-        
-        serviceproviderObj.table_view.reloadData()
+       
         self.tblServiceList.reloadData()
-        self.subServiceTblViewHeight.constant = self.tblServiceList.contentSize.height
-        self.layoutIfNeeded()
+        serviceproviderObj.arr_edit[7]["services"] = arr_service
+        serviceproviderObj.table_view.reloadData()
         
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.subServiceTblViewHeight.constant = self.tblServiceList.contentSize.height
+            self.layoutIfNeeded()
+            self.serviceproviderObj.tableViewHeight.constant = self.serviceproviderObj.table_view.contentSize.height
+        }
+
 //        cell.subServiceTblViewHeight.constant = cell.tblServiceList.contentSize.height
     }
     
@@ -163,6 +167,14 @@ class AllServiceCellSP : UITableViewCell,UITableViewDelegate,UITableViewDataSour
         tblServiceList.endUpdates()
         //self.tableReload()
         self.tblServiceList.reloadData()
+        serviceproviderObj.arr_edit[7]["services"] = arr_service
+        serviceproviderObj.table_view.reloadData()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.subServiceTblViewHeight.constant = self.tblServiceList.contentSize.height
+            self.layoutIfNeeded()
+            self.serviceproviderObj.tableViewHeight.constant = self.serviceproviderObj.table_view.contentSize.height
+        }
     }
 }
 
@@ -456,7 +468,7 @@ extension ServiceProviderProfileVC {
                                     ["main":"Country","image":#imageLiteral(resourceName: "enter_state"),"Edit_image":#imageLiteral(resourceName: "enter_state"),"sub":sCountry,"Place":"City"],
                                     ["main":"Licence Number","image":#imageLiteral(resourceName: "licence_number"),"Edit_image":#imageLiteral(resourceName: "licence_number-1"),"sub":slicenceNo,"Place":"Licence Number"],
                                     ["main":"Licence Type","image":#imageLiteral(resourceName: "pro_licence"),"Edit_image":#imageLiteral(resourceName: "licence_type"),"sub":slicenceType,"Place":"Licence type"],
-                                    ["main":"Insurance","image":strMainService,"name":strMainService],
+                                    ["main":"Insurance","image":strMainService.lowercased(),"name":strMainService],
                                     ["main":"Services","name":strMainService,"services":arrUserService],
                                     ["main":"Radius","Edit_image":#imageLiteral(resourceName: "licence_type"),"sub":radius],
                                     ]
@@ -534,8 +546,8 @@ extension ServiceProviderProfileVC {
                 let dict = cell.arr_service[i]
                 var dictValue = [String:String]()
                 dictValue["service_id"] = dict.serviceId
-                dictValue["price"] = dict.prize
-                dictValue["discount"] = dict.discount
+                dictValue["price"] = dict.prize.replacingOccurrences(of: "$", with: "")
+                dictValue["discount"] = dict.discount.replacingOccurrences(of: "$", with: "")
                 arrSec.append(dictValue)
             }
             arrSec.removeLast()
@@ -597,8 +609,8 @@ extension ServiceProviderProfileVC {
                             let fPrize = Float(createString (value: catValue.value(forKey: "price") as AnyObject))
                             let fDiscount = Float(createString (value: catValue.value(forKey: "discount") as AnyObject))
                             
-                            let prize = String.init(format: "%.2f", fPrize!)
-                            let discount = String.init(format: "%.2f", fDiscount!)
+                            let prize = "$" + String.init(format: "%.2f", fPrize!)
+                            let discount = "$" + String.init(format: "%.2f", fDiscount!)
                             let serviceName = createString(value: catValue.value(forKey: "name") as AnyObject)
                             let status = createString(value: catValue.value(forKey: "status") as AnyObject)
                             
@@ -688,7 +700,9 @@ extension ServiceProviderProfileVC {
             let indexes = (0..<arr_edit.count).map { IndexPath(row: $0, section: 0) }
             self.table_view.reloadRows(at: indexes, with: .top)
             self.table_view.layoutIfNeeded()
-            self.tableViewHeight.constant = 650
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.tableViewHeight.constant = self.table_view.contentSize.height
+            })
             
         }else{
             //For save profile
@@ -716,7 +730,10 @@ extension ServiceProviderProfileVC {
             let indexes = (0..<arr_edit.count).map { IndexPath(row: $0, section: 0) }
             self.table_view.reloadRows(at: indexes, with: .bottom)
             self.table_view.layoutIfNeeded()
-            self.tableViewHeight.constant = 735
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    self.tableViewHeight.constant = self.table_view.contentSize.height
+            })
+            
         }
     }
     
@@ -737,7 +754,30 @@ extension ServiceProviderProfileVC {
             let section = 0
             let row = i
             
-            if row != 6 {
+            if row == 7 {
+                //Main Service
+                if let arrService = arr_edit[row]["services"] as? [userService] {
+                    print(arrService.count)
+                    if arrService.count == 1  && arrService[0].prize.count == 0 {
+                        appDelegate.Popup(Message: "Please enter main services.")
+                        return false
+                    }
+                    
+                }
+                
+            }else if row == 8 {
+                //Radius cell
+                let indexPath = IndexPath(row: row, section: section)
+                let cell: RadiusCellSP = self.table_view.cellForRow(at: indexPath) as! RadiusCellSP
+                if cell.lblMinValue.text == "0"{
+                    appDelegate.Popup(Message: "Please select working area radius.")
+                    return false
+                }
+                //let dicRadius = arr_edit[row]
+                //if String(describing:dicRadius["sub"]!) == "0" {
+                
+                //}
+            }else if row != 6 {
                 
                 let indexPath = IndexPath(row: row, section: section)
                 let cell: EditCellSP = self.table_view.cellForRow(at: indexPath) as! EditCellSP
@@ -762,8 +802,9 @@ extension ServiceProviderProfileVC {
                     }
                     return false
                 }
-            } else {
-                break;
+            }else {
+                
+                //break;
             }
         }
         
@@ -841,16 +882,26 @@ extension ServiceProviderProfileVC : UITableViewDelegate,UITableViewDataSource{
                     cellInsu.mainServiceView.clipsToBounds = true
                     cellInsu.arr_service = dict["services"] as! [userService]
                     cellInsu.isEditing_profile = isEditing_profile
-                    let dict = cellInsu.arr_service[0]
-                    let serviceId = dict.serviceId
-                    let serviceName = dict.serviceName
-                    let userData = userService.init(serviceId: serviceId, prize: "", discount: "", serviceName: serviceName, status: "Inactive")
-                    cellInsu.arr_service.insert(userData, at: cellInsu.arr_service.count)
-                    cellInsu.lblMainService.text = serviceName
-                    let imgName = serviceName
-                    cellInsu.img.image = UIImage.init(named: imgName.lowercased() + "-1")
-                    cellInsu.tblServiceList.reloadData()
-                    cellInsu.subServiceTblViewHeight.constant = cellInsu.tblServiceList.contentSize.height + 44
+                    if cellInsu.arr_service.count > 0 {
+                        
+                        let dict = cellInsu.arr_service[0]
+                        let serviceId = dict.serviceId
+                        let serviceName = dict.serviceName
+                        let userData = userService.init(serviceId: serviceId, prize: "", discount: "", serviceName: serviceName, status: "Inactive")
+                    
+                        if cellInsu.arr_service[cellInsu.arr_service.count - 1].status != "Inactive" {
+                                cellInsu.arr_service.insert(userData, at: cellInsu.arr_service.count)
+                        }
+                        
+                        cellInsu.lblMainService.text = serviceName
+                        let imgName = serviceName
+                        
+                        cellInsu.img.image = UIImage.init(named: imgName.lowercased() + "-1")
+                    }else{
+                        
+                    }
+                        cellInsu.tblServiceList.reloadData()
+                        cellInsu.subServiceTblViewHeight.constant = cellInsu.tblServiceList.contentSize.height + 44
                     
                     return cellInsu
                 } else if value == "Insurance" {
@@ -916,7 +967,7 @@ extension ServiceProviderProfileVC : UITableViewDelegate,UITableViewDataSource{
                     cellInsu.lbl_main.text = strName + " Insurance"
                     cellInsu.lbl_status.text = "Active"
                     cellInsu.img.layer.cornerRadius = cellInsu.img.frame.size.height / 2
-                    cellInsu.img.sd_setImage(with: URL.init(string: WebURL.ImageBaseUrl + strCertificateImg), placeholderImage: UIImage.init(named: "camera_icon"), options: .retryFailed)
+                    cellInsu.img.sd_setImage(with: URL.init(string: WebURL.ImageBaseUrl + strCertificateImg)!, placeholderImage: UIImage.init(named: "placeholder"), options: .retryFailed)
                     return cellInsu
                     
                 } else if indexPath.row == 0 {
