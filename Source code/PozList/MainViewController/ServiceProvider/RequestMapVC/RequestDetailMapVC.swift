@@ -18,10 +18,15 @@ class RequestDetailMapVC: UIViewController {
     @IBOutlet weak var profileViHeightConstant: NSLayoutConstraint!
     
     @IBOutlet weak var imgUserProfile: UIImageView!
-    @IBOutlet weak var lblDistance: UILabel!
+   // @IBOutlet weak var lblDistance: UILabel!
     @IBOutlet weak var lblDesignation: UILabel!
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var mapVi: GMSMapView!
+    @IBOutlet weak var lblRemainTime: UILabel!
+    
+    var seconds = 0
+    var timer = Timer()
+    
     var requestData:ServiceRequest!
     var selectedReq:ServiceRequest!
     
@@ -33,8 +38,25 @@ class RequestDetailMapVC: UIViewController {
     //MARK: - Initial view
     override func viewDidLoad() {
         super.viewDidLoad()
-        lblUserName.text = requestData.serviceCatName
-        lblDistance.text = requestData.distance
+        lblUserName.text = requestData.customerProfile.username
+        //lblDistance.text = requestData.distance
+        lblDesignation.text = requestData.address
+        var str1 =  WebURL.ImageBaseUrl + requestData.customerProfile.profileImg
+        str1 = str1.replacingOccurrences(of: " ", with: "%20")
+        imgUserProfile.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "imgUserPlaceholder"), options: .refreshCached)
+        
+        //Set timer
+        let now1 = Date()
+        let now =  dateFrm(date: requestData.serviceReqUpdateDate)
+        let endDate = now1
+        
+        let calendar = Calendar.current
+        let unitFlags = Set<Calendar.Component>([ .second])
+        let datecomponenets = calendar.dateComponents(unitFlags, from: now, to: endDate)
+        let seconds1 = datecomponenets.second
+        
+        seconds = seconds1!
+        runTimer()
         
         //Animte map view
         animateMapView()
@@ -104,6 +126,38 @@ class RequestDetailMapVC: UIViewController {
         observationForLong.invalidate()
         observationForLatitude.invalidate()
     }
+    
+    func dateFrm(date:String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        //  dateFormatter.dateFormat = "dd-mm-yyyy" //Your date format
+        //  dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00") //Current time zone
+        let date = dateFormatter.date(from: date) //according to date format your date string
+        print(date ?? "") //Convert String to Date
+        return date!
+    }
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTimer() {
+        seconds += 1
+        
+        self.lblRemainTime.text = timeString(time: TimeInterval(seconds))
+        //print(timeString(time: TimeInterval(seconds)))
+    }
+    func stop(){
+        seconds = 0
+        timer.invalidate()
+    }
+    
+    func timeString(time:TimeInterval) -> String {
+        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    }
 }
 //MARK: - IBAction method
 extension RequestDetailMapVC{
@@ -122,20 +176,20 @@ extension RequestDetailMapVC : GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
-        profileViHeightConstant.constant = 70
-        UIView.animate(withDuration: 0.5, animations: {
-            self.view.layoutIfNeeded()
-        })
-        
-        let userData = marker.userData as! ServiceRequest
-        var str1 =  WebURL.ImageBaseUrl + userData.customerProfile.profileImg
-        str1 = str1.replacingOccurrences(of: " ", with: "%20")
-        imgUserProfile.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
-        lblUserName.text = userData.customerProfile.username
-        lblDesignation.text = userData.serviceCatName
-        lblDistance.text = userData.distance + "m"
-        
-        selectedReq = userData
+//        profileViHeightConstant.constant = 70
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.view.layoutIfNeeded()
+//        })
+//
+//        let userData = marker.userData as! ServiceRequest
+//        var str1 =  WebURL.ImageBaseUrl + userData.customerProfile.profileImg
+//        str1 = str1.replacingOccurrences(of: " ", with: "%20")
+//        imgUserProfile.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "imgUserPlaceholder"), options: .refreshCached)
+//        lblUserName.text = userData.customerProfile.username
+//        lblDesignation.text = userData.serviceCatName
+//        lblDistance.text = userData.distance + "m"
+//
+//        selectedReq = userData
         return true
     }
     
@@ -179,7 +233,7 @@ extension RequestDetailMapVC : GMSMapViewDelegate {
         str1 = str1.replacingOccurrences(of: " ", with: "%20")
         //print("customer name : \(custName)")
         //print("profile image : \(str1)")
-        imgProfile.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+        imgProfile.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "imgUserPlaceholder"), options: .refreshCached)
         
         //        imgProfile.bringSubview(toFront: annoImage)
         

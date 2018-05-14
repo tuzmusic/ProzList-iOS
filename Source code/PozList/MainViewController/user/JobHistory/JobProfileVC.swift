@@ -77,7 +77,8 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
         let userType = UserDefaults.Main.string(forKey: .Appuser)
         if userType == "Service"{
             //Login using Service Provider
-            profileHeaderView.lbl_star.text = requestData.customerProfile.avgRating
+            let dblRate = Double (requestData.customerProfile.avgRating )
+            profileHeaderView.lbl_star.text = "\(String(format: "%.1f", dblRate!))"
             profileHeaderView.lblUserName.text = requestData.customerProfile.username
            profileHeaderView.lblUserDetail.text = "-"
             str1 =  WebURL.ImageBaseUrl + requestData.customerProfile.profileImg
@@ -86,7 +87,8 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
 
         }else{
             //Login using Customer
-            profileHeaderView.lbl_star.text = requestData.serviceProviderProfile.avgRating
+            let dblRate = Double (requestData.serviceProviderProfile.avgRating )
+            profileHeaderView.lbl_star.text = "\(String(format: "%.1f", dblRate!))"
             profileHeaderView.lblUserName.text = requestData.serviceProviderProfile.username.capitalized
             profileHeaderView.lblUserDetail.text = requestData.serviceCatName
             profileHeaderView.control_profile_click.addTarget(self, action:#selector(JobProfileVC.click_profile_service), for: .touchUpInside)

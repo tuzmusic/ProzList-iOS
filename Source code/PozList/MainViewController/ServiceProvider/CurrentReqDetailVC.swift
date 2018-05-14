@@ -11,6 +11,8 @@ import UIKit
 class CurrentReqDetailVC: UIViewController ,reviewDelegate {
 
     @IBOutlet weak var btnComplete: UIButton!
+    @IBOutlet weak var btnTrackLocation: UIButton!
+    @IBOutlet weak var imgTrackLocation: UIImageView!
     @IBOutlet weak var lblNoImgs: UILabel!
     
     @IBOutlet weak var lblRequestDesc: UILabel!
@@ -25,7 +27,8 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
     
     @IBOutlet weak var reviewView: UIView!
     var requestData:ServiceRequest!
-    
+    @IBOutlet weak var profileRatingView: HCSStarRatingView!
+    @IBOutlet weak var lblUserRatings: UILabel!
     @IBOutlet weak var ratingView: HCSStarRatingView!
     @IBOutlet weak var reviweViewHeight: NSLayoutConstraint!
     
@@ -102,6 +105,18 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
         
         lblRequestDesc.text = requestData.serviceReqDesc
         lblRequestAddress.text = requestData.address
+        
+        //set ratings
+        //Set Ratings
+        if requestData.customerProfile.avgRating == ""{
+             profileRatingView.value = 0.0
+            lblUserRatings.text = "0 Star"
+        }else{
+            profileRatingView.value = CGFloat(Double(requestData.customerProfile.avgRating)!)
+            let dblRate = Double (requestData.customerProfile.avgRating )
+            lblUserRatings.text = "\(String(format: "%.1f", dblRate!)) Stars"
+        }
+        //requestData.customerProfile.avgRating
         let arrImg = requestData.imagePath
         
         let count = arrImg.count
@@ -310,7 +325,13 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
         }else if requestData.status == "Arrived" {
             btnComplete.setTitle("COMPLETE", for: UIControlState.normal)
         }
-        
+        if requestData.userServiceStatus == "Completed" {
+            self.btnComplete.backgroundColor = UIColor.darkGray
+            self.btnComplete.isUserInteractionEnabled = false
+            self.btnTrackLocation.isUserInteractionEnabled = false
+            self.btnTrackLocation.isHidden = true
+            self.imgTrackLocation.isHidden = true
+        }
     }
     //Redirect to Map screen
     @IBAction func btnTrackLocationTapped(_ sender: Any) {
