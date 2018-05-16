@@ -14,6 +14,7 @@
 		1733EA4B1F7E20E400B3DF1A /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1733EA4A1F7E20E400B3DF1A /* Localizable.swift */; };
 		1733EA4E1F7E2B6100B3DF1A /* RegisterVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1733EA4D1F7E2B5D00B3DF1A /* RegisterVc.swift */; };
 		1733EA501F7E2B7800B3DF1A /* ForgotPassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1733EA4F1F7E2B7800B3DF1A /* ForgotPassVC.swift */; };
+		17398B1020AC12960014F9F4 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17398B0F20AC12960014F9F4 /* Card.swift */; };
 		173BCEDC1FCE6EE70025FA77 /* CurrentRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173BCEDB1FCE6EE70025FA77 /* CurrentRequestVC.swift */; };
 		173BCEDE1FCE72280025FA77 /* ServiceProvider.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173BCEDD1FCE72280025FA77 /* ServiceProvider.storyboard */; };
 		173BCEE01FCE8E140025FA77 /* CurrentReqDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173BCEDF1FCE8E140025FA77 /* CurrentReqDetailVC.swift */; };
@@ -134,6 +135,7 @@
 		1733EA551F7E519B00B3DF1A /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		1733EA561F7E519B00B3DF1A /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		1733EA571F7E519B00B3DF1A /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		17398B0F20AC12960014F9F4 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		173BCEDB1FCE6EE70025FA77 /* CurrentRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRequestVC.swift; sourceTree = "<group>"; };
 		173BCEDD1FCE72280025FA77 /* ServiceProvider.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ServiceProvider.storyboard; sourceTree = "<group>"; };
 		173BCEDF1FCE8E140025FA77 /* CurrentReqDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentReqDetailVC.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 		176894441FAC820A00EDE359 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				17398B0F20AC12960014F9F4 /* Card.swift */,
 				176894451FAC824200EDE359 /* Profile.swift */,
 				17A3510E1FB0271000B44E1A /* Service.swift */,
 				17A0A4DF1FBC1A0F00295040 /* ServiceProvider.swift */,
@@ -954,6 +957,7 @@
 				178200E220515A4D00DC1446 /* NSDateExtension.swift in Sources */,
 				178200EC20515A4D00DC1446 /* UISearchBarExtension.swift in Sources */,
 				179843CB1F94D8300021E7E2 /* SubscribeVC.swift in Sources */,
+				17398B1020AC12960014F9F4 /* Card.swift in Sources */,
 				178EEAAE1FB99926001DDFF5 /* UIView+WebCacheOperation.m in Sources */,
 				1703CF5C209320A0006EF46A /* CustomerRatingVC.swift in Sources */,
 				178EEAAC1FB99920001DDFF5 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,

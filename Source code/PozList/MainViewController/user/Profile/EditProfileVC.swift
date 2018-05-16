@@ -34,9 +34,16 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
     
     @IBOutlet weak var btn_save_edit: UIButton!
     
+    //Card detail
+    @IBOutlet var imgCardType: UIImageView!
+    @IBOutlet var btnEditCard: UIButton!
+    @IBOutlet var lblCardNumber: UILabel!
+    @IBOutlet var lblCardHolderName: UILabel!
+    @IBOutlet var lblCardExpiry: UILabel!
+    
     var isEditing_profile = false
     var text_head = UITextField()
-    
+    var cardData = Card()
     @IBOutlet weak var cons_width_lbl_under_name: NSLayoutConstraint!
     
     @IBOutlet weak var cons_table_height: NSLayoutConstraint!
@@ -80,6 +87,19 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                     
                     let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city,profileImg: imgProfile, avgRating: "")
                     
+                    let arrcard = getArrayFromDictionary(dictionary: dictData, key: "card")
+                    let dictCard = arrcard.firstObject as! NSDictionary
+                    let card_id = createString(value:dictCard.value(forKey: "id") as AnyObject)
+                    let card_cvc = createString(value:dictCard.value(forKey: "card_cvc") as AnyObject)
+                    let card_date = createString(value:dictCard.value(forKey: "card_date") as AnyObject)
+                    let card_holder_name = createString(value:dictCard.value(forKey: "card_holder_name") as AnyObject)
+                    let card_number = createString(value:dictCard.value(forKey: "card_number") as AnyObject)
+                    let issubscribed = createString(value:dictCard.value(forKey: "issubscribed") as AnyObject)
+                    let card_status = createString(value:dictCard.value(forKey: "status") as AnyObject)
+                    let user_id = createString(value:dictCard.value(forKey: "user_id") as AnyObject)
+                    self.cardData = Card.init(id: card_id, card_cvc: card_cvc, card_date: card_date, card_holder_name: card_holder_name, card_number: card_number, issubscribed: issubscribed, status: card_status, user_id: user_id)
+                    
+                    
                     UserDefaults.Main.set(true, forKey: .isSignUp)
                     //UserDefaults.Main.set(userdate, forKey: .Profile)
                     UserDefaults.Main.set(id, forKey: .UserID)
@@ -104,6 +124,12 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                     
                     //str1 = str1.replacingOccurrences(of: " ", with: "%20")
                     //self.Img_profile.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "camera_icon"), options: .refreshCached)
+                    
+                    //Set Card Details
+                    //Card Detail
+                    self.lblCardNumber.text  = self.cardData.card_number
+                    self.lblCardHolderName.text  = self.cardData.card_holder_name
+                    self.lblCardExpiry.text  = self.cardData.card_date
                     self.Changes_UI()
                 }else
                 {
@@ -127,6 +153,7 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
         // Dispose of any resources that can be recreated.
     }
     func Changes_UI()  {
+       
         if isEditing_profile{
             //For edit profile
             lbl_under_name.isHidden = false
@@ -309,6 +336,10 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
         actionSheet.addAction(cancel)
         
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    @IBAction func btnEditCardPressed(_ sender: UIControl) {
+        
     }
         
     //MARK: =======================================================

@@ -72,7 +72,7 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
         
         var str1 =  WebURL.ImageBaseUrl + requestData.serviceProviderProfile.profilePic
         str1 = str1.replacingOccurrences(of: " ", with: "%20")
-        profileHeaderView.profileImgView.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "user"), options: .refreshCached)
+        profileHeaderView.profileImgView.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "imgUserPlaceholder"), options: .refreshCached)
         
         let userType = UserDefaults.Main.string(forKey: .Appuser)
         if userType == "Service"{
@@ -159,7 +159,10 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
     @IBAction func back_Click(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-    
+    @IBAction func btnPaymentDetailPressed(_ sender: Any) {
+        let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "PaymentRecipetVC") as! PaymentRecipetVC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     func closeKeyBoard() {
         resignFirstResponder()
     }
