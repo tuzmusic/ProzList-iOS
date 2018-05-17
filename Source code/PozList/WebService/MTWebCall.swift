@@ -438,11 +438,16 @@ extension MTWebCall{
         let relPath = WebURL.UserProfile + userId
         let _ = getRequest(relPath: relPath, param: dictParam, block: block)
     }
-    //MARK: - get User Profile API calling
+    //MARK: - update User Profile with image API calling
     func updateUserProfile(userId: String,image:UIImage,dictParam:[String : Any],block: @escaping WSBlock) {
         
         let relPath = WebURL.UpdateUserProfile + userId
         let _ = uploadImage(relPath: relPath, img: image, imgKey: "profile_pic", param: dictParam as? [String : String], block: block, progress: nil)
+    }
+    //MARK: - update User Profile API calling
+    func updateUserProfile(userId: String,dictParam:[String : Any],block: @escaping WSBlock) {
+        let relPath = WebURL.UpdateUserProfile + userId
+        let _ = postRequest(relPath: relPath, param: dictParam, block: block)
     }
     //MARK: - Load Catagory API calling
     func getServiceCat(dictParam:[String : Any],block: @escaping WSBlock) {

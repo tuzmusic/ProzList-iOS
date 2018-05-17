@@ -26,6 +26,11 @@
 		174564F51FD16A6600B16E8B /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174564F41FD16A6600B16E8B /* Review.swift */; };
 		174564F71FD16CA000B16E8B /* Stricks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174564F61FD16CA000B16E8B /* Stricks.swift */; };
 		174BDEC51FC81A9D006FA763 /* RequestDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BDEC41FC81A9D006FA763 /* RequestDetailVC.swift */; };
+		174C6B0020AD46CA0026847A /* AddCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C6AFF20AD46CA0026847A /* AddCardVC.swift */; };
+		174C6B0820AD6AB80026847A /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 174C6B0320AD6AB70026847A /* .gitkeep */; };
+		174C6B0920AD6AB80026847A /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 174C6B0520AD6AB70026847A /* .gitkeep */; };
+		174C6B0A20AD6AB80026847A /* String+SwiftLuhn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C6B0620AD6AB70026847A /* String+SwiftLuhn.swift */; };
+		174C6B0B20AD6AB80026847A /* SwiftLuhn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C6B0720AD6AB70026847A /* SwiftLuhn.swift */; };
 		1751185B1F7D238900D8CBFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751185A1F7D238900D8CBFC /* AppDelegate.swift */; };
 		1751185D1F7D238900D8CBFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751185C1F7D238900D8CBFC /* ViewController.swift */; };
 		175118601F7D238900D8CBFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1751185E1F7D238900D8CBFC /* Main.storyboard */; };
@@ -147,6 +152,11 @@
 		174564F41FD16A6600B16E8B /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		174564F61FD16CA000B16E8B /* Stricks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stricks.swift; sourceTree = "<group>"; };
 		174BDEC41FC81A9D006FA763 /* RequestDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailVC.swift; sourceTree = "<group>"; };
+		174C6AFF20AD46CA0026847A /* AddCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardVC.swift; sourceTree = "<group>"; };
+		174C6B0320AD6AB70026847A /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		174C6B0520AD6AB70026847A /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		174C6B0620AD6AB70026847A /* String+SwiftLuhn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SwiftLuhn.swift"; sourceTree = "<group>"; };
+		174C6B0720AD6AB70026847A /* SwiftLuhn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLuhn.swift; sourceTree = "<group>"; };
 		175118571F7D238900D8CBFC /* PozList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PozList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1751185A1F7D238900D8CBFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1751185C1F7D238900D8CBFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -323,6 +333,33 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		174C6B0120AD6AB70026847A /* SwiftLuhn */ = {
+			isa = PBXGroup;
+			children = (
+				174C6B0220AD6AB70026847A /* Assets */,
+				174C6B0420AD6AB70026847A /* Classes */,
+			);
+			path = SwiftLuhn;
+			sourceTree = "<group>";
+		};
+		174C6B0220AD6AB70026847A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				174C6B0320AD6AB70026847A /* .gitkeep */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		174C6B0420AD6AB70026847A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				174C6B0520AD6AB70026847A /* .gitkeep */,
+				174C6B0620AD6AB70026847A /* String+SwiftLuhn.swift */,
+				174C6B0720AD6AB70026847A /* SwiftLuhn.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		1751184E1F7D238900D8CBFC = {
 			isa = PBXGroup;
 			children = (
@@ -423,6 +460,7 @@
 		1781A8401F7D25FF000D4779 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				174C6B0120AD6AB70026847A /* SwiftLuhn */,
 				17704C8A1FCFC98000A923F7 /* HCSStarRatingView */,
 				178EEA7A1FB997B1001DDFF5 /* SDWebImage */,
 				17BBB88A1F9099BD00DF700A /* DropDown */,
@@ -652,6 +690,7 @@
 				17BE81051F835EA50040CB32 /* EditProfileVC.swift */,
 				17443BFF1F8DFC930037B5DF /* ProfileDeatilVC.swift */,
 				17EFA8BE1FC2CBC50045E8F6 /* ServiceProviderProfileVC.swift */,
+				174C6AFF20AD46CA0026847A /* AddCardVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -762,6 +801,8 @@
 			files = (
 				1733EA461F7E174E00B3DF1A /* Localizable.strings in Resources */,
 				17B215A51F84FF59004FB9B4 /* ProfileHeaderView.xib in Resources */,
+				174C6B0820AD6AB80026847A /* .gitkeep in Resources */,
+				174C6B0920AD6AB80026847A /* .gitkeep in Resources */,
 				175118651F7D238900D8CBFC /* LaunchScreen.storyboard in Resources */,
 				1733EA3E1F7E166300B3DF1A /* Customer.storyboard in Resources */,
 				175118621F7D238900D8CBFC /* Assets.xcassets in Resources */,
@@ -879,6 +920,7 @@
 				1781A84E1F7D26EC000D4779 /* CustomToolBar.swift in Sources */,
 				1768944B1FAC8E9000EDE359 /* MTLoadingIndicator.swift in Sources */,
 				174564F71FD16CA000B16E8B /* Stricks.swift in Sources */,
+				174C6B0A20AD6AB80026847A /* String+SwiftLuhn.swift in Sources */,
 				17704C901FD019DD00A923F7 /* RequsetListVC.swift in Sources */,
 				174564F11FD1589E00B16E8B /* AwardGivanVC.swift in Sources */,
 				174BDEC51FC81A9D006FA763 /* RequestDetailVC.swift in Sources */,
@@ -906,6 +948,7 @@
 				1733EA4E1F7E2B6100B3DF1A /* RegisterVc.swift in Sources */,
 				1781A84F1F7D26EC000D4779 /* DTTextField.swift in Sources */,
 				178EEAA41FB99902001DDFF5 /* SDWebImageDownloaderOperation.m in Sources */,
+				174C6B0B20AD6AB80026847A /* SwiftLuhn.swift in Sources */,
 				1751185B1F7D238900D8CBFC /* AppDelegate.swift in Sources */,
 				17443C021F8E291C0037B5DF /* ServiceProvicerSignUpVC.swift in Sources */,
 				178200E420515A4D00DC1446 /* UITextViewExtension.swift in Sources */,
@@ -948,6 +991,7 @@
 				17BE81081F835F7B0040CB32 /* EditProfileVC.swift in Sources */,
 				17758AE01F94E6200009DD0D /* MTUserDefault.swift in Sources */,
 				17B215A71F851AB1004FB9B4 /* FloatRatingView.swift in Sources */,
+				174C6B0020AD46CA0026847A /* AddCardVC.swift in Sources */,
 				17BBB8971F909CFB00DF700A /* DPDConstants.swift in Sources */,
 				17A0A4E41FBC371000295040 /* NearJobVC.swift in Sources */,
 				174564F51FD16A6600B16E8B /* Review.swift in Sources */,

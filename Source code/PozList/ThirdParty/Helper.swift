@@ -155,6 +155,15 @@ class Slider: UISlider {
         }
     }
 }
+//Date Formate
+func getExpiryDateFormate(date:String) -> String {
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "mm/yyyy"
+    let date = dateFormatter.date(from: date)
+    dateFormatter.dateFormat = "mm/yy"
+    return dateFormatter.string(from: date!)
+}
 func showAlert(title: NSString, message: String) {
     let obj = UIAlertView(title: title as String, message: message, delegate: nil, cancelButtonTitle:"OK")
     obj.show()
