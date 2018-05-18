@@ -22,6 +22,7 @@ class AddCardVC: UIViewController ,CustomToolBarDelegate {
     var toolBarDone : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: false)
     var toolBar : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: true)
     var cardData:Card = Card()
+    var userProfileData:Profile = Profile()
     
     var datePickerView = UIPickerView()
     var arrMonth = [String]()
@@ -123,7 +124,11 @@ class AddCardVC: UIViewController ,CustomToolBarDelegate {
     @IBAction func btnConfirmPressed(_ sender: Any) {
         if validateData() {
          print("Information Valid")
-            var dict = [
+            let dict = [
+                "name":userProfileData.username,
+                "email":userProfileData.email,
+                "phone":userProfileData.mobile,
+                "city":userProfileData.city,
                 "card_number":self.txtCardNumber.text!,
                 "card_date":self.txtExpDate.text!,
                 "card_holder_name":self.txtCardName.text!,
@@ -146,43 +151,46 @@ class AddCardVC: UIViewController ,CustomToolBarDelegate {
                         let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
                         print(message)
                         let dictData = getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
-                        let id = createString(value:dictData.value(forKey: "id") as AnyObject)
-                        let username = createString(value: dictData.value(forKey: "name") as AnyObject)
-                        let email = createString(value: dictData.value(forKey: "email") as AnyObject)
-                        let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
-                        let type = createString(value: dictData.value(forKey: "role") as AnyObject)
-                        let status = createString(value: dictData.value(forKey: "status") as AnyObject)
-                        let city = createString(value: dictData.value(forKey: "city") as AnyObject)
-                        let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
-                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: imgProfile, avgRating: "")
-                        
                         UserDefaults.Main.set(true, forKey: .isSignUp)
-                        //UserDefaults.Main.set(userdate, forKey: .Profile)
-                        UserDefaults.Main.set(id, forKey: .UserID)
-                        
-                        
-                        let arrcard = getArrayFromDictionary(dictionary: dictData, key: "card")
-                        if arrcard.count > 0 {
-                            let dictCard = arrcard.firstObject as! NSDictionary
-                            let card_id = createString(value:dictCard.value(forKey: "id") as AnyObject)
-                            let card_cvc = createString(value:dictCard.value(forKey: "card_cvc") as AnyObject)
-                            let card_date = createString(value:dictCard.value(forKey: "card_date") as AnyObject)
-                            let card_holder_name = createString(value:dictCard.value(forKey: "card_holder_name") as AnyObject)
-                            let card_number = createString(value:dictCard.value(forKey: "card_number") as AnyObject)
-                            let issubscribed = createString(value:dictCard.value(forKey: "issubscribed") as AnyObject)
-                            let card_status = createString(value:dictCard.value(forKey: "status") as AnyObject)
-                            let user_id = createString(value:dictCard.value(forKey: "user_id") as AnyObject)
-                            self.cardData = Card.init(id: card_id, card_cvc: card_cvc, card_date: card_date, card_holder_name: card_holder_name, card_number: card_number, issubscribed: issubscribed, status: card_status, user_id: user_id)
-                            
-                            
-                        }
-                        //Set Card Details
-                        //Card Detail
-                        self.txtCardNumber.text  = self.cardData.card_number
-                        self.txtCardName.text  = self.cardData.card_holder_name
-                        self.txtExpDate.text  = self.cardData.card_date
-                        self.txtCardCVV.text = self.cardData.card_cvc
-                        self.setCardTypeImage(cardNumber:self.cardData.card_number.replacingOccurrences(of: " ", with: ""))
+                        UserDefaults.Main.set(dictData, forKey: .Profile)
+                        self.navigationController?.popViewController(animated: true)
+//                        let id = createString(value:dictData.value(forKey: "id") as AnyObject)
+//                        let username = createString(value: dictData.value(forKey: "name") as AnyObject)
+//                        let email = createString(value: dictData.value(forKey: "email") as AnyObject)
+//                        let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
+//                        let type = createString(value: dictData.value(forKey: "role") as AnyObject)
+//                        let status = createString(value: dictData.value(forKey: "status") as AnyObject)
+//                        let city = createString(value: dictData.value(forKey: "city") as AnyObject)
+//                        let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
+//                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: imgProfile, avgRating: "")
+//
+//                        UserDefaults.Main.set(true, forKey: .isSignUp)
+//                        //UserDefaults.Main.set(userdate, forKey: .Profile)
+//                        UserDefaults.Main.set(id, forKey: .UserID)
+//
+//
+//                        let arrcard = getArrayFromDictionary(dictionary: dictData, key: "card")
+//                        if arrcard.count > 0 {
+//                            let dictCard = arrcard.firstObject as! NSDictionary
+//                            let card_id = createString(value:dictCard.value(forKey: "id") as AnyObject)
+//                            let card_cvc = createString(value:dictCard.value(forKey: "card_cvc") as AnyObject)
+//                            let card_date = createString(value:dictCard.value(forKey: "card_date") as AnyObject)
+//                            let card_holder_name = createString(value:dictCard.value(forKey: "card_holder_name") as AnyObject)
+//                            let card_number = createString(value:dictCard.value(forKey: "card_number") as AnyObject)
+//                            let issubscribed = createString(value:dictCard.value(forKey: "issubscribed") as AnyObject)
+//                            let card_status = createString(value:dictCard.value(forKey: "status") as AnyObject)
+//                            let user_id = createString(value:dictCard.value(forKey: "user_id") as AnyObject)
+//                            self.cardData = Card.init(id: card_id, card_cvc: card_cvc, card_date: card_date, card_holder_name: card_holder_name, card_number: card_number, issubscribed: issubscribed, status: card_status, user_id: user_id)
+//
+//
+//                        }
+//                        //Set Card Details
+//                        //Card Detail
+//                        self.txtCardNumber.text  = self.cardData.card_number
+//                        self.txtCardName.text  = self.cardData.card_holder_name
+//                        self.txtExpDate.text  = self.cardData.card_date
+//                        self.txtCardCVV.text = self.cardData.card_cvc
+//                        self.setCardTypeImage(cardNumber:self.cardData.card_number.replacingOccurrences(of: " ", with: ""))
                         
                     }else
                     {

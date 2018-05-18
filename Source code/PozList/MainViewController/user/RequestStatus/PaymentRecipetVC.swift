@@ -13,6 +13,7 @@ class PaymentRecipetVC: UIViewController {
     @IBOutlet weak var view_main_top: UIView!
     @IBOutlet weak var view_main_bottom: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
+    var requestData:ServiceRequest!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,6 +40,7 @@ class PaymentRecipetVC: UIViewController {
                 }
             }
         }
+        self.setData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,13 +48,60 @@ class PaymentRecipetVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func setData(){
+        
+    }
+    
     @IBAction func ClickBack(_ sender: Any) {
       self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btnDownloadPressed(_ sender: Any) {
-        
+        let requestId = self.requestData.ratingNReviewObj.serviceRequestId
+        let transactionId = self.requestData.transactionId
+        let userId = UserDefaults.Main.string(forKey: .UserID)
+        appDelegate.showLoadingIndicator()
+        MTWebCall.call.downloadPdfFile(userId: userId, transactionId: transactionId, requestId: requestId, dictParam: [:]) { (path, status) in
+            appDelegate.hideLoadingIndicator()
+            if status == true {
+                let documentInteractionController = UIDocumentInteractionController(url: URL(fileURLWithPath: path!))
+                documentInteractionController.delegate = self
+                documentInteractionController.presentPreview(animated: true)
+            
+            }else {
+                //Popup
+                let Title = NSLocalizedString("Somthing went wrong \n Try after sometime", comment: "")
+                appDelegate.Popup(Message: Title)
+            }
+            
+        }
     }
     @IBAction func btnEmailReceiptPressed(_ sender: Any) {
+        let requestId = self.requestData.ratingNReviewObj.serviceRequestId
+        let transactionId = self.requestData.transactionId
+        let userId = UserDefaults.Main.string(forKey: .UserID)
+        appDelegate.showLoadingIndicator()
+        MTWebCall.call.emailPdfFile(userId: userId, transactionId: transactionId, requestId: requestId, dictParam: [:]) { (respons, status) in
+            appDelegate.hideLoadingIndicator()
+            jprint(items: status)
+            if (status == 200 && respons != nil) {
+                //Response
+                let dictResponse = respons as! NSDictionary
+                //Popup
+                let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
+                appDelegate.Popup(Message: "\(message)")
+            }else {
+                //Popup
+                let Title = NSLocalizedString("Somthing went wrong \n Try after sometime", comment: "")
+                appDelegate.Popup(Message: Title)
+            }
+            
+        }
         
+    }
+}
+//MARK: - UIDocumentInteractionController Delegate Event
+extension PaymentRecipetVC: UIDocumentInteractionControllerDelegate {
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
     }
 }

@@ -34,6 +34,7 @@ class ServiceRequest: NSObject {
     
     var id: String = ""
     var serviceCatId : String = ""
+    var transactionId : String = ""
     var serviceCatName : String = ""
     var status : String = ""
     var userServiceStatus:String = ""
@@ -53,10 +54,11 @@ class ServiceRequest: NSObject {
         
     }
     
-    init(id: String, serviceCatId: String, serviceCatName: String, status: String, userServiceStatus: String, imagepath: [String], serviceReqDesc : String, serviceReqDate : String, serviceReqUpdateDate: String, latitude : String, longitude : String,distance : String,address : String, customerProfile : Profile, serviceProvider : ServiceProvider, ratingNReviewObj:RatingNReview)
+    init(id: String, serviceCatId: String, transactionId:String, serviceCatName: String, status: String, userServiceStatus: String, imagepath: [String], serviceReqDesc : String, serviceReqDate : String, serviceReqUpdateDate: String, latitude : String, longitude : String,distance : String,address : String, customerProfile : Profile, serviceProvider : ServiceProvider, ratingNReviewObj:RatingNReview)
     {
         self.id = id
         self.serviceCatId = serviceCatId
+        self.transactionId = transactionId
         self.serviceCatName = serviceCatName
         self.status = status
         self.imagePath = imagepath

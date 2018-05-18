@@ -386,6 +386,28 @@ extension MTWebCall{
             block(nil, false)
         }
     }
+    func dowanloadPdfFile(relPath : String, saveFileWithName: String, progress: WSProgress?, block: @escaping WSFileBlock){
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = documentsURL.appendingPathComponent("receipt.pdf")
+            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+        }
+        
+        do{
+            manager.download(try getFullUrl(relPath: relPath), to: destination).downloadProgress { (prog) in
+                progress?(prog)
+                }.response { (responce) in
+                    if responce.error == nil, let path = responce.destinationURL?.path{
+                        block(path, true)
+                    }else{
+                        block(nil, false)
+                    }
+                }.resume()
+            
+        }catch{
+            block(nil, false)
+        }
+    }
 }
 
 
@@ -528,6 +550,17 @@ extension MTWebCall{
         
         let relPath = WebURL.serviceProviderDuty
         let _ = postRequest(relPath: relPath, param: dictParam, block: block)
+    }
+    //MARK: - email PDF
+    func emailPdfFile(userId: String, transactionId: String, requestId: String, dictParam:[String : Any],block: @escaping WSBlock) {
+        
+        let relPath = WebURL.emailPDF + userId + "/" + transactionId + "/" + requestId
+        let _ = getRequest(relPath: relPath, param: dictParam, block: block)
+    }
+    func downloadPdfFile(userId: String, transactionId: String, requestId: String, dictParam:[String : Any],block: @escaping WSFileBlock) {
+        
+        let relPath = WebURL.getPDF + userId + "/" + transactionId + "/" + requestId
+        let _ = dowanloadPdfFile(relPath: relPath, saveFileWithName: "receipt.pdf", progress: nil, block: block)
     }
     
 }

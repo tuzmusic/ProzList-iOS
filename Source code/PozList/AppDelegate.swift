@@ -338,6 +338,7 @@ extension UserDefaults
         }
         enum ObjectDefaultKey: String {
             case Profile
+            case Card
             
         }
     }

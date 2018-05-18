@@ -308,7 +308,7 @@ extension NearJobVC {
                             
                             let id = createString(value:catValue.value(forKey: "id") as AnyObject)
                             let cId = createString(value:catValue.value(forKey: "cat_id") as AnyObject)
-                            
+                            let transactionId = createString(value:catValue.value(forKey: "transaction_id") as AnyObject)
                             let status = createString(value:catValue.value(forKey: "status") as AnyObject)
                             let userServiceStatus = createString(value:catValue.value(forKey: "user_service_status") as AnyObject)
                             let reqDesc = createString(value:catValue.value(forKey: "request_desc") as AnyObject)
@@ -375,10 +375,10 @@ extension NearJobVC {
                             
                             let cName = createString(value:catValue.value(forKey: "name") as AnyObject)
                             if cName != "" {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:cName,  status: status, userServiceStatus:userServiceStatus, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate,latitude:lat,longitude:lng ,distance : distance ,address : address ,customerProfile : cutomerdata ,serviceProvider : ServiceProvider(), ratingNReviewObj:reviewRatingObj)
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, transactionId: transactionId, serviceCatName:cName,  status: status, userServiceStatus:userServiceStatus, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate,latitude:lat,longitude:lng ,distance : distance ,address : address ,customerProfile : cutomerdata ,serviceProvider : ServiceProvider(), ratingNReviewObj:reviewRatingObj)
                             }
                             else {
-                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, serviceCatName:"", status: status, userServiceStatus:userServiceStatus, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate,latitude:lat,longitude:lng , distance : distance,address : address ,customerProfile : cutomerdata ,serviceProvider : ServiceProvider(), ratingNReviewObj:reviewRatingObj)
+                                serviceReq = ServiceRequest.init(id: id, serviceCatId: cId, transactionId: transactionId, serviceCatName:"", status: status, userServiceStatus:userServiceStatus, imagepath: serImges, serviceReqDesc: reqDesc, serviceReqDate: reqDate, serviceReqUpdateDate: reqUpdateDate,latitude:lat,longitude:lng , distance : distance,address : address ,customerProfile : cutomerdata ,serviceProvider : ServiceProvider(), ratingNReviewObj:reviewRatingObj)
                             }
                             
                             self.addAllMarkerPoint(serviceRequest: serviceReq)

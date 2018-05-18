@@ -39,7 +39,7 @@ struct WebURL {
     static let appkey:String = "da85d87b84495e41e24a55ea05bc7247"
     static let tokenKey:String = "Authorization"
 //    static let ImageBaseUrl = "http://project-demo-server.info/prozlist/public/upload/"
-    static let ImageBaseUrl = "http://project-demo-server.net/prozlist/public/upload/"
+    static let ImageBaseUrl = "http://199.250.201.83/~mobile/prozlist/public/upload/"
     static let login:String = WebURL.baseURL + "login"
     static let Register:String = WebURL.baseURL + "registration"
     static let ForgotPassword:String = WebURL.baseURL + "forgot-password"
@@ -59,6 +59,8 @@ struct WebURL {
     static let getAwards:String = WebURL.baseURL + "get_award/"
     static let updateLocation:String = WebURL.baseURL + "update_location"
     static let serviceProviderDuty:String = WebURL.baseURL + "service_provider_duty"
+    static let getPDF:String = WebURL.baseURL + "getPDF/"
+    static let emailPDF:String = WebURL.baseURL + "emailreceipt/"
 }
 
 extension UIColor{

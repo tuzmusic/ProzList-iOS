@@ -161,6 +161,7 @@ class JobProfileVC: UIViewController,CustomToolBarDelegate {
     }
     @IBAction func btnPaymentDetailPressed(_ sender: Any) {
         let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "PaymentRecipetVC") as! PaymentRecipetVC
+        vc.requestData = self.requestData
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func closeKeyBoard() {

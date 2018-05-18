@@ -44,6 +44,8 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
     var isEditing_profile = false
     var text_head = UITextField()
     var cardData = Card()
+    var userProfileData = Profile()
+    var isFromEditCard:Bool = false
     @IBOutlet weak var cons_width_lbl_under_name: NSLayoutConstraint!
     
     @IBOutlet weak var cons_table_height: NSLayoutConstraint!
@@ -77,70 +79,12 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                     let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
                     print(message)
                     let dictData = getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
-                    let id = createString(value:dictData.value(forKey: "id") as AnyObject)
-                    let username = createString(value: dictData.value(forKey: "name") as AnyObject)
-                    let email = createString(value: dictData.value(forKey: "email") as AnyObject)
-                    let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
-                    let type = createString(value: dictData.value(forKey: "role") as AnyObject)
-                    let status = createString(value: dictData.value(forKey: "status") as AnyObject)
-                    let city = createString(value: dictData.value(forKey: "city") as AnyObject)
-                    let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
-                    
-                    let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city,profileImg: imgProfile, avgRating: "")
-                    self.arr_edit = [["main":"Email","image":#imageLiteral(resourceName: "email-1"),"Edit_image":#imageLiteral(resourceName: "email"),"sub":email,"Place":"Enter Your Email"],
-                                     ["main":"City","image":#imageLiteral(resourceName: "locaton"),"Edit_image":#imageLiteral(resourceName: "locaton"),"sub":city,"Place":"Enter your city name"],
-                                     ["main":"Phone Number","image":#imageLiteral(resourceName: "phone_no"),"Edit_image":#imageLiteral(resourceName: "phone"),"sub":mobile,"Place":"Enter Your Phone Number"]]
-                    
-                    let arrcard = getArrayFromDictionary(dictionary: dictData, key: "card")
-                    if arrcard.count > 0 {
-                        let dictCard = arrcard.firstObject as! NSDictionary
-                        let card_id = createString(value:dictCard.value(forKey: "id") as AnyObject)
-                        let card_cvc = createString(value:dictCard.value(forKey: "card_cvc") as AnyObject)
-                        let card_date = createString(value:dictCard.value(forKey: "card_date") as AnyObject)
-                        let card_holder_name = createString(value:dictCard.value(forKey: "card_holder_name") as AnyObject)
-                        let card_number = createString(value:dictCard.value(forKey: "card_number") as AnyObject)
-                        let issubscribed = createString(value:dictCard.value(forKey: "issubscribed") as AnyObject)
-                        let card_status = createString(value:dictCard.value(forKey: "status") as AnyObject)
-                        let user_id = createString(value:dictCard.value(forKey: "user_id") as AnyObject)
-                        self.cardData = Card.init(id: card_id, card_cvc: card_cvc, card_date: card_date, card_holder_name: card_holder_name, card_number: card_number, issubscribed: issubscribed, status: card_status, user_id: user_id)
-                        
-                        
-                    }else{
-                        self.arr_edit.append(["main":"Add Card","image":#imageLiteral(resourceName: "add_card"),"Edit_image":#imageLiteral(resourceName: "add_card"),"sub":"Add Credit/Debit Card","Place":""])
-                        self.table_view.tableFooterView = UIView()
-                    }
-                    
                     UserDefaults.Main.set(true, forKey: .isSignUp)
-                    //UserDefaults.Main.set(userdate, forKey: .Profile)
-                    UserDefaults.Main.set(id, forKey: .UserID)
-                    self.txt_name_edit.text = username.capitalized
+                    UserDefaults.Main.set(dictData, forKey: .Profile)
+                    self.setData()
                     
-                    
-                    let str1 =  WebURL.ImageBaseUrl + imgProfile
-                    let escapedOwnreImage = str1.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-                    let urlOwnreImage = URL.init(string: escapedOwnreImage!)
-                    //SDImageCache.shared().removeImage(forKey: String(describing: urlOwnreImage), fromDisk: true)
-                    
-                    self.Img_profile.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "imgUserPlaceholder"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
-                        //Hide Loading indicator
-                        //self.Img_profile.setShowActivityIndicator(false)
-                        if (image != nil) {
-                            self.Img_profile.contentMode = .scaleAspectFit
-                           // self.Img_profile.image = image
-                        }
-                    })
-                    
-                    //str1 = str1.replacingOccurrences(of: " ", with: "%20")
-                    //self.Img_profile.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "camera_icon"), options: .refreshCached)
-                    
-                    //Set Card Details
-                    //Card Detail
-                    self.lblCardNumber.text  = self.cardData.card_number
-                    self.lblCardHolderName.text  = self.cardData.card_holder_name
-                    self.lblCardExpiry.text  = self.cardData.card_date
-                    self.setCardTypeImage(cardNumber:self.cardData.card_number.replacingOccurrences(of: " ", with: ""))
                         
-                    self.Changes_UI()
+                   
                 }else
                 {
                     //Popup
@@ -158,6 +102,13 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
         
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.isFromEditCard == true {
+            self.isFromEditCard = false
+            setData()
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -165,6 +116,66 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
     func setCardTypeImage(cardNumber:String){
         let strImg = cardNumber.cardType()?.imageString() ?? "imgCardUnknown.png"
         self.imgCardType.image = UIImage(named: strImg)
+    }
+    func setData(){
+        if let dictData = UserDefaults.Main.object(forKey: .Profile) as? NSDictionary {
+            let id = createString(value:dictData.value(forKey: "id") as AnyObject)
+            let username = createString(value: dictData.value(forKey: "name") as AnyObject)
+            let email = createString(value: dictData.value(forKey: "email") as AnyObject)
+            let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
+            let type = createString(value: dictData.value(forKey: "role") as AnyObject)
+            let status = createString(value: dictData.value(forKey: "status") as AnyObject)
+            let city = createString(value: dictData.value(forKey: "city") as AnyObject)
+            let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
+            
+            self.userProfileData = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city,profileImg: imgProfile, avgRating: "")
+            self.arr_edit = [["main":"Email","image":#imageLiteral(resourceName: "email-1"),"Edit_image":#imageLiteral(resourceName: "email"),"sub":email,"Place":"Enter Your Email"],
+                             ["main":"City","image":#imageLiteral(resourceName: "locaton"),"Edit_image":#imageLiteral(resourceName: "locaton"),"sub":city,"Place":"Enter your city name"],
+                             ["main":"Phone Number","image":#imageLiteral(resourceName: "phone_no"),"Edit_image":#imageLiteral(resourceName: "phone"),"sub":mobile,"Place":"Enter Your Phone Number"]]
+            
+            let arrcard = getArrayFromDictionary(dictionary: dictData, key: "card")
+            if arrcard.count > 0 {
+                let dictCard = arrcard.firstObject as! NSDictionary
+                let card_id = createString(value:dictCard.value(forKey: "id") as AnyObject)
+                let card_cvc = createString(value:dictCard.value(forKey: "card_cvc") as AnyObject)
+                let card_date = createString(value:dictCard.value(forKey: "card_date") as AnyObject)
+                let card_holder_name = createString(value:dictCard.value(forKey: "card_holder_name") as AnyObject)
+                let card_number = createString(value:dictCard.value(forKey: "card_number") as AnyObject)
+                let issubscribed = createString(value:dictCard.value(forKey: "issubscribed") as AnyObject)
+                let card_status = createString(value:dictCard.value(forKey: "status") as AnyObject)
+                let user_id = createString(value:dictCard.value(forKey: "user_id") as AnyObject)
+                self.cardData = Card.init(id: card_id, card_cvc: card_cvc, card_date: card_date, card_holder_name: card_holder_name, card_number: card_number, issubscribed: issubscribed, status: card_status, user_id: user_id)
+                
+            }else{
+                self.arr_edit.append(["main":"Add Card","image":#imageLiteral(resourceName: "add_card"),"Edit_image":#imageLiteral(resourceName: "add_card"),"sub":"Add Credit/Debit Card","Place":""])
+                self.table_view.tableFooterView = UIView()
+            }
+            
+            UserDefaults.Main.set(true, forKey: .isSignUp)
+            UserDefaults.Main.set(id, forKey: .UserID)
+            self.txt_name_edit.text = username.capitalized
+            
+            
+            let str1 =  WebURL.ImageBaseUrl + imgProfile
+            let escapedOwnreImage = str1.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+            let urlOwnreImage = URL.init(string: escapedOwnreImage!)
+            self.Img_profile.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "imgUserPlaceholder"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
+                //Hide Loading indicator
+                if (image != nil) {
+                    self.Img_profile.contentMode = .scaleAspectFit
+                }
+            })
+            
+            //Set Card Details
+            //Card Detail
+            self.lblCardNumber.text  = self.cardData.card_number
+            self.lblCardHolderName.text  = self.cardData.card_holder_name
+            self.lblCardExpiry.text  = self.cardData.card_date
+            self.setCardTypeImage(cardNumber:self.cardData.card_number.replacingOccurrences(of: " ", with: ""))
+            self.Changes_UI()
+        }
+        //getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
+        
     }
     func Changes_UI()  {
        
@@ -187,6 +198,7 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
             btn_save_edit.setImage(nil, for:UIControlState.normal)
             let indexes = (0..<arr_edit.count).map { IndexPath(row: $0, section: 0) }
             self.table_view.reloadRows(at: indexes, with: .top)
+            //self.table_view.reloadData()
             self.table_view.layoutIfNeeded()
             self.cons_table_height.constant = self.table_view.contentSize.height
         }else{
@@ -206,7 +218,7 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                 self.view.layoutIfNeeded()
             } ) { (completed) in
             }
-            let indexes = (0..<arr_edit.count).map { IndexPath(row: $0, section: 0) }
+            //let indexes = (0..<arr_edit.count).map { IndexPath(row: $0, section: 0) }
             //self.table_view.reloadRows(at: indexes, with: .bottom)
             self.table_view.reloadData()
             self.table_view.layoutIfNeeded()
@@ -284,69 +296,73 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                         let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
                         print(message)
                         let dictData = getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
-                        let id = createString(value:dictData.value(forKey: "id") as AnyObject)
-                        let username = createString(value: dictData.value(forKey: "name") as AnyObject)
-                        let email = createString(value: dictData.value(forKey: "email") as AnyObject)
-                        let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
-                        let type = createString(value: dictData.value(forKey: "role") as AnyObject)
-                        let status = createString(value: dictData.value(forKey: "status") as AnyObject)
-                        let city = createString(value: dictData.value(forKey: "city") as AnyObject)
-                        let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
-                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: imgProfile, avgRating: "")
-                        
                         UserDefaults.Main.set(true, forKey: .isSignUp)
-                        //UserDefaults.Main.set(userdate, forKey: .Profile)
-                        UserDefaults.Main.set(id, forKey: .UserID)
-                        self.txt_name_edit.text = username
-                        self.arr_edit = [["main":"Email","image":#imageLiteral(resourceName: "email-1"),"Edit_image":#imageLiteral(resourceName: "email"),"sub":email,"Place":"Enter Your Email"],
-                                         ["main":"City","image":#imageLiteral(resourceName: "locaton"),"Edit_image":#imageLiteral(resourceName: "locaton"),"sub":city,"Place":"Enter your city name"],
-                                         ["main":"Phone Number","image":#imageLiteral(resourceName: "phone_no"),"Edit_image":#imageLiteral(resourceName: "phone"),"sub":mobile,"Place":"Enter Your Phone Number"]]
-                        
-                        let arrcard = getArrayFromDictionary(dictionary: dictData, key: "card")
-                        if arrcard.count > 0 {
-                            let dictCard = arrcard.firstObject as! NSDictionary
-                            let card_id = createString(value:dictCard.value(forKey: "id") as AnyObject)
-                            let card_cvc = createString(value:dictCard.value(forKey: "card_cvc") as AnyObject)
-                            let card_date = createString(value:dictCard.value(forKey: "card_date") as AnyObject)
-                            let card_holder_name = createString(value:dictCard.value(forKey: "card_holder_name") as AnyObject)
-                            let card_number = createString(value:dictCard.value(forKey: "card_number") as AnyObject)
-                            let issubscribed = createString(value:dictCard.value(forKey: "issubscribed") as AnyObject)
-                            let card_status = createString(value:dictCard.value(forKey: "status") as AnyObject)
-                            let user_id = createString(value:dictCard.value(forKey: "user_id") as AnyObject)
-                            self.cardData = Card.init(id: card_id, card_cvc: card_cvc, card_date: card_date, card_holder_name: card_holder_name, card_number: card_number, issubscribed: issubscribed, status: card_status, user_id: user_id)
-                            
-                            
-                        }else{
-                            self.arr_edit.append(["main":"Add Card","image":#imageLiteral(resourceName: "add_card"),"Edit_image":#imageLiteral(resourceName: "add_card"),"sub":"Add Credit/Debit Card","Place":""])
-                            self.table_view.tableFooterView = UIView()
-                        }
-                        
-                        let str1 =  WebURL.ImageBaseUrl + imgProfile
-                        let escapedOwnreImage = str1.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-                        let urlOwnreImage = URL.init(string: escapedOwnreImage!)
-                        SDImageCache.shared().removeImage(forKey: String(describing: urlOwnreImage), fromDisk: true)
-                        self.Img_profile.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "imgUserPlaceholder"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
-                            //Hide Loading indicator
-                           
-                            
-                            if (image != nil) {
-                                self.Img_profile.image = image
-                                self.Img_profile.contentMode = UIViewContentMode.scaleAspectFill
-                                self.Img_profile.clipsToBounds = true
-    
-                            }
-                        })
-                        //str1 = str1.replacingOccurrences(of: " ", with: "%20")
-                        //self.Img_profile.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "camera_icon"), options: .refreshCached)
+                        UserDefaults.Main.set(dictData, forKey: .Profile)
                         self.isEditing_profile = !self.isEditing_profile
-                        //Set Card Details
-                        //Card Detail
-                        self.lblCardNumber.text  = self.cardData.card_number
-                        self.lblCardHolderName.text  = self.cardData.card_holder_name
-                        self.lblCardExpiry.text  = self.cardData.card_date
-                        self.setCardTypeImage(cardNumber:self.cardData.card_number.replacingOccurrences(of: " ", with: ""))
-                        
-                        self.Changes_UI()
+                        self.setData()
+//                        let id = createString(value:dictData.value(forKey: "id") as AnyObject)
+//                        let username = createString(value: dictData.value(forKey: "name") as AnyObject)
+//                        let email = createString(value: dictData.value(forKey: "email") as AnyObject)
+//                        let mobile = createString(value: dictData.value(forKey: "phone") as AnyObject)
+//                        let type = createString(value: dictData.value(forKey: "role") as AnyObject)
+//                        let status = createString(value: dictData.value(forKey: "status") as AnyObject)
+//                        let city = createString(value: dictData.value(forKey: "city") as AnyObject)
+//                        let imgProfile = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
+//                        let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: imgProfile, avgRating: "")
+//
+//                        UserDefaults.Main.set(true, forKey: .isSignUp)
+//                        //UserDefaults.Main.set(userdate, forKey: .Profile)
+//                        UserDefaults.Main.set(id, forKey: .UserID)
+//                        self.txt_name_edit.text = username
+//                        self.arr_edit = [["main":"Email","image":#imageLiteral(resourceName: "email-1"),"Edit_image":#imageLiteral(resourceName: "email"),"sub":email,"Place":"Enter Your Email"],
+//                                         ["main":"City","image":#imageLiteral(resourceName: "locaton"),"Edit_image":#imageLiteral(resourceName: "locaton"),"sub":city,"Place":"Enter your city name"],
+//                                         ["main":"Phone Number","image":#imageLiteral(resourceName: "phone_no"),"Edit_image":#imageLiteral(resourceName: "phone"),"sub":mobile,"Place":"Enter Your Phone Number"]]
+//
+//                        let arrcard = getArrayFromDictionary(dictionary: dictData, key: "card")
+//                        if arrcard.count > 0 {
+//                            let dictCard = arrcard.firstObject as! NSDictionary
+//                            let card_id = createString(value:dictCard.value(forKey: "id") as AnyObject)
+//                            let card_cvc = createString(value:dictCard.value(forKey: "card_cvc") as AnyObject)
+//                            let card_date = createString(value:dictCard.value(forKey: "card_date") as AnyObject)
+//                            let card_holder_name = createString(value:dictCard.value(forKey: "card_holder_name") as AnyObject)
+//                            let card_number = createString(value:dictCard.value(forKey: "card_number") as AnyObject)
+//                            let issubscribed = createString(value:dictCard.value(forKey: "issubscribed") as AnyObject)
+//                            let card_status = createString(value:dictCard.value(forKey: "status") as AnyObject)
+//                            let user_id = createString(value:dictCard.value(forKey: "user_id") as AnyObject)
+//                            self.cardData = Card.init(id: card_id, card_cvc: card_cvc, card_date: card_date, card_holder_name: card_holder_name, card_number: card_number, issubscribed: issubscribed, status: card_status, user_id: user_id)
+//
+//
+//                        }else{
+//                            self.arr_edit.append(["main":"Add Card","image":#imageLiteral(resourceName: "add_card"),"Edit_image":#imageLiteral(resourceName: "add_card"),"sub":"Add Credit/Debit Card","Place":""])
+//                            self.table_view.tableFooterView = UIView()
+//                        }
+//
+//                        let str1 =  WebURL.ImageBaseUrl + imgProfile
+//                        let escapedOwnreImage = str1.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+//                        let urlOwnreImage = URL.init(string: escapedOwnreImage!)
+//                        SDImageCache.shared().removeImage(forKey: String(describing: urlOwnreImage), fromDisk: true)
+//                        self.Img_profile.sd_setImage(with: urlOwnreImage, placeholderImage:  UIImage.init(named: "imgUserPlaceholder"), options: SDWebImageOptions.refreshCached, completed: { (image, error, SDImageCacheType, url) in
+//                            //Hide Loading indicator
+//
+//
+//                            if (image != nil) {
+//                                self.Img_profile.image = image
+//                                self.Img_profile.contentMode = UIViewContentMode.scaleAspectFill
+//                                self.Img_profile.clipsToBounds = true
+//
+//                            }
+//                        })
+//                        //str1 = str1.replacingOccurrences(of: " ", with: "%20")
+//                        //self.Img_profile.sd_setImage(with: URL.init(string: str1), placeholderImage: UIImage.init(named: "camera_icon"), options: .refreshCached)
+//                        self.isEditing_profile = !self.isEditing_profile
+//                        //Set Card Details
+//                        //Card Detail
+//                        self.lblCardNumber.text  = self.cardData.card_number
+//                        self.lblCardHolderName.text  = self.cardData.card_holder_name
+//                        self.lblCardExpiry.text  = self.cardData.card_date
+//                        self.setCardTypeImage(cardNumber:self.cardData.card_number.replacingOccurrences(of: " ", with: ""))
+//
+//                        self.Changes_UI()
                     }else
                     {
                         //Popup
@@ -415,8 +431,10 @@ class EditProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
     }
     
     @IBAction func btnEditCardPressed(_ sender: UIControl) {
+        self.isFromEditCard = true
         let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "AddCardVC") as! AddCardVC
         vc.cardData = self.cardData
+        vc.userProfileData = self.userProfileData
         self.navigationController?.pushViewController(vc, animated: true)
     }
         
