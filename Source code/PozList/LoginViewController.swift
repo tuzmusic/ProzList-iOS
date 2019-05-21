@@ -118,8 +118,7 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 			}
 			let dictResponse = res as! NSDictionary
 			let response = getStringFromDictionary(dictionary: dictResponse, key: "response")
-			guard  response == "true" else
-			{
+			guard  response == "true" else {
 				appDelegate.Popup(Message: "\(getStringFromDictionary(dictionary: dictResponse, key: "msg"))")
 				return
 			}
@@ -129,8 +128,8 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 			let dictData = getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
 			let type = createString(value: dictData.value(forKey: "role") as AnyObject)
 			let status = createString(value: dictData.value(forKey: "status") as AnyObject)
-			
-			if type == UserType.Customer.rawValue {
+			switch type {
+			case UserType.Customer.rawValue:
 				UserDefaults.Main.set(UserType.Customer.rawValue, forKey: .Appuser)
 				let id = createString(value:dictData.value(forKey: "id") as AnyObject)
 				let username = createString(value: dictData.value(forKey: "name") as AnyObject)
@@ -150,9 +149,7 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 				UserDefaults.Main.set(userDate1, forKey: .Profile)
 				let selected_service = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
 				self.navigationController?.pushViewController(selected_service, animated: true)
-			}
-			else { // Service Provider
-				
+			case UserType.ServiceProvider.rawValue:				
 				let id = createString(value:dictData.value(forKey: "id") as AnyObject)
 				
 				UserDefaults.Main.set(id, forKey: .UserID)
@@ -164,8 +161,7 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 				let subcrib = createString(value: dictData.value(forKey: "subscribed") as AnyObject)
 				UserDefaults.Main.set((dictData.getString(key: "duty_status") == "on"), forKey: .isDutyOnOff)
 				
-				if certified == "false"
-				{
+				if certified == "false" {
 					let vc = storyBoards.Main.instantiateViewController(withIdentifier: "UploadCertificateVC") as! UploadCertificateVC
 					self.navigationController?.pushViewController(vc, animated: true)
 				} else if subcrib == "false" {
@@ -185,8 +181,6 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 				}
 				UserDefaults.standard.synchronize()
 			}
-			
-			
 		}
 	}
 }
@@ -195,108 +189,74 @@ extension LoginViewController : UITextFieldDelegate {
 	
 	// MARK:- =======================================================
 	//MARK: - Textfield Delegate Method
-	
-	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
-	{
-		
-		if let floatingLabelTextField = textField as? SkyFloatingLabelTextField
-		{
+	func resetErrorMessage(_ textField: UITextField) {
+		if let floatingLabelTextField = textField as? SkyFloatingLabelTextField {
 			floatingLabelTextField.errorMessage = ""
 		}
+	}
+	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+		resetErrorMessage(textField)
 		textField.inputAccessoryView = toolbarInit(textField: textField);
 		return true
 	}
 	
-	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-	{
-		if let floatingLabelTextField = textField as? SkyFloatingLabelTextField
-		{
-			floatingLabelTextField.errorMessage = ""
-		}
-		
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		resetErrorMessage(textField)
 		return true
 	}
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool
-	{
-		if let floatingLabelTextField = textField as? SkyFloatingLabelTextField
-		{
-			floatingLabelTextField.errorMessage = ""
-		}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		resetErrorMessage(textField)
 		textField.resignFirstResponder();
 		return true;
 	}
 	
 	// MARK: - Keyboard
-	func toolbarInit(textField: UITextField) -> UIToolbar
-	{
+	func toolbarInit(textField: UITextField) -> UIToolbar {
 		toolBar.delegate1 = self
 		toolBar.txtField = textField
 		return toolBar;
 	}
-	func resignKeyboard()
-	{
+	func resignKeyboard() {
 		txtfld_email.resignFirstResponder()
 		txtfld_password.resignFirstResponder()
-		
 	}
 	// MARK: - Custom ToolBar Delegates
 	
 	func getSegmentIndex(segmentIndex: Int,selectedTextField: UITextField) {
 		print(selectedTextField.tag)
 		if segmentIndex == 1 {
-			
 			if let nextField = self.view.viewWithTag(selectedTextField.tag + 1) as? UITextField {
 				print(nextField.tag)
 				nextField.becomeFirstResponder()
-			}
-			else if let nextTextView = self.view.viewWithTag(selectedTextField.tag + 1) as? UITextView
-			{
+			} else if let nextTextView = self.view.viewWithTag(selectedTextField.tag + 1) as? UITextView {
 				nextTextView.becomeFirstResponder()
-			}
-			else {
+			} else {
 				resignKeyboard()
 			}
-		}
-		else{
+		} else {
 			if let nextField = self.view.viewWithTag(selectedTextField.tag - 1) as? UITextField {
 				nextField.becomeFirstResponder()
-			}
-			else {
-				// Not found, so remove keyboard.
+			} else {	// Not found, so remove keyboard.
 				resignKeyboard()
 			}
 		}
-	}
-	func closeKeyBoard() {
-		resignKeyboard()
 	}
 }
 // MARK: User Define Methods
 extension LoginViewController{
 	
 	func validateData() -> Bool {
-		guard (txtfld_email.text?.count)! > 0 else
-		{
-			if let floatingLabelTextField = txtfld_email
-			{
-				txtfld_email?.errorMessage = emailMessage
-			}
+		guard (txtfld_email.text?.count)! > 0 else {
+			txtfld_email?.errorMessage = emailMessage
 			return false
 		}
-		guard self.validateEmail(txtfld_email.text!) else
-		{
-			if let floatingLabelTextField = txtfld_email
-			{
-				floatingLabelTextField.errorMessage = emailMessage1
-			}
+		guard self.validateEmail(txtfld_email.text!) else {
+			txtfld_email?.errorMessage = emailMessage1
 			return false
 		}
-		guard (txtfld_password.text?.count)! > 0 else
-		{
-			if let floatingLabelTextField = txtfld_password
-			{
-				floatingLabelTextField.errorMessage = passwordMessage
-			}
+		guard (txtfld_password.text?.count)! > 0 else {
+			txtfld_email?.errorMessage = passwordMessage
 			return false
 		}
 		return true

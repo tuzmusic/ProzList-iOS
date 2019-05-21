@@ -18,8 +18,8 @@ public let apiversion = 1.0
 
 
 
-enum UserType: String{
-    case General = "General"
+enum UserType: String {
+    case General = "General" // NEVER USED
     case Customer = "Customer"
     case ServiceProvider = "Service"
 }
