@@ -2,8 +2,8 @@
 //  ReviewDetailVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 08/02/18.
-//  Copyright © 2018 Devubha Manek. All rights reserved.
+//  Created on 08/02/18.
+//  Copyright © 2018. All rights reserved.
 //
 
 import UIKit

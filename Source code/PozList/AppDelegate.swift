@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  PozList
 //
-//  Created by Devubha Manek on 28/09/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 28/09/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit

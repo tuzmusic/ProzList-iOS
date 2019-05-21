@@ -2,8 +2,8 @@
 //  RegisterVc.swift
 //  ProzList
 //
-//  Created by Devubha Manek on 26/09/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 26/09/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit
@@ -76,7 +76,7 @@ class RegisterVc: UIViewController,CustomToolBarDelegate	 {
     @IBAction func Click_login(_ sender: Any) {
         var isInNav = false
         for viewContro in (self.navigationController?.viewControllers)!{
-            if viewContro is ViewController{
+            if viewContro is LoginViewController{
                 isInNav = true
 //                self.navigationController?.popViewController(animated: true)
                 self.navigationController?.popToViewController(viewContro, animated: true)

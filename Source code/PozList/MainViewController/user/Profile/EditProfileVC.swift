@@ -2,8 +2,8 @@
 //  EditProfileVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 02/10/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 02/10/17.
+//  Copyright © 2017. All rights reserved.
 //
 class EditCell : UITableViewCell{
     @IBOutlet weak var lbl_header: UILabel!

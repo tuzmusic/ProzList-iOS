@@ -2,8 +2,8 @@
 //  ServiceProviderProfileVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 11/20/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 11/20/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit
@@ -64,7 +64,8 @@ class RadiusCellSP : UITableViewCell{
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        radiusSlider.addTarget(self, action: #selector(RadiusCellSP.valueChanged(_:event:)), for: .valueChanged)
+		// TUZ NOTE: THIS LINE BELOW STARTED FAILING (WHERE IT HADN'T BEFORE)
+//        radiusSlider.addTarget(self, action: #selector(RadiusCellSP.valueChanged(_:event:)), for: .valueChanged)
     }
     
     @objc func valueChanged(_ sender: TGPDiscreteSlider, event:UIEvent) {

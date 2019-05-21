@@ -2,8 +2,8 @@
 //  NSDateExtension.swift
 //  HomeEscape
 //
-//  Created by Devubha Manek on 8/17/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 8/17/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit

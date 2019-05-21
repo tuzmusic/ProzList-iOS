@@ -2,8 +2,8 @@
 //  TrackServiceVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 05/10/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 05/10/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit

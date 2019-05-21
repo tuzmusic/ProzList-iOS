@@ -2,8 +2,8 @@
 //  ServiceProvicerSignUpVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 11/10/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 11/10/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit
@@ -88,7 +88,8 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.previous(UIControl())
-        dualColorSlider.addTarget(self, action: #selector(ServiceProvicerSignUpVC.valueChanged(_:event:)), for: .valueChanged)
+		// TUZ NOTE: THIS LINE BELOW STARTED FAILING (WHERE IT HADN'T BEFORE)
+//        dualColorSlider.addTarget(self, action: #selector(ServiceProvicerSignUpVC.valueChanged(_:event:)), for: .valueChanged)
         setupAllTextFiels()
         self.tableReload()
         radius = 0.0;

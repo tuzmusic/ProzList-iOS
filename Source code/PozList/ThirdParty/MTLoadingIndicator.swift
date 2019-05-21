@@ -2,8 +2,8 @@
 //  MTLoadingIndicator.swift
 //  MTLoadingIndicator
 //
-//  Created by Devubha Manek on 9/25/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 9/25/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit

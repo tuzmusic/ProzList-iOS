@@ -27,12 +27,10 @@
 		174564F71FD16CA000B16E8B /* Stricks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174564F61FD16CA000B16E8B /* Stricks.swift */; };
 		174BDEC51FC81A9D006FA763 /* RequestDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BDEC41FC81A9D006FA763 /* RequestDetailVC.swift */; };
 		174C6B0020AD46CA0026847A /* AddCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C6AFF20AD46CA0026847A /* AddCardVC.swift */; };
-		174C6B0820AD6AB80026847A /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 174C6B0320AD6AB70026847A /* .gitkeep */; };
-		174C6B0920AD6AB80026847A /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 174C6B0520AD6AB70026847A /* .gitkeep */; };
 		174C6B0A20AD6AB80026847A /* String+SwiftLuhn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C6B0620AD6AB70026847A /* String+SwiftLuhn.swift */; };
 		174C6B0B20AD6AB80026847A /* SwiftLuhn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C6B0720AD6AB70026847A /* SwiftLuhn.swift */; };
 		1751185B1F7D238900D8CBFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751185A1F7D238900D8CBFC /* AppDelegate.swift */; };
-		1751185D1F7D238900D8CBFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751185C1F7D238900D8CBFC /* ViewController.swift */; };
+		1751185D1F7D238900D8CBFC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1751185C1F7D238900D8CBFC /* LoginViewController.swift */; };
 		175118601F7D238900D8CBFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1751185E1F7D238900D8CBFC /* Main.storyboard */; };
 		175118621F7D238900D8CBFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 175118611F7D238900D8CBFC /* Assets.xcassets */; };
 		175118651F7D238900D8CBFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 175118631F7D238900D8CBFC /* LaunchScreen.storyboard */; };
@@ -113,7 +111,6 @@
 		17BBB8971F909CFB00DF700A /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BBB88D1F9099BD00DF700A /* DPDConstants.swift */; };
 		17BBB8981F909CFB00DF700A /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BBB88E1F9099BD00DF700A /* DPDKeyboardListener.swift */; };
 		17BBB8991F909CFB00DF700A /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BBB88F1F9099BD00DF700A /* DPDUIView+Extension.swift */; };
-		17BBB89A1F909D0700DF700A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17BBB8901F9099BD00DF700A /* Info.plist */; };
 		17BBB89B1F909D1100DF700A /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17BBB8921F9099BD00DF700A /* DropDownCell.xib */; };
 		17BBB89C1F909D1800DF700A /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BBB8941F9099BD00DF700A /* DropDown+Appearance.swift */; };
 		17BBB89D1F909D1800DF700A /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BBB8951F9099BD00DF700A /* DropDown.swift */; };
@@ -160,7 +157,7 @@
 		174C6B0720AD6AB70026847A /* SwiftLuhn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLuhn.swift; sourceTree = "<group>"; };
 		175118571F7D238900D8CBFC /* PozList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PozList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1751185A1F7D238900D8CBFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1751185C1F7D238900D8CBFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1751185C1F7D238900D8CBFC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1751185F1F7D238900D8CBFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		175118611F7D238900D8CBFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		175118641F7D238900D8CBFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -385,7 +382,7 @@
 			children = (
 				178A4A01207237FD0026AA0E /* PozList.entitlements */,
 				1751185A1F7D238900D8CBFC /* AppDelegate.swift */,
-				1751185C1F7D238900D8CBFC /* ViewController.swift */,
+				1751185C1F7D238900D8CBFC /* LoginViewController.swift */,
 				178200CB20515A1D00DC1446 /* OtherClasses */,
 				176894471FAC86C400EDE359 /* WebService */,
 				1733EA4C1F7E2B5D00B3DF1A /* Register_forgot */,
@@ -812,15 +809,12 @@
 			files = (
 				1733EA461F7E174E00B3DF1A /* Localizable.strings in Resources */,
 				17B215A51F84FF59004FB9B4 /* ProfileHeaderView.xib in Resources */,
-				174C6B0820AD6AB80026847A /* .gitkeep in Resources */,
-				174C6B0920AD6AB80026847A /* .gitkeep in Resources */,
 				175118651F7D238900D8CBFC /* LaunchScreen.storyboard in Resources */,
 				1733EA3E1F7E166300B3DF1A /* Customer.storyboard in Resources */,
 				175118621F7D238900D8CBFC /* Assets.xcassets in Resources */,
 				175118601F7D238900D8CBFC /* Main.storyboard in Resources */,
 				17BBB89B1F909D1100DF700A /* DropDownCell.xib in Resources */,
 				173BCEDE1FCE72280025FA77 /* ServiceProvider.storyboard in Resources */,
-				17BBB89A1F909D0700DF700A /* Info.plist in Resources */,
 				178510821FA33F9100D8EE29 /* tempAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -852,18 +846,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PozList/Pods-PozList-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PozList/Pods-PozList-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PozList/Pods-PozList-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PozList/Pods-PozList-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		17395EB72052A4C1006CE534 /* ShellScript */ = {
@@ -885,7 +881,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PozList/Pods-PozList-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PozList/Pods-PozList-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/DKImagePickerController/DKImagePickerController.framework",
@@ -912,7 +908,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PozList/Pods-PozList-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PozList/Pods-PozList-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -938,7 +934,7 @@
 				174BDEC51FC81A9D006FA763 /* RequestDetailVC.swift in Sources */,
 				1733EA501F7E2B7800B3DF1A /* ForgotPassVC.swift in Sources */,
 				174564F31FD158C900B16E8B /* StricksAndReviewVC.swift in Sources */,
-				1751185D1F7D238900D8CBFC /* ViewController.swift in Sources */,
+				1751185D1F7D238900D8CBFC /* LoginViewController.swift in Sources */,
 				173BCEE01FCE8E140025FA77 /* CurrentReqDetailVC.swift in Sources */,
 				17BBB89C1F909D1800DF700A /* DropDown+Appearance.swift in Sources */,
 				17B2159B1F84ADE9004FB9B4 /* JobHistoryVC.swift in Sources */,

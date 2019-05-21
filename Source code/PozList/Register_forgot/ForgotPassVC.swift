@@ -2,8 +2,8 @@
 //  ForgotPassVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 29/09/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 29/09/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit
@@ -200,7 +200,7 @@ extension ForgotPassVC{
                     alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (cancel) in
                         DispatchQueue.main.async {
                             for viewContro in (self.navigationController?.viewControllers)!{
-                                if viewContro is ViewController{
+                                if viewContro is LoginViewController{
                                     self.navigationController?.popViewController(animated: true)
                                     break
                                 }

@@ -2,8 +2,8 @@
 //  CustomerRatingVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 27/04/18.
-//  Copyright © 2018 Devubha Manek. All rights reserved.
+//  Created on 27/04/18.
+//  Copyright © 2018. All rights reserved.
 //
 
 import UIKit

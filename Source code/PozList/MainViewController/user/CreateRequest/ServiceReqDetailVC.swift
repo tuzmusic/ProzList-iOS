@@ -2,8 +2,8 @@
 //  ServiceReqDetailVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 03/10/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 03/10/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 class SrvcSelCell: UITableViewCell {

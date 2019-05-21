@@ -2,8 +2,8 @@
 //  JobHistoryVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 04/10/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 04/10/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 class JobHistoryCell : UITableViewCell{

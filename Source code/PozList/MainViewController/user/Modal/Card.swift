@@ -2,8 +2,8 @@
 //  Card.swift
 //  PozList
 //
-//  Created by Devubha Manek on 16/05/18.
-//  Copyright © 2018 Devubha Manek. All rights reserved.
+//  Created on 16/05/18.
+//  Copyright © 2018. All rights reserved.
 //
 
 import UIKit

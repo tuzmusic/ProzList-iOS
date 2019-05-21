@@ -2,14 +2,14 @@
 //  ViewController.swift
 //  ProzList
 //
-//  Created by Devubha Manek on 26/09/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 26/09/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit
 import SkyFloatingLabelTextField
 
-class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelegate {
+class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelegate {
     
     
     var toolBar : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: true)
@@ -215,7 +215,7 @@ class ViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelega
     }
 }
 
-extension ViewController : UITextFieldDelegate {
+extension LoginViewController : UITextFieldDelegate {
 
     // MARK:- =======================================================
     //MARK: - Textfield Delegate Method
@@ -296,7 +296,7 @@ extension ViewController : UITextFieldDelegate {
     }
 }
 // MARK: User Define Methods
-extension ViewController{
+extension LoginViewController{
     
     func validateData() -> Bool {
         

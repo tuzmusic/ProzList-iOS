@@ -2,8 +2,8 @@
 //  CustomToolBar.swift
 //  Bozzi
 //
-//  Created by Dilip manek on 18/07/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 18/07/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit

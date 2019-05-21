@@ -2,8 +2,8 @@
 //  AddCardVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 17/05/18.
-//  Copyright © 2018 Devubha Manek. All rights reserved.
+//  Created on 17/05/18.
+//  Copyright © 2018. All rights reserved.
 //
 
 import UIKit

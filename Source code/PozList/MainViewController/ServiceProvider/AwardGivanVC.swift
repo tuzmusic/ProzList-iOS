@@ -2,8 +2,8 @@
 //  AwardGivanVC.swift
 //  PozList
 //
-//  Created by Devubha Manek on 12/1/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 12/1/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit

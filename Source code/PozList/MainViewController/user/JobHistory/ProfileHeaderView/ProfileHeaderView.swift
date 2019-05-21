@@ -2,8 +2,8 @@
 //  ProfileHeaderView.swift
 //  Siesta
 //
-//  Created by Devubha Manek on 31/03/17.
-//  Copyright © 2017 Devubha Manek. All rights reserved.
+//  Created on 31/03/17.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit

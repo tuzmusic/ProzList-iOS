@@ -2,8 +2,8 @@
 //  UITableViewExtension.swift
 //  EducationApp
 //
-//  Created by Devubha Manek on 1/2/18.
-//  Copyright © 2018 Dilip Manek. All rights reserved.
+//  Created on 1/2/18.
+//  Copyright © 2018. All rights reserved.
 //
 
 import Foundation

@@ -3,8 +3,8 @@
 //  LocationCoordinate.swift
 //  PozList
 //
-//  Created by Devubha Manek on 3/6/18.
-//  Copyright © 2018 Devubha Manek. All rights reserved.
+//  Created on 3/6/18.
+//  Copyright © 2018. All rights reserved.
 //
 
 import Foundation
