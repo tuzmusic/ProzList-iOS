@@ -7,8 +7,6 @@
 //
 
 class JobHistoryCell : UITableViewCell{
-    
-    
     @IBOutlet weak var view_back_icon: UIView!
     @IBOutlet weak var img_stauts: UIImageView!
     @IBOutlet weak var view_compl: UIView!
@@ -16,7 +14,6 @@ class JobHistoryCell : UITableViewCell{
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var lbl_complete: UILabel!
     @IBOutlet weak var lbl_sub_title: UILabel!
-    
 }
 
 import UIKit
@@ -33,12 +30,6 @@ class JobHistoryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-        // Do any additional setup after loading the view.
-   }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func Click_menu(_ sender: Any) {
@@ -56,7 +47,7 @@ class JobHistoryVC: UIViewController {
         if self.arrJobHistory.count == 0{
             lblNoJobHistoryFound.isHidden = false
             lblNoJobHistoryFound.text = "No Job history found!"
-        }else{
+        } else {
             lblNoJobHistoryFound.isHidden = true
         }
     }
@@ -260,7 +251,7 @@ class JobHistoryVC: UIViewController {
         }
     }
 }
-extension JobHistoryVC:UITableViewDelegate,UITableViewDataSource{
+extension JobHistoryVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrJobHistory.count

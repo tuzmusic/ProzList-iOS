@@ -28,11 +28,7 @@ class SelectServiceVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+	
     @IBAction func ClickMenu(_ sender: UIButton) {
           self.sideMenuViewController?.presentLeftMenuViewController()
     }
@@ -120,10 +116,10 @@ extension SelectServiceVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         for i in 0...arr_service_list.count - 1 {
             let dict = arr_service_list[i] as Service
-            dict.IsSelected = false
+            dict.isSelected = false
         }
         let service = arr_service_list[indexPath.row] as Service
-        service.IsSelected = true
+        service.isSelected = true
         let vc = storyBoards.Customer.instantiateViewController(withIdentifier: "ServiceReqDetailVC") as! ServiceReqDetailVC
         vc.arr_service_list = arr_service_list
         self.navigationController?.pushViewController(vc, animated: true)

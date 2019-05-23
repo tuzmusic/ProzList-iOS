@@ -84,7 +84,7 @@ class RequestDetailVC: UIViewController {
         if requestData.customerProfile.avgRating.length > 0{
             ratingView.rating = Double(requestData.customerProfile.avgRating)!
             lblRatingPoint.text = requestData.customerProfile.avgRating + " Stars"
-        }else{
+        } else {
             lblRatingPoint.text = "0 Star"
         }
         

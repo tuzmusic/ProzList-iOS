@@ -111,7 +111,7 @@ class CurrentReqDetailVC: UIViewController ,reviewDelegate {
         if requestData.customerProfile.avgRating == ""{
              profileRatingView.value = 0.0
             lblUserRatings.text = "0 Star"
-        }else{
+        } else {
             profileRatingView.value = CGFloat(Double(requestData.customerProfile.avgRating)!)
             let dblRate = Double (requestData.customerProfile.avgRating )
             lblUserRatings.text = "\(String(format: "%.1f", dblRate!)) Stars"

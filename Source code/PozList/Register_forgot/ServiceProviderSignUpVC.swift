@@ -1,5 +1,5 @@
 //
-//  ServiceProvicerSignUpVC.swift
+//  ServiceProviderSignUpVC.swift
 //  PozList
 //
 //  Created on 11/10/17.
@@ -23,7 +23,7 @@ class serviceCell:UITableViewCell{
     let serviceId:String! = nil
 }
 
-class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
+class ServiceProviderSignUpVC: UIViewController,CustomToolBarDelegate   {
     
     var toolBar : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: true)
 
@@ -42,7 +42,7 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
     //tableView
     @IBOutlet weak var table_view: UITableView!
     
-   //all taxtfield
+   //all textfields
     
     @IBOutlet weak var txt_name: SkyFloatingLabelTextField!
     
@@ -89,8 +89,8 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
         super.viewDidLoad()
         self.previous(UIControl())
 		// TUZ NOTE: THIS LINE BELOW STARTED FAILING (WHERE IT HADN'T BEFORE)
-//        dualColorSlider.addTarget(self, action: #selector(ServiceProvicerSignUpVC.valueChanged(_:event:)), for: .valueChanged)
-        setupAllTextFiels()
+//        dualColorSlider.addTarget(self, action: #selector(ServiceProviderSignUpVC.valueChanged(_:event:)), for: .valueChanged)
+        setupAllTextFields()
         self.tableReload()
         radius = 0.0;
         self.getServiceList()
@@ -107,10 +107,8 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    func setupAllTextFiels(){
+	
+    func setupAllTextFields(){
         txt_name.text = ""
         txt_email.text = ""
         txt_phone.text = ""
@@ -522,7 +520,7 @@ class ServiceProvicerSignUpVC: UIViewController,CustomToolBarDelegate   {
     }
 }
 
-extension ServiceProvicerSignUpVC:UITableViewDelegate,UITableViewDataSource{
+extension ServiceProviderSignUpVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -536,14 +534,14 @@ extension ServiceProvicerSignUpVC:UITableViewDelegate,UITableViewDataSource{
         let dict = arr_service[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "serviceCell") as! serviceCell
         let status = dict["status"]
-        cell.control_plus_min.removeTarget(self, action: #selector(ServiceProvicerSignUpVC.insert_row(_:)), for: .touchUpInside)
-        cell.control_plus_min.removeTarget(self, action: #selector(ServiceProvicerSignUpVC.delete_row(_:)), for: .touchUpInside)
+        cell.control_plus_min.removeTarget(self, action: #selector(ServiceProviderSignUpVC.insert_row(_:)), for: .touchUpInside)
+        cell.control_plus_min.removeTarget(self, action: #selector(ServiceProviderSignUpVC.delete_row(_:)), for: .touchUpInside)
         if status == "0"{
             cell.img_pls_min.image = #imageLiteral(resourceName: "plush-1")
-            cell.control_plus_min.addTarget(self, action: #selector(ServiceProvicerSignUpVC.insert_row(_:)), for: .touchUpInside)
-        }else{
+            cell.control_plus_min.addTarget(self, action: #selector(ServiceProviderSignUpVC.insert_row(_:)), for: .touchUpInside)
+        } else {
             cell.img_pls_min.image = #imageLiteral(resourceName: "close-1")
-            cell.control_plus_min.addTarget(self, action: #selector(ServiceProvicerSignUpVC.delete_row(_:)), for: .touchUpInside)
+            cell.control_plus_min.addTarget(self, action: #selector(ServiceProviderSignUpVC.delete_row(_:)), for: .touchUpInside)
         }
         
 //        cell.lbl_service_name.text = dict["Service_name"]
@@ -565,7 +563,7 @@ extension ServiceProvicerSignUpVC:UITableViewDelegate,UITableViewDataSource{
     }
 }
 
-extension ServiceProvicerSignUpVC : UITextFieldDelegate {
+extension ServiceProviderSignUpVC : UITextFieldDelegate {
     
     
     // MARK:- =======================================================
@@ -662,7 +660,7 @@ extension ServiceProvicerSignUpVC : UITextFieldDelegate {
     }
 }
 
-extension ServiceProvicerSignUpVC:GMSPlacePickerViewControllerDelegate {
+extension ServiceProviderSignUpVC:GMSPlacePickerViewControllerDelegate {
     
     func openPlaceMap() {
         let config = GMSPlacePickerConfig(viewport: nil)
@@ -704,7 +702,7 @@ extension ServiceProvicerSignUpVC:GMSPlacePickerViewControllerDelegate {
     }
 }
 // MARK: User Define Methods
-extension ServiceProvicerSignUpVC {
+extension ServiceProviderSignUpVC {
     
     func validateData1() -> Bool {
         

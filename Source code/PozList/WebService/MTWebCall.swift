@@ -133,7 +133,7 @@ extension MTWebCall {
         do{
             if relPath.lowercased().contains("http") || relPath.lowercased().contains("www"){
                 return try relPath.asURL()
-            }else{
+            } else {
                 return try (WebURL.baseURL+relPath).asURL()
             }
         }catch let err{
@@ -377,7 +377,7 @@ extension MTWebCall{
                 }.response { (responce) in
                     if responce.error == nil, let path = responce.destinationURL?.path{
                         block(path, true)
-                    }else{
+                    } else {
                         block(nil, false)
                     }
                 }.resume()
@@ -399,7 +399,7 @@ extension MTWebCall{
                 }.response { (responce) in
                     if responce.error == nil, let path = responce.destinationURL?.path{
                         block(path, true)
-                    }else{
+                    } else {
                         block(nil, false)
                     }
                 }.resume()
@@ -417,7 +417,7 @@ extension MTWebCall{
         networkManager.listener = { (status) in
             if status == NetworkReachabilityManager.NetworkReachabilityStatus.notReachable{
                 print("No InterNet")
-            }else{
+            } else {
                 print("Internet Avail")
             }
         }
@@ -427,7 +427,7 @@ extension MTWebCall{
     func isInternetAvailable() -> Bool {
         if networkManager.isReachable{
             return true
-        }else{
+        } else {
             return false
         }
     }

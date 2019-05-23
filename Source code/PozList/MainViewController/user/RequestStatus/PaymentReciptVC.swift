@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class PaymentReciptVC: UIViewController {
+class PaymentReceiptVC: UIViewController {
 
     @IBOutlet weak var view_main: UIView!
     @IBOutlet weak var view_main_top: UIView!
@@ -100,7 +100,7 @@ class PaymentReciptVC: UIViewController {
     }
 }
 //MARK: - UIDocumentInteractionController Delegate Event
-extension PaymentReciptVC: UIDocumentInteractionControllerDelegate {
+extension PaymentReceiptVC: UIDocumentInteractionControllerDelegate {
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
         return self
     }

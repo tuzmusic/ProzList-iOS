@@ -12,7 +12,7 @@ class Service: NSObject {
 
     var id: String = ""
     var servicename : String = ""
-    var IsSelected : Bool = false
+    var isSelected : Bool = false
     var status : String = ""
     var imagePath : String = ""
     var serviceReqDate : String = ""

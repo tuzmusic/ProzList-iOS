@@ -33,11 +33,11 @@ class CreateReqVC: UIViewController {
     var seconds = 0
     var timer = Timer()
     var IsComplete = false
-    var isUserAvil:Bool!
-    @IBOutlet weak var Contro_not_come: UIControl!
+    var isUserAvail:Bool!
+    @IBOutlet weak var Control_not_come: UIControl!
     @IBOutlet weak var Control_panding: UIControl!
     @IBOutlet weak var Control_completed: UIControl!
-    @IBOutlet var userDetaileView: UIView!
+    @IBOutlet var userDetailView: UIView!
     
     @IBOutlet weak var lblPending: UILabel!
     @IBOutlet weak var lblCompleted: UILabel!
@@ -50,9 +50,7 @@ class CreateReqVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        
-        if isUserAvil {
-            
+        if isUserAvail {
             let now1 = Date()
             let now =  dateFrm(date: requestData.serviceReqUpdateDate)
             let endDate = now1
@@ -66,8 +64,8 @@ class CreateReqVC: UIViewController {
             runTimer()
             self.Alert_view.frame = CGRect(x: 0, y: self.view.frame.size.height, width: self.Alert_view.frame.size.width , height: self.Alert_view.frame.size.height)
             
-            userDetaileView.alpha = 1.0
-            userDetaileView.isUserInteractionEnabled = true
+            userDetailView.alpha = 1.0
+            userDetailView.isUserInteractionEnabled = true
             
             print(requestData.status)
             var str1 =  WebURL.ImageBaseUrl + requestData.serviceProviderProfile.profilePic
@@ -76,9 +74,7 @@ class CreateReqVC: UIViewController {
             
             if requestData.serviceProviderProfile.avgRating == "" {
                 self.lbl_rating_profile_pic.text = "0.0"
-                
             } else {
-              
                 //self.lbl_rating_profile_pic.text = "\(String(format: "%.1f", requestData.serviceProviderProfile.avgRating))"
                 let dblRate = Double (requestData.serviceProviderProfile.avgRating )
                // String(format: "%.2f", myDouble)
@@ -92,12 +88,10 @@ class CreateReqVC: UIViewController {
             if status.length > 0 {
                 lblPending.text = status
             }
-            
         } else {
-            
-            userDetaileView.alpha = 0.5
-            userDetaileView.isUserInteractionEnabled = false
-            userDetaileView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
+            userDetailView.alpha = 0.5
+            userDetailView.isUserInteractionEnabled = false
+            userDetailView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
             self.lbl_user_name.text = "-"
             self.lbl_user_service_type.text = "-"
         }
@@ -108,7 +102,6 @@ class CreateReqVC: UIViewController {
     
     //Show Modal
     func showModal() {
-       
         let customerRatingVC = self.storyboard?.instantiateViewController(withIdentifier: "CustomerRatingVC") as! CustomerRatingVC
         customerRatingVC.modalPresentationStyle = .overCurrentContext
         customerRatingVC.requestData = requestData
@@ -117,18 +110,13 @@ class CreateReqVC: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         ProfileImgView.layer.cornerRadius = ProfileImgView.frame.size.height / 2.0
     }
     override func viewWillAppear(_ animated: Bool) {
         UserDefaults.standard.set("Yes", forKey: "isRating")
         UserDefaults.standard.synchronize()
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     //MARK:- Click events
     
     @IBAction func Click_bak(_ sender: Any) {
@@ -164,14 +152,13 @@ class CreateReqVC: UIViewController {
     }
     
     @IBAction func Click_Pending_state(_ sender: UIControl) {
-        
         img_Panding.image = #imageLiteral(resourceName: "Group_name")
-        Control_panding.backgroundColor = UIColor.appPanding()
+        Control_panding.backgroundColor = UIColor.appPending()
         
         Control_completed.backgroundColor = UIColor.lightGray
         img_completed.image =  #imageLiteral(resourceName: "round")
         
-        Contro_not_come.backgroundColor = UIColor.lightGray
+        Control_not_come.backgroundColor = UIColor.lightGray
         img_notCome.image = #imageLiteral(resourceName: "Rounded_red")
     }
     
@@ -181,7 +168,7 @@ class CreateReqVC: UIViewController {
             img_completed.image = #imageLiteral(resourceName: "Group_name")
             Control_completed.backgroundColor = UIColor.appBackGroundColor()
             
-            Contro_not_come.backgroundColor = UIColor.lightGray
+            Control_not_come.backgroundColor = UIColor.lightGray
             img_notCome.image = #imageLiteral(resourceName: "Rounded_red")
             
             Control_panding.backgroundColor = UIColor.lightGray
@@ -193,7 +180,7 @@ class CreateReqVC: UIViewController {
         
         if lblPending.text?.lowercased() != "arrived" && lblPending.text?.lowercased() != "pending"{
             img_notCome.image = #imageLiteral(resourceName: "Group_name")
-            Contro_not_come.backgroundColor = UIColor.appNotcome()
+            Control_not_come.backgroundColor = UIColor.appNotcome()
             
             Control_completed.backgroundColor = UIColor.lightGray
             img_completed.image =  #imageLiteral(resourceName: "round")
@@ -204,7 +191,7 @@ class CreateReqVC: UIViewController {
     }
     
     //MARK: - Alert Click
-    @IBAction func Clicl_alert_save(_ sender: Any) {
+    @IBAction func Click_alert_save(_ sender: Any) {
     }
     
     @IBAction func click_close_alert(_ sender: UIButton) {

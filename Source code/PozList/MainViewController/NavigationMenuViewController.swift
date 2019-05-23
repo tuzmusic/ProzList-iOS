@@ -74,7 +74,7 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
       
         if  appuser == UserType.ServiceProvider.rawValue {  //"ServiceProvider"
             return menu_service_pro.count
-        }else{// User
+        } else {// User
             return menu_User.count
         }
     }
@@ -90,17 +90,17 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
                 
                 if UserDefaults.Main.bool(forKey: .isDutyOnOff){
                     cell.imgSwitchToggle.image = UIImage.init(named: "ToggleOn")
-                }else{
+                } else {
                     cell.imgSwitchToggle.image = UIImage.init(named: "ToggleOff")
                 }
                 
                 cell.btnSwitchOnOff.isHidden = false
                 cell.btnSwitchOnOff.addTarget(self, action: #selector(btnSwitchToggleTapped), for: UIControlEvents.touchUpInside)
-            }else{
+            } else {
                 cell.btnSwitchOnOff.isHidden = true
             }
             
-        }else{  // User
+        } else {  // User
             cell.Img.image = menu_User[indexPath.row]
             cell.lbl.text = menu_user_text[indexPath.row]
             cell.btnSwitchOnOff.isHidden = true
@@ -108,7 +108,7 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
         
         if indexPath.row ==  menu_User.endIndex {
             cell.lbl.font = UIFont.init(name: FontName.RobotoLight, size: 14.0)
-        }else{
+        } else {
              cell.lbl.font = UIFont.init(name: FontName.RobotoLight, size: 16.0)
         }
         return cell
@@ -120,7 +120,7 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
         
         if  appuser == UserType.ServiceProvider.rawValue {  //"ServiceProvider"
             strValue = menu_service_pro_text[indexPath.row]
-        }else{// User
+        } else {// User
             strValue = menu_user_text[indexPath.row]
         }
         
@@ -132,7 +132,7 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
         } else if strValue == "Profile" {
             if  appuser == UserType.ServiceProvider.rawValue {  //"ServiceProvider"
                 self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "ServiceProviderProfileVC")), animated: true)
-            }else{// User
+            } else {// User
                 self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyBoards.Customer.instantiateViewController(withIdentifier: "EditProfileVC")), animated: true)
             }
             self.sideMenuViewController!.hideMenuViewController()
@@ -227,7 +227,7 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
         if UserDefaults.Main.bool(forKey: .isDutyOnOff){
             UserDefaults.Main.set(false, forKey: .isDutyOnOff)
             setDutyOnOffAPI(status: "off")
-        }else{
+        } else {
             UserDefaults.Main.set(true, forKey: .isDutyOnOff)
             setDutyOnOffAPI(status: "on")
         }

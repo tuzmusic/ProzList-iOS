@@ -20,38 +20,41 @@ import UIKit
 import AKSideMenu
 
 /*
- HostViewController is container view controller, contains menu controller and the list of relevant view controllers.
+HostViewController is container view controller, contains menu controller and the list of relevant view controllers.
 
- Responsible for creating and selecting menu items content controlers.
- Has opportunity to show/hide side menu.
- */
+Responsible for creating and selecting menu items content controlers.
+Has opportunity to show/hide side menu.
+*/
 class HostViewController: AKSideMenu,AKSideMenuDelegate {
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.menuPreferredStatusBarStyle = .lightContent
-        self.contentViewShadowColor = .blue
-        self.contentViewShadowOffset = CGSize(width: 10, height: 10)
-        self.contentViewShadowOpacity = 0.6
-        self.contentViewShadowRadius = 0.0
-        self.contentViewShadowEnabled = true
-        
-        let userType = UserDefaults.Main.string(forKey: .Appuser)
-        if userType == "Service"{
-            self.contentViewController = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "serviceProvCantaintView")
-        } else {
-            self.contentViewController = storyBoards.Customer.instantiateViewController(withIdentifier: "customerCantaintView")
-        }
-        self.leftMenuViewController = storyBoards.Customer.instantiateViewController(withIdentifier: "NavigationMenu")
-        //self.backgroundImage = UIImage(named: "Stars")
-        self.delegate = self
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		self.menuPreferredStatusBarStyle = .lightContent
+		self.contentViewShadowColor = .blue
+		self.contentViewShadowOffset = CGSize(width: 10, height: 10)
+		self.contentViewShadowOpacity = 0.6
+		self.contentViewShadowRadius = 0.0
+		self.contentViewShadowEnabled = true
+		
+		let userType = UserDefaults.Main.string(forKey: .Appuser)
+		self.contentViewController = userType == "Service"
+			? storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "serviceProvCantaintView")
+			: storyBoards.Customer.instantiateViewController(withIdentifier: "customerCantaintView")
+		//		if userType == "Service"{
+		//			storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "serviceProvCantaintView")
+		//		} else {
+		//			self.contentViewController = storyBoards.Customer.instantiateViewController(withIdentifier: "customerCantaintView")
+		//		}
+		self.leftMenuViewController = storyBoards.Customer.instantiateViewController(withIdentifier: "NavigationMenu")
+		//self.backgroundImage = UIImage(named: "Stars")
+		self.delegate = self
+	}
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+	}
+	
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+	}
 }

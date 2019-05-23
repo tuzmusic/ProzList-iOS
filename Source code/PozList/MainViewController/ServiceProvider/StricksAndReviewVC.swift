@@ -96,15 +96,15 @@ class StricksAndReviewVC: UIViewController {
             if arrReview.count == 0{
                 lblNoStrikeReviewFound.isHidden = false
                 lblNoStrikeReviewFound.text = "No Review found"
-            }else{
+            } else {
                 lblNoStrikeReviewFound.isHidden = true
             }
-        }else{
+        } else {
             //Set no found
             if arrStrcks.count == 0{
                 lblNoStrikeReviewFound.isHidden = false
                 lblNoStrikeReviewFound.text = "No Strikes found"
-            }else{
+            } else {
                 lblNoStrikeReviewFound.isHidden = true
             }
         }

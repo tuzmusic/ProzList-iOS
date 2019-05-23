@@ -101,7 +101,7 @@ class AwardGivanVC: UIViewController {
                     
                     if self.arrAwardList.count == 0{
                         self.lblNoAwardFound.isHidden = false
-                    }else{
+                    } else {
                         self.lblNoAwardFound.isHidden = true
                     }
                     
@@ -135,7 +135,7 @@ extension AwardGivanVC: UITableViewDelegate, UITableViewDataSource {
         
         if arrayOfIndexpath.contains(indexPath){
             cell.lblDesc.numberOfLines = 0
-        }else{
+        } else {
             cell.lblDesc.numberOfLines = 2
         }
         
@@ -157,7 +157,7 @@ extension AwardGivanVC: UITableViewDelegate, UITableViewDataSource {
         if arrayOfIndexpath.contains(indexPath){
             let index = arrayOfIndexpath.index(of: indexPath)
             arrayOfIndexpath.remove(at: index!)
-        }else{
+        } else {
             arrayOfIndexpath.append(indexPath)
         }
         tblAwardList.reloadData()

@@ -38,15 +38,7 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
     var seconds = 0
     var timer = Timer()
     var IsComplete = false
-    var isUserAvil:Bool!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
-        
-    }
+    var isUserAvail:Bool!
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -110,18 +102,12 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
         self.lblUserName.text = providerRequestData.serviceProviderProfile.username.capitalized
         self.lbl_ServiceType.text = providerRequestData.serviceCatName
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     @IBAction func Click_bak(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnProfileViewClick(_ sender: Any) {
-        
         let vc = storyBoards.ServiceProvider.instantiateViewController(withIdentifier: "ServiceProviderProfileVC") as! ServiceProviderProfileVC
         vc.isOnlyShowProfile = true
         vc.serviceProviderId = providerRequestData.serviceProviderProfile.id
@@ -140,7 +126,7 @@ class TrackServiceVC: UIViewController,GMSMapViewDelegate {
             (data, response, error) in
             if error != nil {
                 print(error!.localizedDescription)
-            }else{
+            } else {
                 do {
                     if let  json : [String:Any] = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]{
                         

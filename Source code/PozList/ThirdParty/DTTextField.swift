@@ -237,7 +237,7 @@ public class DTTextField: UITextField {
                                 self.layoutIfNeeded()
                             }
             }
-        }else{
+        } else {
             animations()
         }
     }
@@ -261,7 +261,7 @@ public class DTTextField: UITextField {
                                 self.layoutIfNeeded()
                             }
             }
-        }else{
+        } else {
             animations()
         }
     }
@@ -283,11 +283,11 @@ public class DTTextField: UITextField {
 
         if floatingDisplayStatus == .never {
             return insetRectForEmptyBounds(rect: rect)
-        }else{
+        } else {
             
             if let text = text,text.isEmptyStr && floatingDisplayStatus == .defaults {
                 return insetRectForEmptyBounds(rect: rect)
-            }else{
+            } else {
                 let topInset = paddingYFloatLabel + lblFloatPlaceholder.bounds.size.height + (paddingHeight / 2.0)
                 let textOriginalY = (rect.height - fontHeight) / 2.0
                 var textY = topInset - textOriginalY
@@ -315,7 +315,7 @@ public class DTTextField: UITextField {
             lblFloatPlaceholder.sizeToFit()
             return CGSize(width: textFieldIntrinsicContentSize.width,
                           height: textFieldIntrinsicContentSize.height + paddingYFloatLabel + paddingYErrorLabel + lblFloatPlaceholder.bounds.size.height + lblError.bounds.size.height + paddingHeight)
-        }else{
+        } else {
             return CGSize(width: textFieldIntrinsicContentSize.width,
                           height: textFieldIntrinsicContentSize.height + paddingYFloatLabel + lblFloatPlaceholder.bounds.size.height + paddingHeight)
         }
@@ -388,7 +388,7 @@ public class DTTextField: UITextField {
         default:
             if let enteredText = text,!enteredText.isEmptyStr{
                 showFloatingLabel(isFirstResponder)
-            }else{
+            } else {
                 hideFlotingLabel(isFirstResponder)
             }
         }

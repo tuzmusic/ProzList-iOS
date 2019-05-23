@@ -75,7 +75,7 @@ class AddCardVC: UIViewController ,CustomToolBarDelegate {
     func setUI(){
         if cardData.card_number == "" {
             lblTitle.text = "Add Card"
-        }else{
+        } else {
             lblTitle.text = "Edit Card"
         }
         txtCardNumber.text = cardData.card_number
@@ -192,8 +192,7 @@ class AddCardVC: UIViewController ,CustomToolBarDelegate {
 //                        self.txtCardCVV.text = self.cardData.card_cvc
 //                        self.setCardTypeImage(cardNumber:self.cardData.card_number.replacingOccurrences(of: " ", with: ""))
                         
-                    }else
-                    {
+                    } else {
                         //Popup
                         let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
                         appDelegate.Popup(Message: "\(message)")
@@ -227,7 +226,7 @@ extension AddCardVC : UITextFieldDelegate {
         textField.autocorrectionType = .no
         if textField.tag == 3 {
             //                textField.keyboardType = UIKeyboardType.phonePad
-        }else{
+        } else {
             textField.keyboardType = UIKeyboardType.default
         }
         

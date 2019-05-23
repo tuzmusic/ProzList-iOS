@@ -391,7 +391,7 @@ extension NearJobVC {
                     //Set no new job found
                     if self.arrReqList.count == 0{
                         self.lblNoNewJobFound.isHidden = false
-                    }else{
+                    } else {
                         self.lblNoNewJobFound.isHidden = true
                     }
                 }else
@@ -403,7 +403,7 @@ extension NearJobVC {
                     //Set no new job found
                     if self.arrReqList.count == 0{
                         self.lblNoNewJobFound.isHidden = false
-                    }else{
+                    } else {
                         self.lblNoNewJobFound.isHidden = true
                     }
                 }

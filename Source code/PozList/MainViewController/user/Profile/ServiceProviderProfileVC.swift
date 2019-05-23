@@ -86,8 +86,6 @@ class AllServiceCellSP : UITableViewCell,UITableViewDelegate,UITableViewDataSour
     @IBOutlet var tblServiceList: UITableView!
     var arr_service = [userService]() //[["Service_name":"Plumbing","price":"$200","discount":"$20","status":"0","Service_id":""]]
     
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arr_service.count
     }
@@ -97,15 +95,15 @@ class AllServiceCellSP : UITableViewCell,UITableViewDelegate,UITableViewDataSour
         if isEditing_profile{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCellEdit") as! ServiceCellEdit
             let status = dict.status
-//            cell.control_plus_min.removeTarget(self, action: #selector(ServiceProvicerSignUpVC.insert_row(_:)), for: .touchUpInside)
-//            cell.control_plus_min.removeTarget(self, action: #selector(ServiceProvicerSignUpVC.delete_row(_:)), for: .touchUpInside)
+//            cell.control_plus_min.removeTarget(self, action: #selector(ServiceProviderSignUpVC.insert_row(_:)), for: .touchUpInside)
+//            cell.control_plus_min.removeTarget(self, action: #selector(ServiceProviderSignUpVC.delete_row(_:)), for: .touchUpInside)
             
             if status == "Inactive"{
                 cell.img_pls_min.image = #imageLiteral(resourceName: "plush-1")
-                cell.control_plus_min.addTarget(self, action: #selector(ServiceProvicerSignUpVC.insert_row(_:)), for: .touchUpInside)
-            }else{
+                cell.control_plus_min.addTarget(self, action: #selector(ServiceProviderSignUpVC.insert_row(_:)), for: .touchUpInside)
+            } else {
                 cell.img_pls_min.image = #imageLiteral(resourceName: "close-1")
-                cell.control_plus_min.addTarget(self, action: #selector(ServiceProvicerSignUpVC.delete_row(_:)), for: .touchUpInside)
+                cell.control_plus_min.addTarget(self, action: #selector(ServiceProviderSignUpVC.delete_row(_:)), for: .touchUpInside)
             }
             
             cell.lbl_service_name.text = dict.serviceName
@@ -705,7 +703,7 @@ extension ServiceProviderProfileVC {
                 self.tableViewHeight.constant = self.table_view.contentSize.height
             })
             
-        }else{
+        } else {
             //For save profile
             lblUserName.isHidden = false
             lblDesignation.isHidden = false
@@ -898,7 +896,7 @@ extension ServiceProviderProfileVC : UITableViewDelegate,UITableViewDataSource{
                         let imgName = serviceName
                         
                         cellInsu.img.image = UIImage.init(named: imgName.lowercased() + "-1")
-                    }else{
+                    } else {
                         
                     }
                         cellInsu.tblServiceList.reloadData()
@@ -933,7 +931,7 @@ extension ServiceProviderProfileVC : UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 return cell
-            }else{
+            } else {
                 var cell:SimpleCellSP!
                 
                 if value == "Radius" {

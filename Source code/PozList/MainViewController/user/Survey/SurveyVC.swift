@@ -84,7 +84,7 @@ extension SurveyVC:UITableViewDelegate,UITableViewDataSource{
         if status == "1"{
         cell.view_back.backgroundColor = UIColor.appBackGroundColor()
             cell.img_checkMark.image = #imageLiteral(resourceName: "chec_mark")
-        }else{
+        } else {
             cell.view_back.backgroundColor = UIColor.lightGray
             cell.img_checkMark.image = #imageLiteral(resourceName: "round")
         }

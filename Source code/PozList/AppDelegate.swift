@@ -139,7 +139,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         if Message.characters.count > 0
         {
             alert = UIAlertController(title: "Alert!", message: Message, preferredStyle: UIAlertControllerStyle.alert)
-        }else{
+        } else {
             alert = UIAlertController(title: "Alert!", message: "Check your internet connection.", preferredStyle: UIAlertControllerStyle.alert)
         }
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { ACTION in

@@ -156,7 +156,7 @@ class CurrentRequestVC: UIViewController {
                     if self.arrReqList.count == 0{
                         self.lblNoRequestFound.text = "No new Jobs found!"
                         self.lblNoRequestFound.isHidden = false
-                    }else{
+                    } else {
                         self.lblNoRequestFound.isHidden = true
                     }
                     

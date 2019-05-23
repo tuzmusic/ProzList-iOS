@@ -11,6 +11,9 @@ import SkyFloatingLabelTextField
 
 class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetDelegate {
 	
+	func closeKeyBoard() { // CustomToolBarDelegate protocol requirement
+		resignKeyboard()
+	}
 	
 	var toolBar : CustomToolBar = CustomToolBar.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.WIDTH, height: 40),isSegment: true)
 	
@@ -56,8 +59,10 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 	@IBAction func signIn(_ sender: Any) {
 		
 		guard validateData() else { return }
-		self.loginApiCall()
-
+		self.loginApiCall()	// THIS takes care of the segue to HostViewController
+		
+		// This was all commented out before. I'm now realizing that that was correct.
+		/*
 		//		TUZ: This alert message doesn't make sense, we're not registering.
 		//		In fact, if we're just signing in successfully we don't need any alert.
 		//		But we definitely do need some kind of failure handling! Not to mention actual signing in!
@@ -71,22 +76,23 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 				
 				// TUZ NOTE: Here's a example const from storyBoards (there's no "Menu" but this is the form we "should" be dealing with)
 				// static let Main = UIStoryboard(name: "Main", bundle: Bundle.main)
-				let selected_service = storyBoards.Menu.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
+				let selected_service = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
 				self.navigationController?.pushViewController(selected_service, animated: true)
 				
 			}
 		}))
 		present(alert, animated: true, completion: nil)
-		
+		*/
 	}
 	
 	@IBAction func signUp(_ sender: UIButton) {
+		// Present a choice to sign up as a customer (RegisterVC) or Service Provider (ServiceProviderSignUpVC)
 		let actionSheetController = UIAlertController(title: "Sign Up", message: "", preferredStyle: .actionSheet)
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
 		actionSheetController.addAction(cancelAction)
 		
 		let forServiceProviderAction = UIAlertAction(title: "For Service provider", style: .default) { action in
-			let vc = storyBoards.Main.instantiateViewController(withIdentifier: "ServiceProvicerSignUpVC") as! ServiceProvicerSignUpVC
+			let vc = storyBoards.Main.instantiateViewController(withIdentifier: "ServiceProviderSignUpVC") as! ServiceProviderSignUpVC
 			self.navigationController?.pushViewController(vc, animated: true)
 		}
 		actionSheetController.addAction(forServiceProviderAction)
@@ -126,9 +132,11 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 			print(getStringFromDictionary(dictionary: dictResponse, key: "msg"))
 			
 			let dictData = getDictionaryFromDictionary(dictionary: dictResponse, key: "data")
-			let type = createString(value: dictData.value(forKey: "role") as AnyObject)
+			let userType = createString(value: dictData.value(forKey: "role") as AnyObject)
 			let status = createString(value: dictData.value(forKey: "status") as AnyObject)
-			switch type {
+			
+			switch userType {
+			
 			case UserType.Customer.rawValue:
 				UserDefaults.Main.set(UserType.Customer.rawValue, forKey: .Appuser)
 				let id = createString(value:dictData.value(forKey: "id") as AnyObject)
@@ -138,7 +146,7 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 				let profilePic = createString(value: dictData.value(forKey: "profile_pic") as AnyObject)
 				let city = createString(value: dictData.value(forKey: "status") as AnyObject)
 				
-				let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: type, status: status, city: city, profileImg: profilePic, avgRating: "")
+				let userdate = Profile.init(id: id, username: username, email: email, mobile: mobile, type: userType, status: status, city: city, profileImg: profilePic, avgRating: "")
 				
 				UserDefaults.Main.set(true, forKey: .isLogin)
 				UserDefaults.Main.set(id, forKey: .UserID)
@@ -149,7 +157,8 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 				UserDefaults.Main.set(userDate1, forKey: .Profile)
 				let selected_service = storyBoards.Customer.instantiateViewController(withIdentifier:"HostViewController") as! HostViewController
 				self.navigationController?.pushViewController(selected_service, animated: true)
-			case UserType.ServiceProvider.rawValue:				
+				
+			case UserType.ServiceProvider.rawValue:
 				let id = createString(value:dictData.value(forKey: "id") as AnyObject)
 				
 				UserDefaults.Main.set(id, forKey: .UserID)
@@ -179,7 +188,8 @@ class LoginViewController: UIViewController,CustomToolBarDelegate,UIActionSheetD
 					let message = getStringFromDictionary(dictionary: dictResponse, key: "msg")
 					appDelegate.Popup(Message: "\(message)")
 				}
-				UserDefaults.standard.synchronize()
+				UserDefaults.standard.synchronize() // TUZ NOTE: In the orig. code, this was indeed called only in ServiceProvider. Seems weird that it's not called in Customer.
+			default: break
 			}
 		}
 	}

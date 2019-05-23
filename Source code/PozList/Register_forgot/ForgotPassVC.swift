@@ -61,7 +61,7 @@ class ForgotPassVC: UIViewController,CustomToolBarDelegate {
         let takePictureAction = UIAlertAction(title: "For Service provider", style: .default) { action -> Void in
             
             
-            let vc = storyBoards.Main.instantiateViewController(withIdentifier: "ServiceProvicerSignUpVC") as! ServiceProvicerSignUpVC
+            let vc = storyBoards.Main.instantiateViewController(withIdentifier: "ServiceProviderSignUpVC") as! ServiceProviderSignUpVC
             self.navigationController?.pushViewController(vc, animated: true)
         }
         actionSheetController.addAction(takePictureAction)
